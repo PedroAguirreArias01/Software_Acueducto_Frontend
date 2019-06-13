@@ -26,19 +26,6 @@ export class SuscriptoresComponent implements OnInit {
     })
   }
 
-  getSuscrptores(){
-    this.loadSuscriptores.post("http://localhost:8080/suscriptores/",
-      JSON.stringify(this.lista), this.headers)
-      .subscribe(dataIncoming => {   // data is already a JSON object
-    console.log(dataIncoming);
-    for (var i in dataIncoming) {
-      console.log('Cargo el mensaje'+dataIncoming);
-      this.lista.push(new Suscriptor(dataIncoming[i].cedula,dataIncoming[i].nombre,dataIncoming[i].apellido,dataIncoming[i].estado,
-        dataIncoming[i].estadoCuenta,dataIncoming[i].fechaNacimiento,dataIncoming[i].genero,dataIncoming[i].numeroTelefono,dataIncoming[i].correoElectronico));
-    }
-  });
-  }
-
   get_Suscriptores(){
     this.loadSuscriptores.get<Suscriptor[]>('http://localhost:8080/suscriptores/').subscribe((res)=>{
         console.log(res);

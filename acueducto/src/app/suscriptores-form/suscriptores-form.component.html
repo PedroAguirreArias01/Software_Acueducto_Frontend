@@ -3,47 +3,25 @@
   <div class="row">
     <div class="col-md-12">
       <div class="well well-sm">
-        <form class="form-horizontal" method="post">
+        <form  (ngSubmit)="onSubmit()" class="form-horizontal" method="post">
           <fieldset>
             <legend class="text-center header">Agregar Suscriptor</legend>
             <div class="form-group">
               <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-user bigicon"></i></span>
               <div class="col-md-8">
-                <input id="cedula" name="cedula" type="number" placeholder="cedula" class="form-control">
+                <input id="cedula" name="cedula" type="number" required [(ngModel)]="suscriptor.cedula" placeholder="cedula" class="form-control">
               </div>
             </div>
             <div class="form-group">
               <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-user bigicon"></i></span>
               <div class="col-md-8">
-                <input id="fname" name="nombre" type="text" placeholder="Nombre" class="form-control">
+                <input id="nombre" name="nombre" type="text" required [(ngModel)]="suscriptor.nombre" placeholder="Nombre" class="form-control">
               </div>
             </div>
             <div class="form-group">
               <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-user bigicon"></i></span>
               <div class="col-md-8">
-                <input id="lname" name="name" type="text" placeholder="Apellido" class="form-control">
-              </div>
-            </div>
-
-            <div class="form-group">
-              <span class="col-md-1 col-md-offset-2 text-center"><i class=""></i></span>
-              <div class="col-md-8">
-                <label for="">Estado Suscriptor: </label>
-                <select id="estado">
-                  <option value="activo">Activo</option>
-                  <option value="inactivo">Inactivo</option>
-                </select>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <span class="col-md-1 col-md-offset-2 text-center"><i class=""></i></span>
-              <div class="col-md-8">
-                <label>Estado Cuenta: </label>
-                <select id="estadoCuenta">
-                  <option value="p">Al dia</option>
-                  <option value="d">En mora</option>
-                </select>
+                <input id="apellido" name="apellido" type="text"  required [(ngModel)]="suscriptor.apellido" placeholder="Apellido" class="form-control">
               </div>
             </div>
 
@@ -51,7 +29,7 @@
               <span class="col-md-1 col-md-offset-2 text-center"><i class=""></i></span>
               <div class="col-md-8">
                   <mat-form-field>
-                      <input matInput [matDatepicker]="picker" placeholder="Fecha Nacimiento">
+                      <input matInput [matDatepicker]="picker" name="fechaNacimiento" required [(ngModel)]="suscriptor.fechaNacimiento" placeholder="Fecha Nacimiento">
                       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                       <mat-datepicker #picker></mat-datepicker>
                     </mat-form-field>
@@ -59,33 +37,22 @@
             </div>
 
             <div class="form-group">
-              <span class="col-md-1 col-md-offset-2 text-center"><i class=""></i></span>
-              <div class="col-md-8">
-                <label for="">Genero: </label>
-                <select id="genero">
-                  <option value="masculino">Masculino</option>
-                  <option value="femenino">Femenino</option>
-                </select>
-              </div>
-            </div>
-
-            <div class="form-group">
               <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-envelope-o bigicon"></i></span>
               <div class="col-md-8">
-                <input id="email" name="email" type="text" placeholder="Email Address" class="form-control">
+                <input id="email" name="email" type="text" required [(ngModel)]="suscriptor.correoElectronico" placeholder="Email Address" class="form-control">
               </div>
             </div>
 
             <div class="form-group">
               <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-phone-square bigicon"></i></span>
               <div class="col-md-8">
-                <input id="phone" name="phone" type="text" placeholder="Phone" class="form-control">
+                <input id="phone" name="phone" type="text" required [(ngModel)]="suscriptor.numeroTelefono" placeholder="Phone" class="form-control">
               </div>
             </div>
 
             <div class="form-group">
               <div class="col-md-12 text-center">
-                <button class="btn btn-primary btn-lg" (click)="send(cedula.value,nombre.value,apellido.value, estado.value,estadoCuenta.value,fechaNacimiento.value,genero.value,phone.value, email.value)">Guardar</button>
+                <button type="submit"class="btn btn-primary btn-lg">Guardar</button>
               </div>
             </div>
           </fieldset>

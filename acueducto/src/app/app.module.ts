@@ -8,6 +8,8 @@ import { SuscriptoresComponent } from './suscriptores/suscriptores.component';
 import {RouterModule, Routes} from '@angular/router';
 import { SuscriptoresFormComponent } from './suscriptores-form/suscriptores-form.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule } from '@angular/forms';
+
 /*material */
 import {
   MatAutocompleteModule,
@@ -97,8 +99,8 @@ const routes: Routes = [
     MatTabsModule,
     MatToolbarModule,
     MatTooltipModule,
-
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -13,21 +13,29 @@ import { Suscriptor } from '../suscriptores/Suscriptor';
 export class SuscriptoresFormComponent implements OnInit {
 
   public suscriptorInfo:string[];
-  public suscriptor: Suscriptor;
+  public suscriptor: Suscriptor = new Suscriptor();
 
   constructor(public saveSuscriptores: HttpClient, private router:Router) { }
 
   ngOnInit() {
-    this.suscriptorInfo = [];
+    this.suscriptor = new Suscriptor();
   }
 
   send(cedula,nombre,apellido, estado,estadoCuenta,fechaNacimiento,genero,numeroTelefono, correoElectronico){
     console.log('este es el nombre'+nombre);
     
     //this.suscriptorInfo.push(cedula,nombre,apellido,estado,estadoCuenta,fechaNacimiento,genero,numeroTelefono,correoElectronico);
-    this.suscriptor = new Suscriptor(cedula,nombre,apellido,estado,estadoCuenta,fechaNacimiento,genero,numeroTelefono,correoElectronico);
+    //this.suscriptor = new Suscriptor(cedula,nombre,apellido,estado,estadoCuenta,fechaNacimiento,genero,numeroTelefono,correoElectronico);
     //console.log(this.suscriptor);
     //this.SaveSuscrptores(this.suscriptor);
+  }
+
+  save(){
+    this.SaveSuscrptores(this.suscriptor);
+  }
+
+  onSubmit(){
+    this.save();
   }
 
   
@@ -40,7 +48,7 @@ export class SuscriptoresFormComponent implements OnInit {
   SaveSuscrptores(suscriptor){
     console.log(suscriptor.nombre);
     let url = 'http://localhost:8080/suscriptores';
-    this.saveSuscriptores.post(url,
+    this.saveSuscriptores.post<Suscriptor>(url,
       suscriptor, this.headers)
       .subscribe(dataIncoming => {   // data is already a JSON object
     console.log(dataIncoming);
