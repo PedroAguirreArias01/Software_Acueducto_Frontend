@@ -47,7 +47,7 @@ export class SuscriptoresFormComponent implements OnInit {
 
   SaveSuscrptores(suscriptor){
     console.log(suscriptor.nombre);
-    let url = 'http://localhost:8080/suscriptores';
+    let url = 'http://localhost:8080/suscriptores/';
     this.saveSuscriptores.post<Suscriptor>(url,
       suscriptor, this.headers)
       .subscribe(dataIncoming => {   // data is already a JSON object

@@ -29,11 +29,11 @@
           <td>{{suscriptor.correoElectronico}}</td>
           <td>{{suscriptor.estado}}</td>
           <td>{{suscriptor.estadoCuenta}}</td>
-          <td class="row">
-            <button type="button" class="btn btn-info" ng-click="editar(row)">
+          <td class="suscriptor">
+            <button type="button" class="btn btn-info" ng-click="editar(suscriptor)">
                 <span class="glyphicon glyphicon-pencil"></span>Editar
             </button>
-            <button type="button" class="btn btn-danger" ng-click="eliminar(row)">
+            <button type="button" class="btn btn-danger" (click)="eliminar(suscriptor)">
                 <span class="glyphicon glyphicon-remove"></span>Eliminar
             </button>
         </td>

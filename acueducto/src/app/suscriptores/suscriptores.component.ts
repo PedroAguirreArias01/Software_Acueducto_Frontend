@@ -12,6 +12,7 @@ import { Suscriptor } from './Suscriptor';
 export class SuscriptoresComponent implements OnInit {
 
   private lista:Suscriptor[];
+  public cedula: string;
 
   constructor(public loadSuscriptores: HttpClient, private router:Router) { }
 
@@ -32,5 +33,28 @@ export class SuscriptoresComponent implements OnInit {
         this.lista = res;
     });
 }
+
+eliminar(suscriptor: Suscriptor){
+    console.log(suscriptor.cedula);
+    let url = 'http://localhost:8080/suscriptores/'+suscriptor.cedula;
+    this.loadSuscriptores.delete<Suscriptor>(url)
+    
+      .subscribe(dataIncoming => {   // data is already a JSON object
+        this.router.navigate(['/app-suscriptores']);
+    console.log(dataIncoming);
+    //this.get_Suscriptores();
+    
+      })
+  };
+
+  // editar(suscriptor){
+  //   console.log(suscriptor.nombre);
+  //   let url = 'http://localhost:8080/suscriptores/';
+  //   this.loadSuscriptores.delete<Suscriptor>(url,
+  //     suscriptor.cedula)
+  //     .subscribe(dataIncoming => {   // data is already a JSON object
+  //   console.log(dataIncoming);
+  //     })
+  // };
 
 }
