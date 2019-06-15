@@ -1,0 +1,36 @@
+
+<div class="card border-primary mb-3" style="margin-left: 30rem;">
+  <div class="card-header">Predios</div>
+  <div class="card-body">
+    <h5 class="card-title">Listado de Suscriptores</h5>
+    <table class="table table-bordered table-striped">
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Dirrecció</th>
+          <th>Estrato</th>
+          <th>Latitud</th>
+          <th>Longitud</th>
+          <th> </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let predio of lista">
+          <td>{{predio.id}}</td>
+          <td>{{predio.direccion}}</td>
+          <td>{{predio.estrato}}</td>
+          <td>{{predio.latitud}}</td>
+          <td>{{predio.longitud}}</td>
+          <td class="predio">
+            <button type="button" class="btn btn-info" ng-click="editar(predio)">
+                <span class="glyphicon glyphicon-pencil"></span>Editar
+            </button>
+            <button type="button" class="btn btn-danger" (click)="eliminar(predio)">
+                <span class="glyphicon glyphicon-remove"></span>Eliminar
+            </button>
+        </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

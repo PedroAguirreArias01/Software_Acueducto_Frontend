@@ -9,6 +9,7 @@ import {RouterModule, Routes} from '@angular/router';
 import { SuscriptoresFormComponent } from './suscriptores-form/suscriptores-form.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
+import { PrediosComponent } from './predios/predios.component';
 
 /*material */
 import {
@@ -47,6 +48,7 @@ import {
   MatTooltipModule,
 } from '@angular/material';
 
+
 const routes: Routes = [
   {path: 'suscriptores', component: SuscriptoresComponent},
   {path: 'suscriptoresform', component: SuscriptoresFormComponent},
@@ -57,6 +59,7 @@ const routes: Routes = [
     AppComponent,
     SuscriptoresComponent,
     SuscriptoresFormComponent,
+    PrediosComponent,
   ],
   imports: [
     BrowserModule,
