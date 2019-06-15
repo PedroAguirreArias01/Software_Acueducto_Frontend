@@ -1,4 +1,4 @@
-export class Suscriptor {
+export class Predio {
     public id: string;
     public direccion: string;
     public estrato: string;

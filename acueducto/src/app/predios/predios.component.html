@@ -2,7 +2,7 @@
 <div class="card border-primary mb-3" style="margin-left: 30rem;">
   <div class="card-header">Predios</div>
   <div class="card-body">
-    <h5 class="card-title">Listado de Suscriptores</h5>
+    <h5 class="card-title">Listado de Predios</h5>
     <table class="table table-bordered table-striped">
       <thead>
         <tr>
@@ -17,7 +17,7 @@
       <tbody>
         <tr *ngFor="let predio of lista">
           <td>{{predio.id}}</td>
-          <td>{{predio.direccion}}</td>
+          <td>{{predio.nombre}}</td>
           <td>{{predio.estrato}}</td>
           <td>{{predio.latitud}}</td>
           <td>{{predio.longitud}}</td>
