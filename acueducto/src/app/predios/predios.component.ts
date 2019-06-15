@@ -32,18 +32,8 @@ export class PrediosComponent implements OnInit {
         this.lista = res;
     });
 
-    eliminar(predio: Predio){
-      console.log(predio.id);
-      let url = 'http://localhost:8080/predios/'+predio.id;
-      this.loadPredios.delete<Predio>(url)
-      
-        .subscribe(dataIncoming => {   // data is already a JSON object
-          this.router.navigate(['/app-predios']);
-      console.log(dataIncoming);
-      //this.get_predios();
-      
-        })
-    };
+    
+  
 }
 
 }
