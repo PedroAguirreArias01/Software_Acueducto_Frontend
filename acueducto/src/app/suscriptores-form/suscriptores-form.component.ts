@@ -4,12 +4,14 @@ import { HttpClient } from "@angular/common/http";
 import { HttpHeaders } from '@angular/common/http';
 import { Router } from "@angular/router";
 import { Suscriptor } from '../suscriptores/Suscriptor';
+import Swal  from 'sweetalert2';
 
 @Component({
   selector: 'app-suscriptores-form',
   templateUrl: './suscriptores-form.component.html',
   styleUrls: ['./suscriptores-form.component.css']
 })
+
 export class SuscriptoresFormComponent implements OnInit {
 
   public suscriptorInfo:string[];
@@ -19,15 +21,6 @@ export class SuscriptoresFormComponent implements OnInit {
 
   ngOnInit() {
     this.suscriptor = new Suscriptor();
-  }
-
-  send(cedula,nombre,apellido, estado,estadoCuenta,fechaNacimiento,genero,numeroTelefono, correoElectronico){
-    console.log('este es el nombre'+nombre);
-    
-    //this.suscriptorInfo.push(cedula,nombre,apellido,estado,estadoCuenta,fechaNacimiento,genero,numeroTelefono,correoElectronico);
-    //this.suscriptor = new Suscriptor(cedula,nombre,apellido,estado,estadoCuenta,fechaNacimiento,genero,numeroTelefono,correoElectronico);
-    //console.log(this.suscriptor);
-    //this.SaveSuscrptores(this.suscriptor);
   }
 
   save(){
@@ -51,8 +44,14 @@ export class SuscriptoresFormComponent implements OnInit {
     this.saveSuscriptores.post<Suscriptor>(url,
       suscriptor, this.headers)
       .subscribe(dataIncoming => {   // data is already a JSON object
-    console.log(dataIncoming);
-      })
+        this.router.navigate(['/suscriptores']);
+        Swal.fire({
+          title: 'Nuevo Suscriptor!',
+          text: `Suscriptor ${suscriptor.nombre} creado con exito`,
+          type: 'success',
+          confirmButtonText: 'Cool'
+        })
+      });
   };
   
 }
