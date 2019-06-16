@@ -4,8 +4,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { SuscriptoresComponent } from './suscriptores/suscriptores.component';
+import { SuscriptoresFormComponent } from './suscriptores/suscriptores-form.component';
 import {RouterModule, Routes} from '@angular/router';
-import { SuscriptoresFormComponent } from './suscriptores-form/suscriptores-form.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { PrediosComponent } from './predios/predios.component';
@@ -51,6 +51,7 @@ import {
 const routes: Routes = [
   {path: 'suscriptores', component: SuscriptoresComponent},
   {path: 'suscriptoresform', component: SuscriptoresFormComponent},
+  {path: 'suscriptoresform/form/:id', component: SuscriptoresFormComponent},
   {path: 'predios', component: PrediosComponent},
   {path: 'prediosform',component: PrediosFormComponent}
 ];
@@ -67,6 +68,7 @@ const routes: Routes = [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    FormsModule,
     RouterModule.forRoot(routes),
     MatDatepickerModule,
     BrowserAnimationsModule,
@@ -104,8 +106,6 @@ const routes: Routes = [
     MatTabsModule,
     MatToolbarModule,
     MatTooltipModule,
-    HttpClientModule,
-    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
