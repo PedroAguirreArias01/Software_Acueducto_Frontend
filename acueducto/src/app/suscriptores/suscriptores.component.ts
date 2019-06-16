@@ -16,6 +16,8 @@ export class SuscriptoresComponent implements OnInit {
 
   private suscriptores: Suscriptor[];
   private suscriptor: Suscriptor;
+  public pageActual: number=1;
+  
   constructor(private suscriptorService: SuscriptorService, private router:Router, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
@@ -42,7 +44,7 @@ export class SuscriptoresComponent implements OnInit {
       if (result.value) {
         this.suscriptorService.delete(suscriptor.cedula).subscribe(
           response => {
-            this.suscriptores = this.suscriptores.filter(cli => cli !== suscriptor)
+            this.suscriptores = this.suscriptores.filter(susc => susc !== suscriptor)
             Swal.fire(
               'Suscriptor Eliminado!',
               `Suscriptor ${suscriptor.nombre} eliminado con éxito.`,

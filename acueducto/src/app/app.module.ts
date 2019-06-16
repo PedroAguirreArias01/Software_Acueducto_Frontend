@@ -10,6 +10,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { PrediosComponent } from './predios/predios.component';
 import { PrediosFormComponent } from './predios-form/predios-form.component';
+import { NgxPaginateModule } from 'ngx-paginate';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 /*material */
 import {
@@ -69,6 +71,8 @@ const routes: Routes = [
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    NgxPaginateModule,
+    NgxPaginationModule,
     RouterModule.forRoot(routes),
     MatDatepickerModule,
     BrowserAnimationsModule,
