@@ -26,7 +26,7 @@ export class SuscriptoresFormComponent implements OnInit {
 
   cargarSuscriptor(): void{
     this.activatedRoute.params.subscribe(params => {
-      let cedula = params['cedula']
+      let cedula = params['cedula'];
       if(cedula){
         this.suscriptorService.getSuscriptor(cedula).subscribe(
           (suscriptor) => this.suscriptor = suscriptor
@@ -58,5 +58,18 @@ export class SuscriptoresFormComponent implements OnInit {
       }
       )
   }
+
+  update(): void {
+    this.suscriptorService.update(this.suscriptor).subscribe( suscriptor => {
+      this.router.navigate(['/suscriptores'])
+      Swal.fire({
+        title: 'Actualizar Suscriptor!',
+        text: `Suscriptor ${suscriptor.nombre} actualizado con exito`,
+        type: 'success',
+        confirmButtonText: 'Cool'
+      })
+    })
+  }
+  
 
 }

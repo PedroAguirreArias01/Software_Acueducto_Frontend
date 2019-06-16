@@ -51,7 +51,7 @@ import {
 const routes: Routes = [
   {path: 'suscriptores', component: SuscriptoresComponent},
   {path: 'suscriptoresform', component: SuscriptoresFormComponent},
-  {path: 'suscriptoresform/form/:id', component: SuscriptoresFormComponent},
+  {path: 'suscriptoresform/form/:cedula', component: SuscriptoresFormComponent},
   {path: 'predios', component: PrediosComponent},
   {path: 'prediosform',component: PrediosFormComponent}
 ];

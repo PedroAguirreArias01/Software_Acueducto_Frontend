@@ -3,7 +3,7 @@
   <div class="row">
     <div class="col-md-12">
       <div class="well well-sm">
-        <form  (ngSubmit)="onSubmit()" class="form-horizontal" method="post">
+        <form  class="form-horizontal" method="post">
           <fieldset>
             <legend class="text-center header">Agregar Suscriptor</legend>
             <div class="form-group">
@@ -52,7 +52,10 @@
 
             <div class="form-group">
               <div class="col-md-12 text-center">
-                <button type="submit"class="btn btn-primary btn-lg">Guardar</button>
+                <button type="submit"class="btn btn-primary btn-lg" (click)= 'onSubmit()' *ngIf="!suscriptor.cedula else elseBlock">Guardar</button>
+                <ng-template #elseBlock>
+                    <button type="submit"class="btn btn-primary btn-lg" (click)= 'update()'>Editar</button>
+                </ng-template>
               </div>
             </div>
           </fieldset>
