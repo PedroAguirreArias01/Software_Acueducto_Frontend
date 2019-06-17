@@ -49,6 +49,8 @@ import {
   MatToolbarModule,
   MatTooltipModule,
 } from '@angular/material';
+import { UsuarioComponent } from './usuario/usuario.component';
+import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
   {path: 'suscriptores', component: SuscriptoresComponent},
@@ -65,7 +67,9 @@ const routes: Routes = [
     SuscriptoresFormComponent,
     PrediosComponent,
     PrediosFormComponent,
-  ],
+    UsuarioComponent,
+    LoginComponent,
+    ],
   imports: [
     BrowserModule,
     AppRoutingModule,
