@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from "@angular/common/http";
-import { HttpHeaders } from '@angular/common/http';
 import { Router, ActivatedRoute } from "@angular/router";
 import { Suscriptor } from './Suscriptor';
 import Swal from 'sweetalert2';

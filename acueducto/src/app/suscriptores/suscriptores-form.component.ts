@@ -1,7 +1,5 @@
 
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from "@angular/common/http";
-import { HttpHeaders } from '@angular/common/http';
 import { Router,ActivatedRoute } from "@angular/router";
 import { Suscriptor } from '../suscriptores/Suscriptor';
 import Swal from 'sweetalert2';
@@ -31,12 +29,6 @@ export class SuscriptoresFormComponent implements OnInit {
 
   onSubmit() {
     this.crear();
-  }
-
-  public headers = {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json'
-    })
   }
 
   public crear(): void {

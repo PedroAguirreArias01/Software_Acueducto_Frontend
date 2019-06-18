@@ -51,13 +51,18 @@ import {
 } from '@angular/material';
 import { UsuarioComponent } from './usuario/usuario.component';
 import { LoginComponent } from './login/login.component';
+import { TarifaComponent } from './tarifa/tarifa.component';
+import { TarifaFormComponent } from './tarifa/tarifa-form.component'
 
 const routes: Routes = [
   {path: 'suscriptores', component: SuscriptoresComponent},
   {path: 'suscriptoresform', component: SuscriptoresFormComponent},
   {path: 'suscriptoresform/form/:cedula', component: SuscriptoresFormComponent},
   {path: 'predios', component: PrediosComponent},
-  {path: 'prediosform',component: PrediosFormComponent}
+  {path: 'prediosform',component: PrediosFormComponent},
+  {path: 'tarifas', component: TarifaComponent},
+  {path: 'tarifasForm', component: TarifaFormComponent},
+  {path: 'tarifasForm/form/:id', component: TarifaFormComponent},
 ];
 
 @NgModule({
@@ -69,6 +74,8 @@ const routes: Routes = [
     PrediosFormComponent,
     UsuarioComponent,
     LoginComponent,
+    TarifaComponent,
+    TarifaFormComponent,
     ],
   imports: [
     BrowserModule,
