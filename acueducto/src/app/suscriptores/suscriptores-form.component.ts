@@ -17,6 +17,9 @@ export class SuscriptoresFormComponent implements OnInit {
 
   public suscriptorInfo: string[];
   public suscriptor: Suscriptor = new Suscriptor();
+  public editar:boolean;
+  public titulo:boolean;
+  public id:boolean;
 
   constructor(private suscriptorService: SuscriptorService, private router: Router,private activatedRoute: ActivatedRoute) { }
 
@@ -24,16 +27,7 @@ export class SuscriptoresFormComponent implements OnInit {
     this.cargarSuscriptor();
   }
 
-  cargarSuscriptor(): void{
-    this.activatedRoute.params.subscribe(params => {
-      let cedula = params['cedula'];
-      if(cedula){
-        this.suscriptorService.getSuscriptor(cedula).subscribe(
-          (suscriptor) => this.suscriptor = suscriptor
-        )
-      }
-    })
-  }
+ 
 
   onSubmit() {
     this.crear();
@@ -59,14 +53,29 @@ export class SuscriptoresFormComponent implements OnInit {
       )
   }
 
+  cargarSuscriptor(): void{
+    this.editar = false;
+    this.activatedRoute.params.subscribe(params => {
+      let cedula = params['cedula'];
+      if(cedula){
+        this.editar = true;
+        this.suscriptorService.getSuscriptor(cedula).subscribe(
+          (suscriptor) =>{ this.suscriptor = suscriptor
+          }
+        )
+      }
+    })
+  }
+
   update(): void {
     this.suscriptorService.update(this.suscriptor).subscribe( suscriptor => {
+      console.log('este es el Suscripto: '+suscriptor.cedula);
       this.router.navigate(['/suscriptores'])
       Swal.fire({
         title: 'Actualizar Suscriptor!',
         text: `Suscriptor ${suscriptor.nombre} actualizado con exito`,
         type: 'success',
-        confirmButtonText: 'Cool'
+        confirmButtonText: 'Aceptar'
       })
     })
   }

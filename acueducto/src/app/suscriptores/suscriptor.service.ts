@@ -28,7 +28,7 @@ export class SuscriptorService {
   }
 
   delete(id: string): Observable<Suscriptor>{
-    return this.http.delete<Suscriptor>(`${this.urlEndPoint}${id}/`, {headers: this.httpHeaders})
+    return this.http.delete<Suscriptor>(`${this.urlEndPoint}${id}`, {headers: this.httpHeaders})
   }
 
   getSuscriptor(cedula): Observable<Suscriptor>{
