@@ -1,4 +1,4 @@
-export class Usuario {
+export class Empleado {
       public cedula: string;
       public nombre: string;
       public apellido: string;

@@ -1,13 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Inject } from '@angular/core';
 import Swal from 'sweetalert2';
 import { Router, ActivatedRoute } from "@angular/router";
 import { Tarifa } from './Tarifa';
 import { TarifaService } from './tarifa.service';
+import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-tarifa',
   templateUrl: './tarifa.component.html',
-  styleUrls: ['./tarifa.component.css']
+  styleUrls: ['./tarifa.component.css'],
+  providers: [NgbModalConfig, NgbModal],
 })
 export class TarifaComponent implements OnInit {
 
@@ -15,8 +17,11 @@ export class TarifaComponent implements OnInit {
   private tarifas: Tarifa[];
   private tarifa: Tarifa;
   public pageActual: number=1;
-  
-  constructor(private tarifaService: TarifaService, private router:Router, private activatedRoute: ActivatedRoute) { }
+  constructor(private tarifaService: TarifaService, private router:Router, 
+    private activatedRoute: ActivatedRoute, config: NgbModalConfig, private modalService: NgbModal) {
+      config.backdrop = 'static';
+      config.keyboard = false;
+     }
 
   ngOnInit() {
     this.tarifaService.get().subscribe(
@@ -59,6 +64,12 @@ export class TarifaComponent implements OnInit {
       }
     })
   }
+
   
+  open(tarifa:Tarifa) {
+    this.modalService.open(tarifa);
+  }
+
 
 }
+

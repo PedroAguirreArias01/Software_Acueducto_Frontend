@@ -12,7 +12,8 @@ import { PrediosComponent } from './predios/predios.component';
 import { PrediosFormComponent } from './predios-form/predios-form.component';
 import { NgxPaginateModule } from 'ngx-paginate';
 import {NgxPaginationModule} from 'ngx-pagination';
-
+import { NgxCurrencyModule} from 'ngx-currency';
+import { CommonModule } from '@angular/common'
 /*material */
 import {
   MatAutocompleteModule,
@@ -52,7 +53,9 @@ import {
 import { UsuarioComponent } from './usuario/usuario.component';
 import { LoginComponent } from './login/login.component';
 import { TarifaComponent } from './tarifa/tarifa.component';
-import { TarifaFormComponent } from './tarifa/tarifa-form.component'
+import { TarifaFormComponent } from './tarifa/tarifa-form.component';
+import { NgbModalConfig, NgbModal  } from "@ng-bootstrap/ng-bootstrap";
+import { UsuarioFormComponent } from './usuario/usuario-form.component';
 
 const routes: Routes = [
   {path: 'suscriptores', component: SuscriptoresComponent},
@@ -63,6 +66,9 @@ const routes: Routes = [
   {path: 'tarifas', component: TarifaComponent},
   {path: 'tarifasForm', component: TarifaFormComponent},
   {path: 'tarifasForm/form/:id', component: TarifaFormComponent},
+  {path: 'usuarios', component: UsuarioComponent },
+  {path: 'usuarios/form/:cedula', component: UsuarioFormComponent },
+  {path: 'usuarioForm', component: UsuarioFormComponent},
 ];
 
 @NgModule({
@@ -76,6 +82,7 @@ const routes: Routes = [
     LoginComponent,
     TarifaComponent,
     TarifaFormComponent,
+    UsuarioFormComponent,
     ],
   imports: [
     BrowserModule,
@@ -84,6 +91,8 @@ const routes: Routes = [
     FormsModule,
     NgxPaginateModule,
     NgxPaginationModule,
+    NgxCurrencyModule,
+    CommonModule,
     RouterModule.forRoot(routes),
     MatDatepickerModule,
     BrowserAnimationsModule,

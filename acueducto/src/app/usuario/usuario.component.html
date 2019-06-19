@@ -1,3 +1,46 @@
-<p>
-  usuario works!
-</p>
+
+<div class="card border-primary mb-3" style="margin-left: 30rem;">
+  <div class="card-header">Empleados</div>
+  <div class="card-body">
+    <div class="my-2 text-left">
+      <button class="btn btn-rounded btn-primary"  routerLink="/usuarioForm"> Crear Empleado</button>
+    </div>
+    <div *ngIf = "suscriptores?.length==0" class="alert alert-info">
+      No hay Empleados en la base de datos!
+    </div>
+    <h5 class="card-title">Listado de Empleados</h5>
+    <table class="table table-bordered table-striped" *ngIf = "empleados?.length>0">
+      <thead>
+        <tr>
+          <th>Cedula</th>
+          <th>Nombre</th>
+          <th>Apellido</th>
+          <th>direccionResidencia</th>
+          <th>Tipo Usuario</th>
+          <th> </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let empleado of empleados | paginate: { itemsPerPage: 7, currentPage: pageActual}">
+          <td>{{empleado.cedula}}</td>
+          <td>{{empleado.nombre}}</td>
+          <td>{{empleado.apellido}}</td>
+          <td>{{empleado.direccionResidencia}}</td>
+          <td>{{empleado.tipoEmpleado}}</td>
+          <td class="empleado">
+            <button type="button" class="btn btn-info" [routerLink]="['/usuarios/form',empleado.cedula]">
+                <span class="glyphicon glyphicon-pencil"></span>Editar
+            </button>
+            <button type="button" class="btn btn-danger" (click)="eliminar(empleado)">
+                <span class="glyphicon glyphicon-remove"></span>Eliminar
+            </button>
+            <button type="button" class="btn btn-info" (click)="eliminar(empleado)">
+              <span class="glyphicon glyphicon-info"></span>Info
+          </button>
+        </td>
+        </tr>
+      </tbody>
+    </table>
+    <pagination-controls (pageChange)="pageActual = $event"></pagination-controls>
+  </div>
+</div>

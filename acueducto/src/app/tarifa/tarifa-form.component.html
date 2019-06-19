@@ -13,7 +13,7 @@
             <div class="form-group">
               <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-keyboard-o"></i></span>
               <div class="col-md-8">
-                <input id="valor" name="valor" type="number" required [(ngModel)]="tarifa.valorTarifa"
+                <input id="valor" name="valor" type="text" required  currencyMask [(ngModel)]="tarifa.valorTarifa" [options]="{prefix: '$', thousands: ',', decimal: '.', precision: '0'}"
                   placeholder="Valor" class="form-control">
               </div>
             </div>

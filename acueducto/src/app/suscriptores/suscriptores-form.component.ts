@@ -16,8 +16,6 @@ export class SuscriptoresFormComponent implements OnInit {
   public suscriptorInfo: string[];
   public suscriptor: Suscriptor = new Suscriptor();
   public editar:boolean;
-  public titulo:boolean;
-  public id:boolean;
 
   constructor(private suscriptorService: SuscriptorService, private router: Router,private activatedRoute: ActivatedRoute) { }
 
