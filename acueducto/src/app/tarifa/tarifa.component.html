@@ -1,4 +1,4 @@
-<div class="card border-primary mb-3" style="margin-left: 30rem;">
+<div class="card border-primary m-3" style="margin-left: 30rem;">
   <div class="card-header">Tarifas</div>
   <div class="card-body">
     <div class="my-2 text-left">
@@ -14,7 +14,7 @@
           <th>Id</th>
           <th>Valor</th>
           <th>Descripción</th>
-          <th> </th>
+          <th>Acciones</th>
         </tr>
       </thead>
       <tbody>
@@ -22,14 +22,14 @@
           <td >{{tarifa.id}} </td>
           <td>{{tarifa.valorTarifa | currency}}</td>
           <td>{{tarifa.descripcion}}</td>
-          <td class="row">
-            <button type="button" class="btn btn-info" [routerLink]="['/tarifasForm/form',tarifa.id]">
+          <td class="actions">
+            <button type="button" class="btn btn-info mx-2" [routerLink]="['/tarifasForm/form',tarifa.id]">
               <span class="glyphicon glyphicon-pencil"></span>Editar
             </button>
-            <button type="button" class="btn btn-danger" (click)="eliminar(tarifa)">
+            <button type="button" class="btn btn-danger mx-2" (click)="eliminar(tarifa)">
               <span class="glyphicon glyphicon-remove"></span>Eliminar
             </button>
-            <button class="btn btn-outline-primary" (click)="open(tarifa)">
+            <button class="btn btn-outline-primary mx-2" (click)="open(tarifa)">
               <span class="glyphicon glyphicon-eye-open"></span>Historial Tarifa
             </button>
           </td>

@@ -4,6 +4,8 @@ import { Router, ActivatedRoute } from "@angular/router";
 import { Tarifa } from './Tarifa';
 import { TarifaService } from './tarifa.service';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { MatDialog } from '@angular/material';
+import { HistorialTarifaModalComponent } from './historial-tarifa-modal/historial-tarifa-modal.component';
 
 @Component({
   selector: 'app-tarifa',
@@ -13,12 +15,13 @@ import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class TarifaComponent implements OnInit {
 
+  name:string = "holi";
   
   private tarifas: Tarifa[];
   private tarifa: Tarifa;
   public pageActual: number=1;
   constructor(private tarifaService: TarifaService, private router:Router, 
-    private activatedRoute: ActivatedRoute, config: NgbModalConfig, private modalService: NgbModal) {
+    private activatedRoute: ActivatedRoute, config: NgbModalConfig, private modalService: NgbModal, public dialog: MatDialog) {
       config.backdrop = 'static';
       config.keyboard = false;
      }
@@ -67,9 +70,14 @@ export class TarifaComponent implements OnInit {
 
   
   open(tarifa:Tarifa) {
-    this.modalService.open(tarifa);
+    console.log(tarifa);
+    const dialogRef = this.dialog.open(
+      HistorialTarifaModalComponent,{
+        width :'40%',
+        height:'60%',
+        data: {tarifa: tarifa}
+      }
+    );
   }
-
-
 }
 

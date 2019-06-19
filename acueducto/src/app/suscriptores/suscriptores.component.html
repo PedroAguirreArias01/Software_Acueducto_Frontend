@@ -1,5 +1,4 @@
-
-<div class="card border-primary mb-3" style="margin-left: 30rem;">
+<div class="card border-primary">
   <div class="card-header">Suscriptores</div>
   <div class="card-body">
     <div class="my-2 text-left">
@@ -19,7 +18,7 @@
           <th>Correo Electronico</th>
           <th>Estado</th>
           <th>Estado Cuenta</th>
-          <th> </th>
+          <th>Acciones</th>
         </tr>
       </thead>
       <tbody>
@@ -32,13 +31,13 @@
           <td>{{suscriptor.estado}}</td>
           <td>{{suscriptor.estadoCuenta}}</td>
           <td class="suscriptor">
-            <button type="button" class="btn btn-info" [routerLink]="['/suscriptoresform/form',suscriptor.cedula]">
+            <button type="button" class="btn btn-info mx-2" [routerLink]="['/suscriptoresform/form',suscriptor.cedula]">
                 <span class="glyphicon glyphicon-pencil"></span>Editar
             </button>
-            <button type="button" class="btn btn-danger" (click)="eliminar(suscriptor)">
+            <button type="button" class="btn btn-danger mx-2" (click)="eliminar(suscriptor)">
                 <span class="glyphicon glyphicon-remove"></span>Eliminar
             </button>
-            <button type="button" class="btn btn-info" (click)="eliminar(suscriptor)">
+            <button type="button" class="btn btn-info mx-2" (click)="eliminar(suscriptor)">
               <span class="glyphicon glyphicon-info"></span>Info
           </button>
         </td>

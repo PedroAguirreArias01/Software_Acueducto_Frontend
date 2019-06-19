@@ -7,13 +7,14 @@ import { SuscriptoresComponent } from './suscriptores/suscriptores.component';
 import { SuscriptoresFormComponent } from './suscriptores/suscriptores-form.component';
 import {RouterModule, Routes} from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PrediosComponent } from './predios/predios.component';
 import { PrediosFormComponent } from './predios-form/predios-form.component';
 import { NgxPaginateModule } from 'ngx-paginate';
 import {NgxPaginationModule} from 'ngx-pagination';
 import { NgxCurrencyModule} from 'ngx-currency';
-import { CommonModule } from '@angular/common'
+import { CommonModule } from '@angular/common';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 /*material */
 import {
   MatAutocompleteModule,
@@ -56,6 +57,7 @@ import { TarifaComponent } from './tarifa/tarifa.component';
 import { TarifaFormComponent } from './tarifa/tarifa-form.component';
 import { NgbModalConfig, NgbModal  } from "@ng-bootstrap/ng-bootstrap";
 import { UsuarioFormComponent } from './usuario/usuario-form.component';
+import { HistorialTarifaModalComponent } from './tarifa/historial-tarifa-modal/historial-tarifa-modal.component';
 
 const routes: Routes = [
   {path: 'suscriptores', component: SuscriptoresComponent},
@@ -83,6 +85,7 @@ const routes: Routes = [
     TarifaComponent,
     TarifaFormComponent,
     UsuarioFormComponent,
+    HistorialTarifaModalComponent,
     ],
   imports: [
     BrowserModule,
@@ -130,8 +133,10 @@ const routes: Routes = [
     MatTabsModule,
     MatToolbarModule,
     MatTooltipModule,
+    ReactiveFormsModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents:[HistorialTarifaModalComponent]
 })
 export class AppModule { }

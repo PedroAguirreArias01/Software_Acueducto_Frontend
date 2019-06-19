@@ -1,5 +1,4 @@
 .nav-side-menu {
-    overflow: auto;
     font-family: verdana;
     font-size: 12px;
     font-weight: 200;
@@ -46,8 +45,6 @@
     font-family: FontAwesome;
     content: "\f078";
     display: inline-block;
-    padding-left: 10px;
-    padding-right: 10px;
     vertical-align: middle;
     float: right;
   }
