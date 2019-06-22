@@ -1,39 +1,43 @@
-<div class="card" style="margin: auto">
-  <form class="form-group" method="post">
-    <fieldset>
-      <legend class="text-center header" *ngIf="!editar else EditarTitulo">Agregar Suscriptor</legend>
+<div class="card">
+  <div class="card-header">
+    <legend class="text-center header" *ngIf="!editar else EditarTitulo">Agregar Suscriptor</legend>
 
-      <ng-template #EditarTitulo>
-        <legend class="text-center header">Editar Suscriptor</legend>
-      </ng-template>
+    <ng-template #EditarTitulo>
+      <legend class="text-center header">Editar Suscriptor</legend>
+    </ng-template>
+  </div>
+  <div class="card-body">
 
-      <div class="form-group">
-        <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-user bigicon"></i></span>
-        <div class="col-md-8">
-          <input id="cedula" name="cedula" type="text" required [(ngModel)]="suscriptor.cedula" placeholder="cedula"
-            class="form-control" minlength="10">
+    <form class="" method="post">
+
+      <div class="form-group row">
+        <label for="nombre" class="col-form-label col-sm-4" style="text-align: right">Cedula</label>
+        <div class="col-sm-6">
+            <input id="cedula" name="cedula" type="text" required [(ngModel)]="suscriptor.cedula" placeholder="cedula"
+              class="form-control" minlength="10">
         </div>
       </div>
 
-      <div class="form-group">
-        <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-user bigicon"></i></span>
-        <div class="col-md-8">
-          <input id="nombre" name="nombre" type="text" required [(ngModel)]="suscriptor.nombre" placeholder="Nombre"
-            class="form-control">
+      <div class="form-group row">
+        <label for="nombre" class="col-form-label col-sm-4" style="text-align: right">Nombre</label>
+        <div class="col-sm-6">
+          <input type="text" class="form-control" [(ngModel)]="suscriptor.nombre" name="nombre" #nombre="ngModel"
+            placeholder="Nombre">
         </div>
       </div>
 
-      <div class="form-group">
-        <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-user bigicon"></i></span>
-        <div class="col-md-8">
+      <div class="form-group row">
+        <label for="nombre" class="col-form-label col-sm-4" style="text-align: right">Apellido</label>
+        <div class="col-sm-6">
           <input id="apellido" name="apellido" type="text" required [(ngModel)]="suscriptor.apellido"
             placeholder="Apellido" class="form-control">
         </div>
       </div>
 
-      <div class="form-group">
-        <span class="col-md-1 col-md-offset-2 text-center"><i class=""></i></span>
-        <div class="col-md-8">
+      <div class="form-group row">
+        <label for="fechaNacimiento" class="col-form-label col-sm-4" style="text-align: right">Fecha Nacimiento</label>
+        <span class="col-md-offset-2 text-center"><i class=""></i></span>
+        <div class="col-sm-8">
           <mat-form-field>
             <input matInput [matDatepicker]="picker" name="fechaNacimiento" required
               [(ngModel)]="suscriptor.fechaNacimiento" placeholder="Fecha Nacimiento">
@@ -41,19 +45,20 @@
             <mat-datepicker #picker></mat-datepicker>
           </mat-form-field>
         </div>
+
       </div>
 
-      <div class="form-group">
-        <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-envelope-o bigicon"></i></span>
-        <div class="col-md-8">
+      <div class="form-group row">
+        <label for="nombre" class="col-form-label col-sm-4" style="text-align: right">Correo</label>
+        <div class="col-sm-6">
           <input id="email" name="email" type="text" required [(ngModel)]="suscriptor.correoElectronico"
             placeholder="Email Address" class="form-control">
         </div>
       </div>
 
-      <div class="form-group">
-        <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-phone-square bigicon"></i></span>
-        <div class="col-md-8">
+      <div class="form-group row">
+        <label for="nombre" class="col-form-label col-sm-4" style="text-align: right">Telefono</label>
+        <div class="col-sm-6">
           <input id="phone" name="phone" type="text" required [(ngModel)]="suscriptor.numeroTelefono"
             placeholder="Phone" class="form-control">
         </div>
@@ -70,6 +75,7 @@
 
         </div>
       </div>
-    </fieldset>
-  </form>
+    </form>
+
+  </div>
 </div>
