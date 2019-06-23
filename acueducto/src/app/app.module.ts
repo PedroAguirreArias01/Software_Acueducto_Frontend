@@ -69,7 +69,7 @@ const routes: Routes = [
   {path: 'suscriptoresform/form/:cedula', component: SuscriptoresFormComponent},
   {path: 'predios', component: PrediosComponent},
   {path: 'prediosform',component: PrediosFormComponent},
-  {path: 'prediosForm/form/:id', component: PrediosFormComponent},
+  {path: 'prediosForm/form/:numeroMatricula', component: PrediosFormComponent},
   {path: 'tarifas', component: TarifaComponent},
   {path: 'tarifasForm', component: TarifaFormComponent},
   {path: 'tarifasForm/form/:id', component: TarifaFormComponent},

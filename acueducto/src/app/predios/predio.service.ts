@@ -31,7 +31,7 @@ export class PredioService {
     return this.http.delete<Predio>(`${this.urlEndPoint}${numeroMatricula}`, {headers: this.httpHeaders})
   }
 
-  getLugar(numeroMatricula: string): Observable<Predio>{
+  getPredio(numeroMatricula: string): Observable<Predio>{
     return this.http.get<Predio>(`${this.urlEndPoint}${numeroMatricula}`, {headers: this.httpHeaders})
   }
 

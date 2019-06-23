@@ -8,10 +8,10 @@
       No hay Predios en la base de datos!
     </div>
     <h5 class="card-title">Listado de Predios</h5>
-    <table class="table table-bordered table-striped" *ngIf="suscriptores?.length>0">
+    <table class="table table-bordered table-striped" *ngIf="predios?.length>0">
       <thead>
         <tr>
-          <th>numeroMatricula</th>
+          <th>Número Matricula</th>
           <th>Dirrecció</th>
           <th>Estrato</th>
           <th>Latitud</th>
@@ -27,7 +27,7 @@
           <td>{{predio.latitud}}</td>
           <td>{{predio.longitud}}</td>
           <td class="predio">
-            <button type="button" class="btn btn-info mx-2" [routerLink]="['/prediosForm/form',predio.id]">
+            <button type="button" class="btn btn-info mx-2" [routerLink]="['/prediosForm/form',predio.numeroMatricula]">
               <span class="glyphicon glyphicon-pencil"></span>Editar
             </button>
             <button type="button" class="btn btn-danger mx-2" (click)="eliminar(predio)">

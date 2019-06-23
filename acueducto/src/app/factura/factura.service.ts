@@ -34,4 +34,9 @@ export class FacturaService {
     return this.http.put<Factura>(`${this.urlEndPoint}${factura.id}`, factura, {headers: this.httpHeaders})
   }
 
+  
+  getFactura(id: number): Observable<Factura>{
+    return this.http.get<Factura>(`${this.urlEndPoint}${id}`, {headers: this.httpHeaders})
+  }
+
 }

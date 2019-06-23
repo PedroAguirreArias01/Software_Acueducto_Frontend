@@ -51,10 +51,10 @@ export class PrediosFormComponent implements OnInit {
   cargarLugar(): void {
     this.editar = false;
     this.activatedRoute.params.subscribe(params => {
-      let id = params['id'];
-      if (id) {
+      let numeroMatricula = params['numeroMatricula'];
+      if (numeroMatricula) {
         this.editar = true;
-        this.predioService.getLugar(id).subscribe(
+        this.predioService.getPredio(numeroMatricula).subscribe(
           (predio) => {
           this.predio = predio
           }

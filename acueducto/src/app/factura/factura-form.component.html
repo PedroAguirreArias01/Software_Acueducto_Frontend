@@ -6,30 +6,30 @@
       <div class="form-group row">
         <label for="nombre" class="col-form-label col-sm-2">Suscriptor</label>
         <div class="col-sm-4">
-          <input type="text" class="form-control" [(ngModel)]="suscriptor.nombre" name="suscriptor"
+          <input type="text" class="form-control" [(ngModel)]="factura.suscriptor.nombre" name="suscriptor"
             placeholder="Suscriptor">
         </div>
         <label for="nombre" class="col-form-label col-sm-2" style="text-align: right">Predio</label>
         <div class="col-sm-4">
-          <input type="text" class="form-control" [(ngModel)]="predio.nombre" name="predio" placeholder="Predio">
+          <input type="text" class="form-control" [(ngModel)]="factura.predio.nombre" name="predio" placeholder="Predio">
         </div>
       </div>
 
       <div class="form-group row">
         <label for="nombre" class="col-form-label col-sm-2">Lectura Anterior</label>
         <div class="col-sm-4">
-          <input type="text" class="form-control" name="suscriptor" placeholder="Lectura Anterior">
+          <input type="text" class="form-control" name="lecturaAnterior" [(ngModel)]="factura.lecturaAnterior" placeholder="Lectura Anterior">
         </div>
         <label for="nombre" class="col-form-label col-sm-2" style="text-align: right">Número Catastral</label>
         <div class="col-sm-4">
-          <input type="text" class="form-control" name="predio" placeholder="Número Catastral">
+          <input type="text" class="form-control" name="numeroCatastral" [(ngModel)]="factura.predio.numeroCatastral" placeholder="Número Catastral">
         </div>
       </div>
 
       <div class="form-group row">
         <label for="nombre" class="col-form-label col-sm-2">Lectura Actual</label>
         <div class="col-sm-4">
-          <input type="text" class="form-control" name="suscriptor" placeholder="Lectura Anterior">
+          <input type="text" class="form-control" name="lecturaAnterior" [(ngModel)]="factura.lecturaAnterior" placeholder="Lectura Anterior">
         </div>
         <label for="nombre" class="col-form-label col-sm-2" style="text-align: right">Fecha de Emisión</label>
         <div class="col-sm-4">

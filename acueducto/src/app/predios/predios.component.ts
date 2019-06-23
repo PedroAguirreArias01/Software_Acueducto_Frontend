@@ -18,7 +18,8 @@ export class PrediosComponent implements OnInit {
 
   ngOnInit() {
     this.predioService.get().subscribe(
-      predios => this.predios = predios
+      predios => {this.predios = predios
+      }
     );
   }
 
