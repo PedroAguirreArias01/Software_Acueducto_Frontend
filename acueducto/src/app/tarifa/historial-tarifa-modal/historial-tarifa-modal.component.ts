@@ -15,4 +15,8 @@ export class HistorialTarifaModalComponent implements OnInit {
   ngOnInit() {
   }
 
+  close(){
+    this.dialogRef.close();
+  }
+
 }

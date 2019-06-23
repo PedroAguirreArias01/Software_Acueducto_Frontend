@@ -58,6 +58,8 @@ import { TarifaFormComponent } from './tarifa/tarifa-form.component';
 import { NgbModalConfig, NgbModal  } from "@ng-bootstrap/ng-bootstrap";
 import { UsuarioFormComponent } from './usuario/usuario-form.component';
 import { HistorialTarifaModalComponent } from './tarifa/historial-tarifa-modal/historial-tarifa-modal.component';
+import { LugarComponent } from './lugar/lugar.component';
+import { LugarFormComponent } from './lugar/lugar-form.component';
 
 const routes: Routes = [
   {path: 'suscriptores', component: SuscriptoresComponent},
@@ -71,6 +73,9 @@ const routes: Routes = [
   {path: 'usuarios', component: UsuarioComponent },
   {path: 'usuarios/form/:cedula', component: UsuarioFormComponent },
   {path: 'usuarioForm', component: UsuarioFormComponent},
+  {path: 'lugar', component: LugarComponent},
+  {path: 'lugarForm', component: LugarFormComponent},
+  {path: 'lugar/form/:id', component: LugarFormComponent},
 ];
 
 @NgModule({
@@ -86,6 +91,8 @@ const routes: Routes = [
     TarifaFormComponent,
     UsuarioFormComponent,
     HistorialTarifaModalComponent,
+    LugarComponent,
+    LugarFormComponent,
     ],
   imports: [
     BrowserModule,

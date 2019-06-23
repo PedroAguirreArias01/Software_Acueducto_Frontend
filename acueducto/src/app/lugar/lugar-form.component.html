@@ -1,0 +1,57 @@
+<div class="card fixed">
+  <div class="card-header">
+    <legend class="text-center header" *ngIf="!editar else EditarTitulo">Agregar Lugar</legend>
+
+    <ng-template #EditarTitulo>
+      <legend class="text-center header">Editar Lugar</legend>
+    </ng-template>
+  </div>
+  <div class="card-body">
+
+    <form class="" method="post">
+      <div class="form-group row">
+        <label for="tipo" class="col-form-label col-sm-4" style="text-align: right">Selecionar Tipo Lugar</label>
+        <div class="col-sm-6">
+          <select class="form-control" name="tipo" [(ngModel)]="tipoLugar" (change)="onChange($event.value)" #tipo>
+            <option value="municipio">Municipio</option>
+            <option value="vereda">Vereda</option>
+          </select>
+        </div>
+      </div>
+
+
+      <div class="form-group row" *ngIf='!tipoLugar else carga'>
+        <label for="region" class="col-form-label col-sm-4" style="text-align: right">Seleccione Municipio</label>
+        <div class="col-sm-6">
+          <select class="form-control" [(ngModel)]="lugar" name="municipio">
+            <option [ngValue]="undefined">--- selecionar Municipio ---</option>
+            <option *ngFor="let municipio of listaMunicipios" [ngValue]="region">{{municipio.nombre}}</option>
+          </select>
+        </div>
+      </div>
+
+      <ng-template #carga>
+
+      </ng-template>
+
+      <div class="form-group row">
+        <label for="nombre" class="col-form-label col-sm-4" style="text-align: right">Nombre</label>
+        <div class="col-sm-6">
+          <input id="nombre" name="nombre" type="text" required [(ngModel)]="lugar.nombre" placeholder="Nombre"
+            class="form-control" minlength="10">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-md-12 text-center">
+          <button type="submit" class="btn btn-primary btn-lg" (click)='onSubmit()'
+            *ngIf="!editar else elseBlock">Guardar</button>
+          <ng-template #elseBlock>
+            <button type="submit" class="btn btn-primary btn-lg" (click)='update()'>Editar</button>
+          </ng-template>
+        </div>
+      </div>
+    </form>
+
+  </div>
+</div>

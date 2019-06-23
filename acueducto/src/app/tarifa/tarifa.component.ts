@@ -79,5 +79,6 @@ export class TarifaComponent implements OnInit {
       }
     );
   }
+
 }
 
