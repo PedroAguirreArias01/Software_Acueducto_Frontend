@@ -73,7 +73,7 @@ export class TarifaComponent implements OnInit {
     console.log(tarifa);
     const dialogRef = this.dialog.open(
       HistorialTarifaModalComponent,{
-        width :'40%',
+        width :'50%',
         height:'60%',
         data: {tarifa: tarifa}
       }

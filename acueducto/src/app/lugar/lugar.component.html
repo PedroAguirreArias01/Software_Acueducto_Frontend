@@ -21,7 +21,8 @@
                 <tr *ngFor="let lugar of lugares | paginate: { itemsPerPage: 7, currentPage: pageActual}">
                     <td>{{lugar.id}}</td>
                     <td>{{lugar.nombre}}</td>
-                    <td>{{lugar.tipo}}</td>
+                    <td *ngIf="lugar.tipo === 'V'">Vereda</td>
+                    <td *ngIf="lugar.tipo === 'M'">Municipio</td>
                     <td class="lugar">
                         <button type="button" class="btn btn-info mx-2"
                             [routerLink]="['/lugar/form',lugar.id]">

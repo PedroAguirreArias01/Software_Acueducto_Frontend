@@ -1,30 +1,38 @@
 <div class="card">
   <div class="card-header ">
-    <h2>Historial Tarifa</h2>
+    <h2>{{data.tarifa.descripcion}}</h2>
   </div>
   <div class="card-body">
-    <h3 class="card-title">{{data.tarifa.descripcion}}</h3>
+    <h3 class="card-title">Valor Actual</h3>
     <h4 class="card-subtitle mb-2 text-muted">{{data.tarifa.valorTarifa | currency}}</h4>
-    <table class="table">
-      <thead>
-        <tr>
-          <th>Fecha </th>
-          <th>Fecha Final</th>
-          <th>Valor</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let item of data.tarifa.historialTarifa">
-          <td>{{item.fechaInicio}}</td>
-          <td *ngIf="item.fechaFinal != null else fechaNoDisponible">{{item.fechaFinal}}</td>
-          <ng-template #fechaNoDisponible>
-            <td>No definida</td>
-          </ng-template>
+    <div class="row">
+      <div class="col-12 d-flex justify-content-center py-2">
+          <h5 >Historial Tarifa</h5>
+      </div>
+      
+    </div>
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Fecha </th>
+            <th>Fecha Final</th>
+            <th>Valor</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of data.tarifa.historialTarifa">
+            <td>{{item.fechaInicio}}</td>
+            <td *ngIf="item.fechaFinal != null else fechaNoDisponible">{{item.fechaFinal}}</td>
+            <ng-template #fechaNoDisponible>
+              <td>No definida</td>
+            </ng-template>
 
-          <td>{{item.valorTarifa | currency}}</td>
-        </tr>
-      </tbody>
-    </table>
+            <td>{{item.valorTarifa | currency}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>
 <div class="row py-3">
