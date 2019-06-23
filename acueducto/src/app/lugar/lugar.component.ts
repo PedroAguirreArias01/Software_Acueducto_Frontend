@@ -23,6 +23,8 @@ export class LugarComponent implements OnInit {
     );
   }
 
+
+
   eliminar(lugar: Lugar): void {
     Swal.fire({
       title: 'Está seguro?',

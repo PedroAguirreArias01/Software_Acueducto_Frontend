@@ -12,19 +12,19 @@
       <div class="form-group row">
         <label for="tipo" class="col-form-label col-sm-4" style="text-align: right">Selecionar Tipo Lugar</label>
         <div class="col-sm-6">
-          <select class="form-control" name="tipo" [(ngModel)]="tipoLugar" (change)="onChange($event.value)" #tipo>
-            <option value="municipio">Municipio</option>
-            <option value="vereda">Vereda</option>
+          <select class="form-control" name="tipo" [(ngModel)]="lugar.tipo" >
+            <option value="M">Municipio</option>
+            <option value="V">Vereda</option>
           </select>
         </div>
       </div>
 
-      <div class="form-group row" *ngIf="tipoLugar === 'vereda' else carga">
+      <div class="form-group row" *ngIf="lugar.tipo === 'V' else carga">
         <label for="region" class="col-form-label col-sm-4" style="text-align: right">Seleccione Municipio</label>
         <div class="col-sm-6">
-          <select class="form-control" [(ngModel)]="lugar" name="municipio">
+          <select class="form-control" [(ngModel)]="lugar.ubicado" name="municipio">
             <option [ngValue]="undefined">--- selecionar Municipio ---</option>
-            <option *ngFor="let municipio of listaMunicipios" [ngValue]="region">{{municipio.nombre}}</option>
+            <option *ngFor="let municipio of listaMunicipios" [ngValue]="municipio">{{municipio.nombre}}</option>
           </select>
         </div>
       </div>

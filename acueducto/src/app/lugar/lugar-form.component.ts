@@ -74,9 +74,4 @@ export class LugarFormComponent implements OnInit {
     );
   }
 
-  onChange(event:any){
-  
-    console.log('entra: '+event as string);
-  }
-
 }
