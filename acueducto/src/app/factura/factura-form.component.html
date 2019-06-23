@@ -1,17 +1,23 @@
 <div class="card">
-  <div class="card-header">Generar Factura</div>
+  <div class="card-header">Generar Factura
+      <div class="row">
+          <!--<button class="btn-primary" type="submit" (click)="cargarPredio()">Buscar</button>-->
+          <input type="text" placeholder="Número Matricula" > 
+        </div>
+  </div>
+  
   <div class="card-body">
+   
     <form>
-
       <div class="form-group row">
         <label for="nombre" class="col-form-label col-sm-2">Suscriptor</label>
         <div class="col-sm-4">
-          <input type="text" class="form-control" [(ngModel)]="factura.suscriptor.nombre" name="suscriptor"
+          <input type="text" class="form-control" [(ngModel)]="predio.suscriptor.nombre" name="suscriptor"
             placeholder="Suscriptor">
         </div>
         <label for="nombre" class="col-form-label col-sm-2" style="text-align: right">Predio</label>
         <div class="col-sm-4">
-          <input type="text" class="form-control" [(ngModel)]="factura.predio.nombre" name="predio" placeholder="Predio">
+          <input type="text" class="form-control" [(ngModel)]="predio.nombre" name="predio" placeholder="Predio">
         </div>
       </div>
 
@@ -22,7 +28,7 @@
         </div>
         <label for="nombre" class="col-form-label col-sm-2" style="text-align: right">Número Catastral</label>
         <div class="col-sm-4">
-          <input type="text" class="form-control" name="numeroCatastral" [(ngModel)]="factura.predio.numeroCatastral" placeholder="Número Catastral">
+          <input type="text" class="form-control" name="numeroCatastral" [(ngModel)]="predio.numeroCatastral" placeholder="Número Catastral">
         </div>
       </div>
 
@@ -52,6 +58,7 @@
             <mat-datepicker #picker></mat-datepicker>
           </mat-form-field>
         </div>
+        <span class="col-md-offset-2 text-center"><i class=""></i></span>
         <label for="nombre" class="col-form-label col-sm-2">Fecha Vencimiento</label>
         <div class="col-sm-4">
           <mat-form-field>

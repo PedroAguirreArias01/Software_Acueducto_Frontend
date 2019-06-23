@@ -3,6 +3,8 @@ import { Router, ActivatedRoute } from "@angular/router";
 import Swal from 'sweetalert2';
 import { Factura } from './Factura';
 import { FacturaService } from './factura.service';
+import {PredioService } from '../predios/predio.service';
+import {Predio} from '../predios/Predio';
 
 @Component({
   selector: 'app-factura-form',
@@ -14,8 +16,10 @@ export class FacturaFormComponent implements OnInit {
   public factura: Factura = new Factura();
   public editar: boolean;
   public facturas: Factura[];
+  public predio: Predio = new Predio();
+  public numeroMatricula: string;
  
-  constructor(private facturaService: FacturaService, private router: Router, private activatedRoute: ActivatedRoute) { }
+  constructor(private facturaService: FacturaService,private predioServicio: PredioService, private router: Router, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
     this.cargarFactura();
@@ -66,6 +70,12 @@ export class FacturaFormComponent implements OnInit {
         confirmButtonText: 'Aceptar'
       })
     })
+  }
+
+  cargarPredio(){
+    this.predioServicio.getPredio(this.numeroMatricula).subscribe(
+      predio => this.predio= predio
+    )
   }
 
 }
