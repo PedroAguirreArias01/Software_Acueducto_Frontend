@@ -10,50 +10,62 @@
 
     <form class="" method="post">
 
-      <div class="form-group">
-        <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-keyboard-o"></i></span>
-        <div class="col-md-8">
+      <div class="form-group row">
+        <label for="nombre" class="col-form-label col-sm-4" style="text-align: right">Número Catastral</label>
+        <div class="col-sm-6">
           <input id="id" name="id" type="text" required [(ngModel)]="predio.id" placeholder="Número Catastral"
             class="form-control">
         </div>
       </div>
-      <div class="form-group">
-        <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-road"></i></span>
-        <div class="col-md-8">
-          <input id="direccion" name="direccion" type="text" required [(ngModel)]="predio.direccion"
+
+      <div class="form-group row">
+        <label for="nombre" class="col-form-label col-sm-4" style="text-align: right">Nombre</label>
+        <div class="col-sm-6">
+          <input id="nombre" name="nombre" type="text" required [(ngModel)]="predio.nombre"
             placeholder="Direccion" class="form-control">
         </div>
       </div>
-      <div class="form-group">
-        <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-sort-numeric-desc"></i></span>
-        <div class="col-md-8">
+
+      <div class="form-group row">
+        <label for="nombre" class="col-form-label col-sm-4" style="text-align: right">Estrato</label>
+        <div class="col-sm-6">
           <input id="estrato" name="estrato" type="number" required [(ngModel)]="predio.estrato" placeholder="Estrato"
             class="form-control" min="1" max="6">
         </div>
       </div>
 
-      <div class="form-group">
-        <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-globe"></i></span>
-        <div class="col-md-8">
+      <div class="form-group row">
+        <label for="nombre" class="col-form-label col-sm-4" style="text-align: right">Latitud</label>
+        <div class="col-sm-6">
           <input id="latitud" name="latitud" type="text" required [(ngModel)]="predio.latitud" placeholder="Latitud"
             class="form-control">
         </div>
       </div>
 
-      <div class="form-group">
-        <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-globe"></i></span>
-        <div class="col-md-8">
+      <div class="form-group row">
+        <label for="nombre" class="col-form-label col-sm-4" style="text-align: right">Longitud</label>
+        <div class="col-sm-6">
           <input id="longitud" name="longitud" type="text" required [(ngModel)]="predio.longitud" placeholder="Longitud"
             class="form-control">
         </div>
       </div>
 
       <div class="form-group row">
-        <label for="region" class="col-form-label col-sm-4" style="text-align: right">Seleccione Municipio</label>
+        <label for="region" class="col-form-label col-sm-4" style="text-align: right">Seleccione Vereda</label>
         <div class="col-sm-6">
-          <select class="form-control" [(ngModel)]="lugar.ubicado" name="municipio">
+          <select class="form-control" [(ngModel)]="predio.lugar" name="lugar">
             <option [ngValue]="undefined">--- selecionar Vereda ---</option>
-            <option *ngFor="let lugar of lugares" [ngValue]="municipio">{{lugar.nombre}}</option>
+            <option *ngFor="let lugar of lugares" [ngValue]="lugar">{{lugar.nombre}}</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="region" class="col-form-label col-sm-4" style="text-align: right">Seleccione Suscriptor</label>
+        <div class="col-sm-6">
+          <select class="form-control" [(ngModel)]="predio.suscriptor" name="suscriptor">
+            <option [ngValue]="undefined">--- selecionar Suscriptor ---</option>
+            <option *ngFor="let suscriptor of suscriptores" [ngValue]="suscriptor">{{suscriptor.nombre}}  {{suscriptor.apellido}}</option>
           </select>
         </div>
       </div>

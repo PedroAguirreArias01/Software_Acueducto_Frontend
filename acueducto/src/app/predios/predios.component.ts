@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from "@angular/router";
 import { Predio } from './Predio';
-import { LugarService} from '../lugar/lugar.service';
-import {Lugar } from '../lugar/lugar';
 import Swal from 'sweetalert2';
 import { PredioService } from './predio.service';
 
@@ -27,7 +25,7 @@ export class PrediosComponent implements OnInit {
   eliminar(predio: Predio): void {
     Swal.fire({
       title: 'Está seguro?',
-      text: `¿Seguro que desea eliminar al Predio ${predio.id}?`,
+      text: `¿Seguro que desea eliminar al Predio ${predio.numeroMatricula}?`,
       type: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
@@ -40,12 +38,12 @@ export class PrediosComponent implements OnInit {
       reverseButtons: true
     }).then((result) => {
       if (result.value) {
-        this.predioService.delete(predio.id).subscribe(
+        this.predioService.delete(predio.numeroMatricula).subscribe(
           response => {
             this.predios = this.predios.filter(pre => pre !== predio)
             Swal.fire(
               'Predio Eliminado!',
-              `Predio ${predio.id} eliminado con éxito.`,
+              `Predio ${predio.numeroMatricula} eliminado con éxito.`,
               'success'
             )
           }

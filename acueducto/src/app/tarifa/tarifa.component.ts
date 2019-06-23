@@ -15,8 +15,6 @@ import { HistorialTarifaModalComponent } from './historial-tarifa-modal/historia
 })
 export class TarifaComponent implements OnInit {
 
-  name:string = "holi";
-  
   private tarifas: Tarifa[];
   private tarifa: Tarifa;
   public pageActual: number=1;

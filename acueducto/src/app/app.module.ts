@@ -60,6 +60,8 @@ import { UsuarioFormComponent } from './usuario/usuario-form.component';
 import { HistorialTarifaModalComponent } from './tarifa/historial-tarifa-modal/historial-tarifa-modal.component';
 import { LugarComponent } from './lugar/lugar.component';
 import { LugarFormComponent } from './lugar/lugar-form.component';
+import { FacturaComponent } from './factura/factura.component';
+import { FacturaFormComponent } from './factura/factura-form.component';
 
 const routes: Routes = [
   {path: 'suscriptores', component: SuscriptoresComponent},
@@ -77,6 +79,9 @@ const routes: Routes = [
   {path: 'lugar', component: LugarComponent},
   {path: 'lugarForm', component: LugarFormComponent},
   {path: 'lugar/form/:id', component: LugarFormComponent},
+  {path: 'facturas', component: FacturaComponent},
+  {path: 'facturaForm', component: FacturaFormComponent},
+  {path: 'facturas/form/:id', component: FacturaFormComponent},
 ];
 
 @NgModule({
@@ -94,6 +99,8 @@ const routes: Routes = [
     HistorialTarifaModalComponent,
     LugarComponent,
     LugarFormComponent,
+    FacturaComponent,
+    FacturaFormComponent,
     ],
   imports: [
     BrowserModule,

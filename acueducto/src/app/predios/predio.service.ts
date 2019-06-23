@@ -27,16 +27,16 @@ export class PredioService {
     return this.http.post<Predio>(this.urlEndPoint, predio, { headers: this.httpHeaders });
   }
 
-  delete(id: string): Observable<Predio>{
-    return this.http.delete<Predio>(`${this.urlEndPoint}${id}`, {headers: this.httpHeaders})
+  delete(numeroMatricula: string): Observable<Predio>{
+    return this.http.delete<Predio>(`${this.urlEndPoint}${numeroMatricula}`, {headers: this.httpHeaders})
   }
 
-  getLugar(id: number): Observable<Predio>{
-    return this.http.get<Predio>(`${this.urlEndPoint}${id}`, {headers: this.httpHeaders})
+  getLugar(numeroMatricula: string): Observable<Predio>{
+    return this.http.get<Predio>(`${this.urlEndPoint}${numeroMatricula}`, {headers: this.httpHeaders})
   }
 
   update(predio: Predio): Observable<Predio>{
-    return this.http.put<Predio>(`${this.urlEndPoint}${predio.id}`, predio, {headers: this.httpHeaders})
+    return this.http.put<Predio>(`${this.urlEndPoint}${predio.numeroMatricula}`, predio, {headers: this.httpHeaders})
   }
 
 }

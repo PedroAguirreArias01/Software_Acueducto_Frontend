@@ -4,18 +4,16 @@
     <div class="my-2 text-left">
       <button class="btn btn-rounded btn-primary"  routerLink="/suscriptoresform"> Crear Suscriptor</button>
     </div>
-    <div *ngIf = "suscriptores?.length==0" class="alert alert-info">
+    <div *ngIf = "suscriptores?.length===0" class="alert alert-info">
       No hay Suscriptores en la base de datos!
     </div>
     <h5 class="card-title">Listado de Suscriptores</h5>
     <table class="table table-bordered table-striped" *ngIf = "suscriptores?.length>0">
       <thead>
         <tr>
-          <th>Cedula</th>
           <th>Nombre</th>
           <th>Apellido</th>
           <th>Número Telefono</th>
-          <th>Correo Electronico</th>
           <th>Estado</th>
           <th>Estado Cuenta</th>
           <th>Acciones</th>
@@ -23,11 +21,9 @@
       </thead>
       <tbody>
         <tr *ngFor="let suscriptor of suscriptores | paginate: { itemsPerPage: 7, currentPage: pageActual}">
-          <td>{{suscriptor.cedula}}</td>
           <td>{{suscriptor.nombre}}</td>
           <td>{{suscriptor.apellido}}</td>
           <td>{{suscriptor.numeroTelefono}}</td>
-          <td>{{suscriptor.correoElectronico}}</td>
           <td>{{suscriptor.estado}}</td>
           <td>{{suscriptor.estadoCuenta}}</td>
           <td class="suscriptor">

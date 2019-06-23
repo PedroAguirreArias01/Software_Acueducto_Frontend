@@ -26,12 +26,6 @@
           </li>
 
           <li>
-            <a routerLink="/predios">
-              <i class="fa fa-money"></i> Predios
-            </a>
-          </li>
-
-          <li>
             <a routerLink="/usuarios">
               <i class="fa fa-user fa-lg"></i> Usuarios
             </a>
@@ -44,6 +38,15 @@
             <li routerLink="/lugar">Lugares</li>
             <li> <a routerLink="/predios"> Predios </a></li>
           </ul>
+
+          <li data-toggle="collapse" data-target="#facturacion" class="collapsed">
+            <a href="#"><i class="fa fa-car fa-lg"></i> Facturación<span class="arrow"></span></a>
+          </li>
+          <ul class="sub-menu collapse" id="facturacion">
+            <li routerLink="/facturaForm">Generar Facturación</li>
+            <li> <a routerLink="/facturas"> Facturas </a></li>
+          </ul>
+
         </ul>
       </div>
     </div>
