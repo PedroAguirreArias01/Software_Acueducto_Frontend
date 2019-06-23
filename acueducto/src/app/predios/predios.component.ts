@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from "@angular/common/http";
-import { HttpHeaders } from '@angular/common/http';
-import { Router } from "@angular/router";
+import { Router, ActivatedRoute } from "@angular/router";
 import { Predio } from './Predio';
+import { LugarService} from '../lugar/lugar.service';
+import {Lugar } from '../lugar/lugar';
+import Swal from 'sweetalert2';
+import { PredioService } from './predio.service';
 
 @Component({
   selector: 'app-predios',
@@ -10,42 +12,45 @@ import { Predio } from './Predio';
   styleUrls: ['./predios.component.css']
 })
 export class PrediosComponent implements OnInit {
-
-  private lista: Predio[];
-  public id: string;
-
-  constructor(public loadPredios: HttpClient, private router: Router) { }
+  private predios: Predio[];
+  private predio: Predio;
+  public pageActual: number=1;
+  
+  constructor(private predioService: PredioService, private router:Router, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
-    this.get_Predios();
+    this.predioService.get().subscribe(
+      predios => this.predios = predios
+    );
   }
 
-  public headers = {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json'
+  eliminar(predio: Predio): void {
+    Swal.fire({
+      title: 'Está seguro?',
+      text: `¿Seguro que desea eliminar al Predio ${predio.id}?`,
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, eliminar!',
+      cancelButtonText: 'No, cancelar!',
+      confirmButtonClass: 'btn btn-success',
+      cancelButtonClass: 'btn btn-danger',
+      buttonsStyling: false,
+      reverseButtons: true
+    }).then((result) => {
+      if (result.value) {
+        this.predioService.delete(predio.id).subscribe(
+          response => {
+            this.predios = this.predios.filter(pre => pre !== predio)
+            Swal.fire(
+              'Predio Eliminado!',
+              `Predio ${predio.id} eliminado con éxito.`,
+              'success'
+            )
+          }
+        )
+      }
     })
   }
-
-  eliminar(predio: Predio) {
-    console.log(predio.id);
-    let url = 'http://localhost:8080/predios/' + predio.id;
-    this.loadPredios.delete<Predio>(url)
-
-      .subscribe(dataIncoming => {   // data is already a JSON object
-        this.router.navigate(['/app-predios']);
-        console.log(dataIncoming);
-        //this.predios();
-
-      })
-  };
-
-  get_Predios() {
-    this.loadPredios.get<Predio[]>('http://localhost:8080/predios/').subscribe((res) => {
-      console.log(res);
-      this.lista = res;
-    });
-
-
-  }
-
 }

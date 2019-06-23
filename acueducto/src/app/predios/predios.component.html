@@ -1,12 +1,17 @@
-
-<div class="card border-primary mb-3">
+<div class="col-md-12 card border-primary">
   <div class="card-header">Predios</div>
   <div class="card-body">
+    <div class="my-2 text-left">
+      <button class="btn btn-rounded btn-primary" routerLink="/prediosform"> Crear Predios</button>
+    </div>
+    <div *ngIf="predios.length==0" class="alert alert-info">
+      No hay Predios en la base de datos!
+    </div>
     <h5 class="card-title">Listado de Predios</h5>
-    <table class="table table-bordered table-striped">
+    <table class="table table-bordered table-striped" *ngIf="suscriptores?.length>0">
       <thead>
         <tr>
-          <th>Id</th>
+          <th>numeroMatricula</th>
           <th>Dirrecció</th>
           <th>Estrato</th>
           <th>Latitud</th>
@@ -15,22 +20,23 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let predio of lista">
-          <td>{{predio.id}}</td>
+        <tr *ngFor="let predio of predios | paginate: { itemsPerPage: 7, currentPage: pageActual}">
+          <td>{{predio.numeroMatricula}}</td>
           <td>{{predio.nombre}}</td>
           <td>{{predio.estrato}}</td>
           <td>{{predio.latitud}}</td>
           <td>{{predio.longitud}}</td>
           <td class="predio">
-            <button type="button" class="btn btn-info" ng-click="editar(predio)">
-                <span class="glyphicon glyphicon-pencil"></span>Editar
+            <button type="button" class="btn btn-info mx-2" [routerLink]="['/prediosForm/form',predio.id]">
+              <span class="glyphicon glyphicon-pencil"></span>Editar
             </button>
-            <button type="button" class="btn btn-danger" (click)="eliminar(predio)">
-                <span class="glyphicon glyphicon-remove"></span>Eliminar
+            <button type="button" class="btn btn-danger mx-2" (click)="eliminar(predio)">
+              <span class="glyphicon glyphicon-remove"></span>Eliminar
             </button>
-        </td>
+          </td>
         </tr>
       </tbody>
     </table>
+    <pagination-controls (pageChange)="pageActual = $event"></pagination-controls>
   </div>
 </div>

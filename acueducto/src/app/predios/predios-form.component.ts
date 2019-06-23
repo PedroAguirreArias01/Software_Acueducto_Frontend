@@ -1,0 +1,78 @@
+import { Component, OnInit } from '@angular/core';
+import { Predio } from './Predio';
+import { PredioService } from './predio.service';
+import { Router, ActivatedRoute } from "@angular/router";
+import Swal from 'sweetalert2';
+import {LugarService} from '../lugar/lugar.service'
+import { Lugar } from '../lugar/lugar';
+
+@Component({
+  selector: 'app-predios-form',
+  templateUrl: './predios-form.component.html',
+  styleUrls: ['./predios-form.component.css']
+})
+export class PrediosFormComponent implements OnInit {
+
+  public predio: Predio = new Predio();
+  public editar: boolean;
+  public lugares: Lugar[];
+ 
+
+  constructor(private predioService: PredioService,  private lugarService: LugarService,private router: Router, private activatedRoute: ActivatedRoute) { }
+
+  ngOnInit() {
+    this.getListaLugares();
+    this.cargarLugar();
+  }
+
+  onSubmit() {
+    this.crear();
+  }
+
+  public crear(): void {
+    this.predioService.create(this.predio).
+      subscribe(predio => {
+        this.router.navigate(['/predios'])
+        Swal.fire({
+          title: 'Nuevo Predio!',
+          text: `Predio ${predio.id} creado con exito`,
+          type: 'success',
+          confirmButtonText: 'Aceptar'
+        })
+      }
+      )
+  }
+
+  cargarLugar(): void {
+    this.editar = false;
+    this.activatedRoute.params.subscribe(params => {
+      let id = params['id'];
+      if (id) {
+        this.editar = true;
+        this.predioService.getLugar(id).subscribe(
+          (predio) => {
+          this.predio = predio
+          }
+        )
+      }
+    })
+  }
+
+  update(): void {
+    this.predioService.update(this.predio).subscribe(predio => {
+      this.router.navigate(['/predios'])
+      Swal.fire({
+        title: 'Actualizar Predio!',
+        text: `Predio ${predio.id} actualizado con exito`,
+        type: 'success',
+        confirmButtonText: 'Aceptar'
+      })
+    })
+  }
+
+  getListaLugares(){
+    this.lugarService.get().subscribe(
+      lugares => this.lugares = lugares
+    );
+  }
+}

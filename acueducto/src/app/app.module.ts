@@ -9,7 +9,7 @@ import {RouterModule, Routes} from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PrediosComponent } from './predios/predios.component';
-import { PrediosFormComponent } from './predios-form/predios-form.component';
+import { PrediosFormComponent } from './predios/predios-form.component';
 import { NgxPaginateModule } from 'ngx-paginate';
 import {NgxPaginationModule} from 'ngx-pagination';
 import { NgxCurrencyModule} from 'ngx-currency';
@@ -67,6 +67,7 @@ const routes: Routes = [
   {path: 'suscriptoresform/form/:cedula', component: SuscriptoresFormComponent},
   {path: 'predios', component: PrediosComponent},
   {path: 'prediosform',component: PrediosFormComponent},
+  {path: 'prediosForm/form/:id', component: PrediosFormComponent},
   {path: 'tarifas', component: TarifaComponent},
   {path: 'tarifasForm', component: TarifaFormComponent},
   {path: 'tarifasForm/form/:id', component: TarifaFormComponent},

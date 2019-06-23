@@ -1,0 +1,74 @@
+<div class="card fixed">
+  <div class="card-header">
+    <legend class="text-center header" *ngIf="!editar else EditarTitulo">Agregar Predio</legend>
+
+    <ng-template #EditarTitulo>
+      <legend class="text-center header">Editar Predio</legend>
+    </ng-template>
+  </div>
+  <div class="card-body">
+
+    <form class="" method="post">
+
+      <div class="form-group">
+        <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-keyboard-o"></i></span>
+        <div class="col-md-8">
+          <input id="id" name="id" type="text" required [(ngModel)]="predio.id" placeholder="Número Catastral"
+            class="form-control">
+        </div>
+      </div>
+      <div class="form-group">
+        <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-road"></i></span>
+        <div class="col-md-8">
+          <input id="direccion" name="direccion" type="text" required [(ngModel)]="predio.direccion"
+            placeholder="Direccion" class="form-control">
+        </div>
+      </div>
+      <div class="form-group">
+        <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-sort-numeric-desc"></i></span>
+        <div class="col-md-8">
+          <input id="estrato" name="estrato" type="number" required [(ngModel)]="predio.estrato" placeholder="Estrato"
+            class="form-control" min="1" max="6">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-globe"></i></span>
+        <div class="col-md-8">
+          <input id="latitud" name="latitud" type="text" required [(ngModel)]="predio.latitud" placeholder="Latitud"
+            class="form-control">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-globe"></i></span>
+        <div class="col-md-8">
+          <input id="longitud" name="longitud" type="text" required [(ngModel)]="predio.longitud" placeholder="Longitud"
+            class="form-control">
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="region" class="col-form-label col-sm-4" style="text-align: right">Seleccione Municipio</label>
+        <div class="col-sm-6">
+          <select class="form-control" [(ngModel)]="lugar.ubicado" name="municipio">
+            <option [ngValue]="undefined">--- selecionar Vereda ---</option>
+            <option *ngFor="let lugar of lugares" [ngValue]="municipio">{{lugar.nombre}}</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-md-12 text-center">
+          <button type="submit" class="btn btn-primary btn-lg" (click)='onSubmit()'
+            *ngIf="!editar else elseBlock">Guardar</button>
+          <ng-template #elseBlock>
+            <button type="submit" class="btn btn-primary btn-lg" (click)='update()'>Editar</button>
+          </ng-template>
+        </div>
+      </div>
+      
+    </form>
+
+  </div>
+</div>
