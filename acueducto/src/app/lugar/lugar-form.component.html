@@ -19,8 +19,7 @@
         </div>
       </div>
 
-
-      <div class="form-group row" *ngIf='!tipoLugar else carga'>
+      <div class="form-group row" *ngIf="tipoLugar === 'vereda' else carga">
         <label for="region" class="col-form-label col-sm-4" style="text-align: right">Seleccione Municipio</label>
         <div class="col-sm-6">
           <select class="form-control" [(ngModel)]="lugar" name="municipio">
