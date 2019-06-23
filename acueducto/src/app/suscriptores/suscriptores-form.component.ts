@@ -17,9 +17,19 @@ export class SuscriptoresFormComponent implements OnInit {
   public suscriptor: Suscriptor = new Suscriptor();
   public editar:boolean;
 
+  private minYears: number;
+  private minDate: Date;
+  private maxDate:Date;
+
+
   constructor(private suscriptorService: SuscriptorService, private router: Router,private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
+    this.minYears= 18;
+    this.minDate = new Date(1900,0,1);
+    this.maxDate = new Date(new Date().setFullYear(new Date().getFullYear() - this.minYears))
+    console.log(this.maxDate);
+    console.log(this.minDate)
     this.cargarSuscriptor();
   }
 
