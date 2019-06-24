@@ -1,118 +1,132 @@
-<div class="card">
-  <div class="card-header">Generar Factura
-      <div class="row">
-          <!--<button class="btn-primary" type="submit" (click)="cargarPredio()">Buscar</button>-->
-          <input type="text" placeholder="Número Matricula" > 
-        </div>
-  </div>
-  
-  <div class="card-body">
-   
-    <form>
-      <div class="form-group row">
-        <label for="nombre" class="col-form-label col-sm-2">Suscriptor</label>
-        <div class="col-sm-4">
-          <input type="text" class="form-control" [(ngModel)]="predio.suscriptor.nombre" name="suscriptor"
-            placeholder="Suscriptor">
-        </div>
-        <label for="nombre" class="col-form-label col-sm-2" style="text-align: right">Predio</label>
-        <div class="col-sm-4">
-          <input type="text" class="form-control" [(ngModel)]="predio.nombre" name="predio" placeholder="Predio">
-        </div>
-      </div>
+<div class="container">
+  <div class="row m-3">
+    <div class="form-group">
 
-      <div class="form-group row">
-        <label for="nombre" class="col-form-label col-sm-2">Lectura Anterior</label>
-        <div class="col-sm-4">
-          <input type="text" class="form-control" name="lecturaAnterior" [(ngModel)]="factura.lecturaAnterior" placeholder="Lectura Anterior">
-        </div>
-        <label for="nombre" class="col-form-label col-sm-2" style="text-align: right">Número Catastral</label>
-        <div class="col-sm-4">
-          <input type="text" class="form-control" name="numeroCatastral" [(ngModel)]="predio.numeroCatastral" placeholder="Número Catastral">
-        </div>
-      </div>
-
-      <div class="form-group row">
-        <label for="nombre" class="col-form-label col-sm-2">Lectura Actual</label>
-        <div class="col-sm-4">
-          <input type="text" class="form-control" name="lecturaAnterior" [(ngModel)]="factura.lecturaAnterior" placeholder="Lectura Anterior">
-        </div>
-        <label for="nombre" class="col-form-label col-sm-2" style="text-align: right">Fecha de Emisión</label>
-        <div class="col-sm-4">
-          <mat-form-field>
-            <input matInput [matDatepicker]="picker" name="fechaEmision" required [(ngModel)]="factura.fechaEmision"
-              placeholder="Fecha Emisión">
-            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
-          </mat-form-field>
-        </div>
-      </div>
-
-      <div class="form-group row">
-        <label for="nombre" class="col-form-label col-sm-2">Fecha de Pago</label>
-        <div class="col-sm-4">
-          <mat-form-field>
-            <input matInput [matDatepicker]="picker" name="fechaPago" required [(ngModel)]="factura.fechaPago"
-              placeholder="Fecha Pago">
-            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
-          </mat-form-field>
-        </div>
-        <span class="col-md-offset-2 text-center"><i class=""></i></span>
-        <label for="nombre" class="col-form-label col-sm-2">Fecha Vencimiento</label>
-        <div class="col-sm-4">
-          <mat-form-field>
-            <input matInput [matDatepicker]="picker" name="fechaVencimiento" required
-              [(ngModel)]="factura.fechaVencimiento" placeholder="Fecha Vencimiento">
-            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
-          </mat-form-field>
-        </div>
-      </div>
-    </form>
-
-    <div class="card">
-      <div class="card-header">Descripción de factura</div>
-      <div class="card-body">
-        <table class="table table-bordered table-striped">
-          <thead>
-            <tr>
-              <th>Item</th>
-              <th>Descripción</th>
-              <th>Precio</th>
-              <th>Cantidad</th>
-              <th>Total a Pagar</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>1</td>
-              <td>pagos varios</td>
-              <td>2000</td>
-              <td>10</td>
-              <td>20000</td>
-            </tr>
-          </tbody>
-        </table>
-        <div class="form-group row">
-          <div class="col-sm-6">
-            <button class="btn btn-primary" style="text-align: left">Agregar Item</button>
-          </div>
-          <label for="nombre" class="col-form-label col-sm-2" style="text-align: right">Total</label>
-          <div class="col-sm-4">
-            <input type="text" class="form-control" name="total" placeholder="Total">
-          </div>
-        </div>
-      </div>
-      <!--<div class="card-footer">Footer</div>-->
+      <form class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="search" placeholder="Predios" matInput [formControl]="searchTerm"
+          [matAutocomplete]="auto" >
+        <mat-autocomplete #auto="matAutocomplete" [displayWith]="autocompleteDisplay" (optionSelected)="onPredioSelected($event.option)">
+          <mat-option *ngFor="let predio of prediosFiltrados" [value]="predio">
+            {{ predio.numeroMatricula }} ({{predio.nombre}})
+          </mat-option>
+        </mat-autocomplete>
+      </form>
+      <!-- CREATE AUTO COMPLETE PANEL WITH OPTIONS. -->
     </div>
   </div>
-  <div class="card-footer">
-      <div class="form-group row">
+
+  <div class="row m-3">
+    <div class="card">
+      <div class="card-header">Generar Factura
+      </div>
+
+      <div class="card-body">
+
+        <form>
+          <div class="form-group row">
+            <label for="nombre" class="col-form-label col-sm-2">Suscriptor</label>
+            <div class="col-sm-4">
+              <input type="text" class="form-control" [(ngModel)]="predio.nombre" name="suscriptor"
+                placeholder="Suscriptor">
+            </div>
+            <label for="nombre" class="col-form-label col-sm-2" style="text-align: right">Predio</label>
+            <div class="col-sm-4">
+              <input type="text" class="form-control" [(ngModel)]="predio.nombre" name="predio" placeholder="Predio">
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="nombre" class="col-form-label col-sm-2" style="text-align: right">Número Catastral</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" name="numeroCatastral" [(ngModel)]="predio.numeroCatastral"
+                placeholder="Número Catastral">
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="nombre" class="col-form-label col-sm-2">Lectura Actual</label>
+            <div class="col-sm-4">
+              <input type="text" class="form-control" name="lecturaAnterior" [(ngModel)]="factura.lecturaAnterior"
+                placeholder="Lectura Anterior">
+            </div>
+            <label for="nombre" class="col-form-label col-sm-2" style="text-align: right">Fecha de Emisión</label>
+            <div class="col-sm-4">
+              <mat-form-field>
+                <input matInput [matDatepicker]="pickerFechaEmision" name="fechaEmision" required
+                  [(ngModel)]="factura.fechaEmision" placeholder="Fecha Emisión">
+                <mat-datepicker-toggle matSuffix [for]="pickerFechaEmision"></mat-datepicker-toggle>
+                <mat-datepicker #pickerFechaEmision></mat-datepicker>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="nombre" class="col-form-label col-sm-2">Fecha de Pago</label>
+            <div class="col-sm-4">
+              <mat-form-field>
+                <input matInput [matDatepicker]="pickerFechaPago" name="fechaPago" required
+                  [(ngModel)]="factura.fechaPago" placeholder="Fecha Pago">
+                <mat-datepicker-toggle matSuffix [for]="pickerFechaPago"></mat-datepicker-toggle>
+                <mat-datepicker #pickerFechaPago></mat-datepicker>
+              </mat-form-field>
+            </div>
+            <span class="col-md-offset-2 text-center"><i class=""></i></span>
+            <label for="nombre" class="col-form-label col-sm-2">Fecha Vencimiento</label>
+            <div class="col-sm-4">
+              <mat-form-field>
+                <input matInput [matDatepicker]="pickerFechaVencimiento" name="fechaVencimiento" required
+                  [(ngModel)]="factura.fechaVencimiento" placeholder="Fecha Vencimiento">
+                <mat-datepicker-toggle matSuffix [for]="pickerFechaVencimiento"></mat-datepicker-toggle>
+                <mat-datepicker #pickerFechaVencimiento></mat-datepicker>
+              </mat-form-field>
+            </div>
+          </div>
+        </form>
+
+        <div class="card">
+          <div class="card-header">Descripción de factura</div>
+          <div class="card-body">
+            <table class="table table-bordered table-striped">
+              <thead>
+                <tr>
+                  <th>Item</th>
+                  <th>Descripción</th>
+                  <th>Precio</th>
+                  <th>Cantidad</th>
+                  <th>Total a Pagar</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>pagos varios</td>
+                  <td>2000</td>
+                  <td>10</td>
+                  <td>20000</td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="form-group row">
+              <div class="col-sm-6">
+                <button class="btn btn-primary" style="text-align: left">Agregar Item</button>
+              </div>
+              <label for="nombre" class="col-form-label col-sm-2" style="text-align: right">Total</label>
+              <div class="col-sm-4">
+                <input type="text" class="form-control" name="total" placeholder="Total">
+              </div>
+            </div>
+          </div>
+          <!--<div class="card-footer">Footer</div>-->
+        </div>
+      </div>
+      <div class="card-footer">
+        <div class="form-group row">
           <div class="col-sm-6">
             <button class="btn btn-success" style="text-align: left">Generar Factura</button>
             <button class="btn btn-danger" style="text-align: left">Cancelar</button>
           </div>
         </div>
+      </div>
+    </div>
   </div>
 </div>

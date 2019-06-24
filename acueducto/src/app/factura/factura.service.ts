@@ -3,13 +3,15 @@ import { Observable } from 'rxjs';
 import { of } from 'rxjs';
 import { HttpClient } from "@angular/common/http";
 import { HttpHeaders } from '@angular/common/http';
-import { map } from 'rxjs/operators';
+import { map, debounceTime } from 'rxjs/operators';
 import { Factura } from './Factura';
+import { Predio } from '../predios/Predio';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FacturaService {
+
   private urlEndPoint: string = 'http://localhost:8080/facturas/';
 
   private httpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -37,6 +39,6 @@ export class FacturaService {
   
   getFactura(id: number): Observable<Factura>{
     return this.http.get<Factura>(`${this.urlEndPoint}${id}`, {headers: this.httpHeaders})
-  }
+  } 
 
 }
