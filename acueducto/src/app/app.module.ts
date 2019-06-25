@@ -62,6 +62,7 @@ import { LugarComponent } from './lugar/lugar.component';
 import { LugarFormComponent } from './lugar/lugar-form.component';
 import { FacturaComponent } from './factura/factura.component';
 import { FacturaFormComponent } from './factura/factura-form.component';
+import { FacturaModalComponent } from './factura/factura-modal/factura-modal.component';
 
 const routes: Routes = [
   {path: 'suscriptores', component: SuscriptoresComponent},
@@ -101,6 +102,7 @@ const routes: Routes = [
     LugarFormComponent,
     FacturaComponent,
     FacturaFormComponent,
+    FacturaModalComponent,
     ],
   imports: [
     BrowserModule,
@@ -152,6 +154,8 @@ const routes: Routes = [
   ],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents:[HistorialTarifaModalComponent]
+  entryComponents:[
+    HistorialTarifaModalComponent, 
+    FacturaModalComponent]
 })
 export class AppModule { }

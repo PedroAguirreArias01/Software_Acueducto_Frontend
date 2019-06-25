@@ -9,33 +9,35 @@ import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { startWith, map } from 'rxjs/operators';
 import { MatOption } from '@angular/material';
+import { MatDialog } from '@angular/material';
+import { FacturaModalComponent } from './factura-modal/factura-modal.component'
+import { Suscriptor } from '../suscriptores/Suscriptor';
 
 @Component({
   selector: 'app-factura-form',
   templateUrl: './factura-form.component.html',
-  styleUrls: ['./factura-form.component.css']
 })
 export class FacturaFormComponent implements OnInit {
 
-  public searchTerm: FormControl = new FormControl();
+  //public searchTerm: FormControl = new FormControl();
   private predios: Predio[];
-  private prediosFiltrados: Predio[];
-
+  //private prediosFiltrados: Predio[];
+  //private show: boolean;
 
   public factura: Factura = new Factura();
   public editar: boolean;
   public facturas: Factura[];
   public predio: Predio = new Predio();
+  public suscriptor: Suscriptor = new Suscriptor();
 
-  constructor(private facturaService: FacturaService, private predioService: PredioService, private router: Router, private activatedRoute: ActivatedRoute) { }
+  constructor(private facturaService: FacturaService, private predioService: PredioService, 
+    private router: Router, private activatedRoute: ActivatedRoute, public dialog: MatDialog) { }
 
   ngOnInit() {
     if (this.editar) {
       this.cargarFactura();
     }
-
     this.cargarPredios();
-
   }
 
 
@@ -43,27 +45,27 @@ export class FacturaFormComponent implements OnInit {
     this.crear();
   }
 
-  private filter(pred: any): Predio[] {
+  // private filter(pred: any): Predio[] {
 
-    return this.predios.filter((item: any) => {
-      console.log("m");
-      //If the user selects an option, the value becomes a Human object,
-      //therefore we need to reset the val for the filter because an
-      //object cannot be used in this toLowerCase filter
-      if (typeof pred === 'object') { pred = "" };
-      const TempString = item.nombre;
-      return TempString.toLowerCase().includes(pred.toLowerCase());
-    });
-  }
+  //   return this.predios.filter((item: any) => {
+  //     console.log("m");
+  //     //If the user selects an option, the value becomes a Human object,
+  //     //therefore we need to reset the val for the filter because an
+  //     //object cannot be used in this toLowerCase filter
+  //     if (typeof pred === 'object') { pred = "" };
+  //     const TempString = item.nombre;
+  //     return TempString.toLowerCase().includes(pred.toLowerCase());
+  //   });
+  // }
 
-  autocompleteDisplay(item: any): string {
-    if (item == undefined) { return }
-    return item.nombre;
-  }
+  // autocompleteDisplay(item: any): string {
+  //   if (item == undefined) { return }
+  //   return item.nombre;
+  // }
 
-  OnPredioSelected(option: MatOption) {
-    console.log(option.value);
-  }
+  // OnPredioSelected(option: MatOption) {
+  //   console.log(option.value);
+  // }
 
   public crear(): void {
     console.log(JSON.stringify(this.factura));
@@ -108,20 +110,22 @@ export class FacturaFormComponent implements OnInit {
     })
   }
 
-  print(predio) {
-    console.log(JSON.stringify(predio));
-  }
-
   cargarPredios() {
     this.predioService.get().subscribe(
-      predios => {
-      this.predios = predios
-        for (let index = 0; index < predios.length; index++) {
-          const element = predios[index];
-          console.log('ESTARIFA: ' + element.nombre)
-        }
+      predios => {this.predios = predios
+          console.log('Predio cargado:'+JSON.stringify(this.predios[0]));
       }
     )
+  }
+
+  open() {
+    const dialogRef = this.dialog.open(
+      FacturaModalComponent,{
+        width :'50%',
+        height:'60%',
+        //data: {tarifa: tarifa}
+      }
+    );
   }
 
 }
