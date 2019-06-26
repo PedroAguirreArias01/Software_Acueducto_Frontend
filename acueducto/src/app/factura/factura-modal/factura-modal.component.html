@@ -15,10 +15,23 @@
     <div class="form-group row">
       <label for="valorTarifa" class="col-form-label col-sm-4" style="text-align: right">Valor Tarifa</label>
       <div class="col-sm-6">
-        <input id="valor" name="valor" currencyMask [(ngModel)]="tarifa.valorTarifa" [options]="{prefix: '$', thousands: ',', decimal: '.', precision: '0'}" placeholder="Valor"
-          class="form-control" readonly>
+       
       </div>
     </div>
+
+    <form>
+      <div class="form-group row">
+        <label for="nombre" class="col-form-label col-sm-2">Valor Tarifa</label>
+        <div class="col-sm-4">
+          <input id="valor" name="valor" currencyMask [(ngModel)]="tarifa.valorTarifa" [options]="{prefix: '$', thousands: ',', decimal: '.', precision: '0'}" placeholder="Valor"
+          class="form-control" readonly>
+        </div>
+        <label for="nombre" class="col-form-label col-sm-2" style="text-align: right">Consumo Actual</label>
+        <div class="col-sm-4">
+          <input type="text" class="form-control"  name="predio" placeholder="Consumo Actual">
+        </div>
+      </div>
+    </form>
 
   </div>
   <div class="card-footer">
