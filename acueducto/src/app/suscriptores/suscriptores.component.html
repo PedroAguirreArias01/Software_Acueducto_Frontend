@@ -2,17 +2,16 @@
   <div class="card-header">Suscriptores</div>
   <div class="card-body">
     <div class="my-2 text-left">
-      <button class="btn btn-rounded btn-primary"  routerLink="/suscriptoresform"> Crear Suscriptor</button>
+      <button class="btn btn-rounded btn-primary" routerLink="/suscriptoresform"> Crear Suscriptor</button>
     </div>
-    <div *ngIf = "suscriptores?.length===0" class="alert alert-info">
+    <div *ngIf="suscriptores?.length===0" class="alert alert-info">
       No hay Suscriptores en la base de datos!
     </div>
     <h5 class="card-title">Listado de Suscriptores</h5>
-    <table class="table table-bordered table-striped" *ngIf = "suscriptores?.length>0">
+    <table class="table table-bordered table-striped" *ngIf="suscriptores?.length>0">
       <thead>
         <tr>
           <th>Nombre</th>
-          <th>Apellido</th>
           <th>Número Telefono</th>
           <th>Estado</th>
           <th>Estado Cuenta</th>
@@ -20,24 +19,39 @@
         </tr>
       </thead>
       <tbody>
+
         <tr *ngFor="let suscriptor of suscriptores | paginate: { itemsPerPage: 7, currentPage: pageActual}">
-          <td>{{suscriptor.nombre}}</td>
-          <td>{{suscriptor.apellido}}</td>
+          <td>{{suscriptor.nombre}} {{suscriptor.apellido}}</td>
           <td>{{suscriptor.numeroTelefono}}</td>
-          <td>{{suscriptor.estado}}</td>
-          <td>{{suscriptor.estadoCuenta}}</td>
-          <td class="suscriptor">
-            <button type="button" class="btn btn-info mx-2" [routerLink]="['/suscriptoresform/form',suscriptor.cedula]">
-                <span class="glyphicon glyphicon-pencil"></span>Editar
+          <td><span class="badge"
+              [ngClass]="{'badge-success' : suscriptor.estado === 'A',
+              'badge-secondary' : suscriptor.estado === 'I'}">
+              {{suscriptor.estado === 'A'? 'Activo':'Inactivo'}}</span>
+          </td>
+
+          <!-- <td *ngIf="suscriptor.estado === 'A'; else inactivo"><span class="badge badge-success">Activo</span></td>
+          <ng-template #inactivo>
+            <td><span class="badge badge-danger">Inactivo</span></td>
+          </ng-template> -->
+
+          <td><i class="fas fa-check-circle" ></i>{{suscriptor.estadoCuenta === 'D'? 'Al día': 'En mora'}}</td>
+
+
+
+          <td>
+            <button type="button" class="btn btn-info mx-2"
+              [routerLink]="['/suscriptoresform/form', suscriptor.cedula]">
+              <span class="glyphicon glyphicon-pencil"></span>Editar
             </button>
             <button type="button" class="btn btn-danger mx-2" (click)="eliminar(suscriptor)">
-                <span class="glyphicon glyphicon-remove"></span>Eliminar
+              <span class="glyphicon glyphicon-remove"></span>Eliminar
             </button>
             <button type="button" class="btn btn-info mx-2" (click)="eliminar(suscriptor)">
               <span class="glyphicon glyphicon-info"></span>Info
-          </button>
-        </td>
+            </button>
+          </td>
         </tr>
+
       </tbody>
     </table>
     <pagination-controls (pageChange)="pageActual = $event"></pagination-controls>

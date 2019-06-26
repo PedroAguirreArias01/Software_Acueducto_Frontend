@@ -15,9 +15,6 @@ export class SuscriptoresComponent implements OnInit {
   private suscriptores: Suscriptor[];
   private suscriptor: Suscriptor;
   public pageActual: number=1;
-
-
-  
   
   constructor(private suscriptorService: SuscriptorService, private router:Router, private activatedRoute: ActivatedRoute) { 
    

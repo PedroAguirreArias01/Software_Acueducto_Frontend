@@ -67,6 +67,7 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 
 const routes: Routes = [
+  {path: '', redirectTo:'suscriptores', pathMatch: "full"},
   {path: 'suscriptores', component: SuscriptoresComponent},
   {path: 'suscriptoresform', component: SuscriptoresFormComponent},
   {path: 'suscriptoresform/form/:cedula', component: SuscriptoresFormComponent},
@@ -79,7 +80,7 @@ const routes: Routes = [
   {path: 'usuarios', component: UsuarioComponent },
   {path: 'usuarios/form/:cedula', component: UsuarioFormComponent },
   {path: 'usuarioForm', component: UsuarioFormComponent},
-  {path: 'lugar', component: LugarComponent},
+  {path: 'lugares', component: LugarComponent},
   {path: 'lugarForm', component: LugarFormComponent},
   {path: 'lugar/form/:id', component: LugarFormComponent},
   {path: 'facturas', component: FacturaComponent},
