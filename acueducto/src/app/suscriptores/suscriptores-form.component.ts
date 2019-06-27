@@ -13,7 +13,9 @@ import { SuscriptorService } from './suscriptor.service';
 
 export class SuscriptoresFormComponent implements OnInit {
 
-  public suscriptorInfo: string[];
+  private formTitle: string;
+  private submitButtonText: string;
+
   public suscriptor: Suscriptor = new Suscriptor();
   public editar:boolean;
 
@@ -33,19 +35,13 @@ export class SuscriptoresFormComponent implements OnInit {
     this.cargarSuscriptor();
   }
 
- 
-
-  onSubmit() {
-    this.crear();
-  }
-
-  public crear(): void {
+  public createSuscriptor(): void {
     this.suscriptorService.create(this.suscriptor).
       subscribe(suscriptor => {
         this.router.navigate(['/suscriptores'])
         Swal.fire({
           title: 'Nuevo Suscriptor!',
-          text: `Suscriptor ${suscriptor.nombre} creado con exito`,
+          text: `Suscriptor ${this.suscriptor.nombre} creado con exito`,
           type: 'success',
           confirmButtonText: 'Cool'
         })
@@ -73,12 +69,11 @@ export class SuscriptoresFormComponent implements OnInit {
       this.router.navigate(['/suscriptores'])
       Swal.fire({
         title: 'Actualizar Suscriptor!',
-        text: `Suscriptor ${suscriptor.nombre} actualizado con exito`,
+        text: `Suscriptor ${this.suscriptor.nombre} actualizado con exito`,
         type: 'success',
         confirmButtonText: 'Aceptar'
       })
     })
   }
-  
 
 }

@@ -4,10 +4,10 @@
     <div class="my-2 text-left">
       <button class="btn btn-rounded btn-primary" routerLink="/suscriptoresform"> Crear Suscriptor</button>
     </div>
-    <div *ngIf="suscriptores?.length===0" class="alert alert-info">
-      No hay Suscriptores en la base de datos!
-    </div>
     <h5 class="card-title">Listado de Suscriptores</h5>
+    <div *ngIf="suscriptores?.length === 0" class="alert alert-info">
+        No hay Suscriptores en la base de datos!
+      </div>
     <table class="table table-bordered table-striped" *ngIf="suscriptores?.length>0">
       <thead>
         <tr>
@@ -54,6 +54,6 @@
 
       </tbody>
     </table>
-    <pagination-controls (pageChange)="pageActual = $event"></pagination-controls>
+    <pagination-controls (pageChange)="pageActual = $event" *ngIf="suscriptores?.length != 0"></pagination-controls>
   </div>
 </div>

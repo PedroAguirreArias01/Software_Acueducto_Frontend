@@ -8,7 +8,7 @@
   </div>
   <div class="card-body">
 
-    <form class="" method="post">
+    <form>
 
       <div class="form-group row">
         <label for="nombre" class="col-form-label col-sm-4" style="text-align: right">Cedula</label>
@@ -66,7 +66,7 @@
 
       <div class="form-group">
         <div class="col-md-12 text-center">
-          <button type="submit" class="btn btn-primary btn-lg" (click)='onSubmit()'
+          <button type="submit" class="btn btn-primary btn-lg" (click)='createSuscriptor()'
             *ngIf="!editar else elseBlock">Guardar</button>
 
           <ng-template #elseBlock>
