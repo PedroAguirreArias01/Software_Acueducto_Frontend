@@ -30,7 +30,7 @@ export class LugarFormComponent implements OnInit {
   public crear(): void {
     this.lugarService.create(this.lugar).
       subscribe(suscriptor => {
-        this.router.navigate(['/lugar'])
+        this.router.navigate(['/lugares'])
         Swal.fire({
           title: 'Nuevo Lugar!',
           text: `Lugar ${suscriptor.nombre} creado con exito`,
@@ -58,7 +58,7 @@ export class LugarFormComponent implements OnInit {
 
   update(): void {
     this.lugarService.update(this.lugar).subscribe(suscriptor => {
-      this.router.navigate(['/lugar'])
+      this.router.navigate(['/lugares'])
       Swal.fire({
         title: 'Actualizar Lugar!',
         text: `Lugar ${suscriptor.nombre} actualizado con exito`,
