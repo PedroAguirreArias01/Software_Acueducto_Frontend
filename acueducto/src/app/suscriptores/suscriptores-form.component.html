@@ -8,13 +8,22 @@
   </div>
   <div class="card-body">
 
-    <form>
-
+    <!-- Sirve para validar el formulario -->
+    <form #suscriptorForm="ngForm">
       <div class="form-group row">
         <label for="nombre" class="col-form-label col-sm-4" style="text-align: right">Cedula</label>
         <div class="col-sm-6">
-            <input id="cedula" name="cedula" type="text" required [(ngModel)]="suscriptor.cedula" placeholder="cedula"
-              class="form-control" minlength="10">
+          <input id="cedula" name="cedula" type="text" required [(ngModel)]="suscriptor.cedula" digitOnly
+            placeholder="cedula" class="form-control" minLenght="10" maxlength="10" #cedula="ngModel">
+          <!-- Div exterior para saber si hay errores, divs interiores para mostrar cada uno de los errores -->
+          <div class="alert alert-danger" *ngIf="cedula.invalid && (cedula.dirty || cedula.touched)">
+            <div *ngIf="cedula.errors.required">
+              <small>Cédula es requerida</small>
+            </div>
+            <div *ngIf="cedula.errors.minLength && cedula.errors.maxLength ">
+              <small>Cédula no tiene la longitud requerida</small>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -23,14 +32,26 @@
         <div class="col-sm-6">
           <input type="text" class="form-control" [(ngModel)]="suscriptor.nombre" name="nombre" #nombre="ngModel"
             placeholder="Nombre">
+          <!-- Div exterior para saber si hay errores, divs interiores para mostrar cada uno de los errores -->
+          <div class="alert alert-danger" *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)">
+            <div *ngIf="nombre.errors.required">
+              <small>Cédula es requerida</small>
+            </div>
+          </div>
         </div>
       </div>
 
       <div class="form-group row">
         <label for="nombre" class="col-form-label col-sm-4" style="text-align: right">Apellido</label>
         <div class="col-sm-6">
-          <input id="apellido" name="apellido" type="text" required [(ngModel)]="suscriptor.apellido"
+          <input id="apellido" name="apellido" type="text" required [(ngModel)]="suscriptor.apellido" #apellido="ngModel"
             placeholder="Apellido" class="form-control">
+          <!-- Div exterior para saber si hay errores, divs interiores para mostrar cada uno de los errores -->
+          <div class="alert alert-danger" *ngIf="apellido.invalid && (apellido.dirty || apellido.touched)">
+            <div *ngIf="apellido.errors.required">
+              <small>Apellido es requerido</small>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -40,9 +61,9 @@
         <div class="col-sm-8">
           <mat-form-field>
             <input matInput [matDatepicker]="picker" [min]="minDate" [max]="maxDate" name="fechaNacimiento" required
-              [(ngModel)]="suscriptor.fechaNacimiento" placeholder="Fecha Nacimiento">
+              [(ngModel)]="suscriptor.fechaNacimiento" placeholder="Fecha Nacimiento" #fechan>
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
+            <mat-datepicker touchUi #picker></mat-datepicker>
           </mat-form-field>
         </div>
 
@@ -51,26 +72,39 @@
       <div class="form-group row">
         <label for="nombre" class="col-form-label col-sm-4" style="text-align: right">Correo</label>
         <div class="col-sm-6">
-          <input id="email" name="email" type="text" required [(ngModel)]="suscriptor.correoElectronico"
-            placeholder="Email Address" class="form-control">
+          <input id="email" name="email" type="text" email [(ngModel)]="suscriptor.correoElectronico"
+            placeholder="Correo Electrónico" class="form-control" #email="ngModel">
+            <!-- Div exterior para saber si hay errores, divs interiores para mostrar cada uno de los errores -->
+          <div class="alert alert-danger" *ngIf="email.invalid && (email.dirty || email.touched)">
+            <div *ngIf="email.errors.email">
+              <small>Correo electrónico no tiene el formato requerido</small>
+            </div>
+          </div>
         </div>
       </div>
 
       <div class="form-group row">
         <label for="nombre" class="col-form-label col-sm-4" style="text-align: right">Telefono</label>
         <div class="col-sm-6">
-          <input id="phone" name="phone" type="text" required [(ngModel)]="suscriptor.numeroTelefono"
-            placeholder="Phone" class="form-control">
+          <input id="telefono" name="telefono" type="text" required [(ngModel)]="suscriptor.numeroTelefono"
+            placeholder="Teléfono" #telefono="ngModel" class="form-control">
+             <!-- Div exterior para saber si hay errores, divs interiores para mostrar cada uno de los errores -->
+          <div class="alert alert-danger" *ngIf="telefono.invalid && (telefono.dirty || telefono.touched)">
+            <div *ngIf="telefono.errors.required">
+              <small>El número de teléfono es requerido</small>
+            </div>
+          </div>
         </div>
       </div>
 
       <div class="form-group">
         <div class="col-md-12 text-center">
           <button type="submit" class="btn btn-primary btn-lg" (click)='createSuscriptor()'
-            *ngIf="!editar else elseBlock">Guardar</button>
+            [disabled]="!suscriptorForm.form.valid" *ngIf="!editar else elseBlock">Guardar</button>
 
           <ng-template #elseBlock>
-            <button type="submit" class="btn btn-primary btn-lg" (click)='update()'>Editar</button>
+            <button type="submit" class="btn btn-primary btn-lg" (click)='update()'
+              [disabled]="!suscriptorForm.form.valid">Editar</button>
           </ng-template>
 
         </div>

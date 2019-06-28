@@ -8,45 +8,49 @@
   </div>
   <div class="card-body">
 
-    <form class="" method="post">
+    <!-- Sirve para validar el formulario -->
+    <form #lugarForm="ngForm">
       <div class="form-group row">
         <label for="tipo" class="col-form-label col-sm-4" style="text-align: right">Selecionar Tipo Lugar</label>
         <div class="col-sm-6">
-          <select class="form-control" name="tipo" [(ngModel)]="lugar.tipo" >
+          <select class="form-control" name="tipo" [(ngModel)]="lugar.tipo">
             <option value="M">Municipio</option>
             <option value="V">Vereda</option>
           </select>
         </div>
       </div>
 
-      <div class="form-group row" *ngIf="lugar.tipo === 'V' else carga">
+      <div class="form-group row" *ngIf="lugar.tipo === 'V'">
         <label for="region" class="col-form-label col-sm-4" style="text-align: right">Seleccione Municipio</label>
         <div class="col-sm-6">
-          <select class="form-control" [(ngModel)]="lugar.ubicado" name="municipio">
-            <option [ngValue]="undefined">--- selecionar Municipio ---</option>
+          <select class="form-control" [(ngModel)]="lugar.ubicado" name="municipio" required #municipio="ngModel">
+            <option [ngValue]="undefined">Seleccionar Municipio</option>
             <option *ngFor="let municipio of listaMunicipios" [ngValue]="municipio">{{municipio.nombre}}</option>
           </select>
         </div>
       </div>
 
-      <ng-template #carga>
-
-      </ng-template>
-
       <div class="form-group row">
         <label for="nombre" class="col-form-label col-sm-4" style="text-align: right">Nombre</label>
         <div class="col-sm-6">
           <input id="nombre" name="nombre" type="text" required [(ngModel)]="lugar.nombre" placeholder="Nombre"
-            class="form-control" minlength="10">
+            #nombre="ngModel" class="form-control" minLength="1">
+          <!-- Div exterior para saber si hay errores, divs interiores para mostrar cada uno de los errores -->
+          <div class="alert alert-danger" *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)">
+            <div *ngIf="nombre.errors.required">
+              <small>Nombre del lugar es requerido</small>
+            </div>
+          </div>
         </div>
       </div>
 
       <div class="form-group">
         <div class="col-md-12 text-center">
-          <button type="submit" class="btn btn-primary btn-lg" (click)='onSubmit()'
+          <button type="submit" class="btn btn-primary btn-lg" (click)='onSubmit()' [disabled]="!lugarForm.form.valid"
             *ngIf="!editar else elseBlock">Guardar</button>
           <ng-template #elseBlock>
-            <button type="submit" class="btn btn-primary btn-lg" (click)='update()'>Editar</button>
+            <button type="submit" class="btn btn-primary btn-lg" (click)='update()'
+              [disabled]="!lugarForm.form.valid">Editar</button>
           </ng-template>
         </div>
       </div>

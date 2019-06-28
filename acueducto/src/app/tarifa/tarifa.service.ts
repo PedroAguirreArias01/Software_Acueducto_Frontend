@@ -50,7 +50,7 @@ export class TarifaService {
     return this.http.get<Tarifa>(`${this.urlEndPoint}${id}`, {headers: this.httpHeaders}).pipe(
       //Entra cuando hay un NOT_FOUND o INTERNAL_SERVER_ERROR
       catchError(e => {
-        this.router.navigate(['/suscriptores']);
+        this.router.navigate(['/tarifas']);
         console.log(e.error.mensaje);
         Swal.fire('Error ', e.error.mensaje ,'error');
         return throwError(e);

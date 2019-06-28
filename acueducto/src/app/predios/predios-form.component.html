@@ -8,78 +8,110 @@
   </div>
   <div class="card-body">
 
-    <form class="" method="post">
+    <form #predioForm="ngForm">
 
+      <!-- FALTA LA VALIDACIÓN PARA QUE ACEPTE UN NÚMERO CATASTRAL VÁLIDO -->
       <div class="form-group row">
-        <label for="nombre" class="col-form-label col-sm-4" style="text-align: right">Número Catastral</label>
+        <label for="numeroMatricula" class="col-form-label col-sm-4" style="text-align: right">Número Catastral</label>
         <div class="col-sm-6">
-          <input id="numeroMatricula" name="numeroMatricula" type="text" required [(ngModel)]="predio.numeroMatricula" placeholder="Número Catastral"
-            class="form-control">
+          <input id="numeroMatricula" name="numeroMatricula" type="text" required [(ngModel)]="predio.numeroMatricula"
+            #numeroMatricula="ngModel" placeholder="Número Catastral" class="form-control">
+          <!-- Div exterior para saber si hay errores, divs interiores para mostrar cada uno de los errores -->
+          <div class="alert alert-danger py-0"
+            *ngIf="numeroMatricula.invalid && (numeroMatricula.dirty || numeroMatricula.touched)">
+            <div *ngIf="numeroMatricula.errors.required">
+              <small>Número de Matrícula del predio es requerido</small>
+            </div>
+          </div>
         </div>
       </div>
 
       <div class="form-group row">
         <label for="nombre" class="col-form-label col-sm-4" style="text-align: right">Nombre</label>
         <div class="col-sm-6">
-          <input id="nombre" name="nombre" type="text" required [(ngModel)]="predio.nombre"
+          <input id="nombre" name="nombre" type="text" required [(ngModel)]="predio.nombre" #nombre="ngModel"
             placeholder="Nombre" class="form-control">
+          <!-- Div exterior para saber si hay errores, divs interiores para mostrar cada uno de los errores -->
+          <div class="alert alert-danger py-0" *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)">
+            <div *ngIf="nombre.errors.required">
+              <small>Nombre de predio es requerido</small>
+            </div>
+          </div>
         </div>
       </div>
 
       <div class="form-group row">
-        <label for="nombre" class="col-form-label col-sm-4" style="text-align: right">Estrato</label>
+        <label for="estrato" class="col-form-label col-sm-4" style="text-align: right">Estrato</label>
         <div class="col-sm-6">
-          <input id="estrato" name="estrato" type="number" required [(ngModel)]="predio.estrato" placeholder="Estrato"
-            class="form-control" min="1" max="6">
+          <input id="estrato" name="estrato" type="number" required [(ngModel)]="predio.estrato" #estrato="ngModel"
+            placeholder="Estrato" class="form-control" min="1" max="6">
+          <!-- Div exterior para saber si hay errores, divs interiores para mostrar cada uno de los errores -->
+          <div class="alert alert-danger py-0" *ngIf="estrato.invalid && (estrato.dirty || estrato.touched)">
+            <div *ngIf="estrato.errors.required">
+              <small>El estrato del predio es requerido</small>
+            </div>
+          </div>
         </div>
       </div>
 
       <div class="form-group row">
         <label for="nombre" class="col-form-label col-sm-4" style="text-align: right">Latitud</label>
         <div class="col-sm-6">
-          <input id="latitud" name="latitud" type="text" required [(ngModel)]="predio.latitud" placeholder="Latitud"
-            class="form-control">
+          <input id="latitud" name="latitud" type="text" required [(ngModel)]="predio.latitud" #latitud="ngModel"
+            placeholder="Latitud" class="form-control">
+          <div class="alert alert-danger py-0" *ngIf="latitud.invalid && (latitud.dirty || latitud.touched)">
+            <div *ngIf="latitud.errors.required">
+              <small>El componente de latitud es requerido</small>
+            </div>
+          </div>
         </div>
       </div>
 
       <div class="form-group row">
         <label for="nombre" class="col-form-label col-sm-4" style="text-align: right">Longitud</label>
         <div class="col-sm-6">
-          <input id="longitud" name="longitud" type="text" required [(ngModel)]="predio.longitud" placeholder="Longitud"
-            class="form-control">
+          <input id="longitud" name="longitud" type="text" required [(ngModel)]="predio.longitud" #longitud="ngModel"
+            placeholder="Longitud" class="form-control">
+          <div class="alert alert-danger py-0" *ngIf="longitud.invalid && (longitud.dirty || longitud.touched)">
+            <div *ngIf="longitud.errors.required">
+              <small>El componente de longitud es requerido</small>
+            </div>
+          </div>
         </div>
       </div>
 
       <div class="form-group row">
-        <label for="region" class="col-form-label col-sm-4" style="text-align: right">Seleccione Vereda</label>
+        <label for="region" class="col-form-label col-sm-4" style="text-align: right">Vereda</label>
         <div class="col-sm-6">
-          <select class="form-control" [(ngModel)]="predio.lugar" name="lugar">
-            <option [ngValue]="undefined">--- selecionar Vereda ---</option>
+          <select class="form-control" required [(ngModel)]="predio.lugar" name="lugar">
+            <option [ngValue]="undefined">Seleccione Vereda</option>
             <option *ngFor="let lugar of lugares" [ngValue]="lugar">{{lugar.nombre}}</option>
           </select>
         </div>
       </div>
 
       <div class="form-group row">
-        <label for="region" class="col-form-label col-sm-4" style="text-align: right">Seleccione Suscriptor</label>
+        <label for="suscriptor" class="col-form-label col-sm-4" style="text-align: right">Suscriptor</label>
         <div class="col-sm-6">
-          <select class="form-control" [(ngModel)]="predio.suscriptor" name="suscriptor">
-            <option [ngValue]="undefined">--- selecionar Suscriptor ---</option>
-            <option *ngFor="let suscriptor of suscriptores" [ngValue]="suscriptor">{{suscriptor.nombre}}  {{suscriptor.apellido}}</option>
+          <select class="form-control" required [(ngModel)]="predio.suscriptor" name="suscriptor">
+            <option [ngValue]="undefined">Seleccione Suscriptor</option>
+            <option *ngFor="let suscriptor of suscriptores" [ngValue]="suscriptor">{{suscriptor.nombre}}
+              {{suscriptor.apellido}}</option>
           </select>
         </div>
       </div>
 
       <div class="form-group">
         <div class="col-md-12 text-center">
-          <button type="submit" class="btn btn-primary btn-lg" (click)='onSubmit()'
-            *ngIf="!editar else elseBlock">Guardar</button>
+          <button type="submit" class="btn btn-primary btn-lg" (click)='onSubmit()' *ngIf="!editar else elseBlock"
+            [disabled]="!predioForm.form.valid">Guardar</button>
           <ng-template #elseBlock>
-            <button type="submit" class="btn btn-primary btn-lg" (click)='update()'>Editar</button>
+            <button type="submit" class="btn btn-primary btn-lg" (click)='update()'
+              [disabled]="!predioForm.form.valid">Editar</button>
           </ng-template>
         </div>
       </div>
-      
+
     </form>
 
   </div>
