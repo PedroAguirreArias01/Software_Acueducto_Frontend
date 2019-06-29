@@ -3,9 +3,9 @@ import { Predio } from './Predio';
 import { PredioService } from './predio.service';
 import { Router, ActivatedRoute } from "@angular/router";
 import Swal from 'sweetalert2';
-import {LugarService} from '../lugar/lugar.service'
+import { LugarService } from '../lugar/lugar.service'
 import { Lugar } from '../lugar/lugar';
-import {SuscriptorService } from '../suscriptores/suscriptor.service';
+import { SuscriptorService } from '../suscriptores/suscriptor.service';
 import { Suscriptor } from '../suscriptores/Suscriptor';
 
 @Component({
@@ -17,15 +17,15 @@ export class PrediosFormComponent implements OnInit {
 
   public predio: Predio = new Predio();
   public editar: boolean;
-  public lugares: Lugar[];
+  public veredas: Lugar[];
   public suscriptores: Suscriptor[];
- 
-  constructor(private predioService: PredioService,  private lugarService: LugarService, private suscriptorService: SuscriptorService, private router: Router, private activatedRoute: ActivatedRoute) { }
+
+  constructor(private predioService: PredioService, private lugarService: LugarService, private suscriptorService: SuscriptorService, private router: Router, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
-    this.getListaLugares();
-    this.cargarLugar();
+    this.getListaVeredas();
     this.getSuscriptores();
+    this.cargarLugar();
   }
 
   onSubmit() {
@@ -36,7 +36,7 @@ export class PrediosFormComponent implements OnInit {
     console.log(JSON.stringify(this.predio));
     this.predioService.create(this.predio).
       subscribe(predio => {
-        
+
         this.router.navigate(['/predios'])
         Swal.fire({
           title: 'Nuevo Predio!',
@@ -56,7 +56,7 @@ export class PrediosFormComponent implements OnInit {
         this.editar = true;
         this.predioService.getPredio(numeroMatricula).subscribe(
           (predio) => {
-          this.predio = predio
+            this.predio = predio
           }
         )
       }
@@ -75,15 +75,27 @@ export class PrediosFormComponent implements OnInit {
     })
   }
 
-  getListaLugares(){
+  getListaVeredas() {
     this.lugarService.getListaVeredas().subscribe(
-      lugares => this.lugares = lugares
+      veredas => this.veredas = veredas
     );
   }
 
-  getSuscriptores(){
+  getSuscriptores() {
     this.suscriptorService.getSuscriptores().subscribe(
       suscriptores => this.suscriptores = suscriptores
     );
+  }
+
+  //o1 -> del *ngFor
+  //o2 -> asignado al predio
+  compararVereda(o1: Lugar, o2: Lugar) {
+    return (o1 == null || o2 == null) ? false : (o1.id === o2.id);
+  }
+
+   //o1 -> del *ngFor
+  //o2 -> asignado al predio
+  compararSuscriptor(o1: Suscriptor, o2: Suscriptor) {
+    return (o1 == null || o2 == null) ? false : (o1.cedula === o2.cedula);
   }
 }

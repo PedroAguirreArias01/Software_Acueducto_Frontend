@@ -81,11 +81,12 @@
       </div>
 
       <div class="form-group row">
-        <label for="region" class="col-form-label col-sm-4" style="text-align: right">Vereda</label>
+        <label for="vereda" class="col-form-label col-sm-4" style="text-align: right">Vereda</label>
         <div class="col-sm-6">
-          <select class="form-control" required [(ngModel)]="predio.lugar" name="lugar">
-            <option [ngValue]="undefined">Seleccione Vereda</option>
-            <option *ngFor="let lugar of lugares" [ngValue]="lugar">{{lugar.nombre}}</option>
+          <!-- con [compareWith] -->
+          <select [compareWith]="compararVereda" class="form-control" required [(ngModel)]="predio.vereda" name="vereda">
+            <!-- <option [ngValue]="undefined">Seleccione Vereda</option> -->
+            <option *ngFor="let vereda of veredas" [ngValue]="vereda">{{vereda.nombre}}</option>
           </select>
         </div>
       </div>
@@ -93,8 +94,8 @@
       <div class="form-group row">
         <label for="suscriptor" class="col-form-label col-sm-4" style="text-align: right">Suscriptor</label>
         <div class="col-sm-6">
-          <select class="form-control" required [(ngModel)]="predio.suscriptor" name="suscriptor">
-            <option [ngValue]="undefined">Seleccione Suscriptor</option>
+          <select [compareWith]="compararSuscriptor" class= "form-control" required [(ngModel)]="predio.suscriptor" name="suscriptor">
+            <!-- <option [ngValue]="undefined">Seleccione Suscriptor</option> -->
             <option *ngFor="let suscriptor of suscriptores" [ngValue]="suscriptor">{{suscriptor.nombre}}
               {{suscriptor.apellido}}</option>
           </select>

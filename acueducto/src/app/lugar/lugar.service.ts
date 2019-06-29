@@ -4,7 +4,7 @@ import { of } from 'rxjs';
 import { HttpClient } from "@angular/common/http";
 import { HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators';
-import { Lugar} from './Lugar'
+import { Lugar } from './Lugar'
 
 @Injectable({
   providedIn: 'root'
@@ -26,28 +26,26 @@ export class LugarService {
     return this.http.post<Lugar>(this.urlEndPoint, lugar, { headers: this.httpHeaders });
   }
 
-  delete(id: number): Observable<Lugar>{
-    return this.http.delete<Lugar>(`${this.urlEndPoint}${id}`, {headers: this.httpHeaders})
+  delete(id: number): Observable<Lugar> {
+    return this.http.delete<Lugar>(`${this.urlEndPoint}${id}`, { headers: this.httpHeaders })
   }
 
-  getLugar(id: number): Observable<Lugar>{
-    return this.http.get<Lugar>(`${this.urlEndPoint}${id}`, {headers: this.httpHeaders})
+  getLugar(id: number): Observable<Lugar> {
+    return this.http.get<Lugar>(`${this.urlEndPoint}${id}`, { headers: this.httpHeaders })
   }
 
-  update(lugar: Lugar): Observable<Lugar>{
-    return this.http.put<Lugar>(`${this.urlEndPoint}${lugar.id}`, lugar, {headers: this.httpHeaders})
+  update(lugar: Lugar): Observable<Lugar> {
+    return this.http.put<Lugar>(`${this.urlEndPoint}${lugar.id}`, lugar, { headers: this.httpHeaders })
   }
 
   getListaMunicipios(): Observable<Lugar[]> {
-    return this.http.get(this.urlEndPoint+'tipo/M').pipe(
+    return this.http.get(this.urlEndPoint + 'tipo/M').pipe(
       map(response => response as Lugar[])
     );
   }
 
   getListaVeredas(): Observable<Lugar[]> {
-    return this.http.get(this.urlEndPoint+'tipo/V').pipe(
-      map(response => response as Lugar[])
-    );
+    return this.http.get<Lugar[]>(this.urlEndPoint + 'tipo/V');
   }
 
 }

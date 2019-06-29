@@ -65,6 +65,7 @@ import { FacturaFormComponent } from './factura/factura-form.component';
 import { FacturaModalComponent } from './factura/factura-modal/factura-modal.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
+import { DetalleSuscriptorComponent } from './suscriptores/detalle-suscriptor/detalle-suscriptor.component';
 
 const routes: Routes = [
   {path: '', redirectTo:'suscriptores', pathMatch: "full"},
@@ -108,6 +109,7 @@ const routes: Routes = [
     FacturaModalComponent,
     HeaderComponent,
     FooterComponent,
+    DetalleSuscriptorComponent,
     ],
   imports: [
     BrowserModule,

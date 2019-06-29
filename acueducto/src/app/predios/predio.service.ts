@@ -5,6 +5,7 @@ import { HttpClient } from "@angular/common/http";
 import { HttpHeaders } from '@angular/common/http';
 import { map, debounceTime } from 'rxjs/operators';
 import { Predio } from './Predio';
+import { Lugar } from '../lugar/lugar';
 
 @Injectable({
   providedIn: 'root'
