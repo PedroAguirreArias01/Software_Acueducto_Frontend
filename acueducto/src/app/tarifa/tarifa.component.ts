@@ -28,9 +28,7 @@ export class TarifaComponent implements OnInit {
     this.tarifaService.get().subscribe(
       tarifas => {this.tarifas = tarifas
         for (let index = 0; index < tarifas.length; index++) {
-          const element = tarifas[index];
-          console.log('ESTARIFA: '+element.fechaInicio)
-          
+          const element = tarifas[index];          
         }
       }
     );
@@ -71,8 +69,8 @@ export class TarifaComponent implements OnInit {
     console.log(tarifa);
     const dialogRef = this.dialog.open(
       HistorialTarifaModalComponent,{
-        width :'50%',
-        height:'60%',
+        width :'60%',
+        height:'80%',
         data: {tarifa: tarifa}
       }
     );

@@ -4,9 +4,12 @@
 <div class="col-md-12 card border-primary">
   <div class="card-header">Suscriptores</div>
   <div class="card-body">
-    <div class="my-2 text-left">
+    <div class="my-1 text-left">
       <button class="btn btn-rounded btn-primary" routerLink="/suscriptoresform"> Crear Suscriptor</button>
     </div>
+    
+    <hr>
+
     <h5 class="card-title">Listado de Suscriptores</h5>
     <div *ngIf="suscriptores?.length === 0" class="alert alert-info">
         No hay Suscriptores en la base de datos!

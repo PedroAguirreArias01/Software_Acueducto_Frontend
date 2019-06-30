@@ -10,7 +10,6 @@ import { Observable } from 'rxjs';
 import { startWith, map, flatMap } from 'rxjs/operators';
 import { MatOption, MatAutocompleteSelectedEvent } from '@angular/material';
 import { MatDialog } from '@angular/material';
-import { FacturaModalComponent } from './factura-modal/factura-modal.component'
 import { Suscriptor } from '../suscriptores/Suscriptor';
 import { Tarifa } from '../tarifa/Tarifa';
 import { TarifaService } from '../tarifa/tarifa.service';
@@ -59,8 +58,6 @@ export class FacturaFormComponent implements OnInit {
     this.crear();
   }
 
- 
-
   cargarFactura(): void {
     this.editar = false;
     this.activatedRoute.params.subscribe(params => {
@@ -88,15 +85,6 @@ export class FacturaFormComponent implements OnInit {
     })
   }
 
-  open() {
-    const dialogRef = this.dialog.open(
-      FacturaModalComponent, {
-        width: '50%',
-        height: '60%',
-        data: { factura: FacturaFormComponent }
-      }
-    );
-  }
 
   seleccionarPredio(event: MatAutocompleteSelectedEvent): void {
     let predio = event.option.value as Predio;
@@ -139,7 +127,7 @@ export class FacturaFormComponent implements OnInit {
 
   actualizarCantidad(id: number, event: any): void {
     let cantidad: number = event.target.value as number;
-    if(cantidad == 0){
+    if (cantidad == 0) {
       return this.eliminarItem(id);
     }
     this.factura.detallesFactura = this.factura.detallesFactura.map((item: DetalleFactura) => {
@@ -169,15 +157,17 @@ export class FacturaFormComponent implements OnInit {
     });
   }
 
-  eliminarItem(id: number): void{
+  eliminarItem(id: number): void {
     this.factura.detallesFactura = this.factura.detallesFactura.filter((item: DetalleFactura) => id !== item.tarifa.id);
   }
 
   public crear(): void {
-    console.log(JSON.stringify(this.factura));
-    this.facturaService.create(this.factura).
-      subscribe(factura => {
-        this.router.navigate(['/Facturas'])
+    if (this.factura.detallesFactura.length == 0) {
+      //Vuelve invalido el formulario para que no haga el submit
+      this.myItem.setErrors({ invalid: true });
+    } else {
+      this.facturaService.create(this.factura).subscribe(factura => {
+        this.router.navigate(['/facturas'])
         Swal.fire({
           title: 'Nueva Factura!',
           text: `Factura ${factura.id} creada con exito`,
@@ -185,6 +175,7 @@ export class FacturaFormComponent implements OnInit {
           confirmButtonText: 'Aceptar'
         })
       }
-      )
+      );
+    }
   }
 }
