@@ -11,7 +11,7 @@
     <hr>
 
     <h5 class="card-title">Listado de Suscriptores</h5>
-    <div *ngIf="suscriptores?.length === 0" class="alert alert-info">
+    <div *ngIf="suscriptores.length == 0" class="alert alert-info">
       No hay Suscriptores en la base de datos!
     </div>
     <table class="table table-bordered table-striped" *ngIf="suscriptores?.length>0">

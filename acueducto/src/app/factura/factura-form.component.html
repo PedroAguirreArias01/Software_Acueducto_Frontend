@@ -1,4 +1,4 @@
-<div class="container">
+<div class="card-body">
   <mat-form-field class="example-full-width">
     <input type="text" placeholder="Seleccionar Predio" aria-label="Number" matInput [formControl]="myControl"
       [matAutocomplete]="auto">
@@ -10,7 +10,6 @@
     </mat-autocomplete>
   </mat-form-field>
 
-  <div class="row m-3">
     <div class="card">
       <div class="card-header">Generar Factura
       </div>
@@ -32,7 +31,7 @@
 
           <div class="form-group row">
             <label for="nombre" class="col-form-label col-sm-2" style="text-align: right">Número Catastral</label>
-            <div class="col-sm-10">
+            <div class="col-sm-4">
               <input type="text" class="form-control" name="numeroCatastral" [(ngModel)]="predio.numeroMatricula"
                 placeholder="Número Catastral" readonly>
             </div>
@@ -90,7 +89,7 @@
                     <td>{{detalle.tarifa.valorTarifa}}</td>
                     <td><input type="number" value="{{detalle.cantidad}}" class="form-control col-sm-4"
                         (change)="actualizarCantidad(detalle.tarifa.id, $event)"></td>
-                    <td>{{detalle.calcularValor()}}</td>
+                    <td>{{detalle.calcularValor()  | currency}}</td>
                     <td><button class="btn btn-danger btn-sm" type="button"
                         (click)="eliminarItem(detalle.tarifa.id)">X</button></td>
                   </tr>
@@ -105,7 +104,7 @@
               <label for="nombre" class="col-form-label col-sm-2" style="text-align: right">Total a Pagar</label>
               <div class="col-sm-4">
                 <input type="text" class="form-control" name="total" placeholder="Total"
-                  [ngModel]="factura.calcularGranTotal()" readonly>
+                  [ngModel]="factura.calcularGranTotal()  | currency" readonly>
               </div>
             </div>
           </div>
@@ -114,6 +113,5 @@
       <div class="card-footer">
 
       </div>
-    </div>
   </div>
 </div>
