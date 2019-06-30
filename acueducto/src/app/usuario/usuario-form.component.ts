@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Router,ActivatedRoute } from "@angular/router";
+import { Router, ActivatedRoute } from "@angular/router";
 import { Empleado } from './Usuario';
 import { UsuarioService } from './usuario.service';
 import Swal from 'sweetalert2';
+import { Lugar } from '../lugar/lugar';
+import { LugarService } from '../lugar/lugar.service';
 
 @Component({
   selector: 'app-usuario-form',
@@ -12,21 +14,28 @@ import Swal from 'sweetalert2';
 export class UsuarioFormComponent implements OnInit {
 
   public empleado: Empleado = new Empleado();
-  public editar:boolean;
+  public editar: boolean;
+  public lugares: Lugar[];
+  public lugar: Lugar = new Lugar();
 
-  constructor(private usuarioService: UsuarioService, private router: Router,private activatedRoute: ActivatedRoute) { }
+  constructor(private usuarioService: UsuarioService, public lugarService: LugarService, private router: Router, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
-    this.cargarSuscriptor();
-  }
+    if (this.editar) {
+      this.cargarUsuario();
+    }
 
- 
+    this.lugarService.get().subscribe(
+      lugares => this.lugares = lugares
+    );
+  }
 
   onSubmit() {
     this.crear();
   }
 
   public crear(): void {
+    console.log(JSON.stringify(this.empleado));
     this.usuarioService.create(this.empleado).
       subscribe(suscriptor => {
         this.router.navigate(['/usuarios'])
@@ -40,14 +49,15 @@ export class UsuarioFormComponent implements OnInit {
       )
   }
 
-  cargarSuscriptor(): void{
+  cargarUsuario(): void {
     this.editar = false;
     this.activatedRoute.params.subscribe(params => {
       let cedula = params['cedula'];
-      if(cedula){
+      if (cedula) {
         this.editar = true;
         this.usuarioService.getEmpleado(cedula).subscribe(
-          (empleado) =>{ this.empleado = empleado
+          (empleado) => {
+          this.empleado = empleado
           }
         )
       }
@@ -55,7 +65,7 @@ export class UsuarioFormComponent implements OnInit {
   }
 
   update(): void {
-    this.usuarioService.update(this.empleado).subscribe( empleado => {
+    this.usuarioService.update(this.empleado).subscribe(empleado => {
       this.router.navigate(['/usuarios'])
       Swal.fire({
         title: 'Actualizar Empleado!',

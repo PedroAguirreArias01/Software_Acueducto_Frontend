@@ -1,3 +1,5 @@
+import { Lugar } from '../lugar/lugar';
+
 export class Empleado {
       public cedula: string;
       public nombre: string;
@@ -8,5 +10,5 @@ export class Empleado {
       public contrasena: string;
       public genero: string;
       public direccionResidencia: string;
-      public lugarResidencia: string;
+      public lugarResidencia: Lugar;
   }

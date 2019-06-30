@@ -1,121 +1,109 @@
-
 <div class="card mb-3">
+  <div class="card-header">
+    <legend class="text-center header" *ngIf="!editar else EditarTitulo">Agregar Empleado</legend>
+    <ng-template #EditarTitulo>
+      <legend class="text-center header">Editar Empleado</legend>
+    </ng-template>
+  </div>
+  <div class="card-body">
+    <form class="form-horizontal" method="post">
+      <div class="form-row">
+        <div class="form-group col-6">
+          <label for="cedula">Cedula</label>
+          <input type="text" class="form-control" id="cedula" name="cedula" [(ngModel)]="empleado.cedula" required>
+        </div>
+        <div class="form-group col-6">
+          <label for="nombre">Nombre</label>
+          <input type="text" class="form-control" id="nombre" name="nombre" [(ngModel)]="empleado.nombre" required>
+        </div>
+      </div>
 
-    <div class="col-md-12">
-      <div class="well well-sm">
-        <form class="form-horizontal" method="post">
-          <fieldset>
-            <legend class="text-center header" *ngIf="!editar else EditarTitulo">Agregar Empleado</legend>
+      <div class="form-row">
+        <div class="form-group col-6">
+          <label for="apellido">Apellido</label>
+          <input type="text" class="form-control" id="apellido" name="apellido" [(ngModel)]="empleado.apellido"
+            required>
+        </div>
+        <div class="form-group col-6">
+          <mat-form-field>
+            <input matInput [matDatepicker]="picker" name="fechaNacimiento" required
+              [(ngModel)]="empleado.fechaNacimiento" placeholder="Fecha Nacimiento">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </div>
+      </div>
 
-            <ng-template #EditarTitulo>
-              <legend class="text-center header">Editar Empleado</legend>
-            </ng-template>
+      <div class="form-row">
+        <div class="from-group col-6">
+          <label>Genero</label>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="masculino" [(ngModel)] = "empleado.genero"
+              checked>
+            <label class="form-check-label" for="exampleRadios1">
+              Masculino
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="femenino" [(ngModel)] = "empleado.genero">
+            <label class="form-check-label" for="exampleRadios2">
+              Femenino
+            </label>
+          </div>
+        </div>
+      </div>
+      <hr>
+      <div class="form-row">
+        <div class="form-group col-6">
+          <label for="cedula">Tipo Empleado</label>
+          <input type="text" class="form-control" id="tipoEmpleado" name="tipoEmpleado"
+            [(ngModel)]="empleado.tipoEmpleado">
+        </div>
+        <div class="form-group col-6">
+          <label for="nombre">Usuario</label>
+          <input type="text" class="form-control" id="usuario" name="usuario" [(ngModel)]="empleado.usuario" required>
+        </div>
+      </div>
 
-            <div class="form-group">
-              <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-user bigicon"></i></span>
-              <div class="col-md-8">
-                <input id="cedula" name="cedula" type="text" required [(ngModel)]="empleado.cedula"
-                  placeholder="cedula" class="form-control" minlength="10">
-              </div>
-            </div>
+      <div class="form-row">
+        <div class="form-group col-6">
+          <label>Contraseña</label>
+          <input type="password" name="contrasena" class="form-control" [(ngModel)]="empleado.contrasena" />
+        </div>
+        <div class="form-group col-6">
+          <label>Confirmar Contraseña</label>
+          <input type="password" name="confirmPassword" class="form-control" />
+        </div>
+      </div>
+      <hr>
 
-            <div class="form-group">
-              <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-user bigicon"></i></span>
-              <div class="col-md-8">
-                <input id="nombre" name="nombre" type="text" required [(ngModel)]="empleado.nombre"
-                  placeholder="Nombre" class="form-control">
-              </div>
-            </div>
-            
-            <div class="form-group">
-              <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-user bigicon"></i></span>
-              <div class="col-md-8">
-                <input id="apellido" name="apellido" type="text" required [(ngModel)]="empleado.apellido"
-                  placeholder="Apellido" class="form-control">
-              </div>
-            </div>
+      <div class="form-row">
+        <div class="form-group col-6">
+          <label for="direccionResidencia">dirección de Residencia</label>
+          <input type="text" class="form-control" id="direccionResidencia" name="direccionResidencia"
+            [(ngModel)]="empleado.direccionResidencia" required>
+        </div>
+        <div class="form-group col-6">
+          <label for="lugarResidencia">Lugar de Residencia</label>
+          <select class="form-control" required [(ngModel)]="empleado.lugarResidencia" name="lugarResidencia">
+            <option *ngFor="let lugarResidencia of lugares" [ngValue]="lugarResidencia">
+              {{lugarResidencia.nombre}}</option>
+          </select>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="card-footer">
+    <div class="form-group">
+      <div class="col-md-6">
+        <button type="button" class="btn btn-primary" (click)='onSubmit()'
+          *ngIf="!editar else elseBlock">Guardar</button>
 
-            <div class="form-group">
-              <span class="col-md-1 col-md-offset-2 text-center"><i class=""></i></span>
-              <div class="col-md-8">
-                <mat-form-field>
-                  <input matInput [matDatepicker]="picker" name="fechaNacimiento" required
-                    [(ngModel)]="empleado.fechaNacimiento" placeholder="Fecha Nacimiento">
-                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                  <mat-datepicker #picker></mat-datepicker>
-                </mat-form-field>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-envelope-o bigicon"></i></span>
-              <div class="col-md-8">
-                <input id="tipoEmpleado" name="tipoEmpleado" type="text" required [(ngModel)]="empleado.tipoEmpleado"
-                  placeholder="Tipo Empleado" class="form-control">
-              </div>
-            </div>
-
-            <div class="form-group">
-              <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-phone-square bigicon"></i></span>
-              <div class="col-md-8">
-                <input id="usuario" name="usuario" type="text" required [(ngModel)]="empleado.usuario"
-                  placeholder="Usuario" class="form-control">
-              </div>
-            </div>
-
-            <div class="form-group">
-              <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-phone-square bigicon"></i></span>
-              <div class="col-md-8">
-                <input id="Contrasena" name="Contrasena" type="password" required [(ngModel)]="empleado.Contrasena"
-                  placeholder="Contraseña" class="form-control">
-              </div>
-            </div>
-
-            <div class="form-group">
-              <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-phone-square bigicon"></i></span>
-              <div class="col-md-8">
-                <input id="contrasena" name="contrasena" type="password" required [(ngModel)]="empleado.Contrasena"
-                  placeholder="Confirmar Contraseña" class="form-control">
-              </div>
-            </div>
-
-            <div class="form-group">
-              <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-phone-square bigicon"></i></span>
-              <div class="col-md-8">
-                <input id="genero" name="genero" type="text" required [(ngModel)]="empleado.genero"
-                  placeholder="Genero" class="form-control">
-              </div>
-            </div>
-
-            <div class="form-group">
-              <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-phone-square bigicon"></i></span>
-              <div class="col-md-8">
-                <input id="direccionResidencia" name="direccionResidencia" type="password" required [(ngModel)]="empleado.direccionResidencia"
-                  placeholder="dirección de Residencia" class="form-control">
-              </div>
-            </div>
-
-            <div class="form-group">
-              <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-phone-square bigicon"></i></span>
-              <div class="col-md-8">
-                <input id="lugarResidencia" name="lugarResidencia" type="text" required [(ngModel)]="empleado.lugarResidencia"
-                  placeholder="Lugar de Residencia" class="form-control">
-              </div>
-            </div>
-
-            <div class="form-group">
-              <div class="col-md-12 text-center">
-                <button type="submit" class="btn btn-primary btn-lg" (click)='onSubmit()' *ngIf="!editar else elseBlock">Guardar</button>
-
-                <ng-template #elseBlock>
-                  <button type="submit" class="btn btn-primary btn-lg" (click)='update()'>Editar</button>
-                </ng-template>
-
-              </div>
-            </div>
-          </fieldset>
-        </form>
-
+        <ng-template #elseBlock>
+          <button type="button" class="btn btn-primary" (click)='update()'>Editar</button>
+        </ng-template>
+      </div>
     </div>
   </div>
+
 </div>
