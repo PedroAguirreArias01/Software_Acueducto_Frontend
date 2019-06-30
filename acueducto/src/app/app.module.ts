@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { SuscriptoresComponent } from './suscriptores/suscriptores.component';
 import { SuscriptoresFormComponent } from './suscriptores/suscriptores-form.component';
+import {DetalleSuscriptorComponent} from './suscriptores/detalle-suscriptor/detalle-suscriptor.component';
 import {RouterModule, Routes} from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -65,7 +66,12 @@ import { FacturaFormComponent } from './factura/factura-form.component';
 import { FacturaModalComponent } from './factura/factura-modal/factura-modal.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
-import { DetalleSuscriptorComponent } from './suscriptores/detalle-suscriptor/detalle-suscriptor.component';
+
+//Registra el locale para procesar las fechas
+import {registerLocaleData} from '@angular/common';
+import localeES from '@angular/common/locales/es';
+
+registerLocaleData(localeES,'es');
 
 const routes: Routes = [
   {path: '', redirectTo:'suscriptores', pathMatch: "full"},
@@ -94,6 +100,7 @@ const routes: Routes = [
     AppComponent,
     SuscriptoresComponent,
     SuscriptoresFormComponent,
+    DetalleSuscriptorComponent,
     PrediosComponent,
     PrediosFormComponent,
     UsuarioComponent,
@@ -108,8 +115,7 @@ const routes: Routes = [
     FacturaFormComponent,
     FacturaModalComponent,
     HeaderComponent,
-    FooterComponent,
-    DetalleSuscriptorComponent,
+    FooterComponent
     ],
   imports: [
     BrowserModule,

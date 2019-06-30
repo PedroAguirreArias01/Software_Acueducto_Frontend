@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from "@angular/router";
 import { Suscriptor } from './Suscriptor';
 import Swal from 'sweetalert2';
 import { SuscriptorService } from './suscriptor.service';
+import { ModalService } from './detalle-suscriptor/modal.service';
 
 @Component({
   selector: 'app-suscriptores',
@@ -13,10 +14,11 @@ import { SuscriptorService } from './suscriptor.service';
 export class SuscriptoresComponent implements OnInit {
 
   private suscriptores: Suscriptor[];
-  private suscriptor: Suscriptor;
+  private suscriptorSeleccionado: Suscriptor;
   public pageActual: number=1;
   
-  constructor(private suscriptorService: SuscriptorService, private router:Router, private activatedRoute: ActivatedRoute) { 
+  constructor(private suscriptorService: SuscriptorService, private router:Router, 
+    private activatedRoute: ActivatedRoute, private modalService: ModalService ) { 
    
   }
 
@@ -55,4 +57,12 @@ export class SuscriptoresComponent implements OnInit {
       }
     })
   }
+
+  //Asigna el cliente seleccionado a la variable suscriptorSeleccionado,
+  // luego puede pasarse dicha variable al modal para mostrarse
+  abrirModal(suscriptor:Suscriptor):void{
+    this.suscriptorSeleccionado = suscriptor;
+    this.modalService.abrirModal();
+  }
+
 }
