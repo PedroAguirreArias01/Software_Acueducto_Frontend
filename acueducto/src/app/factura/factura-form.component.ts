@@ -7,11 +7,14 @@ import { PredioService } from '../predios/predio.service';
 import { Predio } from '../predios/Predio';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { startWith, map } from 'rxjs/operators';
-import { MatOption } from '@angular/material';
+import { startWith, map, flatMap } from 'rxjs/operators';
+import { MatOption, MatAutocompleteSelectedEvent } from '@angular/material';
 import { MatDialog } from '@angular/material';
 import { FacturaModalComponent } from './factura-modal/factura-modal.component'
 import { Suscriptor } from '../suscriptores/Suscriptor';
+import { Tarifa } from '../tarifa/Tarifa';
+import { TarifaService } from '../tarifa/tarifa.service';
+import { DetalleFactura } from './DetallesFactura';
 
 @Component({
   selector: 'app-factura-form',
@@ -19,25 +22,36 @@ import { Suscriptor } from '../suscriptores/Suscriptor';
 })
 export class FacturaFormComponent implements OnInit {
 
-  //public searchTerm: FormControl = new FormControl();
-  private predios: Predio[];
-  //private prediosFiltrados: Predio[];
-  //private show: boolean;
-
   public factura: Factura = new Factura();
   public editar: boolean;
-  public facturas: Factura[];
-  public predio: Predio = new Predio();
   public suscriptor: Suscriptor = new Suscriptor();
+  public detalleFactura: DetalleFactura;
+  public predio: Predio = new Predio();
 
-  constructor(private facturaService: FacturaService, private predioService: PredioService, 
+  filteredOptions: Observable<Predio[]>;
+  myControl = new FormControl();
+
+  tarifasFiltradas: Observable<Tarifa[]>;
+  myItem = new FormControl();
+
+  constructor(private facturaService: FacturaService, private tarifaService: TarifaService, private predioService: PredioService,
     private router: Router, private activatedRoute: ActivatedRoute, public dialog: MatDialog) { }
 
   ngOnInit() {
     if (this.editar) {
       this.cargarFactura();
     }
-    this.cargarPredios();
+    this.filteredOptions = this.myControl.valueChanges
+      .pipe(
+        map(value => typeof value === 'string' ? value : value.nombre),
+        flatMap(value => value ? this._filter(value) : [])
+      );
+
+    this.tarifasFiltradas = this.myItem.valueChanges
+      .pipe(
+        map(value => typeof value === 'string' ? value : value.nombre),
+        flatMap(value => value ? this._filterTarifa(value) : [])
+      );
   }
 
 
@@ -45,43 +59,7 @@ export class FacturaFormComponent implements OnInit {
     this.crear();
   }
 
-  // private filter(pred: any): Predio[] {
-
-  //   return this.predios.filter((item: any) => {
-  //     console.log("m");
-  //     //If the user selects an option, the value becomes a Human object,
-  //     //therefore we need to reset the val for the filter because an
-  //     //object cannot be used in this toLowerCase filter
-  //     if (typeof pred === 'object') { pred = "" };
-  //     const TempString = item.nombre;
-  //     return TempString.toLowerCase().includes(pred.toLowerCase());
-  //   });
-  // }
-
-  // autocompleteDisplay(item: any): string {
-  //   if (item == undefined) { return }
-  //   return item.nombre;
-  // }
-
-  // OnPredioSelected(option: MatOption) {
-  //   console.log(option.value);
-  // }
-
-  public crear(): void {
-    console.log(JSON.stringify(this.factura));
-    this.facturaService.create(this.factura).
-      subscribe(factura => {
-
-        this.router.navigate(['/Facturas'])
-        Swal.fire({
-          title: 'Nueva Factura!',
-          text: `Factura ${factura} creado con exito`,
-          type: 'success',
-          confirmButtonText: 'Aceptar'
-        })
-      }
-      )
-  }
+ 
 
   cargarFactura(): void {
     this.editar = false;
@@ -110,22 +88,103 @@ export class FacturaFormComponent implements OnInit {
     })
   }
 
-  cargarPredios() {
-    this.predioService.get().subscribe(
-      predios => {this.predios = predios
-          console.log('Predio cargado:'+JSON.stringify(this.predios[0]));
-      }
-    )
-  }
-
   open() {
     const dialogRef = this.dialog.open(
-      FacturaModalComponent,{
-        width :'50%',
-        height:'60%',
-        //data: {tarifa: tarifa}
+      FacturaModalComponent, {
+        width: '50%',
+        height: '60%',
+        data: { factura: FacturaFormComponent }
       }
     );
   }
 
+  seleccionarPredio(event: MatAutocompleteSelectedEvent): void {
+    let predio = event.option.value as Predio;
+    this.predio = predio;
+    this.factura.predio = predio;
+    this.suscriptor = predio.suscriptor;
+    console.log('factura seleccionado: ' + JSON.stringify(this.factura))
+
+  }
+
+  mostrarPredio(predio?: Predio): string | undefined {
+    return predio ? predio.nombre : undefined;
+  }
+
+  private _filter(value: string): Observable<Predio[]> {
+    return this.predioService.searchPredios(value);
+  }
+
+  private _filterTarifa(value: string): Observable<Tarifa[]> {
+    return this.tarifaService.searchTarifa(value);
+  }
+
+  mostrarTarifa(tarifa?: Tarifa): string | undefined {
+    return tarifa ? tarifa.descripcion : undefined;
+  }
+
+  seleccionarTarifa(event: MatAutocompleteSelectedEvent): void {
+    let tarifa = event.option.value as Tarifa;
+    if (this.existeItem(tarifa.id)) {
+      this.incrementaCantidad(tarifa.id);
+    } else {
+      let nuevoDetalle = new DetalleFactura();
+      nuevoDetalle.tarifa = tarifa;
+      this.factura.detallesFactura.push(nuevoDetalle);
+    }
+    this.myItem.setValue('');
+    event.option.focus();
+    event.option.deselect();
+  }
+
+  actualizarCantidad(id: number, event: any): void {
+    let cantidad: number = event.target.value as number;
+    if(cantidad == 0){
+      return this.eliminarItem(id);
+    }
+    this.factura.detallesFactura = this.factura.detallesFactura.map((item: DetalleFactura) => {
+      if (id === item.tarifa.id) {
+        item.cantidad = cantidad;
+      }
+      return item;
+    });
+  }
+
+  existeItem(id: number): boolean {
+    let existe = false;
+    this.factura.detallesFactura.forEach((item: DetalleFactura) => {
+      if (id === item.tarifa.id) {
+        existe = true;
+      }
+    })
+    return existe;
+  }
+
+  incrementaCantidad(id: number): void {
+    this.factura.detallesFactura = this.factura.detallesFactura.map((item: DetalleFactura) => {
+      if (id === item.tarifa.id) {
+        ++item.cantidad;
+      }
+      return item;
+    });
+  }
+
+  eliminarItem(id: number): void{
+    this.factura.detallesFactura = this.factura.detallesFactura.filter((item: DetalleFactura) => id !== item.tarifa.id);
+  }
+
+  public crear(): void {
+    console.log(JSON.stringify(this.factura));
+    this.facturaService.create(this.factura).
+      subscribe(factura => {
+        this.router.navigate(['/Facturas'])
+        Swal.fire({
+          title: 'Nueva Factura!',
+          text: `Factura ${factura.id} creada con exito`,
+          type: 'success',
+          confirmButtonText: 'Aceptar'
+        })
+      }
+      )
+  }
 }

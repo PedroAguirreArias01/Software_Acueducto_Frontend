@@ -2,6 +2,8 @@ import { Component, OnInit,Inject } from '@angular/core';
 import {MatDialogRef, MatDialog, MAT_DIALOG_DATA} from '@angular/material';
 import { Tarifa } from 'src/app/tarifa/Tarifa';
 import { TarifaService } from 'src/app/tarifa/tarifa.service';
+import { DetalleFactura } from '../DetallesFactura';
+import { Factura } from '../Factura';
 
 @Component({
   selector: 'app-factura-modal',
@@ -12,9 +14,10 @@ export class FacturaModalComponent implements OnInit {
 
   public tarifas: Tarifa[];
   public tarifa: Tarifa = new Tarifa();
+  public detalleFactura: DetalleFactura = new DetalleFactura();
 
   constructor( public dialogRef: MatDialogRef<FacturaModalComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: Tarifa, public tarifaService: TarifaService) { }
+    @Inject(MAT_DIALOG_DATA) public factura: Factura, public tarifaService: TarifaService) { }
 
   ngOnInit() {
     this.getTarifas();
@@ -41,4 +44,16 @@ export class FacturaModalComponent implements OnInit {
   loadTarifa(){
     this.tarifa;
   }
+
+  addTarifaFactura(detalleFactura: DetalleFactura, tarifa: Tarifa): DetalleFactura {
+    detalleFactura.tarifa = tarifa;
+    this.detalleFactura = detalleFactura;
+    if(detalleFactura !== null){
+      //this.factura.detallesFactura.push(detalleFactura);
+      console.log('este es el detelle: '+JSON.stringify(detalleFactura));
+      this.dialogRef.close();
+      return detalleFactura;
+    }
+  }
+  
 }

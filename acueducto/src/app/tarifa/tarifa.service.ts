@@ -67,4 +67,8 @@ export class TarifaService {
       })
     );
   }
+
+  searchTarifa(term) {
+    return this.http.get<Tarifa[]>(`${this.urlEndPoint}search/${term}`);
+  }
 }

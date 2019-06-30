@@ -28,14 +28,14 @@
         </div>
         <label for="nombre" class="col-form-label col-sm-2" style="text-align: right">Consumo Actual</label>
         <div class="col-sm-4">
-          <input type="text" class="form-control"  name="predio" placeholder="Consumo Actual">
+          <input type="text" class="form-control"  name="consumoActual"  [(ngModel)]= "detalleFactura.consumoActual" placeholder="Consumo Actual">
         </div>
       </div>
     </form>
 
   </div>
   <div class="card-footer">
-    <button class="btn btn-primary">Agragar</button>
-    <button class="btn btn-danger">Cancelar</button>
+    <button class="btn btn-primary" (click)= "addTarifaFactura(detalleFactura, tarifa)">Agragar</button>
+    <button class="btn btn-danger" (click)= "close()">Cancelar</button>
   </div>
 </div>

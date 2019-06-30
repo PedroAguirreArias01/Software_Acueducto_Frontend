@@ -1,5 +1,6 @@
 import { Lugar } from '../lugar/lugar';
 import { Suscriptor } from '../suscriptores/Suscriptor';
+import { Factura } from '../factura/Factura';
 
 export class Predio {
     public numeroMatricula: string;
@@ -9,4 +10,5 @@ export class Predio {
     public latitud: number;
     public longitud: string;
     public suscriptor: Suscriptor;
+    public facturas: Factura[];
 }

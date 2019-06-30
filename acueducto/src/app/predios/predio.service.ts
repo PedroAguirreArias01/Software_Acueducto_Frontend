@@ -40,17 +40,7 @@ export class PredioService {
     return this.http.put<Predio>(`${this.urlEndPoint}${predio.numeroMatricula}`, predio, { headers: this.httpHeaders })
   }
 
-  search(term) {
-    var predios = this.http.get(`${this.urlEndPoint}` + 'search/' + term)
-      .pipe(
-        debounceTime(500),  // WAIT FOR 500 MILISECONDS ATER EACH KEY STROKE.
-        map(
-          (data: any) => {
-            return (
-              data.length != 0 ? data as Predio[] : [{ "BookName": "No Record Found" } as any]
-            );
-          }
-        ));
-    return predios;
+  searchPredios(term) {
+    return this.http.get<Predio[]>(`${this.urlEndPoint}search/${term}`);
   }
 }
