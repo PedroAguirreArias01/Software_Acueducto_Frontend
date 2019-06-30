@@ -7,13 +7,13 @@
     <div class="my-1 text-left">
       <button class="btn btn-rounded btn-primary" routerLink="/suscriptoresform"> Crear Suscriptor</button>
     </div>
-    
+
     <hr>
 
     <h5 class="card-title">Listado de Suscriptores</h5>
     <div *ngIf="suscriptores?.length === 0" class="alert alert-info">
-        No hay Suscriptores en la base de datos!
-      </div>
+      No hay Suscriptores en la base de datos!
+    </div>
     <table class="table table-bordered table-striped" *ngIf="suscriptores?.length>0">
       <thead>
         <tr>
@@ -29,8 +29,7 @@
         <tr *ngFor="let suscriptor of suscriptores | paginate: { itemsPerPage: 7, currentPage: pageActual}">
           <td>{{suscriptor.nombre}} {{suscriptor.apellido}}</td>
           <td>{{suscriptor.numeroTelefono}}</td>
-          <td><span class="badge"
-              [ngClass]="{'badge-success' : suscriptor.estado === 'A',
+          <td><span class="badge" [ngClass]="{'badge-success' : suscriptor.estado === 'A',
               'badge-secondary' : suscriptor.estado === 'I'}">
               {{suscriptor.estado === 'A'? 'Activo':'Inactivo'}}</span>
           </td>
@@ -40,18 +39,20 @@
             <td><span class="badge badge-danger">Inactivo</span></td>
           </ng-template> -->
 
-          <td><i class="fas fa-check-circle" ></i>{{suscriptor.estadoCuenta === 'D'? 'Al día': 'En mora'}}</td>
-
+          <td><span><i class="fa fa-2x "
+             [ngClass]="{'fa-check-circle-o text-success': suscriptor.estadoCuenta === 'D',
+                        'fa-exclamation-circle text-danger': suscriptor.estadoCuenta === 'M'}" ></i>
+              {{suscriptor.estadoCuenta === 'D'? 'Al día': 'En mora'}}</span></td>
           <td>
             <button type="button" class="btn btn-info mx-2"
               [routerLink]="['/suscriptoresform/form', suscriptor.cedula]">
-              <span class="glyphicon glyphicon-pencil"></span>Editar
+              Editar
             </button>
             <button type="button" class="btn btn-danger mx-2" (click)="eliminar(suscriptor)">
-              <span class="glyphicon glyphicon-remove"></span>Eliminar
+              Eliminar
             </button>
             <button type="button" class="btn btn-info mx-2" (click)="abrirModal(suscriptor)">
-              <span class="glyphicon glyphicon-info"></span>Info
+              Info
             </button>
           </td>
         </tr>

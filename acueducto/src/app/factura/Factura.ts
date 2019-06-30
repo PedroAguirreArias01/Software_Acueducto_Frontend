@@ -7,6 +7,7 @@ export class Factura{
     public periodoFacturado: Date;
     public fechaMaximoPago: Date;
     public fechaPago: Date;
+    public estadoFactura: string;
     public detallesFactura: Array<DetalleFactura>=[];
     public predio: Predio;
     public total: number;

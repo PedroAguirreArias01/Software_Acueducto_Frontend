@@ -69,6 +69,8 @@ export class SuscriptorService {
   }
 
   getPrediosBySuscriptor(cedula: String): Observable<Predio[]> {
-    return this.http.get<Predio[]>(`${this.urlEndPoint}${cedula}`+'/predios', { headers: this.httpHeaders });
+    return this.http.get<Predio[]>(`${this.urlEndPoint}${cedula}`+'/predios', { headers: this.httpHeaders }).pipe(
+      map(response => response as Predio[])
+    );
   }
 }

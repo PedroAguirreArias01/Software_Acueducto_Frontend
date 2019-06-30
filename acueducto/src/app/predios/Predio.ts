@@ -11,4 +11,8 @@ export class Predio {
     public longitud: string;
     public suscriptor: Suscriptor;
     public facturas: Factura[];
+
+    public isUpToDate(): boolean {
+        return false;
+    }
 }
