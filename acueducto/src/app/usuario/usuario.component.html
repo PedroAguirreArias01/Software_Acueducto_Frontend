@@ -16,7 +16,7 @@
           <th>Apellido</th>
           <th>direccionResidencia</th>
           <th>Tipo Usuario</th>
-          <th> </th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
@@ -27,13 +27,13 @@
           <td>{{empleado.direccionResidencia}}</td>
           <td>{{empleado.tipoEmpleado}}</td>
           <td class="empleado">
-            <button type="button" class="btn btn-info" [routerLink]="['/usuarios/form',empleado.cedula]">
+            <button type="button" class="btn btn-info mx-2" [routerLink]="['/usuarios/form',empleado.cedula]">
                 <span class="glyphicon glyphicon-pencil"></span>Editar
             </button>
-            <button type="button" class="btn btn-danger" (click)="eliminar(empleado)">
+            <button type="button" class="btn btn-danger mx-2" (click)="eliminar(empleado)">
                 <span class="glyphicon glyphicon-remove"></span>Eliminar
             </button>
-            <button type="button" class="btn btn-info" (click)="eliminar(empleado)">
+            <button type="button" class="btn btn-info mx-2" (click)="eliminar(empleado)">
               <span class="glyphicon glyphicon-info"></span>Info
           </button>
         </td>
