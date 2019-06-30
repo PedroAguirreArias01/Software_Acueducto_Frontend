@@ -73,7 +73,7 @@
                 <div *ngFor="let predio of predios" class="card">
                   <div class="card-header">
                     <h2 class="mb-0">
-                        <button type="button" class="btn btn-link" data-toggle="collapse" [attr.data-target]="'#' + predio.numeroMatricula">Predio {{predio.vereda.id}}</button>	
+                        <button type="button" class="btn btn-link" data-toggle="collapse" [attr.data-target]="'#' + predio.numeroMatricula">Predio {{predio.vereda.id}} - {{predio.numeroMatricula}}</button>	
                     </h2>
                   </div>
                   <div [attr.id]="predio.numeroMatricula" class="collapse" data-parent="#accordionPredios">
