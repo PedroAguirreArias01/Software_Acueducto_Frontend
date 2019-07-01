@@ -91,8 +91,6 @@ export class FacturaFormComponent implements OnInit {
     this.predio = predio;
     this.factura.predio = predio;
     this.suscriptor = predio.suscriptor;
-    console.log('factura seleccionado: ' + JSON.stringify(this.factura))
-
   }
 
   mostrarPredio(predio?: Predio): string | undefined {

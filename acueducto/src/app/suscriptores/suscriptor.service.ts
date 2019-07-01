@@ -8,6 +8,8 @@ import { map, catchError } from 'rxjs/operators';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { Predio } from '../predios/Predio';
+import { Factura } from '../factura/Factura';
+import { formatDate } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
@@ -69,7 +71,7 @@ export class SuscriptorService {
   }
 
   getPrediosBySuscriptor(cedula: String): Observable<Predio[]> {
-    return this.http.get<Predio[]>(`${this.urlEndPoint}${cedula}`+'/predios', { headers: this.httpHeaders }).pipe(
+    return this.http.get<Predio[]>(`${this.urlEndPoint}${cedula}` + '/predios', { headers: this.httpHeaders }).pipe(
       map(response => response as Predio[])
     );
   }

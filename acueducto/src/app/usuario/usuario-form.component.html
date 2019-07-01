@@ -6,7 +6,7 @@
     </ng-template>
   </div>
   <div class="card-body">
-    <form class="form-horizontal" method="post">
+    <form class="form-horizontal" >
       <div class="form-row">
         <div class="form-group col-6">
           <label for="cedula">Cedula</label>
@@ -41,21 +41,22 @@
         <div class="from-group col-6">
           <label>Genero</label>
           <div class="form-check">
-            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="M"
+            <input class="form-check-input" type="radio" name="generoRadios" id="masculino" value="M"
               [(ngModel)]="empleado.genero" checked>
-            <label class="form-check-label" for="exampleRadios1">
+            <label class="form-check-label" for="masculino">
               Masculino
             </label>
           </div>
           <div class="form-check">
-            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="F"
+            <input class="form-check-input" type="radio" name="generoRadios" id="femenino" value="F"
               [(ngModel)]="empleado.genero">
-            <label class="form-check-label" for="exampleRadios2">
+            <label class="form-check-label" for="femenino">
               Femenino
             </label>
           </div>
         </div>
       </div>
+      
       <hr>
       <div class="form-row">
         <div class="form-group col-6">

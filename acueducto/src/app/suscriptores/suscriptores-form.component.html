@@ -44,13 +44,33 @@
       <div class="form-group row">
         <label for="nombre" class="col-form-label col-sm-4" style="text-align: right">Apellido</label>
         <div class="col-sm-6">
-          <input id="apellido" name="apellido" type="text" required [(ngModel)]="suscriptor.apellido" #apellido="ngModel"
-            placeholder="Apellido" class="form-control">
+          <input id="apellido" name="apellido" type="text" required [(ngModel)]="suscriptor.apellido"
+            #apellido="ngModel" placeholder="Apellido" class="form-control">
           <!-- Div exterior para saber si hay errores, divs interiores para mostrar cada uno de los errores -->
           <div class="alert alert-danger" *ngIf="apellido.invalid && (apellido.dirty || apellido.touched)">
             <div *ngIf="apellido.errors.required">
               <small>Apellido es requerido</small>
             </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="generoRadios" class="col-form-label col-sm-4" style="text-align: right">Género</label>
+        <div class="col-sm-6">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="generoRadios" id="masculino" value="M"
+              [(ngModel)]="suscriptor.genero" checked>
+            <label class="form-check-label" for="masculino">
+              Masculino
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="generoRadios" id="femenino" value="F"
+              [(ngModel)]="suscriptor.genero">
+            <label class="form-check-label" for="femenino">
+              Femenino
+            </label>
           </div>
         </div>
       </div>
@@ -74,7 +94,7 @@
         <div class="col-sm-6">
           <input id="email" name="email" type="text" email [(ngModel)]="suscriptor.correoElectronico"
             placeholder="Correo Electrónico" class="form-control" #email="ngModel">
-            <!-- Div exterior para saber si hay errores, divs interiores para mostrar cada uno de los errores -->
+          <!-- Div exterior para saber si hay errores, divs interiores para mostrar cada uno de los errores -->
           <div class="alert alert-danger" *ngIf="email.invalid && (email.dirty || email.touched)">
             <div *ngIf="email.errors.email">
               <small>Correo electrónico no tiene el formato requerido</small>
@@ -88,7 +108,7 @@
         <div class="col-sm-6">
           <input id="telefono" name="telefono" type="text" required [(ngModel)]="suscriptor.numeroTelefono"
             placeholder="Teléfono" #telefono="ngModel" class="form-control">
-             <!-- Div exterior para saber si hay errores, divs interiores para mostrar cada uno de los errores -->
+          <!-- Div exterior para saber si hay errores, divs interiores para mostrar cada uno de los errores -->
           <div class="alert alert-danger" *ngIf="telefono.invalid && (telefono.dirty || telefono.touched)">
             <div *ngIf="telefono.errors.required">
               <small>El número de teléfono es requerido</small>

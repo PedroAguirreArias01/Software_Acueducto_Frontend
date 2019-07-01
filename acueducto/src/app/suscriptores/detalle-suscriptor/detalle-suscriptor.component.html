@@ -98,14 +98,23 @@
                         <table class="table table-bordered table-striped">
                           <thead>
                             <tr>
-                              <th>ID Factura</th>
+                              <th>ID</th>
+                              <th>Periodo Facturado</th>
+                              <th>Fecha Pago</th>
                               <th>Valor</th>
+                              <th>Estado</th>
                             </tr>
                           </thead>
                           <tbody>
                             <tr *ngFor="let factura of predio.facturas">
                               <td>{{factura.id}}</td>
+                              <td>{{factura.periodoFacturado | date:"MM/yyyy"}}</td>
+                              <td *ngIf="factura.fechaPago === null; else sinFechaPago" >{{factura.fechaPago | date:"dd/MM/yyyy"}}</td>
+                              <ng-template #sinFechaPago>
+                                <td>Sin pagar</td>
+                              </ng-template>
                               <td>{{factura.granTotal | currency}}</td>
+                              <td>{{factura.estadoFactura}}</td>
                             </tr>
                           </tbody>
                         </table>
@@ -114,22 +123,6 @@
                   </div>
                 </div>
               </div>
-
-              <!-- <div class="panel-group" id="accordion">
-                <div class="panel panel-default">
-                  <div class="panel-heading">
-                    <h4 class="panel-title">
-                      <a class="text-dark no-underline" data-toggle="collapse" data-parent="#accordion"
-                        href="#collapse1">Predio 1</a>
-                    </h4>
-                  </div>
-                  <div id="collapse1" class="panel-collapse collapse in">
-                    <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                      sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                      quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div>
-                  </div>
-                </div>
-              </div> -->
 
             </div>
 
