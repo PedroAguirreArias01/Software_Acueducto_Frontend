@@ -17,7 +17,7 @@ export class FacturaComponent implements OnInit {
   constructor( public facturaService: FacturaService) { }
 
   ngOnInit() {
-    this.facturaService.get().subscribe(
+    this.facturaService.getfacturas().subscribe(
       facturas =>{
          this.facturas = facturas
          for (let index = 0; index < this.facturas.length; index++) {
