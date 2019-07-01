@@ -44,7 +44,7 @@ export class FacturaComponent implements OnInit {
       reverseButtons: true
     }).then((result) => {
       if (result.value) {
-        this.facturaService.delete(factura.id).subscribe(
+        this.facturaService.delete(20).subscribe(
           response => {
             this.facturas = this.facturas.filter(fac => fac !== factura)
             Swal.fire(
