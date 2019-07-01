@@ -15,27 +15,20 @@ export class UsuarioFormComponent implements OnInit {
 
   public empleado: Empleado = new Empleado();
   public editar: boolean;
-  public lugares: Lugar[];
-  public lugar: Lugar = new Lugar();
+  public municipios: Lugar[];
 
   constructor(private usuarioService: UsuarioService, public lugarService: LugarService, private router: Router, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
-    if (this.editar) {
-      this.cargarUsuario();
-    }
-
-    this.lugarService.get().subscribe(
-      lugares => this.lugares = lugares
-    );
+    this.getListaMunicipios();
+    this.cargarEmpleado();
   }
 
   onSubmit() {
-    this.crear();
+    this.crearEmpleado();
   }
 
-  public crear(): void {
-    console.log(JSON.stringify(this.empleado));
+  public crearEmpleado(): void {
     this.usuarioService.create(this.empleado).
       subscribe(suscriptor => {
         this.router.navigate(['/usuarios'])
@@ -49,7 +42,7 @@ export class UsuarioFormComponent implements OnInit {
       )
   }
 
-  cargarUsuario(): void {
+  cargarEmpleado(): void {
     this.editar = false;
     this.activatedRoute.params.subscribe(params => {
       let cedula = params['cedula'];
@@ -57,7 +50,7 @@ export class UsuarioFormComponent implements OnInit {
         this.editar = true;
         this.usuarioService.getEmpleado(cedula).subscribe(
           (empleado) => {
-          this.empleado = empleado
+            this.empleado = empleado
           }
         )
       }
@@ -74,6 +67,18 @@ export class UsuarioFormComponent implements OnInit {
         confirmButtonText: 'Aceptar'
       })
     })
+  }
+
+  getListaMunicipios() {
+    this.lugarService.getListaMunicipios().subscribe(
+      municipios => this.municipios = municipios
+    );
+  }
+
+  //o1 -> del *ngFor
+  //o2 -> asignado al empleado
+  compararMunicipio(o1: Lugar, o2: Lugar) {
+    return (o1 == null || o2 == null) ? false : (o1.id === o2.id);
   }
 
 }

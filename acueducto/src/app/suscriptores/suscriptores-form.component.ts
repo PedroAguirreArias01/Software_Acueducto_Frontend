@@ -29,9 +29,7 @@ export class SuscriptoresFormComponent implements OnInit {
   ngOnInit() {
     this.minYears= 18;
     this.minDate = new Date(1900,0,1);
-    this.maxDate = new Date(new Date().setFullYear(new Date().getFullYear() - this.minYears))
-    console.log(this.maxDate);
-    console.log(this.minDate)
+    this.maxDate = new Date(new Date().setFullYear(new Date().getFullYear() - this.minYears));
     this.cargarSuscriptor();
   }
 
@@ -65,7 +63,6 @@ export class SuscriptoresFormComponent implements OnInit {
 
   update(): void {
     this.suscriptorService.update(this.suscriptor).subscribe( suscriptor => {
-      console.log('este es el Suscripto: '+suscriptor.cedula);
       this.router.navigate(['/suscriptores'])
       Swal.fire({
         title: 'Actualizar Suscriptor!',

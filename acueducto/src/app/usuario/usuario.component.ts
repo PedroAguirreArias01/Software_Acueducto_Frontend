@@ -17,7 +17,7 @@ export class UsuarioComponent implements OnInit {
   constructor(private usuarioService: UsuarioService, private router:Router, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
-    this.usuarioService.get().subscribe(
+    this.usuarioService.getEmpleados().subscribe(
       empleados => this.empleados = empleados
     );
   }

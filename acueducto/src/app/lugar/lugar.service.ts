@@ -45,7 +45,9 @@ export class LugarService {
   }
 
   getListaVeredas(): Observable<Lugar[]> {
-    return this.http.get<Lugar[]>(this.urlEndPoint + 'tipo/V');
+    return this.http.get<Lugar[]>(this.urlEndPoint + 'tipo/V').pipe(
+      map(response => response as Lugar[])
+    );
   }
 
 }
