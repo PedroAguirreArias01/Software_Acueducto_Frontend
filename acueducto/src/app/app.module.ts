@@ -69,6 +69,7 @@ import { FooterComponent } from './footer/footer.component';
 //Registra el locale para procesar las fechas
 import {registerLocaleData} from '@angular/common';
 import localeES from '@angular/common/locales/es';
+import { FacturaDetallesComponent } from './factura/factura-detalles/factura-detalles.component';
 
 registerLocaleData(localeES,'es');
 
@@ -113,7 +114,8 @@ const routes: Routes = [
     FacturaComponent,
     FacturaFormComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    FacturaDetallesComponent
     ],
   imports: [
     BrowserModule,
@@ -166,6 +168,7 @@ const routes: Routes = [
   providers: [],
   bootstrap: [AppComponent],
   entryComponents:[
-    HistorialTarifaModalComponent]
+    HistorialTarifaModalComponent,
+    FacturaDetallesComponent]
 })
 export class AppModule { }
