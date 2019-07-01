@@ -33,10 +33,8 @@ export class PrediosFormComponent implements OnInit {
   }
 
   public crear(): void {
-    console.log(JSON.stringify(this.predio));
     this.predioService.create(this.predio).
       subscribe(predio => {
-
         this.router.navigate(['/predios'])
         Swal.fire({
           title: 'Nuevo Predio!',

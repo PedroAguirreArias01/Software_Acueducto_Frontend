@@ -24,6 +24,9 @@
           <input type="text" class="form-control" id="apellido" name="apellido" [(ngModel)]="empleado.apellido"
             required>
         </div>
+      </div>
+
+      <div class="form-row">
         <div class="form-group col-6">
           <mat-form-field>
             <input matInput [matDatepicker]="picker" name="fechaNacimiento" required
@@ -38,14 +41,15 @@
         <div class="from-group col-6">
           <label>Genero</label>
           <div class="form-check">
-            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="M" [(ngModel)] = "empleado.genero"
-              checked>
+            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="M"
+              [(ngModel)]="empleado.genero" checked>
             <label class="form-check-label" for="exampleRadios1">
               Masculino
             </label>
           </div>
           <div class="form-check">
-            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="F" [(ngModel)] = "empleado.genero">
+            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="F"
+              [(ngModel)]="empleado.genero">
             <label class="form-check-label" for="exampleRadios2">
               Femenino
             </label>
@@ -79,15 +83,16 @@
 
       <div class="form-row">
         <div class="form-group col-6">
-          <label for="direccionResidencia">dirección de Residencia</label>
+          <label for="direccionResidencia">Dirección de Residencia</label>
           <input type="text" class="form-control" id="direccionResidencia" name="direccionResidencia"
             [(ngModel)]="empleado.direccionResidencia" required>
         </div>
         <div class="form-group col-6">
           <label for="lugarResidencia">Lugar de Residencia</label>
-          <select class="form-control" required [(ngModel)]="empleado.lugarResidencia" name="lugarResidencia">
-            <option *ngFor="let lugarResidencia of lugares" [ngValue]="lugarResidencia">
-              {{lugarResidencia.nombre}}</option>
+          <select [compareWith]="compararMunicipio" class="form-control" required [(ngModel)]="empleado.lugarResidencia"
+            name="lugarResidencia">
+            <option *ngFor="let municipio of municipios" [ngValue]="municipio">
+              {{municipio.nombre}}</option>
           </select>
         </div>
       </div>
