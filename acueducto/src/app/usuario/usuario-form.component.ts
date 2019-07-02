@@ -16,6 +16,7 @@ export class UsuarioFormComponent implements OnInit {
   public empleado: Empleado = new Empleado();
   public editar: boolean;
   public municipios: Lugar[];
+  public passwordUser: string;
 
   constructor(private usuarioService: UsuarioService, public lugarService: LugarService, private router: Router, private activatedRoute: ActivatedRoute) { }
 
@@ -79,6 +80,24 @@ export class UsuarioFormComponent implements OnInit {
   //o2 -> asignado al empleado
   compararMunicipio(o1: Lugar, o2: Lugar) {
     return (o1 == null || o2 == null) ? false : (o1.id === o2.id);
+  }
+
+  getPass(event: any): void{
+    this.passwordUser = event.target.value as string;
+  }
+
+  verificarPass(event: any){
+    let passwor: string = event.target.value as string;
+    if(passwor === this.passwordUser){
+      console.log('son iguales'+passwor)
+    }else{
+      Swal.fire({
+        title: 'Error de contraseña',
+        text: `Las Contraseñas deben coincidir`,
+        type: 'error',
+        confirmButtonText: 'Aceptar'
+      })
+    }
   }
 
 }
