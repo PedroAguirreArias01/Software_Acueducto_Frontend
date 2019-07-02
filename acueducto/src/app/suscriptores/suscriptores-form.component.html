@@ -13,8 +13,8 @@
       <div class="form-group row">
         <label for="nombre" class="col-form-label col-sm-4" style="text-align: right">Cedula</label>
         <div class="col-sm-6">
-          <input id="cedula" name="cedula" type="text" required [(ngModel)]="suscriptor.cedula" 
-            class="form-control" minLenght="10" maxlength="10" #cedula="ngModel" digitsOnly>
+          <input id="cedula" name="cedula" type="text" required [(ngModel)]="suscriptor.cedula" class="form-control"
+            minLenght="10" maxlength="10" #cedula="ngModel" digitsOnly>
           <!-- Div exterior para saber si hay errores, divs interiores para mostrar cada uno de los errores -->
           <div class="alert alert-danger" *ngIf="cedula.invalid && (cedula.dirty || cedula.touched)">
             <div *ngIf="cedula.errors.required">
@@ -30,8 +30,8 @@
       <div class="form-group row">
         <label for="nombre" class="col-form-label col-sm-4" style="text-align: right">Nombre</label>
         <div class="col-sm-6">
-          <input type="text" class="form-control" required [(ngModel)]="suscriptor.nombre" name="nombre" #nombre="ngModel"
-            >
+          <input type="text" class="form-control" required [(ngModel)]="suscriptor.nombre" name="nombre"
+            #nombre="ngModel">
           <!-- Div exterior para saber si hay errores, divs interiores para mostrar cada uno de los errores -->
           <div class="alert alert-danger" *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)">
             <div *ngIf="nombre.errors.required">
@@ -77,8 +77,7 @@
 
       <div class="form-group row">
         <label for="fechaNacimiento" class="col-form-label col-sm-4" style="text-align: right">Fecha Nacimiento</label>
-        <span class="col-md-offset-2 text-center"><i class=""></i></span>
-        <div class="col-sm-8">
+        <div class="col-sm-6">
           <mat-form-field>
             <input matInput [matDatepicker]="picker" [min]="minDate" [max]="maxDate" name="fechaNacimiento" required
               [(ngModel)]="suscriptor.fechaNacimiento" #fechan>
@@ -86,14 +85,23 @@
             <mat-datepicker touchUi #picker></mat-datepicker>
           </mat-form-field>
         </div>
+      </div>
 
+      <div class="form-group row" *ngIf="editar">
+          <label for="cedula" class="col-form-label col-sm-4" style="text-align: right">Estado</label>
+        <div class="form-group col-3">
+          <select class="form-control" name="estado" [(ngModel)]="suscriptor.estado">
+            <option value="A">Activo</option>
+            <option value="I">Inactivo</option>
+          </select>
+        </div>
       </div>
 
       <div class="form-group row">
         <label for="nombre" class="col-form-label col-sm-4" style="text-align: right">Correo</label>
         <div class="col-sm-6">
           <input id="email" name="email" type="text" email [(ngModel)]="suscriptor.correoElectronico"
-             class="form-control" #email="ngModel">
+            class="form-control" #email="ngModel">
           <!-- Div exterior para saber si hay errores, divs interiores para mostrar cada uno de los errores -->
           <div class="alert alert-danger" *ngIf="email.invalid && (email.dirty || email.touched)">
             <div *ngIf="email.errors.email">
@@ -107,7 +115,7 @@
         <label for="nombre" class="col-form-label col-sm-4" style="text-align: right">Telefono</label>
         <div class="col-sm-6">
           <input id="telefono" name="telefono" type="text" required [(ngModel)]="suscriptor.numeroTelefono"
-             #telefono="ngModel" class="form-control">
+            #telefono="ngModel" class="form-control">
           <!-- Div exterior para saber si hay errores, divs interiores para mostrar cada uno de los errores -->
           <div class="alert alert-danger" *ngIf="telefono.invalid && (telefono.dirty || telefono.touched)">
             <div *ngIf="telefono.errors.required">
@@ -116,6 +124,8 @@
           </div>
         </div>
       </div>
+
+
 
       <div class="form-group">
         <div class="col-md-12 text-center">

@@ -13,7 +13,7 @@ import { ModalService } from './detalle-suscriptor/modal.service';
 
 export class SuscriptoresComponent implements OnInit {
 
-  private suscriptores: Suscriptor[];
+  private suscriptores: Array<Suscriptor> = [];
   private suscriptorSeleccionado: Suscriptor;
   public pageActual: number=1;
   

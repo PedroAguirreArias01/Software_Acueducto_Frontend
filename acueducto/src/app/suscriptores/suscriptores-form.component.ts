@@ -41,7 +41,7 @@ export class SuscriptoresFormComponent implements OnInit {
           title: 'Nuevo Suscriptor!',
           text: `Suscriptor ${suscriptor.nombre} creado con exito`,
           type: 'success',
-          confirmButtonText: 'Cool'
+          confirmButtonText: 'Aceptar'
         })
       }
       )
