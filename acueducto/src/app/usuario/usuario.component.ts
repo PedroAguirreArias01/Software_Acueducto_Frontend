@@ -3,7 +3,8 @@ import { Router, ActivatedRoute, Event } from "@angular/router";
 import { Empleado } from './Usuario';
 import { UsuarioService } from './usuario.service';
 import Swal from 'sweetalert2';
-import { HttpEventType } from '@angular/common/http';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { ModalService } from './detalle-usuario/modal.service';
 
 @Component({
   selector: 'app-usuario',
@@ -13,13 +14,10 @@ import { HttpEventType } from '@angular/common/http';
 export class UsuarioComponent implements OnInit {
 
   private empleados: Empleado[];
-  private empleado: Empleado = new Empleado();
+  private empleadoSeleccionado: Empleado;
   public pageActual: number = 1;
 
-  private fotoSeleccionada: File;
-  progreso: number = 0;
-
-  constructor(private usuarioService: UsuarioService, private router: Router, private activatedRoute: ActivatedRoute) { }
+  constructor(private usuarioService: UsuarioService, private modalService:ModalService, private router: Router, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
     this.usuarioService.getEmpleados().subscribe(
@@ -57,52 +55,9 @@ export class UsuarioComponent implements OnInit {
     })
   }
 
-  seleccionarFoto(event) {
-    this.fotoSeleccionada = event.target.files[0];
-    this.progreso = 0;
-    if (this.fotoSeleccionada.type.indexOf('image') < 0) {
-      Swal.fire(
-        'Subida de foto',
-        'Error: el archivo debe ser de tipo imagen',
-        'error'
-      )
-      this.fotoSeleccionada = null;
-    }
-    console.log(this.fotoSeleccionada);
+  abrirModal(empleado:Empleado){
+    this.empleadoSeleccionado = empleado;
+    this.modalService.abrirModal();
   }
-
-  subirFoto() {
-
-    if (!this.fotoSeleccionada) {
-      Swal.fire(
-        'Subida de foto',
-        'Error: Debe seleccionar una foto',
-        'error'
-      )
-    } else {
-
-      this.usuarioService.subirFoto(this.fotoSeleccionada, this.empleado.cedula).subscribe(
-        event => {
-
-          //Mira si el tipo de evento es de progreso de subida, si es así calcula el progreso
-          //Si no, muestra el mensaje completado
-          if (event.type === HttpEventType.UploadProgress) {
-            this.progreso = Math.round(event.loaded / event.total * 100);
-          } else if (event.type === HttpEventType.Response) {
-            let response: any = event.body;
-            this.empleado = response.empleado as Empleado;
-            Swal.fire(
-              'Subida de foto',
-              response.mensaje,
-              'success'
-            )
-          }
-          // this.empleado = empleado;
-
-        }
-      );
-    }
-  }
-
-
+  
 }

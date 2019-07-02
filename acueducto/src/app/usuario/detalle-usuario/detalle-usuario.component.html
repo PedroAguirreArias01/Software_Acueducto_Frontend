@@ -1,44 +1,58 @@
-<div class="card">
-  <div class="card-header">Modal Detalle Usuario</div>
-  <div class="card-body">
-    <div class="container">
-      <div class="row">
+<!-- Modal -->
+<div *ngIf="modalService.mostrar" class="modal animacion fade-in" id="modelId" tabindex="-1" role="dialog"
+  style="display:block;" aria-labelledby="modelTitleId" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Detalle Empleado</h5>
+        <button type="button" class="close" (click)="cerrarModal()" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="container">
+          <div class="row">
 
-        <ul *ngIf="empleado" class="list-group mb-3">
-          <li class="list-group-item">{{empleado.nombre}} {{empleado.apellido}}</li>
-          <li class="list-group-item">{{empleado.cedula}}</li>
-          <li class="list-group-item">{{empleado.usuario}}</li>
-          <li class="list-group-item">{{empleado.direccionResidencia}}</li>
-          <li class="list-group-item">{{empleado.fechaNacimiento | date: "dd, MMMM  yyyy"}}</li>
 
-        </ul>
 
-        <div class="col-sm">
-          <div class="input-group mb-3">
-            <div class="custom-file">
-              <input (change)="seleccionarFoto($event)" type="file" class="custom-file-input" id="seleccionarFoto">
-              <label for="seleccionarFoto" class="custom-file-label" for="seleccionarFoto">Seleccionar Foto</label>
+            <div class="col-sm">
+              <ul *ngIf="empleado" class="list-group mb-3">
+                <li class="list-group-item">{{empleado.nombre}} {{empleado.apellido}}</li>
+                <li class="list-group-item">{{empleado.cedula}}</li>
+                <li class="list-group-item">{{empleado.usuario}}</li>
+                <li class="list-group-item">{{empleado.direccionResidencia}}</li>
+                <li class="list-group-item">{{empleado.fechaNacimiento | date: "dd, MMMM  yyyy"}}</li>
+
+              </ul>
+              <div class="input-group mb-3">
+                <div class="custom-file">
+                  <input (change)="seleccionarFoto($event)" type="file" class="custom-file-input" id="seleccionarFoto">
+                  <label  for="seleccionarFoto" class="custom-file-label" for="seleccionarFoto">{{fotoSeleccionada? fotoSeleccionada.name: 'Seleccionar Foto' }}</label>
+                </div>
+                <div class="input-group-append">
+                  <button (click)="subirFoto()" [disabled]="!fotoSeleccionada" class="btn btn-outline-secondary"
+                    type="button">Subir</button>
+                </div>
+              </div>
+
+              <div *ngIf="progreso > 0" class="progress">
+                <div class="progress-bar" role="progressbar" [ngStyle]="{'width': progreso +'%'}"
+                  attr.aria-valuenow="{{progreso}}" aria-valuemin="0" aria-valuemax="100">
+                  {{progreso}}%
+                </div>
+              </div>
+
             </div>
-            <div class="input-group-append">
-              <button (click)="subirFoto()" [disabled]="!fotoSeleccionada" class="btn btn-outline-secondary"
-                type="button">Subir</button>
+
+            <div class="col-sm">
+              <img *ngIf="empleado?.foto" src="http://localhost:8080/empleados/uploads/img/{{empleado.foto}}" alt=""
+                class="img-thumbnail rounded">
             </div>
           </div>
-
-          <div *ngIf="progreso > 0" class="progress">
-            <div class="progress-bar" role="progressbar" [ngStyle]="{'width': progreso +'%'}" attr.aria-valuenow="{{progreso}}" aria-valuemin="0"
-              aria-valuemax="100">
-            {{progreso}}%
-            </div>
-          </div>
-
         </div>
-
-
-        <div class="col-sm">
-          <img *ngIf="empleado?.foto" src="http://localhost:8080/empleados/uploads/img{{empleado.foto}}" alt=""
-            class="img-thumbnail rounded">
-        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" (click)="cerrarModal()" class="btn btn-secondary" data-dismiss="modal">Close</button>
       </div>
     </div>
   </div>

@@ -73,7 +73,7 @@ export class UsuarioService {
     let formData = new FormData();  
     formData.append("foto", foto);
     formData.append("cedula", cedula);
-
+    console.log("Aqui sube");
     //Habilitita seguimiento de progreso de subida
     const req = new HttpRequest('POST', `${this.urlEndPoint}/cargarFoto`,formData, {
       reportProgress: true

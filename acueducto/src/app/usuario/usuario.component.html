@@ -1,16 +1,18 @@
+<detalle-empleado-modal *ngIf="empleadoSeleccionado" [empleado]="empleadoSeleccionado"></detalle-empleado-modal>
 <div class="card border-primary mb-3">
   <div class="card-header">Empleados</div>
   <div class="card-body">
     <div class="my-2 text-left">
-      <button class="btn btn-rounded btn-primary"  routerLink="/usuarioForm"> Crear Empleado</button>
+      <button class="btn btn-rounded btn-primary" routerLink="/usuarioForm"> Crear Empleado</button>
     </div>
-    <div *ngIf = "empleados?.length===0" class="alert alert-info">
+    <div *ngIf="empleados?.length===0" class="alert alert-info">
       No hay Empleados en la base de datos!
     </div>
     <h5 class="card-title">Listado de Empleados</h5>
-    <table class="table table-bordered table-striped" *ngIf = "empleados?.length>0">
+    <table class="table table-bordered table-striped" *ngIf="empleados?.length>0">
       <thead>
         <tr>
+          <th></th>
           <th>Cedula</th>
           <th>Nombre</th>
           <th>Apellido</th>
@@ -21,6 +23,13 @@
       </thead>
       <tbody>
         <tr *ngFor="let empleado of empleados | paginate: { itemsPerPage: 7, currentPage: pageActual}">
+          <td> <img (click)="abrirModal(empleado)" *ngIf="empleado?.foto"
+              src="http://localhost:8080/empleados/uploads/img/{{empleado.foto}}" alt="" class="img-thumbnail rounded-circle"
+              style="width:64px;height:64px;cursor:pointer;">
+              <img (click)="abrirModal(empleado)" *ngIf="!empleado?.foto"
+              src="http://localhost:8080/images/user.png" alt="Sin foto" class="img-thumbnail rounded"
+              style="width:64px;cursor:pointer;">
+          </td>
           <td>{{empleado.cedula}}</td>
           <td>{{empleado.nombre}}</td>
           <td>{{empleado.apellido}}</td>
@@ -28,15 +37,15 @@
           <td>{{empleado.tipoEmpleado}}</td>
           <td class="empleado">
             <button type="button" class="btn btn-info mx-2" [routerLink]="['/usuarios/form',empleado.cedula]">
-                <span class="glyphicon glyphicon-pencil"></span>Editar
+              <span class="glyphicon glyphicon-pencil"></span>Editar
             </button>
             <button type="button" class="btn btn-danger mx-2" (click)="eliminar(empleado)">
-                <span class="glyphicon glyphicon-remove"></span>Eliminar
+              <span class="glyphicon glyphicon-remove"></span>Eliminar
             </button>
             <button type="button" class="btn btn-info mx-2" (click)="eliminar(empleado)">
               <span class="glyphicon glyphicon-info"></span>Info
-          </button>
-        </td>
+            </button>
+          </td>
         </tr>
       </tbody>
     </table>
