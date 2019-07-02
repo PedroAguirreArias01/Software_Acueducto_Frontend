@@ -28,6 +28,7 @@ export class UsuarioService {
 
   create(empleado: Empleado): Observable<Empleado> {
     return this.http.post<Empleado>(this.urlEndPoint, empleado, { headers: this.httpHeaders }).pipe(
+      map((response: any) => response.empleado as Empleado),
       catchError(e => {
         console.log(e.error.mensaje);
         Swal.fire('Error ', e.error.mensaje, 'error');
@@ -60,6 +61,7 @@ export class UsuarioService {
 
   update(empleado: Empleado): Observable<Empleado> {
     return this.http.put<Empleado>(`${this.urlEndPoint}${empleado.cedula}`, empleado, { headers: this.httpHeaders }).pipe(
+      map((response: any) => response.empleado as Empleado),
       catchError(e => {
         console.log(e.error.mensaje);
         Swal.fire('Error ', e.error.mensaje, 'error');

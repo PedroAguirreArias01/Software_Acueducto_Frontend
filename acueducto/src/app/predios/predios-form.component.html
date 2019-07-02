@@ -30,7 +30,7 @@
         <label for="nombre" class="col-form-label col-sm-4" style="text-align: right">Nombre</label>
         <div class="col-sm-6">
           <input id="nombre" name="nombre" type="text" required [(ngModel)]="predio.nombre" #nombre="ngModel"
-            placeholder="Nombre" class="form-control">
+             class="form-control">
           <!-- Div exterior para saber si hay errores, divs interiores para mostrar cada uno de los errores -->
           <div class="alert alert-danger py-0" *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)">
             <div *ngIf="nombre.errors.required">
@@ -71,7 +71,7 @@
         <label for="nombre" class="col-form-label col-sm-4" style="text-align: right">Longitud</label>
         <div class="col-sm-6">
           <input id="longitud" name="longitud" type="text" required [(ngModel)]="predio.longitud" #longitud="ngModel"
-            placeholder="Longitud" class="form-control">
+             class="form-control">
           <div class="alert alert-danger py-0" *ngIf="longitud.invalid && (longitud.dirty || longitud.touched)">
             <div *ngIf="longitud.errors.required">
               <small>El componente de longitud es requerido</small>

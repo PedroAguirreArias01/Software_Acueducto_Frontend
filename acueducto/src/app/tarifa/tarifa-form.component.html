@@ -14,7 +14,7 @@
         <label for="valorTarifa" class="col-form-label col-sm-4" style="text-align: right">Valor Tarifa</label>
         <div class="col-sm-6">
           <input id="valor" name="valor" required currencyMask [(ngModel)]="tarifa.valorTarifa"
-            [options]="{prefix: '$', thousands: ',', decimal: '.', precision: '0'}" placeholder="Valor"
+            [options]="{prefix: '$', thousands: ',', decimal: '.', precision: '0'}"
             class="form-control" #valor="ngModel">
           <!-- Div exterior para saber si hay errores, divs interiores para mostrar cada uno de los errores -->
           <div class="alert alert-danger" *ngIf="valor.invalid && (valor.dirty || valor.touched)">
@@ -29,7 +29,7 @@
         <label for="descripcion" class="col-form-label col-sm-4" style="text-align: right">Descripción</label>
         <div class="col-sm-6">
           <input id="descripcion" name="descripcion" type="text" required [(ngModel)]="tarifa.descripcion"
-            #descripcion="ngModel" placeholder="descripcion" class="form-control">
+            #descripcion="ngModel" class="form-control">
           <!-- Div exterior para saber si hay errores, divs interiores para mostrar cada uno de los errores -->
           <div class="alert alert-danger" *ngIf="descripcion.invalid && (descripcion.dirty || descripcion.touched)">
             <div *ngIf="descripcion.errors.required">

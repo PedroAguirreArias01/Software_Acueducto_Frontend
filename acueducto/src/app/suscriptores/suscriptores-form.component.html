@@ -13,8 +13,8 @@
       <div class="form-group row">
         <label for="nombre" class="col-form-label col-sm-4" style="text-align: right">Cedula</label>
         <div class="col-sm-6">
-          <input id="cedula" name="cedula" type="text" required [(ngModel)]="suscriptor.cedula" digitOnly
-            class="form-control" minLenght="10" maxlength="10" #cedula="ngModel">
+          <input id="cedula" name="cedula" type="text" required [(ngModel)]="suscriptor.cedula" 
+            class="form-control" minLenght="10" maxlength="10" #cedula="ngModel" digitsOnly>
           <!-- Div exterior para saber si hay errores, divs interiores para mostrar cada uno de los errores -->
           <div class="alert alert-danger" *ngIf="cedula.invalid && (cedula.dirty || cedula.touched)">
             <div *ngIf="cedula.errors.required">

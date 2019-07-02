@@ -70,6 +70,7 @@ import { FooterComponent } from './footer/footer.component';
 import {registerLocaleData} from '@angular/common';
 import localeES from '@angular/common/locales/es';
 import { FacturaDetallesComponent } from './factura/factura-detalles/factura-detalles.component';
+import { DigitsOnlyDirective } from './digits-only.directive';
 
 registerLocaleData(localeES,'es');
 
@@ -115,7 +116,8 @@ const routes: Routes = [
     FacturaFormComponent,
     HeaderComponent,
     FooterComponent,
-    FacturaDetallesComponent
+    FacturaDetallesComponent,
+    DigitsOnlyDirective
     ],
   imports: [
     BrowserModule,

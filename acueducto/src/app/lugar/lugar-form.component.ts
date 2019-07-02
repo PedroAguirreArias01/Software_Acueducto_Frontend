@@ -29,11 +29,11 @@ export class LugarFormComponent implements OnInit {
 
   public crear(): void {
     this.lugarService.create(this.lugar).
-      subscribe(suscriptor => {
+      subscribe(lugar => {
         this.router.navigate(['/lugares'])
         Swal.fire({
           title: 'Nuevo Lugar!',
-          text: `Lugar ${suscriptor.nombre} creado con exito`,
+          text: `Lugar ${lugar.nombre} creado con exito`,
           type: 'success',
           confirmButtonText: 'Cool'
         })
@@ -57,11 +57,11 @@ export class LugarFormComponent implements OnInit {
   }
 
   update(): void {
-    this.lugarService.update(this.lugar).subscribe(suscriptor => {
+    this.lugarService.update(this.lugar).subscribe(lugar => {
       this.router.navigate(['/lugares'])
       Swal.fire({
         title: 'Actualizar Lugar!',
-        text: `Lugar ${suscriptor.nombre} actualizado con exito`,
+        text: `Lugar ${lugar.nombre} actualizado con exito`,
         type: 'success',
         confirmButtonText: 'Aceptar'
       })

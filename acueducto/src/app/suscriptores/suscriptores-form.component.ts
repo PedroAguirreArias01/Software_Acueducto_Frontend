@@ -39,7 +39,7 @@ export class SuscriptoresFormComponent implements OnInit {
         this.router.navigate(['/suscriptores'])
         Swal.fire({
           title: 'Nuevo Suscriptor!',
-          text: `Suscriptor ${this.suscriptor.nombre} creado con exito`,
+          text: `Suscriptor ${suscriptor.nombre} creado con exito`,
           type: 'success',
           confirmButtonText: 'Cool'
         })
@@ -66,7 +66,7 @@ export class SuscriptoresFormComponent implements OnInit {
       this.router.navigate(['/suscriptores'])
       Swal.fire({
         title: 'Actualizar Suscriptor!',
-        text: `Suscriptor ${this.suscriptor.nombre} actualizado con exito`,
+        text: `Suscriptor ${suscriptor.nombre} actualizado con exito`,
         type: 'success',
         confirmButtonText: 'Aceptar'
       })

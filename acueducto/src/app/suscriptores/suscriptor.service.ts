@@ -29,9 +29,9 @@ export class SuscriptorService {
   }
 
   create(suscriptor: Suscriptor): Observable<Suscriptor> {
-    return this.http.post<Suscriptor>(this.urlEndPoint, suscriptor, { headers: this.httpHeaders }).pipe(
+    return this.http.post(this.urlEndPoint, suscriptor, { headers: this.httpHeaders }).pipe(
+      map((response: any) => response.suscriptor as Suscriptor),
       catchError(e => {
-        console.log(e.error.mensaje);
         Swal.fire('Error ', e.error.mensaje, 'error');
         return throwError(e);
       })
@@ -62,6 +62,7 @@ export class SuscriptorService {
 
   update(suscriptor: Suscriptor): Observable<Suscriptor> {
     return this.http.put<Suscriptor>(`${this.urlEndPoint}${suscriptor.cedula}`, suscriptor, { headers: this.httpHeaders }).pipe(
+      map((response: any) => response.suscriptor as Suscriptor),
       catchError(e => {
         console.log(e.error.mensaje);
         Swal.fire('Error ', e.error.mensaje, 'error');

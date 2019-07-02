@@ -28,6 +28,7 @@ export class TarifaService {
 
   create(tarifa: Tarifa): Observable<Tarifa> {
     return this.http.post<Tarifa>(this.urlEndPoint, tarifa, { headers: this.httpHeaders }).pipe(
+      map((response: any) => response.tarifa as Tarifa),
       catchError(e => {
         console.log(e.error.mensaje);
         Swal.fire('Error ', e.error.mensaje ,'error');
@@ -60,6 +61,7 @@ export class TarifaService {
 
   update(tarifa: Tarifa): Observable<Tarifa>{
     return this.http.put<Tarifa>(`${this.urlEndPoint}${tarifa.id}`, tarifa, {headers: this.httpHeaders}).pipe(
+      map((response: any) => response.tarifa as Tarifa),
       catchError(e => {
         console.log(e.error.mensaje);
         Swal.fire('Error ', e.error.mensaje ,'error');

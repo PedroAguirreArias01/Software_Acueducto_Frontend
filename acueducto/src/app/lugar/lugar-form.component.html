@@ -11,7 +11,7 @@
     <!-- Sirve para validar el formulario -->
     <form #lugarForm="ngForm">
       <div class="form-group row">
-        <label for="tipo" class="col-form-label col-sm-4" style="text-align: right">Selecionar Tipo Lugar</label>
+        <label for="tipo" class="col-form-label col-sm-4" style="text-align: right">Tipo Lugar</label>
         <div class="col-sm-6">
           <select class="form-control" name="tipo" [(ngModel)]="lugar.tipo">
             <option value="M">Municipio</option>
@@ -33,7 +33,7 @@
       <div class="form-group row">
         <label for="nombre" class="col-form-label col-sm-4" style="text-align: right">Nombre</label>
         <div class="col-sm-6">
-          <input id="nombre" name="nombre" type="text" required [(ngModel)]="lugar.nombre" placeholder="Nombre"
+          <input id="nombre" name="nombre" type="text" required [(ngModel)]="lugar.nombre"
             #nombre="ngModel" class="form-control" minLength="1">
           <!-- Div exterior para saber si hay errores, divs interiores para mostrar cada uno de los errores -->
           <div class="alert alert-danger" *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)">

@@ -24,7 +24,8 @@ export class LugarService {
   }
 
   create(lugar: Lugar): Observable<Lugar> {
-    return this.http.post<Lugar>(this.urlEndPoint, lugar, { headers: this.httpHeaders }).pipe(
+    return this.http.post(this.urlEndPoint, lugar, { headers: this.httpHeaders }).pipe(
+      map((response: any) => response.lugar as Lugar),
       catchError(e => {
         console.log(e.error.mensaje);
         Swal.fire('Error ', e.error.mensaje, 'error');
@@ -54,7 +55,8 @@ export class LugarService {
   }
 
   update(lugar: Lugar): Observable<Lugar> {
-    return this.http.put<Lugar>(`${this.urlEndPoint}${lugar.id}`, lugar, { headers: this.httpHeaders }).pipe(
+    return this.http.put(`${this.urlEndPoint}${lugar.id}`, lugar, { headers: this.httpHeaders }).pipe(
+      map((response: any) => response.lugar as Lugar),
       catchError(e => {
         console.log(e.error.mensaje);
         Swal.fire('Error ', e.error.mensaje, 'error');
