@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
-import { of } from 'rxjs';
-import { HttpClient } from "@angular/common/http";
-import { HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpRequest,HttpHeaders, HttpEvent } from "@angular/common/http";
 import { map, catchError } from 'rxjs/operators';
 import { Empleado } from './Usuario';
 import Swal from 'sweetalert2';
@@ -68,6 +66,20 @@ export class UsuarioService {
         return throwError(e);
       })
     );
+  }
+
+  subirFoto(foto: File, cedula):Observable<HttpEvent<{}>>{
+    //Clase nativa de JS para el manejo de archivos
+    let formData = new FormData();  
+    formData.append("foto", foto);
+    formData.append("cedula", cedula);
+
+    //Habilitita seguimiento de progreso de subida
+    const req = new HttpRequest('POST', `${this.urlEndPoint}/cargarFoto`,formData, {
+      reportProgress: true
+    });
+
+    return this.http.request(req);
   }
 
 }
