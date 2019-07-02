@@ -72,11 +72,12 @@ import localeES from '@angular/common/locales/es';
 import { FacturaDetallesComponent } from './factura/factura-detalles/factura-detalles.component';
 import { DigitsOnlyDirective } from './digits-only.directive';
 import { DetalleUsuarioComponent } from './usuario/detalle-usuario/detalle-usuario.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 registerLocaleData(localeES,'es');
 
 const routes: Routes = [
-  {path: '', redirectTo:'suscriptores', pathMatch: "full"},
+  {path: '', redirectTo:'dashboard', pathMatch: "full"},
   {path: 'suscriptores', component: SuscriptoresComponent},
   {path: 'suscriptoresform', component: SuscriptoresFormComponent},
   {path: 'suscriptoresform/form/:cedula', component: SuscriptoresFormComponent},
@@ -95,6 +96,7 @@ const routes: Routes = [
   {path: 'facturas', component: FacturaComponent},
   {path: 'facturaForm', component: FacturaFormComponent},
   {path: 'facturas/form/:id', component: FacturaFormComponent},
+  {path: 'dashboard', component: DashboardComponent},
 ];
 
 @NgModule({
@@ -119,7 +121,8 @@ const routes: Routes = [
     FooterComponent,
     FacturaDetallesComponent,
     DigitsOnlyDirective,
-    DetalleUsuarioComponent
+    DetalleUsuarioComponent,
+    DashboardComponent
     ],
   imports: [
     BrowserModule,
