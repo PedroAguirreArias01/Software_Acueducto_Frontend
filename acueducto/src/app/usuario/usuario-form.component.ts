@@ -17,12 +17,21 @@ export class UsuarioFormComponent implements OnInit {
   public editar: boolean;
   public municipios: Lugar[];
   public passwordUser: string;
+  
+  private minYears: number;
+  private minDate: Date;
+  private maxDate:Date;
 
   constructor(private usuarioService: UsuarioService, public lugarService: LugarService, private router: Router, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
+    this.minYears= 18;
+    this.minDate = new Date(1900,0,1);
+    this.maxDate = new Date(new Date().setFullYear(new Date().getFullYear() - this.minYears));
     this.getListaMunicipios();
+    if(this.editar){
     this.cargarEmpleado();
+    }
   }
 
   onSubmit() {

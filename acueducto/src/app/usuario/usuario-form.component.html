@@ -50,7 +50,8 @@
         <div class="form-group col-6">
           <mat-form-field>
             <input matInput [matDatepicker]="picker" name="fechaNacimiento" required
-              [(ngModel)]="empleado.fechaNacimiento" placeholder="Fecha Nacimiento">
+              [(ngModel)]="empleado.fechaNacimiento" placeholder="Fecha Nacimiento"
+              [min]="minDate" [max]="maxDate" #fechan>
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
           </mat-form-field>
