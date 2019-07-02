@@ -15,7 +15,7 @@
         <label for="numeroMatricula" class="col-form-label col-sm-4" style="text-align: right">Número Catastral</label>
         <div class="col-sm-6">
           <input id="numeroMatricula" name="numeroMatricula" type="text" required [(ngModel)]="predio.numeroMatricula"
-            #numeroMatricula="ngModel" placeholder="Número Catastral" class="form-control">
+            #numeroMatricula="ngModel" class="form-control">
           <!-- Div exterior para saber si hay errores, divs interiores para mostrar cada uno de los errores -->
           <div class="alert alert-danger py-0"
             *ngIf="numeroMatricula.invalid && (numeroMatricula.dirty || numeroMatricula.touched)">
@@ -44,7 +44,7 @@
         <label for="estrato" class="col-form-label col-sm-4" style="text-align: right">Estrato</label>
         <div class="col-sm-6">
           <input id="estrato" name="estrato" type="number" required [(ngModel)]="predio.estrato" #estrato="ngModel"
-            placeholder="Estrato" class="form-control" min="1" max="6">
+             class="form-control" min="1" max="6">
           <!-- Div exterior para saber si hay errores, divs interiores para mostrar cada uno de los errores -->
           <div class="alert alert-danger py-0" *ngIf="estrato.invalid && (estrato.dirty || estrato.touched)">
             <div *ngIf="estrato.errors.required">
@@ -58,7 +58,7 @@
         <label for="nombre" class="col-form-label col-sm-4" style="text-align: right">Latitud</label>
         <div class="col-sm-6">
           <input id="latitud" name="latitud" type="text" required [(ngModel)]="predio.latitud" #latitud="ngModel"
-            placeholder="Latitud" class="form-control">
+             class="form-control">
           <div class="alert alert-danger py-0" *ngIf="latitud.invalid && (latitud.dirty || latitud.touched)">
             <div *ngIf="latitud.errors.required">
               <small>El componente de latitud es requerido</small>

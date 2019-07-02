@@ -38,17 +38,19 @@
               </div>
             </div>
 
+
             <div class="form-check">
-              <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1"
-                checked>
-              <label class="form-check-label" for="exampleRadios1">
-                Default radio
+              <input class="form-check-input" type="radio" name="generoRadios" id="masculino" value="M"
+                [(ngModel)]="suscriptor.genero" disabled checked>
+              <label class="form-check-label" for="masculino">
+                Masculino
               </label>
             </div>
             <div class="form-check">
-              <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
-              <label class="form-check-label" for="exampleRadios2">
-                Second default radio
+              <input class="form-check-input" type="radio" name="generoRadios" id="femenino" value="F"
+                [(ngModel)]="suscriptor.genero" disabled>
+              <label class="form-check-label" for="femenino">
+                Femenino
               </label>
             </div>
 
@@ -69,6 +71,9 @@
 
             <div>
               <h4 class="my-2">Información de Predios</h4>
+              <div *ngIf="predios.length == 0" class="alert alert-info">
+                Este suscriptor no tiene predios asignados
+              </div>
               <div class="accordion" id="accordionPredios">
                 <div *ngFor="let predio of predios" class="card">
                   <div class="card-header">
@@ -92,41 +97,49 @@
                     </div>
                   </div>
 
-                  <div [attr.id]="predio.numeroMatricula" class="collapse" data-parent="#accordionPredios">
-                    <div class="card-body">
-                      <div class="table-responsive my-custom-scrollbar table-wrapper-scroll-y ">
-                        <table class="table table-bordered table-striped">
-                          <thead>
-                            <tr>
-                              <th>ID</th>
-                              <th>Periodo Facturado</th>
-                              <th>Fecha Pago</th>
-                              <th>Valor</th>
-                              <th>Estado</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr *ngFor="let factura of predio.facturas">
-                              <td>{{factura.id}}</td>
-                              <td>{{factura.periodoFacturado | date:"MM/yyyy"}}</td>
-                              <td *ngIf="factura.fechaPago === null; else sinFechaPago" >{{factura.fechaPago | date:"dd/MM/yyyy"}}</td>
-                              <ng-template #sinFechaPago>
-                                <td>Sin pagar</td>
-                              </ng-template>
-                              <td>{{factura.granTotal | currency}}</td>
-                              <td>{{factura.estadoFactura}}</td>
-                            </tr>
-                          </tbody>
-                        </table>
+                  <ng-container *ngIf="predio.facturas.length == 0; else mostrarFacturas">
+                    <div class="m-3 alert alert-info">
+                        Este predio no tiene facturas
+                    </div>
+                  </ng-container>
+                  <ng-template #elseTemplate>
+
+                    <div [attr.id]="predio.numeroMatricula" class="collapse" data-parent="#accordionPredios">
+                      <div class="card-body">
+                        <div class="table-responsive my-custom-scrollbar table-wrapper-scroll-y ">
+                          <table class="table table-bordered table-striped">
+                            <thead>
+                              <tr>
+                                <th>ID</th>
+                                <th>Periodo Facturado</th>
+                                <th>Fecha Pago</th>
+                                <th>Valor</th>
+                                <th>Estado</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr *ngFor="let factura of predio.facturas">
+                                <td>{{factura.id}}</td>
+                                <td>{{factura.periodoFacturado | date:"MM/yyyy"}}</td>
+                                <td *ngIf="!factura.fechaPago; else sinFechaPago">
+                                  {{factura.fechaPago | date:"dd/MM/yyyy"}}</td>
+                                <ng-template #sinFechaPago>
+                                  <td>Sin pagar</td>
+                                </ng-template>
+                                <td>{{factura.granTotal | currency}}</td>
+                                <td>{{factura.estadoFactura}}</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
                       </div>
                     </div>
-                  </div>
+
+                  </ng-template>
+
                 </div>
               </div>
-
             </div>
-
-
           </div>
         </div>
         <div class="modal-footer">

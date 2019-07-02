@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { of } from 'rxjs';
 import { HttpClient } from "@angular/common/http";
 import { HttpHeaders } from '@angular/common/http';
-import { map } from 'rxjs/operators';
+import { map, catchError } from 'rxjs/operators';
 import { Lugar } from './Lugar'
+import Swal from 'sweetalert2';
 
 @Injectable({
   providedIn: 'root'
@@ -23,19 +24,43 @@ export class LugarService {
   }
 
   create(lugar: Lugar): Observable<Lugar> {
-    return this.http.post<Lugar>(this.urlEndPoint, lugar, { headers: this.httpHeaders });
+    return this.http.post<Lugar>(this.urlEndPoint, lugar, { headers: this.httpHeaders }).pipe(
+      catchError(e => {
+        console.log(e.error.mensaje);
+        Swal.fire('Error ', e.error.mensaje, 'error');
+        return throwError(e);
+      })
+    );
   }
 
   delete(id: number): Observable<Lugar> {
-    return this.http.delete<Lugar>(`${this.urlEndPoint}${id}`, { headers: this.httpHeaders })
+    return this.http.delete<Lugar>(`${this.urlEndPoint}${id}`, { headers: this.httpHeaders }).pipe(
+      catchError(e => {
+        console.log(e.error.mensaje);
+        Swal.fire('Error ', e.error.mensaje, 'error');
+        return throwError(e);
+      })
+    );
   }
 
   getLugar(id: number): Observable<Lugar> {
-    return this.http.get<Lugar>(`${this.urlEndPoint}${id}`, { headers: this.httpHeaders })
+    return this.http.get<Lugar>(`${this.urlEndPoint}${id}`, { headers: this.httpHeaders }).pipe(
+      catchError(e => {
+        console.log(e.error.mensaje);
+        Swal.fire('Error ', e.error.mensaje, 'error');
+        return throwError(e);
+      })
+    );
   }
 
   update(lugar: Lugar): Observable<Lugar> {
-    return this.http.put<Lugar>(`${this.urlEndPoint}${lugar.id}`, lugar, { headers: this.httpHeaders })
+    return this.http.put<Lugar>(`${this.urlEndPoint}${lugar.id}`, lugar, { headers: this.httpHeaders }).pipe(
+      catchError(e => {
+        console.log(e.error.mensaje);
+        Swal.fire('Error ', e.error.mensaje, 'error');
+        return throwError(e);
+      })
+    );
   }
 
   getListaMunicipios(): Observable<Lugar[]> {
@@ -49,5 +74,4 @@ export class LugarService {
       map(response => response as Lugar[])
     );
   }
-
 }

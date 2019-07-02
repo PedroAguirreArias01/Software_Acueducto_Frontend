@@ -14,7 +14,7 @@
         <label for="nombre" class="col-form-label col-sm-4" style="text-align: right">Cedula</label>
         <div class="col-sm-6">
           <input id="cedula" name="cedula" type="text" required [(ngModel)]="suscriptor.cedula" digitOnly
-            placeholder="cedula" class="form-control" minLenght="10" maxlength="10" #cedula="ngModel">
+            class="form-control" minLenght="10" maxlength="10" #cedula="ngModel">
           <!-- Div exterior para saber si hay errores, divs interiores para mostrar cada uno de los errores -->
           <div class="alert alert-danger" *ngIf="cedula.invalid && (cedula.dirty || cedula.touched)">
             <div *ngIf="cedula.errors.required">
@@ -30,12 +30,12 @@
       <div class="form-group row">
         <label for="nombre" class="col-form-label col-sm-4" style="text-align: right">Nombre</label>
         <div class="col-sm-6">
-          <input type="text" class="form-control" [(ngModel)]="suscriptor.nombre" name="nombre" #nombre="ngModel"
-            placeholder="Nombre">
+          <input type="text" class="form-control" required [(ngModel)]="suscriptor.nombre" name="nombre" #nombre="ngModel"
+            >
           <!-- Div exterior para saber si hay errores, divs interiores para mostrar cada uno de los errores -->
           <div class="alert alert-danger" *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)">
             <div *ngIf="nombre.errors.required">
-              <small>Cédula es requerida</small>
+              <small>Nombre es requerido</small>
             </div>
           </div>
         </div>
@@ -45,7 +45,7 @@
         <label for="nombre" class="col-form-label col-sm-4" style="text-align: right">Apellido</label>
         <div class="col-sm-6">
           <input id="apellido" name="apellido" type="text" required [(ngModel)]="suscriptor.apellido"
-            #apellido="ngModel" placeholder="Apellido" class="form-control">
+            #apellido="ngModel" class="form-control">
           <!-- Div exterior para saber si hay errores, divs interiores para mostrar cada uno de los errores -->
           <div class="alert alert-danger" *ngIf="apellido.invalid && (apellido.dirty || apellido.touched)">
             <div *ngIf="apellido.errors.required">
@@ -81,7 +81,7 @@
         <div class="col-sm-8">
           <mat-form-field>
             <input matInput [matDatepicker]="picker" [min]="minDate" [max]="maxDate" name="fechaNacimiento" required
-              [(ngModel)]="suscriptor.fechaNacimiento" placeholder="Fecha Nacimiento" #fechan>
+              [(ngModel)]="suscriptor.fechaNacimiento" #fechan>
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker touchUi #picker></mat-datepicker>
           </mat-form-field>
@@ -93,7 +93,7 @@
         <label for="nombre" class="col-form-label col-sm-4" style="text-align: right">Correo</label>
         <div class="col-sm-6">
           <input id="email" name="email" type="text" email [(ngModel)]="suscriptor.correoElectronico"
-            placeholder="Correo Electrónico" class="form-control" #email="ngModel">
+             class="form-control" #email="ngModel">
           <!-- Div exterior para saber si hay errores, divs interiores para mostrar cada uno de los errores -->
           <div class="alert alert-danger" *ngIf="email.invalid && (email.dirty || email.touched)">
             <div *ngIf="email.errors.email">
@@ -107,7 +107,7 @@
         <label for="nombre" class="col-form-label col-sm-4" style="text-align: right">Telefono</label>
         <div class="col-sm-6">
           <input id="telefono" name="telefono" type="text" required [(ngModel)]="suscriptor.numeroTelefono"
-            placeholder="Teléfono" #telefono="ngModel" class="form-control">
+             #telefono="ngModel" class="form-control">
           <!-- Div exterior para saber si hay errores, divs interiores para mostrar cada uno de los errores -->
           <div class="alert alert-danger" *ngIf="telefono.invalid && (telefono.dirty || telefono.touched)">
             <div *ngIf="telefono.errors.required">

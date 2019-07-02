@@ -34,11 +34,6 @@
               {{suscriptor.estado === 'A'? 'Activo':'Inactivo'}}</span>
           </td>
 
-          <!-- <td *ngIf="suscriptor.estado === 'A'; else inactivo"><span class="badge badge-success">Activo</span></td>
-          <ng-template #inactivo>
-            <td><span class="badge badge-danger">Inactivo</span></td>
-          </ng-template> -->
-
           <td><span><i class="fa fa-2x "
              [ngClass]="{'fa-check-circle-o text-success': suscriptor.estadoCuenta === 'D',
                         'fa-exclamation-circle text-danger': suscriptor.estadoCuenta === 'M'}" ></i>
