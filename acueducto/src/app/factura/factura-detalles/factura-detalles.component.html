@@ -1,5 +1,5 @@
 <div class="modal-header">
-  <h5 class="modal-title"> Factura No {{data.factura.id}}</h5>
+  <h5 class="modal-title"> Factura N° {{data.factura.id}}</h5>
   <button (click)="close()" type="button" class="close" data-dismiss="modal" aria-label="Close">
     <span aria-hidden="true">&times;</span>
   </button>
@@ -7,61 +7,76 @@
 <div class="card">
 
   <div class="card-body">
-    <!--
+    <h3> Información de suscriptor</h3>
+    <hr>
     <div class="form-row">
       <div class="form-group col-6">
         <label for="nombre">Nombre</label>
-        <input readonly type="text" class="form-control" id="nombre" value="{{data.factura.suscriptor.nombre}}">
+        <input readonly type="text" class="form-control" id="nombre" value="{{data.factura.predio.suscriptor.nombre}}">
       </div>
       <div class="form-group col-6">
         <label for="apellido">Apellido</label>
-        <input readonly type="text" class="form-control" id="apellido" value="{{data.factura.suscriptor.apellido}}">
+        <input readonly type="text" class="form-control" id="apellido"
+          value="{{data.factura.predio.suscriptor.apellido}}">
       </div>
     </div>
 
     <div class="form-row">
       <div class="form-group col-6">
         <label for="numeroCedula">Número de Cédula</label>
-        <input readonly type="text" class="form-control" id="numeroCedula" value="{{data.factura.suscriptor.cedula}}">
+        <input readonly type="text" class="form-control" id="numeroCedula"
+          value="{{data.factura.predio.suscriptor.cedula}}">
       </div>
     </div>
-
+    <br>
+    <h3> Información de Predio</h3>
     <hr>
--->
 
-  <hr>
-  <div>
-    <label> Detalles</label>
-    <div class="table-responsive">
-      <table class="table table-bordered table-striped">
-        <thead>
-          <tr>
-            <th>Descripción</th>
-            <th>Precio</th>
-            <th>Cantidad</th>
-            <th>Total</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let detalle of data.factura.detallesFactura">
-            <td>{{detalle.tarifa.descripcion}}</td>
-            <td>{{detalle.tarifa.valorTarifa | currency}}</td>
-            <td>{{detalle.cantidad}}</td>
-            <td>{{detalle.valor | currency}}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
     <div class="form-row">
-        <div class="col-sm-6">
-          <label for="nombre" style="text-align: right">Total a Pagar</label>
-        </div>
-        <div class="col-sm-6">
-          <input type="text" class="form-control" name="total" placeholder="Total"
-            [ngModel]="data.factura.granTotal | currency" readonly>
-        </div>
+      <div class="form-group col-6">
+        <label for="nombre">Nombre predio</label>
+        <input readonly type="text" class="form-control" id="nombre" value="{{data.factura.predio.nombre}}">
       </div>
+      <div class="form-group col-6">
+        <label for="numeroMatricula">Número de matricula</label>
+        <input readonly type="text" class="form-control" id="numeroMatricula"
+          value="{{data.factura.predio.numeroMatricula}}">
+      </div>
+    </div>
+    <hr>
+    <div>
+
+      <h3> Detalles</h3>
+      <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+          <thead>
+            <tr>
+              <th>Descripción</th>
+              <th>Precio</th>
+              <th>Cantidad</th>
+              <th>Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let detalle of data.factura.detallesFactura">
+              <td>{{detalle.tarifa.descripcion}}</td>
+              <td>{{detalle.tarifa.valorTarifa | currency}}</td>
+              <td>{{detalle.cantidad}}</td>
+              <td>{{detalle.valor | currency}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="col-sm-6">
+        <label for="nombre" style="text-align: right">Total a Pagar</label>
+      </div>
+      <div class="col-sm-6">
+        <input type="text" class="form-control" name="total" placeholder="Total"
+          [ngModel]="data.factura.granTotal | currency" readonly>
+      </div>
+    </div>
   </div>
 
   <div class="modal-footer">

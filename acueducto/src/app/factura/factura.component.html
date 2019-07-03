@@ -1,5 +1,47 @@
 <div class="card">
     <div class="card-header">
+        Buscar facturas
+    </div>
+    <div class="card-body">
+        <form action="">
+            <div class="form-group row">
+                <div class="col-sm-4">
+                    <mat-form-field class="example-full-width">
+                        <input type="text" placeholder="Nombre predio" aria-label="Number" matInput
+                            [formControl]="myControl" [matAutocomplete]="auto">
+                        <mat-autocomplete #auto="matAutocomplete" [displayWith]="mostrarPredio"
+                            (optionSelected)="seleccionarPredio($event)">
+                            <mat-option *ngFor="let predio of filteredOptions | async" [value]="predio">
+                                {{factura.predio.nombre}}
+                            </mat-option>
+                        </mat-autocomplete>
+                    </mat-form-field>
+                </div>
+
+                <div class="col-sm-4">
+                    <mat-form-field class="ms-3">
+                        <input matInput [matDatepicker]="picker" name="periodoFacturado"
+                            placeholder="Periodo facturado">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker touchUi #picker></mat-datepicker>
+                    </mat-form-field>
+                </div>
+
+                <div class="col-sm-4">
+                    <label for="estadoFactura">Estado Facturas</label>
+                    <select class="form-control" name="estadoFactura">
+                        <option>---------Seleccionar-----------</option>
+                        <option value="A">Factura pendiente de pago</option>
+                        <option value="I">Facturas por pagar</option>
+                        <option value="I">Facturas vencidas</option>
+                    </select>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="card">
+    <div class="card-header">
         Listado de facturas
     </div>
     <div class="card-body">
@@ -24,11 +66,14 @@
                     <td>{{factura.periodoFacturado | date:"MM/yyyy"}}</td>
                     <td>{{factura.estadoFactura}}</td>
                     <td>{{factura.granTotal | currency}}</td>
-                    <td><button class="btn btn-danger mx-2" type="button" (click)= "eliminar(factura)">X</button>
-                    <button class="btn btn-success" type="button" (click)= "open(factura)"> Ver</button></td>
+                    <td><button class="btn btn-danger mx-2" type="button" (click)="eliminar(factura)">X</button>
+                        <button class="btn btn-success" type="button" (click)="open(factura)"> Ver</button></td>
                 </tr>
             </tbody>
         </table>
         <pagination-controls (pageChange)="pageActual = $event" *ngIf="suscriptores?.length != 0"></pagination-controls>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Generar PDF</button>
+        </div>
     </div>
 </div>
