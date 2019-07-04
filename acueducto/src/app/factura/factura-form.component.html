@@ -1,117 +1,118 @@
-<div class="card-body">
-  <mat-form-field class="example-full-width">
-    <input type="text" placeholder="Seleccionar Predio" aria-label="Number" matInput [formControl]="myControl"
-      [matAutocomplete]="auto">
-    <mat-autocomplete #auto="matAutocomplete" [displayWith]="mostrarPredio"
-      (optionSelected)="seleccionarPredio($event)">
-      <mat-option *ngFor="let predio of filteredOptions | async" [value]="predio">
-        {{predio.nombre}}
-      </mat-option>
-    </mat-autocomplete>
-  </mat-form-field>
-
-    <div class="card">
-      <div class="card-header">Generar Factura
+<div class="card">
+    <div class="card-header">Generar Factura
       </div>
+<div class="card-body">
+  <div class="card-header">
+    <mat-form-field class="example-full-width">
+      <input type="text" placeholder="Seleccionar Predio" aria-label="Number" matInput [formControl]="myControl"
+        [matAutocomplete]="auto" required>
+      <mat-autocomplete #auto="matAutocomplete" [displayWith]="mostrarPredio"
+        (optionSelected)="seleccionarPredio($event)">
+        <mat-option *ngFor="let predio of filteredOptions | async" [value]="predio">
+          {{predio.nombre}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+  </div>
 
-      <div class="card-body">
-        <form>
-          <div class="form-group row">
-            <label for="nombre" class="col-form-label col-sm-2">Suscriptor</label>
-            <div class="col-sm-4">
-              <input type="text" class="form-control" value="{{suscriptor.nombre}} {{suscriptor.apellido}}"
-                name="suscriptor" readonly>
-            </div>
-            <label for="nombre" class="col-form-label col-sm-2" style="text-align: right">Predio</label>
-            <div class="col-sm-4">
-              <input type="text" class="form-control" [(ngModel)]="predio.nombre" name="predio" placeholder="Predio"
-                readonly>
-            </div>
+  <div class="card">
+
+    <div class="card-body">
+      <form>
+        <div class="form-group row">
+          <label for="nombre" class="col-form-label col-sm-2">Suscriptor</label>
+          <div class="col-sm-4">
+            <input type="text" class="form-control" value="{{suscriptor.nombre}} {{suscriptor.apellido}}"
+              name="suscriptor" readonly>
+          </div>
+          <label for="nombre" class="col-form-label col-sm-2" style="text-align: right">Predio</label>
+          <div class="col-sm-4">
+            <input type="text" class="form-control" [(ngModel)]="predio.nombre" name="predio" placeholder="Predio"
+              readonly>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="nombre" class="col-form-label col-sm-2" style="text-align: right">Número Catastral</label>
+          <div class="col-sm-4">
+            <input type="text" class="form-control" name="numeroCatastral" [(ngModel)]="predio.numeroMatricula"
+              placeholder="Número Catastral" readonly>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="nombre" class="col-form-label col-sm-2">Lectura Actual</label>
+          <div class="col-sm-4">
+            <input type="text" class="form-control" name="lecturaAnterior" [(ngModel)]="factura.lecturaAnterior"
+              placeholder="Lectura Anterior" readonly>
+          </div>
+        </div>
+
+
+      </form>
+
+      <div class="card">
+        <div class="card-header">Descripción de factura</div>
+        <div class="card-body">
+          <form class="example-form">
+
+            <mat-form-field class="example-full-width">
+              <input type="text" placeholder="Seleccionar Tarifa" aria-label="Number" matInput [formControl]="myItem"
+                [matAutocomplete]="autoT">
+              <mat-autocomplete #autoT="matAutocomplete" [displayWith]="mostrarTarifa"
+                (optionSelected)="seleccionarTarifa($event)">
+                <mat-option *ngFor="let tarifa of tarifasFiltradas | async" [value]="tarifa">
+                  {{tarifa.descripcion}}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+          </form>
+
+          <div class="alert alert-danger" *ngIf="myItem.invalid">
+            La factura no puede estar vacía
+          </div>
+
+          <div class="alert alert-info my-4" *ngIf="factura.detallesFactura.length == 0">
+            No hay detalles asignados para la factura, debe agregar almenos un detalle!
+          </div>
+          <div class="table-responsive">
+            <table class="table table-bordered table-striped" *ngIf="factura.detallesFactura.length > 0">
+              <thead>
+                <tr>
+                  <th>Descripción</th>
+                  <th>Precio</th>
+                  <th>Cantidad</th>
+                  <th>Total</th>
+                  <th>Eliminar</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let detalle of factura.detallesFactura">
+                  <td>{{detalle.tarifa.descripcion}}</td>
+                  <td>{{detalle.tarifa.valorTarifa}}</td>
+                  <td><input type="number" value="{{detalle.cantidad}}" class="form-control col-sm-4"
+                      (change)="actualizarCantidad(detalle.tarifa.id, $event)"></td>
+                  <td>{{detalle.calcularValor()  | currency}}</td>
+                  <td><button class="btn btn-danger btn-sm" type="button"
+                      (click)="eliminarItem(detalle.tarifa.id)">X</button></td>
+                </tr>
+              </tbody>
+            </table>
           </div>
 
           <div class="form-group row">
-            <label for="nombre" class="col-form-label col-sm-2" style="text-align: right">Número Catastral</label>
+            <div class="col-sm-6">
+              <button class="btn btn-success" (click)="crear()">Generar Factura</button>
+            </div>
+            <label for="nombre" class="col-form-label col-sm-2" style="text-align: right">Total a Pagar</label>
             <div class="col-sm-4">
-              <input type="text" class="form-control" name="numeroCatastral" [(ngModel)]="predio.numeroMatricula"
-                placeholder="Número Catastral" readonly>
-            </div>
-          </div>
-
-          <div class="form-group row">
-            <label for="nombre" class="col-form-label col-sm-2">Lectura Actual</label>
-            <div class="col-sm-4">
-              <input type="text" class="form-control" name="lecturaAnterior" [(ngModel)]="factura.lecturaAnterior"
-                placeholder="Lectura Anterior" readonly>
-            </div>
-          </div>
-
-
-        </form>
-
-        <div class="card">
-          <div class="card-header">Descripción de factura</div>
-          <div class="card-body">
-            <form class="example-form">
-
-              <mat-form-field class="example-full-width">
-                <input type="text" placeholder="Seleccionar Tarifa" aria-label="Number" matInput [formControl]="myItem"
-                  [matAutocomplete]="autoT">
-                <mat-autocomplete #autoT="matAutocomplete" [displayWith]="mostrarTarifa"
-                  (optionSelected)="seleccionarTarifa($event)">
-                  <mat-option *ngFor="let tarifa of tarifasFiltradas | async" [value]="tarifa">
-                    {{tarifa.descripcion}}
-                  </mat-option>
-                </mat-autocomplete>
-              </mat-form-field>
-            </form>
-
-            <div class="alert alert-danger" *ngIf="myItem.invalid">
-              La factura no puede estar vacía
-            </div>
-
-            <div class="alert alert-info my-4" *ngIf="factura.detallesFactura.length == 0">
-              No hay detalles asignados para la factura, debe agregar almenos un detalle!
-            </div>
-            <div class="table-responsive">
-              <table class="table table-bordered table-striped" *ngIf="factura.detallesFactura.length > 0">
-                <thead>
-                  <tr>
-                    <th>Descripción</th>
-                    <th>Precio</th>
-                    <th>Cantidad</th>
-                    <th>Total</th>
-                    <th>Eliminar</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let detalle of factura.detallesFactura">
-                    <td>{{detalle.tarifa.descripcion}}</td>
-                    <td>{{detalle.tarifa.valorTarifa}}</td>
-                    <td><input type="number" value="{{detalle.cantidad}}" class="form-control col-sm-4"
-                        (change)="actualizarCantidad(detalle.tarifa.id, $event)"></td>
-                    <td>{{detalle.calcularValor()  | currency}}</td>
-                    <td><button class="btn btn-danger btn-sm" type="button"
-                        (click)="eliminarItem(detalle.tarifa.id)">X</button></td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-
-            <div class="form-group row">
-              <div class="col-sm-6">
-                <button class="btn btn-success" (click)="crear()">Generar Factura</button>
-              </div>
-              <label for="nombre" class="col-form-label col-sm-2" style="text-align: right">Total a Pagar</label>
-              <div class="col-sm-4">
-                <input type="text" class="form-control" name="total" placeholder="Total"
-                  [ngModel]="factura.calcularGranTotal()  | currency" readonly>
-              </div>
+              <input type="text" class="form-control" name="total" placeholder="Total"
+                [ngModel]="factura.calcularGranTotal()  | currency" readonly>
             </div>
           </div>
         </div>
       </div>
-      <div class="card-footer">
-
-      </div>
+    </div>
+  </div>
   </div>
 </div>
