@@ -16,6 +16,7 @@ import {NgxPaginationModule} from 'ngx-pagination';
 import { NgxCurrencyModule} from 'ngx-currency';
 import { CommonModule } from '@angular/common';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+
 /*material */
 import {
   MatAutocompleteModule,
@@ -167,7 +168,7 @@ const routes: Routes = [
     MatTabsModule,
     MatToolbarModule,
     MatTooltipModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
