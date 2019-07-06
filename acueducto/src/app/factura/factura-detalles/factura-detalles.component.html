@@ -20,15 +20,15 @@
       <div class="row">
         <div class="col-sm-4">
           <h5>Fecha Emisión</h5>
-          <h5>{{data.factura.fechaEmision}}</h5>
+          <label>{{data.factura.fechaEmision}}</label>
         </div>
         <div class="col-sm-4">
           <h5>Periodo Facturado</h5>
-          <h5>{{data.factura.periodoFacturado}}</h5>
+          <label>{{data.factura.periodoFacturado}}</label>
         </div>
         <div class="col-sm-4">
           <h5>Fecha Máximo de pago</h5>
-          <h5>{{data.factura.fechaMaximoPago}}</h5>
+          <label>{{data.factura.fechaMaximoPago}}</label>
         </div>
       </div>
       <hr>
@@ -112,5 +112,5 @@
 
 <div class="modal-footer">
   <button type="button" class="btn btn-secondary"
-    (click)="downloadPdf()">Generar PDF</button>
+    (click)="downloadPdf(data.factura.id)">Generar PDF</button>
 </div>

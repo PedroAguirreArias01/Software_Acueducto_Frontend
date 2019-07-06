@@ -13,9 +13,12 @@ import html2canvas from 'html2canvas';
 export class FacturaDetallesComponent implements OnInit {
 
   public suscriptor: Suscriptor = new Suscriptor();
+  public factura: Factura = new Factura();
 
   constructor(public dialogRef: MatDialogRef<FacturaDetallesComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: Factura) { }
+    @Inject(MAT_DIALOG_DATA) public data: Factura) { 
+      this.factura= data;
+    }
 
   ngOnInit() {
   }
@@ -27,7 +30,7 @@ export class FacturaDetallesComponent implements OnInit {
 
   @ViewChild('content', { static: false }) content: ElementRef;
 
-  downloadPdf() {
+  downloadPdf(id: number) {
     const doc = new jspdf();
     const content = this.content.nativeElement;
     html2canvas(content).then(canvas => {
@@ -48,8 +51,9 @@ export class FacturaDetallesComponent implements OnInit {
         doc.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
         heightLeft -= pageHeight;
       }
+      console.log('numero factura'+id)
       // Generated PDF
-      doc.save('asdfghj' + '.pdf');
+      doc.save('factura'+id + '.pdf');
     });
   }
 
