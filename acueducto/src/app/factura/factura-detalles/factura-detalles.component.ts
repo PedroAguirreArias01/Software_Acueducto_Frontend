@@ -3,7 +3,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Factura } from '../Factura';
 import { Suscriptor } from 'src/app/suscriptores/Suscriptor';
 import * as jspdf from 'jspdf';
-import * as html2canvas from 'html2canvas';
+import html2canvas from 'html2canvas';
 
 @Component({
   selector: 'app-factura-detalles',

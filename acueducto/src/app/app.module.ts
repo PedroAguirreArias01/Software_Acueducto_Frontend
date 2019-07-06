@@ -11,7 +11,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PrediosComponent } from './predios/predios.component';
 import { PrediosFormComponent } from './predios/predios-form.component';
-import { NgxPaginateModule } from 'ngx-paginate';
 import {NgxPaginationModule} from 'ngx-pagination';
 import { NgxCurrencyModule} from 'ngx-currency';
 import { CommonModule } from '@angular/common';
@@ -127,7 +126,6 @@ const routes: Routes = [
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    NgxPaginateModule,
     NgxPaginationModule,
     NgxCurrencyModule,
     CommonModule,
