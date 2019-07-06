@@ -27,6 +27,8 @@ export class FacturaFormComponent implements OnInit {
   public detalleFactura: DetalleFactura;
   public predio: Predio = new Predio();
 
+  public file: File;
+  
   filteredOptions: Observable<Predio[]>;
   myControl = new FormControl();
 
@@ -176,4 +178,14 @@ export class FacturaFormComponent implements OnInit {
       );
     }
   }
+
+  changeListener($event) : void {
+
+    let reader = new FileReader();
+         if ($event.target.files && $event.target.files.length > 0) {
+           this.file = $event.target.files[0];
+        }
+    
+      }
+
 }

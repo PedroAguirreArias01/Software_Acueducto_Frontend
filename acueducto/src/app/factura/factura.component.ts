@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Factura } from './Factura';
 import { FacturaService } from './factura.service';
 import Swal from 'sweetalert2';
 import { Router, ActivatedRoute } from "@angular/router";
 import { MatDialog } from '@angular/material';
 import { FacturaDetallesComponent } from './factura-detalles/factura-detalles.component';
+import * as jspdf from 'jspdf';
 
 @Component({
   selector: 'app-factura',
@@ -66,6 +67,26 @@ export class FacturaComponent implements OnInit {
         data: {factura: factura}
       }
     );
+  }
+
+  @ViewChild ('content', {static: false}) content: ElementRef;
+
+  downloadPDF(){
+    let doc = new jspdf();
+    let specialElementHandlers  = {
+      '#editor' : function(Element, rederer){
+        return true;
+
+      }
+    }
+
+    let conetnt = this.content.nativeElement;
+    doc.fromHTML(conetnt.innerHTML, 15, 15, {
+      'width': 190,
+      'elementHandlers': specialElementHandlers
+       }, function() {
+          doc.save('result.pdf');
+       });
   }
 
 }
