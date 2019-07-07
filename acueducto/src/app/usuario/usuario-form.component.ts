@@ -29,7 +29,7 @@ export class UsuarioFormComponent implements OnInit {
     this.minDate = new Date(1900,0,1);
     this.maxDate = new Date(new Date().setFullYear(new Date().getFullYear() - this.minYears));
     this.getListaMunicipios();
-    if(this.editar){
+    if(!this.editar){
     this.cargarEmpleado();
     }
   }
@@ -56,7 +56,9 @@ export class UsuarioFormComponent implements OnInit {
     this.editar = false;
     this.activatedRoute.params.subscribe(params => {
       let cedula = params['cedula'];
+      console.log('esta es la cedula del empleado a editar: '+cedula)
       if (cedula) {
+        console.log('if esta es la cedula del empleado a editar: '+cedula)
         this.editar = true;
         this.usuarioService.getEmpleado(cedula).subscribe(
           (empleado) => {
