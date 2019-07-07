@@ -6,19 +6,68 @@ import { Router, ActivatedRoute } from "@angular/router";
 import { MatDialog } from '@angular/material';
 import { FacturaDetallesComponent } from './factura-detalles/factura-detalles.component';
 import * as jspdf from 'jspdf';
+import { MomentDateAdapter } from '@angular/material-moment-adapter';
+import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
+import { MatDatepicker } from '@angular/material/datepicker';
+import * as _moment from 'moment';
+import { default as _rollupMoment, Moment } from 'moment';
+import { FormControl } from '@angular/forms';
+
+const moment = _rollupMoment || _moment;
+export const MY_FORMATS = {
+  parse: {
+    dateInput: 'MM/YYYY',
+  },
+  display: {
+    dateInput: 'MM/YYYY',
+    monthYearLabel: 'MMM YYYY',
+    dateA11yLabel: 'LL',
+    monthYearA11yLabel: 'MMMM YYYY',
+  },
+};
 
 @Component({
   selector: 'app-factura',
   templateUrl: './factura.component.html',
-  styleUrls: ['./factura.component.css']
+  styleUrls: ['./factura.component.css'],
+  providers: [
+    // `MomentDateAdapter` can be automatically provided by importing `MomentDateModule` in your
+    // application's root module. We provide it at the component level here, due to limitations of
+    // our example generation script.
+    { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },
+
+    { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS },
+  ],
 })
 export class FacturaComponent implements OnInit {
 
   public pageActual: number = 1;
   public facturas: Array<Factura> = [];
+  // tslint:disable-next-line:no-duplicate-imports
+
+
+
+
 
   constructor(public facturaService: FacturaService
-    ,public dialog: MatDialog) { }
+    , public dialog: MatDialog) { }
+
+
+  date = new FormControl(moment());
+
+  chosenYearHandler(normalizedYear: Moment) {
+    const ctrlValue = this.date.value;
+    ctrlValue.year(normalizedYear.year());
+    this.date.setValue(ctrlValue);
+  }
+
+  chosenMonthHandler(normalizedMonth: Moment, datepicker: MatDatepicker<Moment>) {
+    const ctrlValue = this.date.value;
+    ctrlValue.month(normalizedMonth.month());
+    this.date.setValue(ctrlValue);
+    datepicker.close();
+  }
+
 
   ngOnInit() {
     this.facturaService.getfacturas().subscribe(
@@ -58,23 +107,23 @@ export class FacturaComponent implements OnInit {
     })
   }
 
-  open(factura:Factura) {
-    console.log('sisisisis'+JSON.stringify(factura))
+  open(factura: Factura) {
+    console.log('sisisisis' + JSON.stringify(factura))
     const dialogRef = this.dialog.open(
-      FacturaDetallesComponent,{
-        width :'60%',
-        height:'80%',
-        data: {factura: factura}
+      FacturaDetallesComponent, {
+        width: '60%',
+        height: '80%',
+        data: { factura: factura }
       }
     );
   }
 
-  @ViewChild ('content', {static: false}) content: ElementRef;
+  @ViewChild('content', { static: false }) content: ElementRef;
 
-  downloadPDF(){
+  downloadPDF() {
     let doc = new jspdf();
-    let specialElementHandlers  = {
-      '#editor' : function(Element, rederer){
+    let specialElementHandlers = {
+      '#editor': function (Element, rederer) {
         return true;
 
       }
@@ -84,9 +133,9 @@ export class FacturaComponent implements OnInit {
     doc.fromHTML(conetnt.innerHTML, 15, 15, {
       'width': 190,
       'elementHandlers': specialElementHandlers
-       }, function() {
-          doc.save('result.pdf');
-       });
+    }, function () {
+      doc.save('result.pdf');
+    });
   }
 
 }
