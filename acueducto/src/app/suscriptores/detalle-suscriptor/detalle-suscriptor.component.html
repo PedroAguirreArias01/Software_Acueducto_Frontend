@@ -1,150 +1,149 @@
 <!-- Modal -->
-<div class="abrir-modal animacion fade-in" *ngIf="modalService.mostrar">
-  <div class="modal" tabindex="-1" role="dialog" style="display:block;">
-    <div class="modal-dialog modal-lg" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">{{titulo}}</h5>
-          <button (click)="cerrarModal()" type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <div class="container">
+<div *ngIf="modalService.mostrar" class="modal animacion fade-in" tabindex="-1" id="modelId" role="dialog"
+  style="display:block;">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">{{titulo}}</h5>
+        <button (click)="cerrarModal()" type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="container">
 
-            <div class="form-row">
-              <div class="form-group col-6">
-                <label for="nombre">Nombre</label>
-                <input readonly type="text" class="form-control" id="nombre" [value]="suscriptor.nombre">
-              </div>
-              <div class="form-group col-6">
-                <label for="apellido">Apellido</label>
-                <input readonly type="text" class="form-control" id="apellido" [value]="suscriptor.apellido">
-              </div>
+          <div class="form-row">
+            <div class="form-group col-6">
+              <label for="nombre">Nombre</label>
+              <input readonly type="text" class="form-control" id="nombre" [value]="suscriptor.nombre">
             </div>
-
-            <div class="form-row">
-              <div class="form-group col-6">
-                <label for="numeroCedula">Número de Cédula</label>
-                <input readonly type="text" class="form-control" id="numeroCedula" [value]="suscriptor.cedula">
-              </div>
+            <div class="form-group col-6">
+              <label for="apellido">Apellido</label>
+              <input readonly type="text" class="form-control" id="apellido" [value]="suscriptor.apellido">
             </div>
+          </div>
 
-            <div class="form-row">
-              <div class="form-group col-6">
-                <label for="fechaNacimiento">Fecha Nacimiento</label>
-                <input readonly type="text" class="form-control" id="fechaNacimiento"
-                  [value]="suscriptor.fechaNacimiento | date:'dd/MM/yyyy'">
-              </div>
+          <div class="form-row">
+            <div class="form-group col-6">
+              <label for="numeroCedula">Número de Cédula</label>
+              <input readonly type="text" class="form-control" id="numeroCedula" [value]="suscriptor.cedula">
             </div>
+          </div>
 
-
-            <div class="form-check">
-              <input class="form-check-input" type="radio" name="generoRadios" id="masculino" value="M"
-                [(ngModel)]="suscriptor.genero" disabled checked>
-              <label class="form-check-label" for="masculino">
-                Masculino
-              </label>
+          <div class="form-row">
+            <div class="form-group col-6">
+              <label for="fechaNacimiento">Fecha Nacimiento</label>
+              <input readonly type="text" class="form-control" id="fechaNacimiento"
+                [value]="suscriptor.fechaNacimiento | date:'dd/MM/yyyy'">
             </div>
-            <div class="form-check">
-              <input class="form-check-input" type="radio" name="generoRadios" id="femenino" value="F"
-                [(ngModel)]="suscriptor.genero" disabled>
-              <label class="form-check-label" for="femenino">
-                Femenino
-              </label>
+          </div>
+
+
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="generoRadios" id="masculino" value="M"
+              [(ngModel)]="suscriptor.genero" disabled checked>
+            <label class="form-check-label" for="masculino">
+              Masculino
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="generoRadios" id="femenino" value="F"
+              [(ngModel)]="suscriptor.genero" disabled>
+            <label class="form-check-label" for="femenino">
+              Femenino
+            </label>
+          </div>
+
+          <hr>
+
+          <div class="form-row">
+            <div class="form-group col-6">
+              <label for="nombre">Número de teléfono</label>
+              <input readonly type="text" class="form-control" id="nombre" [value]="suscriptor.numeroTelefono">
             </div>
-
-            <hr>
-
-            <div class="form-row">
-              <div class="form-group col-6">
-                <label for="nombre">Número de teléfono</label>
-                <input readonly type="text" class="form-control" id="nombre" [value]="suscriptor.numeroTelefono">
-              </div>
-              <div class="form-group col-6">
-                <label for="apellido">Correo Electrónico</label>
-                <input readonly type="text" class="form-control" id="apellido" [value]="suscriptor.correoElectronico">
-              </div>
+            <div class="form-group col-6">
+              <label for="apellido">Correo Electrónico</label>
+              <input readonly type="text" class="form-control" id="apellido" [value]="suscriptor.correoElectronico">
             </div>
+          </div>
 
-            <hr>
+          <hr>
 
-            <div>
-              <h4 class="my-2">Información de Predios</h4>
-              <div *ngIf="predios.length == 0" class="alert alert-info">
-                Este suscriptor no tiene predios asignados
-              </div>
-              <div class="accordion" id="accordionPredios">
-                <div *ngFor="let predio of predios" class="card">
-                  <div class="card-header">
+          <div>
+            <h4 class="my-2">Información de Predios</h4>
+            <div *ngIf="predios.length == 0" class="alert alert-info">
+              Este suscriptor no tiene predios asignados
+            </div>
+            <div class="accordion" id="accordionPredios">
+              <div *ngFor="let predio of predios" class="card">
+                <div class="card-header">
 
-                    <div class="row ">
-                      <div class="col-4">
-                        <button class="no-underline p-0" type="button" class="btn" data-toggle="collapse"
-                          [attr.data-target]="'#' + predio.numeroMatricula">Predio N° {{predio.vereda.id}} -
-                          {{predio.numeroMatricula}}
-                        </button>
-                      </div>
-                      <div class="col-4 d-flex align-items-center justify-content-center ">
-                        <p class="p-0 m-0">Vereda {{predio.vereda.nombre}}</p>
-                      </div>
-                      <div class="col-4 d-flex align-items-center justify-content-end">
-                        <p class="p-0 m-0">Prueba</p>
-                        <!-- <p><span><i class="fa fa-2x text-success" [ngClass]="{'fa-check-circle-o text-success': predio.isUpToDate(),
+                  <div class="row ">
+                    <div class="col-4">
+                      <button class="no-underline p-0" type="button" class="btn" data-toggle="collapse"
+                        [attr.data-target]="'#' + predio.numeroMatricula">Predio N° {{predio.vereda.id}} -
+                        {{predio.numeroMatricula}}
+                      </button>
+                    </div>
+                    <div class="col-4 d-flex align-items-center justify-content-center ">
+                      <p class="p-0 m-0">Vereda {{predio.vereda.nombre}}</p>
+                    </div>
+                    <div class="col-4 d-flex align-items-center justify-content-end">
+                      <p class="p-0 m-0">Prueba</p>
+                      <!-- <p><span><i class="fa fa-2x text-success" [ngClass]="{'fa-check-circle-o text-success': predio.isUpToDate(),
                                      'fa-exclamation-circle text-danger': !predio.isUpToDate()}"></i>
                             {{predio.isUpToDate()? 'Al día': 'En mora'}}</span></p> -->
+                    </div>
+                  </div>
+                </div>
+
+                <ng-container *ngIf="predio.facturas.length === 0; else mostrarFacturas">
+                  <div class="m-3 alert alert-info">
+                    Este predio no tiene facturas
+                  </div>
+                </ng-container>
+                <ng-template #mostrarFacturas>
+
+                  <div [attr.id]="predio.numeroMatricula" class="collapse" data-parent="#accordionPredios">
+                    <div class="card-body">
+                      <div class="table-responsive my-custom-scrollbar table-wrapper-scroll-y ">
+                        <table class="table table-bordered table-striped">
+                          <thead>
+                            <tr>
+                              <th>ID</th>
+                              <th>Periodo Facturado</th>
+                              <th>Fecha Pago</th>
+                              <th>Valor</th>
+                              <th>Estado</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr *ngFor="let factura of predio.facturas">
+                              <td>{{factura.id}}</td>
+                              <td>{{factura.periodoFacturado | date:"MM/yyyy"}}</td>
+                              <td *ngIf="!factura.fechaPago; else sinFechaPago">
+                                {{factura.fechaPago | date:"dd/MM/yyyy"}}</td>
+                              <ng-template #sinFechaPago>
+                                <td>Sin pagar</td>
+                              </ng-template>
+                              <td>{{factura.granTotal | currency}}</td>
+                              <td>{{factura.estadoFactura}}</td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                     </div>
                   </div>
 
-                  <ng-container *ngIf="predio.facturas.length == 0; else mostrarFacturas">
-                    <div class="m-3 alert alert-info">
-                        Este predio no tiene facturas
-                    </div>
-                  </ng-container>
-                  <ng-template #elseTemplate>
+                </ng-template>
 
-                    <div [attr.id]="predio.numeroMatricula" class="collapse" data-parent="#accordionPredios">
-                      <div class="card-body">
-                        <div class="table-responsive my-custom-scrollbar table-wrapper-scroll-y ">
-                          <table class="table table-bordered table-striped">
-                            <thead>
-                              <tr>
-                                <th>ID</th>
-                                <th>Periodo Facturado</th>
-                                <th>Fecha Pago</th>
-                                <th>Valor</th>
-                                <th>Estado</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              <tr *ngFor="let factura of predio.facturas">
-                                <td>{{factura.id}}</td>
-                                <td>{{factura.periodoFacturado | date:"MM/yyyy"}}</td>
-                                <td *ngIf="!factura.fechaPago; else sinFechaPago">
-                                  {{factura.fechaPago | date:"dd/MM/yyyy"}}</td>
-                                <ng-template #sinFechaPago>
-                                  <td>Sin pagar</td>
-                                </ng-template>
-                                <td>{{factura.granTotal | currency}}</td>
-                                <td>{{factura.estadoFactura}}</td>
-                              </tr>
-                            </tbody>
-                          </table>
-                        </div>
-                      </div>
-                    </div>
-
-                  </ng-template>
-
-                </div>
               </div>
             </div>
           </div>
         </div>
-        <div class="modal-footer">
-          <button (click)="cerrarModal()" type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-        </div>
+      </div>
+      <div class="modal-footer">
+        <button (click)="cerrarModal()" type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
       </div>
     </div>
   </div>

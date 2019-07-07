@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { Suscriptor } from '../Suscriptor';
 import { SuscriptorService } from '../suscriptor.service';
 import { ActivatedRoute } from '@angular/router';
@@ -10,16 +10,21 @@ import { Predio } from 'src/app/predios/Predio';
   templateUrl: './detalle-suscriptor.component.html',
   styleUrls: ['./detalle-suscriptor.component.css']
 })
-export class DetalleSuscriptorComponent implements OnInit {
+export class DetalleSuscriptorComponent implements OnInit, OnChanges{
 
+ 
   //Inyecta el suscriptor
   @Input() suscriptor:Suscriptor;
 
-  private predios:Predio[];
+  public predios:Predio[] = [];
   private titulo:String;
 
   constructor(private suscriptorService: SuscriptorService, private activatedRoute: ActivatedRoute, private modalService: ModalService) {
     this.titulo = "Detalle Suscriptor";
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    this.cargarPrediosSuscriptor(this.suscriptor.cedula);
   }
 
   ngOnInit() {
