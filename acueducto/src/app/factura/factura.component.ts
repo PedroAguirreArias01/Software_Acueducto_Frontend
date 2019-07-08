@@ -169,7 +169,6 @@ export class FacturaComponent implements OnInit {
 
 
   filterFacturasEstado(data: string){
-    console.log('data: '+data);
     if (data && (data != 'todo')) {
       this.facturasFiltradas = this.facturas.filter((factura: Factura) => {
         return factura.estadoFactura.toLowerCase().indexOf(data.toLowerCase()) > -1;

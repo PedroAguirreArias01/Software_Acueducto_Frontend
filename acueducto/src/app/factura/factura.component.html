@@ -20,7 +20,8 @@
 
                 <div class="col-sm-4">
                     <label for="estadoFactura">Estado Facturas</label>
-                    <select class="form-control" name="estadoFactura" (change)="filterFacturasEstado($event.target.value)">
+                    <select class="form-control" name="estadoFactura"
+                        (change)="filterFacturasEstado($event.target.value)">
                         <option value="todo">---------Seleccionar-----------</option>
                         <option value="PP">Factura pendiente de pago</option>
                         <option value="PA">Facturas pagadas</option>
@@ -75,8 +76,17 @@
                     </tr>
                 </tbody>
             </table>
-            <pagination-controls (pageChange)="pageActual = $event" *ngIf="suscriptores?.length != 0">
-            </pagination-controls>
+            <div class="row">
+                <div class="col-sm-9">
+                    <pagination-controls (pageChange)="pageActual = $event" *ngIf="suscriptores?.length != 0">
+                    </pagination-controls>
+                </div>
+
+                <div class="col-sm-3">
+                    Número de facturas: {{ facturasFiltradas.length }}
+                </div>
+            </div>
+
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" (click)="downloadPDF()">Generar PDF</button>
             </div>
