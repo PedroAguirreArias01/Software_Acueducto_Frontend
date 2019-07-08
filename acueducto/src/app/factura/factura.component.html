@@ -20,8 +20,8 @@
 
                 <div class="col-sm-4">
                     <label for="estadoFactura">Estado Facturas</label>
-                    <select class="form-control" name="estadoFactura">
-                        <option>---------Seleccionar-----------</option>
+                    <select class="form-control" name="estadoFactura" (change)="filterFacturasEstado($event.target.value)">
+                        <option value="todo">---------Seleccionar-----------</option>
                         <option value="PP">Factura pendiente de pago</option>
                         <option value="PA">Facturas pagadas</option>
                         <option value="VE">Facturas vencidas</option>

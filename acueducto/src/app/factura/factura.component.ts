@@ -45,6 +45,7 @@ export class FacturaComponent implements OnInit {
   public facturas: Array<Factura> = [];
   public facturasFiltradas: Array<Factura> = [];
   public filtroFecha: Date = new Date();
+  public estadoFactura: string;
 
   constructor(public facturaService: FacturaService
     , public dialog: MatDialog) { }
@@ -166,4 +167,15 @@ export class FacturaComponent implements OnInit {
 
   }
 
+
+  filterFacturasEstado(data: string){
+    console.log('data: '+data);
+    if (data && (data != 'todo')) {
+      this.facturasFiltradas = this.facturas.filter((factura: Factura) => {
+        return factura.estadoFactura.toLowerCase().indexOf(data.toLowerCase()) > -1;
+      });
+    } else {
+      this.facturasFiltradas = this.facturas;
+    }
+  }
 }
