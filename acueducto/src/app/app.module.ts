@@ -72,6 +72,7 @@ import localeES from '@angular/common/locales/es';
 import { FacturaDetallesComponent } from './factura/factura-detalles/factura-detalles.component';
 import { DigitsOnlyDirective } from './digits-only.directive';
 import { DetalleUsuarioComponent } from './usuario/detalle-usuario/detalle-usuario.component';
+import { FilterFacturasComponent } from './factura/filter-facturas.component';
 
 registerLocaleData(localeES,'es');
 
@@ -119,7 +120,8 @@ const routes: Routes = [
     FooterComponent,
     FacturaDetallesComponent,
     DigitsOnlyDirective,
-    DetalleUsuarioComponent
+    DetalleUsuarioComponent,
+    FilterFacturasComponent
     ],
   imports: [
     BrowserModule,

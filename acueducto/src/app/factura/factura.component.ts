@@ -8,7 +8,7 @@ import { FacturaDetallesComponent } from './factura-detalles/factura-detalles.co
 import * as jspdf from 'jspdf';
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
-import { MatDatepicker } from '@angular/material/datepicker';
+import { MatDatepicker, MatDatepickerInputEvent } from '@angular/material/datepicker';
 import * as _moment from 'moment';
 import { default as _rollupMoment, Moment } from 'moment';
 import { FormControl } from '@angular/forms';
@@ -43,17 +43,15 @@ export class FacturaComponent implements OnInit {
 
   public pageActual: number = 1;
   public facturas: Array<Factura> = [];
-  // tslint:disable-next-line:no-duplicate-imports
-
-
-
-
+  public facturasFiltradas: Array<Factura> = [];
+  public filtroFecha: Date = new Date();
 
   constructor(public facturaService: FacturaService
     , public dialog: MatDialog) { }
 
 
   date = new FormControl(moment());
+  serializedDate = new FormControl((new Date()).toISOString());
 
   chosenYearHandler(normalizedYear: Moment) {
     const ctrlValue = this.date.value;
@@ -66,6 +64,8 @@ export class FacturaComponent implements OnInit {
     ctrlValue.month(normalizedMonth.month());
     this.date.setValue(ctrlValue);
     datepicker.close();
+    this.filtroFecha = new Date(this.date.value)
+    this.filerFacturasDate();
   }
 
 
@@ -73,6 +73,7 @@ export class FacturaComponent implements OnInit {
     this.facturaService.getfacturas().subscribe(
       facturas => {
         this.facturas = facturas
+        this.facturasFiltradas = this.facturas;
       }
     );
   }
@@ -108,7 +109,6 @@ export class FacturaComponent implements OnInit {
   }
 
   open(factura: Factura) {
-    console.log('sisisisis' + JSON.stringify(factura))
     const dialogRef = this.dialog.open(
       FacturaDetallesComponent, {
         width: '60%',
@@ -136,6 +136,34 @@ export class FacturaComponent implements OnInit {
     }, function () {
       doc.save('result.pdf');
     });
+  }
+
+  filter(data: string) {
+    if (data) {
+      this.facturasFiltradas = this.facturas.filter((factura: Factura) => {
+        return factura.predio.nombre.toLowerCase().indexOf(data.toLowerCase()) > -1;
+      });
+    } else {
+      this.facturasFiltradas = this.facturas;
+    }
+  }
+
+  filerFacturasDate() {
+    if (this.filtroFecha) {
+      var month = this.filtroFecha.getUTCMonth() + 1; //months from 1-12
+      var year = this.filtroFecha.getUTCFullYear();
+      this.facturasFiltradas = this.facturas.filter((factura: Factura) => {
+        let dateFac = new Date(factura.periodoFacturado);
+        var monthFac = dateFac.getUTCMonth() + 1; //months from 1-12
+      var yearFac = dateFac.getUTCFullYear();
+        if ((month === monthFac) && (year=== yearFac)) {
+          return factura;
+        }
+      });
+    } else {
+      this.facturasFiltradas = this.facturas;
+    }
+
   }
 
 }

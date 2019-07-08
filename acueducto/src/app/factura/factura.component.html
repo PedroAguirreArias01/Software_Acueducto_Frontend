@@ -6,21 +6,11 @@
         <form action="">
             <div class="form-group row">
                 <div class="col-sm-4">
-                    <mat-form-field class="example-full-width">
-                        <input type="text" placeholder="Nombre predio" aria-label="Number" matInput
-                            [formControl]="myControl" [matAutocomplete]="auto">
-                        <mat-autocomplete #auto="matAutocomplete" [displayWith]="mostrarPredio"
-                            (optionSelected)="seleccionarPredio($event)">
-                            <mat-option *ngFor="let predio of filteredOptions | async" [value]="predio">
-                                {{factura.predio.nombre}}
-                            </mat-option>
-                        </mat-autocomplete>
-                    </mat-form-field>
+                    <app-filter-facturas (changed)="filter($event)"></app-filter-facturas>
                 </div>
-
                 <div class="col-sm-4">
                     <mat-form-field class="ms-3">
-                        <input matInput [matDatepicker]="dp" placeholder="Month and Year" [formControl]="date">
+                        <input matInput [matDatepicker]="dp" placeholder="Periodo Facturado" [formControl]="date">
                         <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
                         <mat-datepicker #dp startView="multi-year" (yearSelected)="chosenYearHandler($event)"
                             (monthSelected)="chosenMonthHandler($event, dp)" panelClass="example-month-picker">
@@ -32,9 +22,9 @@
                     <label for="estadoFactura">Estado Facturas</label>
                     <select class="form-control" name="estadoFactura">
                         <option>---------Seleccionar-----------</option>
-                        <option value="A">Factura pendiente de pago</option>
-                        <option value="I">Facturas por pagar</option>
-                        <option value="I">Facturas vencidas</option>
+                        <option value="PP">Factura pendiente de pago</option>
+                        <option value="PA">Facturas pagadas</option>
+                        <option value="VE">Facturas vencidas</option>
                     </select>
                 </div>
             </div>
@@ -70,7 +60,8 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let factura of facturas | paginate: { itemsPerPage: 7, currentPage: pageActual}">
+                    <tr
+                        *ngFor="let factura of facturasFiltradas | paginate: { itemsPerPage: 7, currentPage: pageActual}">
                         <td>{{factura.id}}</td>
                         <td>{{factura.fechaEmision}}</td>
                         <td>{{factura.periodoFacturado | date:"MM/yyyy"}}</td>
@@ -78,6 +69,9 @@
                         <td>{{factura.granTotal | currency}}</td>
                         <td><button class="btn btn-danger mx-2" type="button" (click)="eliminar(factura)">X</button>
                             <button class="btn btn-success" type="button" (click)="open(factura)"> Ver</button></td>
+                    </tr>
+                    <tr *ngIf="!facturasFiltradas || !facturasFiltradas.length">
+                        <td colspan="6">No se encontraron facturas!</td>
                     </tr>
                 </tbody>
             </table>
