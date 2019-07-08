@@ -53,6 +53,7 @@
                 <thead>
                     <tr>
                         <th>ID</th>
+                        <th>Predio</th>
                         <th>Fecha Emisión</th>
                         <th>Periodo Facturado</th>
                         <th>Estado Factura</th>
@@ -64,6 +65,7 @@
                     <tr
                         *ngFor="let factura of facturasFiltradas | paginate: { itemsPerPage: 7, currentPage: pageActual}">
                         <td>{{factura.id}}</td>
+                        <td>{{factura.predio.nombre}}</td>
                         <td>{{factura.fechaEmision}}</td>
                         <td>{{factura.periodoFacturado | date:"MM/yyyy"}}</td>
                         <td>{{factura.estadoFactura}}</td>
