@@ -10,7 +10,17 @@
 
     <hr>
 
-    <h5 class="card-title">Listado de Suscriptores</h5>
+    <div class="row">
+      <div class="col-sm-4 mt-3">
+        <h5 class="card-title">Listado de Suscriptores</h5>
+      </div>
+      <div class="col-sm-8">
+        <div class="d-flex flex-row-reverse">
+          <app-filter-suscriptores (changed)="filter($event)"></app-filter-suscriptores>
+        </div>
+      </div>
+    </div>
+
     <div *ngIf="suscriptores.length == 0" class="alert alert-info">
       No hay Suscriptores en la base de datos!
     </div>
@@ -26,7 +36,7 @@
       </thead>
       <tbody>
 
-        <tr *ngFor="let suscriptor of suscriptores | paginate: { itemsPerPage: 7, currentPage: pageActual}">
+        <tr *ngFor="let suscriptor of suscriptoresFiltrados | paginate: { itemsPerPage: 7, currentPage: pageActual}">
           <td>{{suscriptor.nombre}} {{suscriptor.apellido}}</td>
           <td>{{suscriptor.numeroTelefono}}</td>
           <td><span class="badge" [ngClass]="{'badge-success' : suscriptor.estado === 'A',
@@ -34,9 +44,8 @@
               {{suscriptor.estado === 'A'? 'Activo':'Inactivo'}}</span>
           </td>
 
-          <td><span><i class="fa fa-2x "
-             [ngClass]="{'fa-check-circle-o text-success': suscriptor.estadoCuenta === 'D',
-                        'fa-exclamation-circle text-danger': suscriptor.estadoCuenta === 'M'}" ></i>
+          <td><span><i class="fa fa-2x " [ngClass]="{'fa-check-circle-o text-success': suscriptor.estadoCuenta === 'D',
+                        'fa-exclamation-circle text-danger': suscriptor.estadoCuenta === 'M'}"></i>
               {{suscriptor.estadoCuenta === 'D'? 'Al día': 'En mora'}}</span></td>
           <td>
             <button type="button" class="btn btn-info mx-2"
@@ -51,9 +60,20 @@
             </button>
           </td>
         </tr>
-
+        <tr *ngIf="!suscriptoresFiltrados || !suscriptoresFiltrados.length">
+            <td colspan="5">No se encontraron suscriptores</td>
+        </tr>
       </tbody>
     </table>
-    <pagination-controls (pageChange)="pageActual = $event" *ngIf="suscriptores?.length != 0"></pagination-controls>
+    <div class="row">
+        <div class="col-sm-9">
+          <pagination-controls (pageChange)="pageActual = $event" *ngIf="suscriptoresFiltrados?.length != 0">
+          </pagination-controls>
+        </div>
+        <div class="col-sm-3">
+          Número de Suscriptores: {{suscriptoresFiltrados.length }}
+        </div>
+      </div>
+
   </div>
 </div>

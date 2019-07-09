@@ -15,17 +15,20 @@ export class SuscriptoresComponent implements OnInit {
 
   private suscriptores: Array<Suscriptor> = [];
   private suscriptorSeleccionado: Suscriptor;
-  public pageActual: number=1;
-  
-  constructor(private suscriptorService: SuscriptorService, private router:Router, 
-    private activatedRoute: ActivatedRoute, private modalService: ModalService ) { 
-   
+  public pageActual: number = 1;
+  public suscriptoresFiltrados: Array<Suscriptor> = [];
+
+  constructor(private suscriptorService: SuscriptorService, private router: Router,
+    private activatedRoute: ActivatedRoute, private modalService: ModalService) {
+
   }
 
   ngOnInit() {
     this.suscriptorService.getSuscriptores().subscribe(
-      suscriptores => this.suscriptores = suscriptores
-    );
+      suscriptores => {
+      this.suscriptores = suscriptores
+        this.suscriptoresFiltrados = this.suscriptores;
+      });
   }
 
   eliminar(suscriptor: Suscriptor): void {
@@ -60,9 +63,21 @@ export class SuscriptoresComponent implements OnInit {
 
   //Asigna el cliente seleccionado a la variable suscriptorSeleccionado,
   // luego puede pasarse dicha variable al modal para mostrarse
-  abrirModal(suscriptor:Suscriptor):void{
+  abrirModal(suscriptor: Suscriptor): void {
     this.suscriptorSeleccionado = suscriptor;
     this.modalService.abrirModal();
+  }
+
+  //------------------------filtro de busqueda de suscriptores----------------------
+  filter(data: string) {
+    if (data) {
+      this.suscriptoresFiltrados = this.suscriptores.filter((suscriptor: Suscriptor) => {
+        return suscriptor.nombre.toLowerCase().indexOf(data.toLowerCase()) > -1 ||
+          suscriptor.apellido.toLowerCase().indexOf(data.toLowerCase()) > -1;
+      });
+    } else {
+      this.suscriptoresFiltrados = this.suscriptores;
+    }
   }
 
 }
