@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { of } from 'rxjs';
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpEvent, HttpRequest } from "@angular/common/http";
 import { HttpHeaders } from '@angular/common/http';
 import { map, debounceTime, catchError } from 'rxjs/operators';
 import { Factura } from './Factura';
@@ -61,6 +61,17 @@ export class FacturaService {
         return throwError(e);
       })
     );
+  }
+
+  subirArchivo(archivo: File):Observable<HttpEvent<{}>>{
+    //Clase nativa de JS para el manejo de archivos
+    let formData = new FormData();  
+    formData.append("archivo", archivo);
+    //Habilita seguimiento de progreso de subida
+    const req = new HttpRequest('POST', `${this.urlEndPoint}/generarFacturas`,formData, {
+      reportProgress: true
+    });
+    return this.http.request(req);
   }
 
 }

@@ -14,6 +14,7 @@ import { Suscriptor } from '../suscriptores/Suscriptor';
 import { Tarifa } from '../tarifa/Tarifa';
 import { TarifaService } from '../tarifa/tarifa.service';
 import { DetalleFactura } from './DetallesFactura';
+import { HttpEventType } from '@angular/common/http';
 
 @Component({
   selector: 'app-factura-form',
@@ -27,16 +28,22 @@ export class FacturaFormComponent implements OnInit {
   public detalleFactura: DetalleFactura;
   public predio: Predio = new Predio();
 
-  public file: File;
-  
+  //----------------- Subida de archivo -------------------------
+
+  public archivoSeleccionado: File;
+  progreso: number = 0;
+
+  //-------------------------------------------------------------
+
   filteredOptions: Observable<Predio[]>;
   myControl = new FormControl();
 
   tarifasFiltradas: Observable<Tarifa[]>;
   myItem = new FormControl();
 
-  constructor(private facturaService: FacturaService, private tarifaService: TarifaService, private predioService: PredioService,
-    private router: Router, private activatedRoute: ActivatedRoute, public dialog: MatDialog) { }
+  constructor(private facturaService: FacturaService, private tarifaService: TarifaService,
+    private predioService: PredioService, private router: Router, private activatedRoute: ActivatedRoute,
+    public dialog: MatDialog) { }
 
   ngOnInit() {
     if (this.editar) {
@@ -179,13 +186,50 @@ export class FacturaFormComponent implements OnInit {
     }
   }
 
-  changeListener($event) : void {
+  seleccionarArchivo(event) {
+    this.archivoSeleccionado = event.target.files[0];
+    this.progreso = 0;
+    //Es de tipo Excel
+    if (this.archivoSeleccionado.type != "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet") {
+      Swal.fire(
+        'Subida de Archivo',
+        'Error: el archivo debe ser de tipo Excel (.xlsx)',
+        'error'
+      )
+      this.archivoSeleccionado = null;
+    }
+    console.log(this.archivoSeleccionado);
+  }
 
-    let reader = new FileReader();
-         if ($event.target.files && $event.target.files.length > 0) {
-           this.file = $event.target.files[0];
+  subirArchivo() {
+
+    if (!this.archivoSeleccionado) {
+      Swal.fire(
+        'Subida de Archivo',
+        'Error: Debe seleccionar un archivo',
+        'error'
+      )
+    } else {
+
+      this.facturaService.subirArchivo(this.archivoSeleccionado).subscribe(
+        event => {
+          //Mira si el tipo de evento es de progreso de subida, si es así calcula el progreso
+          //Si no, muestra el mensaje completado
+          if (event.type === HttpEventType.UploadProgress) {
+            this.progreso = Math.round(event.loaded / event.total * 100);
+          } else if (event.type === HttpEventType.Response) {
+            let response: any = event.body;
+            this.router.navigate(['/facturas']);
+            Swal.fire(
+              'Subida de Archivo',
+              response.mensaje,
+              'success'
+            )
+          }
         }
-    
-      }
+      );
+    }
+  }
+
 
 }
