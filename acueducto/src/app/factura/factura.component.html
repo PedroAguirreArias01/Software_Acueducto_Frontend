@@ -5,10 +5,10 @@
     <div class="card-body">
         <form action="">
             <div class="form-group row">
-                <div class="col-sm-4">
+                <div class="col-sm-4 mt-3">
                     <app-filter-facturas (changed)="filter($event)"></app-filter-facturas>
                 </div>
-                <div class="col-sm-4">
+                <div class="col-sm-4 mt-3">
                     <mat-form-field class="ms-3">
                         <input matInput [matDatepicker]="dp" placeholder="Periodo Facturado" [formControl]="date">
                         <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>

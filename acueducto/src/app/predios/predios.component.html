@@ -47,14 +47,14 @@
             </button>
           </td>
         </tr>
-        <tr *ngIf="!filteredCustomers || !filteredCustomers.length">
+        <tr *ngIf="!prediosFiltrados || !prediosFiltrados.length">
             <td colspan="6">No hay predios</td>
         </tr>
       </tbody>
     </table>
     <div class="row">
       <div class="col-sm-9">
-        <pagination-controls (pageChange)="pageActual = $event" *ngIf="suscriptores?.length != 0">
+        <pagination-controls (pageChange)="pageActual = $event" *ngIf="predios?.length != 0">
         </pagination-controls>
       </div>
       <div class="col-sm-3">
