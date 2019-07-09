@@ -39,14 +39,7 @@ export class UsuarioFormComponent implements OnInit {
   }
 
   public crearEmpleado(): void {
-    if (this.passwordUser && this.passwordUser !== this.empleado.contrasena) {
-      Swal.fire({
-        title: 'Error de contraseña',
-        text: `Las Contraseñas deben coincidir`,
-        type: 'error',
-        confirmButtonText: 'Aceptar'
-      })
-    } else {
+    if (this.passwordUser && this.passwordUser === this.empleado.contrasena) {
       this.usuarioService.create(this.empleado).
         subscribe(suscriptor => {
           this.router.navigate(['/usuarios'])
@@ -58,6 +51,13 @@ export class UsuarioFormComponent implements OnInit {
           })
         }
         )
+    } else {
+      Swal.fire({
+        title: 'Error de contraseña',
+        text: `Las Contraseñas deben coincidir`,
+        type: 'error',
+        confirmButtonText: 'Aceptar'
+      })
     }
 
   }
