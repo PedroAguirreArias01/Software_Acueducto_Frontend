@@ -58,4 +58,5 @@ export class DetalleSuscriptorComponent implements OnInit, OnChanges{
   cerrarModal(){
     this.modalService.cerrarModal();
   }
+  
 }

@@ -73,6 +73,7 @@ import { FacturaDetallesComponent } from './factura/factura-detalles/factura-det
 import { DigitsOnlyDirective } from './digits-only.directive';
 import { DetalleUsuarioComponent } from './usuario/detalle-usuario/detalle-usuario.component';
 import { FilterFacturasComponent } from './factura/filter-facturas.component';
+import { DetallePredioComponent } from './predios/detalle-predio/detalle-predio.component';
 
 registerLocaleData(localeES,'es');
 
@@ -121,7 +122,8 @@ const routes: Routes = [
     FacturaDetallesComponent,
     DigitsOnlyDirective,
     DetalleUsuarioComponent,
-    FilterFacturasComponent
+    FilterFacturasComponent,
+    DetallePredioComponent
     ],
   imports: [
     BrowserModule,

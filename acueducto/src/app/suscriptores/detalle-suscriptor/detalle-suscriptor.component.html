@@ -121,7 +121,7 @@
                             <tr *ngFor="let factura of predio.facturas">
                               <td>{{factura.id}}</td>
                               <td>{{factura.periodoFacturado | date:"MM/yyyy"}}</td>
-                              <td *ngIf="!factura.fechaPago; else sinFechaPago">
+                              <td *ngIf="factura.fechaPago !== null; else sinFechaPago">
                                 {{factura.fechaPago | date:"dd/MM/yyyy"}}</td>
                               <ng-template #sinFechaPago>
                                 <td>Sin pagar</td>
