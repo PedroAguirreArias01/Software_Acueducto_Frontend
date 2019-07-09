@@ -12,7 +12,7 @@
           <label for="cedula">Cedula</label>
           <input type="text" required class="form-control" id="cedula" name="cedula" [(ngModel)]="empleado.cedula"
             digitOnly minLenght="10" maxlength="10" #cedula="ngModel">
-          <div class="alert alert-danger" *ngIf="cedula.invalid && (cedula.dirty || cedula.touched)">
+          <div class="alert alert-danger py-0" *ngIf="cedula.invalid && (cedula.dirty || cedula.touched)">
             <div *ngIf="cedula.errors.required">
               <small>Cédula es requerida</small>
             </div>
@@ -25,7 +25,7 @@
           <label for="nombre">Nombre</label>
           <input type="text" class="form-control" id="nombre" name="nombre" [(ngModel)]="empleado.nombre" required
             #nombre="ngModel">
-          <div class="alert alert-danger" *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)">
+          <div class="alert alert-danger py-0" *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)">
             <div *ngIf="nombre.errors.required">
               <small>Nombre es requerido</small>
             </div>
@@ -38,7 +38,7 @@
           <label for="apellido">Apellido</label>
           <input type="text" class="form-control" id="apellido" name="apellido" [(ngModel)]="empleado.apellido" required
             #apellido="ngModel">
-          <div class="alert alert-danger" *ngIf="apellido.invalid && (apellido.dirty || apellido.touched)">
+          <div class="alert alert-danger py-0" *ngIf="apellido.invalid && (apellido.dirty || apellido.touched)">
             <div *ngIf="apellido.errors.required">
               <small>Apellido es requerido</small>
             </div>
@@ -50,8 +50,8 @@
         <div class="form-group col-6">
           <mat-form-field>
             <input matInput [matDatepicker]="picker" name="fechaNacimiento" required
-              [(ngModel)]="empleado.fechaNacimiento" placeholder="Fecha Nacimiento"
-              [min]="minDate" [max]="maxDate" #fechan>
+              [(ngModel)]="empleado.fechaNacimiento" placeholder="Fecha Nacimiento" [min]="minDate" [max]="maxDate"
+              #fechan>
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
           </mat-form-field>
@@ -92,7 +92,7 @@
           <label for="nombre">Usuario</label>
           <input type="text" class="form-control" id="usuario" name="usuario" [(ngModel)]="empleado.usuario" required
             #usuario="ngModel">
-          <div class="alert alert-danger" *ngIf="usuario.invalid && (usuario.dirty || usuario.touched)">
+          <div class="alert alert-danger py-0" *ngIf="usuario.invalid && (usuario.dirty || usuario.touched)">
             <div *ngIf="usuario.errors.required">
               <small>Usuario es requerido</small>
             </div>
@@ -103,20 +103,21 @@
       <div class="form-row">
         <div class="form-group col-6">
           <label>Contraseña</label>
-          <input type="password" name="contrasena" class="form-control" [(ngModel)]="empleado.contrasena" required
-            #contrasena="ngModel" minLength="6" />
-          <div class="alert alert-danger" *ngIf="contrasena.invalid && (contrasena.dirty || contrasena.touched)">
+          <input type="password" name="contrasena" class="form-control" [(ngModel)]="empleado.contrasena"
+            minlength="6" required #contrasena="ngModel" />
+          <div class="alert alert-danger py-0" *ngIf="contrasena.invalid && (contrasena.dirty || contrasena.touched)">
+            <div *ngIf="contrasena.errors.minlength">
+              <small>La contraseña debe tener minimo 6 caracteres</small>
+            </div>
             <div *ngIf="contrasena.errors.required">
               <small>Contraseña es requerida</small>
-            </div>
-            <div *ngIf="contrasena.errors.minLength">
-              <small>La contraseña debe tener minimo 6 caracteres</small>
             </div>
           </div>
         </div>
         <div class="form-group col-6">
-          <label>Confirmar Contraseña</label>
-          <input type="password" name="confirmPassword" (change)="verificarPass($event)" class="form-control"/>
+          <label>Confirmar contraseña</label>
+          <input type="password" name="confirmPassword" (change)="verificarPass($event)" class="form-control"
+            required/>
         </div>
       </div>
       <hr>

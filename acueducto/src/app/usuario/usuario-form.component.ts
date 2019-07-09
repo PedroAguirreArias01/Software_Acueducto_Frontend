@@ -17,20 +17,20 @@ export class UsuarioFormComponent implements OnInit {
   public editar: boolean;
   public municipios: Lugar[];
   public passwordUser: string;
-  
+
   private minYears: number;
   private minDate: Date;
-  private maxDate:Date;
+  private maxDate: Date;
 
   constructor(private usuarioService: UsuarioService, public lugarService: LugarService, private router: Router, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
-    this.minYears= 18;
-    this.minDate = new Date(1900,0,1);
+    this.minYears = 18;
+    this.minDate = new Date(1900, 0, 1);
     this.maxDate = new Date(new Date().setFullYear(new Date().getFullYear() - this.minYears));
     this.getListaMunicipios();
-    if(!this.editar){
-    this.cargarEmpleado();
+    if (!this.editar) {
+      this.cargarEmpleado();
     }
   }
 
@@ -39,26 +39,36 @@ export class UsuarioFormComponent implements OnInit {
   }
 
   public crearEmpleado(): void {
-    this.usuarioService.create(this.empleado).
-      subscribe(suscriptor => {
-        this.router.navigate(['/usuarios'])
-        Swal.fire({
-          title: 'Nuevo Empleado!',
-          text: `Empleado ${suscriptor.nombre} creado con exito`,
-          type: 'success',
-          confirmButtonText: 'Aceptar'
-        })
-      }
-      )
+    if (this.passwordUser && this.passwordUser !== this.empleado.contrasena) {
+      Swal.fire({
+        title: 'Error de contraseña',
+        text: `Las Contraseñas deben coincidir`,
+        type: 'error',
+        confirmButtonText: 'Aceptar'
+      })
+    } else {
+      this.usuarioService.create(this.empleado).
+        subscribe(suscriptor => {
+          this.router.navigate(['/usuarios'])
+          Swal.fire({
+            title: 'Nuevo Empleado!',
+            text: `Empleado ${suscriptor.nombre} creado con exito`,
+            type: 'success',
+            confirmButtonText: 'Aceptar'
+          })
+        }
+        )
+    }
+
   }
 
   cargarEmpleado(): void {
     this.editar = false;
     this.activatedRoute.params.subscribe(params => {
       let cedula = params['cedula'];
-      console.log('esta es la cedula del empleado a editar: '+cedula)
+      console.log('esta es la cedula del empleado a editar: ' + cedula)
       if (cedula) {
-        console.log('if esta es la cedula del empleado a editar: '+cedula)
+        console.log('if esta es la cedula del empleado a editar: ' + cedula)
         this.editar = true;
         this.usuarioService.getEmpleado(cedula).subscribe(
           (empleado) => {
@@ -93,15 +103,9 @@ export class UsuarioFormComponent implements OnInit {
     return (o1 == null || o2 == null) ? false : (o1.id === o2.id);
   }
 
-  getPass(event: any): void{
+  verificarPass(event: any) {
     this.passwordUser = event.target.value as string;
-  }
-
-  verificarPass(event: any){
-    let passwor: string = event.target.value as string;
-    if(passwor === this.passwordUser){
-      console.log('son iguales'+passwor)
-    }else{
+    if (this.passwordUser && this.passwordUser !== this.empleado.contrasena) {
       Swal.fire({
         title: 'Error de contraseña',
         text: `Las Contraseñas deben coincidir`,
