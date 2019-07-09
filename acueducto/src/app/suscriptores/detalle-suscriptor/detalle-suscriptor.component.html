@@ -89,10 +89,9 @@
                       <p class="p-0 m-0">Vereda {{predio.vereda.nombre}}</p>
                     </div>
                     <div class="col-4 d-flex align-items-center justify-content-end">
-                      <p class="p-0 m-0">Prueba</p>
-                      <!-- <p><span><i class="fa fa-2x text-success" [ngClass]="{'fa-check-circle-o text-success': predio.isUpToDate(),
-                                     'fa-exclamation-circle text-danger': !predio.isUpToDate()}"></i>
-                            {{predio.isUpToDate()? 'Al día': 'En mora'}}</span></p> -->
+                      <p><span><i class="fa fa-2x" [ngClass]="{'fa-check-circle-o text-success': predio.estadoPredio == 'A',
+                                     'fa-exclamation-circle text-danger': predio.estadoPredio == 'M'}"></i>
+                            {{predio.estadoPredio == 'A'? 'Al día': 'En mora'}}</span></p>
                     </div>
                   </div>
                 </div>

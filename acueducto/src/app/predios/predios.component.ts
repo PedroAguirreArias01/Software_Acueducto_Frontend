@@ -4,7 +4,7 @@ import { Predio } from './Predio';
 import Swal from 'sweetalert2';
 import { PredioService } from './predio.service';
 import { Suscriptor } from '../suscriptores/Suscriptor';
-import { ModalService } from '../usuario/detalle-usuario/modal.service';
+import { ModalService } from '../suscriptores/detalle-suscriptor/modal.service';
 
 @Component({
   selector: 'app-predios',
@@ -16,7 +16,7 @@ export class PrediosComponent implements OnInit {
   private predio: Predio;
   public pageActual: number = 1;
   public prediosFiltrados: Array<Predio> = [];
-  private suscriptorSeleccionado: Suscriptor;
+  private predioSeleccionado: Predio;
 
   constructor(private predioService: PredioService, private router: Router, private activatedRoute: ActivatedRoute, private modalService: ModalService) { }
 
@@ -71,10 +71,10 @@ export class PrediosComponent implements OnInit {
     }
   }
 
-//Asigna el cliente seleccionado a la variable suscriptorSeleccionado,
+  //Asigna el predio seleccionado a la variable predioSeleccionado,
   // luego puede pasarse dicha variable al modal para mostrarse
-  abrirModal(suscriptor:Suscriptor):void{
-    this.suscriptorSeleccionado = suscriptor;
+  abrirModal(predio:Predio):void{
+    this.predioSeleccionado = predio;
     this.modalService.abrirModal();
   }
 

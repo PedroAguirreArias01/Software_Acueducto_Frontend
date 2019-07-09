@@ -1,3 +1,4 @@
+<detalle-predio *ngIf="predioSeleccionado" [predio] = predioSeleccionado></detalle-predio>
 <div class="col-md-12 card border-primary">
   <div class="card-header">Predios</div>
   <div class="card-body">
@@ -44,6 +45,9 @@
             </button>
             <button type="button" class="btn btn-danger mx-2" (click)="eliminar(predio)">
               <span class="glyphicon glyphicon-remove"></span>Eliminar
+            </button>
+            <button type="button" class="btn btn-success mx-2" (click)="abrirModal(predio)">
+              Info
             </button>
           </td>
         </tr>
