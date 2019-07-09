@@ -10,13 +10,13 @@ export class Factura {
   public estadoFactura: string;
   public detallesFactura: Array<DetalleFactura> = [];
   public predio: Predio;
-  public total: number;
+  public granTotal: number;
 
   calcularGranTotal(): number {
-    this.total = 0;
+    this.granTotal = 0;
     this.detallesFactura.forEach((item: DetalleFactura) => {
-      this.total += item.calcularValor();
+      this.granTotal += item.calcularValor();
     });
-    return this.total;
+    return this.granTotal;
   }
 }

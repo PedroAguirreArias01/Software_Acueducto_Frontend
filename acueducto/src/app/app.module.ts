@@ -75,7 +75,7 @@ import { DigitsOnlyDirective } from './digits-only.directive';
 import { DetalleUsuarioComponent } from './usuario/detalle-usuario/detalle-usuario.component';
 import { FilterFacturasComponent } from './factura/filter-facturas.component';
 import { DetallePredioComponent } from './predios/detalle-predio/detalle-predio.component';
-
+import {FilterSuscriptoresComponent } from './suscriptores/filter-suscriptores.component'
 registerLocaleData(localeES,'es');
 
 const routes: Routes = [
@@ -97,7 +97,7 @@ const routes: Routes = [
   {path: 'lugar/form/:id', component: LugarFormComponent},
   {path: 'facturas', component: FacturaComponent},
   {path: 'facturaForm', component: FacturaFormComponent},
-  {path: 'facturas/form/:id', component: FacturaFormComponent},
+  {path: 'facturaForm/form/:id', component: FacturaFormComponent},
 ];
 
 @NgModule({
@@ -125,7 +125,8 @@ const routes: Routes = [
     DetalleUsuarioComponent,
     FilterFacturasComponent,
     DetallePredioComponent,
-    FilterPrediosComponent
+    FilterPrediosComponent,
+    FilterSuscriptoresComponent,
     ],
   imports: [
     BrowserModule,

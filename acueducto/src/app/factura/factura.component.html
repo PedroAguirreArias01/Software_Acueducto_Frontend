@@ -74,7 +74,9 @@
                             <td>{{factura.estadoFactura}}</td>
                             <td>{{factura.granTotal | currency}}</td>
                             <td><button class="btn btn-danger mx-2" type="button" (click)="eliminar(factura)">X</button>
-                                <button class="btn btn-success" type="button" (click)="open(factura)"> Ver</button></td>
+                                <button class="btn btn-success mx-2" type="button" (click)="open(factura)"> Ver</button>
+                                <button class="btn btn-primary" *ngIf="(factura.estadoFactura !=='PA')" [routerLink]="['/facturaForm/form',factura.id]">Editar</button>
+                            </td>
                         </tr>
                         <tr *ngIf="!facturasFiltradas || !facturasFiltradas.length">
                             <td colspan="6">No se encontraron facturas!</td>
@@ -92,7 +94,6 @@
                     Número de facturas: {{ facturasFiltradas.length }}
                 </div>
             </div>
-
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" (click)="downloadPDF()">Generar PDF</button>
             </div>

@@ -65,7 +65,7 @@
               </div>
               <label for="nombre" class="col-form-label col-sm-2" style="text-align: right">Predio</label>
               <div class="col-sm-4">
-                <input type="text" class="form-control" [(ngModel)]="predio.nombre" name="predio" placeholder="Predio"
+                <input type="text" class="form-control" [(ngModel)]="factura.predio.nombre" name="predio" placeholder="Predio"
                   readonly>
               </div>
             </div>
@@ -73,7 +73,7 @@
             <div class="form-group row">
               <label for="nombre" class="col-form-label col-sm-2" style="text-align: right">Número Catastral</label>
               <div class="col-sm-4">
-                <input type="text" class="form-control" name="numeroCatastral" [(ngModel)]="predio.numeroMatricula"
+                <input type="text" class="form-control" name="numeroCatastral" [(ngModel)]="factura.predio.numeroMatricula"
                   placeholder="Número Catastral" readonly>
               </div>
             </div>
@@ -85,8 +85,6 @@
                   placeholder="Lectura Anterior" readonly>
               </div>
             </div>
-
-
           </form>
 
           <div class="card">
