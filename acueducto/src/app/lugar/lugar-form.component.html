@@ -13,10 +13,16 @@
       <div class="form-group row">
         <label for="tipo" class="col-form-label col-sm-4" style="text-align: right">Tipo Lugar</label>
         <div class="col-sm-6">
-          <select class="form-control" name="tipo" [(ngModel)]="lugar.tipo">
+          <select class="form-control" name="tipo" [(ngModel)]="lugar.tipo" #tipoLugar="ngModel" required>
             <option value="M">Municipio</option>
             <option value="V">Vereda</option>
           </select>
+          <!-- Div exterior para saber si hay errores, divs interiores para mostrar cada uno de los errores -->
+         <div class="alert alert-danger py-0" *ngIf="tipoLugar.invalid && (tipoLugar.dirty || tipoLugar.touched)">
+          <div *ngIf="tipoLugar.errors.required">
+            <small>Tipo de lugar es requerido</small>
+          </div>
+        </div>
         </div>
       </div>
 
@@ -36,7 +42,7 @@
           <input id="nombre" name="nombre" type="text" required [(ngModel)]="lugar.nombre"
             #nombre="ngModel" class="form-control" minLength="1">
           <!-- Div exterior para saber si hay errores, divs interiores para mostrar cada uno de los errores -->
-          <div class="alert alert-danger" *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)">
+          <div class="alert alert-danger py-0" *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)">
             <div *ngIf="nombre.errors.required">
               <small>Nombre del lugar es requerido</small>
             </div>

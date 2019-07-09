@@ -219,6 +219,7 @@ export class FacturaFormComponent implements OnInit {
             this.progreso = Math.round(event.loaded / event.total * 100);
           } else if (event.type === HttpEventType.Response) {
             let response: any = event.body;
+            
             this.router.navigate(['/facturas']);
             Swal.fire(
               'Subida de Archivo',

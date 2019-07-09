@@ -79,20 +79,20 @@
                 <div class="card-header">
 
                   <div class="row ">
-                    <div class="col-4">
+                    <div class="col-6">
                       <button class="no-underline p-0" type="button" class="btn" data-toggle="collapse"
                         [attr.data-target]="'#' + predio.numeroMatricula">Predio N° {{predio.vereda.id}} -
                         {{predio.numeroMatricula}}
                       </button>
                     </div>
-                    <div class="col-4 d-flex align-items-center justify-content-center ">
+                    <div class="col-6 d-flex align-items-center justify-content-center ">
                       <p class="p-0 m-0">Vereda {{predio.vereda.nombre}}</p>
                     </div>
-                    <div class="col-4 d-flex align-items-center justify-content-end">
-                      <p><span><i class="fa fa-2x" [ngClass]="{'fa-check-circle-o text-success': predio.estadoPredio == 'A',
-                                     'fa-exclamation-circle text-danger': predio.estadoPredio == 'M'}"></i>
-                            {{predio.estadoPredio == 'A'? 'Al día': 'En mora'}}</span></p>
-                    </div>
+                    <!-- <div class="col-4 d-flex align-items-center justify-content-end">
+                      <p><span><i  class="fa fa-2x " [ngClass]="{'fa-check-circle-o text-success': predio.estadoPredio === undefined,
+                                     'fa-exclamation-circle text-danger': predio.estadoPredio === 'M'}"></i>
+                            {{predio.estadoPredio == undefined? 'Al día': 'En mora'}}</span></p>
+                    </div> -->
                   </div>
                 </div>
 

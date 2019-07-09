@@ -71,7 +71,13 @@ export class FacturaService {
     const req = new HttpRequest('POST', `${this.urlEndPoint}/generarFacturas`,formData, {
       reportProgress: true
     });
-    return this.http.request(req);
+    return this.http.request(req).pipe(
+      catchError( e => {
+        console.log(e.error.mensaje);
+        Swal.fire('Error ', e.error.mensaje, 'error');
+        return throwError(e);
+      })
+    );
   }
 
 }

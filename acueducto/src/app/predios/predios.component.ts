@@ -24,7 +24,8 @@ export class PrediosComponent implements OnInit {
     this.predioService.get().subscribe(
       predios => {
       this.predios = predios
-        this.prediosFiltrados = this.predios;
+       console.log(this.predios);
+      this.prediosFiltrados = this.predios;
       }
     );
   }
@@ -75,6 +76,7 @@ export class PrediosComponent implements OnInit {
   // luego puede pasarse dicha variable al modal para mostrarse
   abrirModal(predio:Predio):void{
     this.predioSeleccionado = predio;
+    console.log(this.predioSeleccionado);
     this.modalService.abrirModal();
   }
 

@@ -17,7 +17,7 @@
             [options]="{prefix: '$', thousands: ',', decimal: '.', precision: '0'}"
             class="form-control" #valor="ngModel">
           <!-- Div exterior para saber si hay errores, divs interiores para mostrar cada uno de los errores -->
-          <div class="alert alert-danger" *ngIf="valor.invalid && (valor.dirty || valor.touched)">
+          <div class="alert alert-danger py-0" *ngIf="valor.invalid && (valor.dirty || valor.touched)">
             <div *ngIf="valor.errors.required">
               <small>Valor es requerido</small>
             </div>
@@ -31,7 +31,7 @@
           <input id="descripcion" name="descripcion" type="text" required [(ngModel)]="tarifa.descripcion"
             #descripcion="ngModel" class="form-control">
           <!-- Div exterior para saber si hay errores, divs interiores para mostrar cada uno de los errores -->
-          <div class="alert alert-danger" *ngIf="descripcion.invalid && (descripcion.dirty || descripcion.touched)">
+          <div class="alert alert-danger py-0" *ngIf="descripcion.invalid && (descripcion.dirty || descripcion.touched)">
             <div *ngIf="descripcion.errors.required">
               <small>Descripción es requerida</small>
             </div>

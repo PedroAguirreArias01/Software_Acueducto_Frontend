@@ -21,7 +21,14 @@ export class PredioService {
 
   get(): Observable<Predio[]> {
     return this.http.get(this.urlEndPoint).pipe(
-      map(response => response as Predio[])
+      map(res => {
+        let predios = res as Predio[];
+        return predios.map((predio) => {
+          console.log(predio)
+          return predio
+        }
+        );
+      })
     );
   }
 
