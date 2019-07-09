@@ -38,7 +38,7 @@ export class PrediosFormComponent implements OnInit {
         this.router.navigate(['/predios'])
         Swal.fire({
           title: 'Nuevo Predio!',
-          text: `Predio ${predio.numeroMatricula} creado con exito`,
+          text: `Predio ${this.predio.nombre} creado con exito`,
           type: 'success',
           confirmButtonText: 'Aceptar'
         })

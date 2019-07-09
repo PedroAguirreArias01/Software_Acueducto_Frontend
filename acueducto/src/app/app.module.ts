@@ -65,6 +65,7 @@ import { FacturaComponent } from './factura/factura.component';
 import { FacturaFormComponent } from './factura/factura-form.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
+import { FilterPrediosComponent } from './predios/filter-predios.component';
 
 //Registra el locale para procesar las fechas
 import {registerLocaleData} from '@angular/common';
@@ -123,7 +124,8 @@ const routes: Routes = [
     DigitsOnlyDirective,
     DetalleUsuarioComponent,
     FilterFacturasComponent,
-    DetallePredioComponent
+    DetallePredioComponent,
+    FilterPrediosComponent
     ],
   imports: [
     BrowserModule,

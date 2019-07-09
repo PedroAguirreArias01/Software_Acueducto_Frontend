@@ -3,6 +3,8 @@ import { Router, ActivatedRoute } from "@angular/router";
 import { Predio } from './Predio';
 import Swal from 'sweetalert2';
 import { PredioService } from './predio.service';
+import { Suscriptor } from '../suscriptores/Suscriptor';
+import { ModalService } from '../usuario/detalle-usuario/modal.service';
 
 @Component({
   selector: 'app-predios',
@@ -10,15 +12,19 @@ import { PredioService } from './predio.service';
   styleUrls: ['./predios.component.css']
 })
 export class PrediosComponent implements OnInit {
-  private predios: Predio[];
+  private predios: Array<Predio> = [];
   private predio: Predio;
-  public pageActual: number=1;
-  
-  constructor(private predioService: PredioService, private router:Router, private activatedRoute: ActivatedRoute) { }
+  public pageActual: number = 1;
+  public prediosFiltrados: Array<Predio> = [];
+  private suscriptorSeleccionado: Suscriptor;
+
+  constructor(private predioService: PredioService, private router: Router, private activatedRoute: ActivatedRoute, private modalService: ModalService) { }
 
   ngOnInit() {
     this.predioService.get().subscribe(
-      predios => {this.predios = predios
+      predios => {
+      this.predios = predios
+        this.prediosFiltrados = this.predios;
       }
     );
   }
@@ -52,4 +58,24 @@ export class PrediosComponent implements OnInit {
       }
     })
   }
+
+  filter(data: string) {
+    console.log('sisiissiisisisisisisis')
+    if (data) {
+      this.prediosFiltrados = this.predios.filter((predio: Predio) => {
+        return predio.nombre.toLowerCase().indexOf(data.toLowerCase()) > -1 ||
+          predio.vereda.nombre.toLowerCase().indexOf(data.toLowerCase()) > -1;
+      });
+    } else {
+      this.prediosFiltrados = this.predios;
+    }
+  }
+
+//Asigna el cliente seleccionado a la variable suscriptorSeleccionado,
+  // luego puede pasarse dicha variable al modal para mostrarse
+  abrirModal(suscriptor:Suscriptor):void{
+    this.suscriptorSeleccionado = suscriptor;
+    this.modalService.abrirModal();
+  }
+
 }

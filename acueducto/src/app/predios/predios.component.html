@@ -4,28 +4,40 @@
     <div class="my-2 text-left">
       <button class="btn btn-rounded btn-primary" routerLink="/prediosform">Crear Predio</button>
     </div>
+    <div class="card-header">
+      <div class="row">
+        <div class="col-sm-6 mt-3">
+          <h5 class="card-title">Listado de Predios</h5>
+        </div>
+        <div class="col-sm-6">
+          <div class="d-flex flex-row-reverse">
+              <app-filter-predios (changed)="filter($event)"></app-filter-predios>
+          </div>
+         
+        </div>
+      </div>
+    </div>
     <div *ngIf="predios?.length===0" class="alert alert-info">
       No hay Predios en la base de datos!
     </div>
-    <h5 class="card-title">Listado de Predios</h5>
     <table class="table table-bordered table-striped" *ngIf="predios?.length>0">
       <thead>
         <tr>
           <th>Número Matricula</th>
           <th>Nombre</th>
           <th>Estrato</th>
-          <th>Latitud</th>
-          <th>Longitud</th>
-          <th></th>
+          <th>Vereda</th>
+          <th>Estado</th>
+          <th>Acciones</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let predio of predios | paginate: { itemsPerPage: 7, currentPage: pageActual}">
+        <tr *ngFor="let predio of prediosFiltrados | paginate: { itemsPerPage: 7, currentPage: pageActual}">
           <td>{{predio.numeroMatricula}}</td>
           <td>{{predio.nombre}}</td>
           <td>{{predio.estrato}}</td>
-          <td>{{predio.latitud}}</td>
-          <td>{{predio.longitud}}</td>
+          <td>{{predio.vereda.nombre}}</td>
+          <td>{{predio.estado}}</td>
           <td class="predio">
             <button type="button" class="btn btn-info mx-2" [routerLink]="['/prediosForm/form',predio.numeroMatricula]">
               <span class="glyphicon glyphicon-pencil"></span>Editar
@@ -35,8 +47,19 @@
             </button>
           </td>
         </tr>
+        <tr *ngIf="!filteredCustomers || !filteredCustomers.length">
+            <td colspan="6">No hay predios</td>
+        </tr>
       </tbody>
     </table>
-    <pagination-controls (pageChange)="pageActual = $event"></pagination-controls>
+    <div class="row">
+      <div class="col-sm-9">
+        <pagination-controls (pageChange)="pageActual = $event" *ngIf="suscriptores?.length != 0">
+        </pagination-controls>
+      </div>
+      <div class="col-sm-3">
+        Número de Predios: {{ prediosFiltrados.length }}
+      </div>
+    </div>
   </div>
 </div>
