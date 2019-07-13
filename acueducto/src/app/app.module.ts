@@ -85,7 +85,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 registerLocaleData(localeES, 'es');
 
 const routes: Routes = [
-  // {path: '', redirectTo:'suscriptores', pathMatch: "full"},
+   {path: '', redirectTo:'dashboard', pathMatch: "full"},
   {
     path: 'suscriptores', component: SuscriptoresComponent,
     canActivate: [AuthGuard, RoleGuard], data: { role: 'ROLE_ADMIN,ROLE_FONTANERO,ROLE_TESORERO' }
