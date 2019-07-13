@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Empleado } from '../Usuario';
+import { Usuario } from '../Usuario';
 import Swal from 'sweetalert2';
 import { HttpEventType } from '@angular/common/http';
 import { UsuarioService } from '../usuario.service';
@@ -15,7 +15,7 @@ export class DetalleUsuarioComponent implements OnInit {
   private fotoSeleccionada: File;
   progreso: number = 0;
 
-  @Input() empleado: Empleado;
+  @Input() empleado: Usuario;
   constructor(private usuarioService: UsuarioService, private modalService: ModalService) { }
 
   ngOnInit() {
@@ -55,7 +55,7 @@ export class DetalleUsuarioComponent implements OnInit {
             this.progreso = Math.round(event.loaded / event.total * 100);
           } else if (event.type === HttpEventType.Response) {
             let response: any = event.body;
-            this.empleado = response.empleado as Empleado;
+            this.empleado = response.empleado as Usuario;
             Swal.fire(
               'Subida de foto',
               response.mensaje,
@@ -63,7 +63,6 @@ export class DetalleUsuarioComponent implements OnInit {
             )
           }
           // this.empleado = empleado;
-
         }
       );
     }

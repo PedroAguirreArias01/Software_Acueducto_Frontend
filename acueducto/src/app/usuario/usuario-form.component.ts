@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from "@angular/router";
-import { Empleado } from './Usuario';
+import { Usuario } from './Usuario';
 import { UsuarioService } from './usuario.service';
 import Swal from 'sweetalert2';
 import { Lugar } from '../lugar/lugar';
@@ -13,7 +13,7 @@ import { LugarService } from '../lugar/lugar.service';
 })
 export class UsuarioFormComponent implements OnInit {
 
-  public empleado: Empleado = new Empleado();
+  public empleado: Usuario = new Usuario();
   public editar: boolean;
   public municipios: Lugar[];
   public passwordUser: string;

@@ -1,6 +1,6 @@
 import { Lugar } from '../lugar/lugar';
 
-export class Empleado {
+export class Usuario {
       public cedula: string;
       public nombre: string;
       public apellido: string;

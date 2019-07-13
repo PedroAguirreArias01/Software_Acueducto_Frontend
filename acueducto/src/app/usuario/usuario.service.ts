@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { HttpClient, HttpRequest,HttpHeaders, HttpEvent } from "@angular/common/http";
 import { map, catchError } from 'rxjs/operators';
-import { Empleado } from './Usuario';
+import { Usuario } from './Usuario';
 import Swal from 'sweetalert2';
 import { Suscriptor } from '../suscriptores/Suscriptor';
 import { Router } from '@angular/router';
@@ -39,15 +39,15 @@ export class UsuarioService {
   }
 
 
-  getEmpleados(): Observable<Empleado[]> {
+  getEmpleados(): Observable<Usuario[]> {
     return this.http.get(this.urlEndPoint).pipe(
-      map(response => response as Empleado[])
+      map(response => response as Usuario[])
     );
   }
 
-  create(empleado: Empleado): Observable<Empleado> {
-    return this.http.post<Empleado>(this.urlEndPoint, empleado, { headers: this.httpHeaders }).pipe(
-      map((response: any) => response.empleado as Empleado),
+  create(empleado: Usuario): Observable<Usuario> {
+    return this.http.post<Usuario>(this.urlEndPoint, empleado, { headers: this.httpHeaders }).pipe(
+      map((response: any) => response.empleado as Usuario),
       catchError(e => {
         console.log(e.error.mensaje);
         Swal.fire('Error ', e.error.mensaje, 'error');
@@ -56,8 +56,8 @@ export class UsuarioService {
     );
   }
 
-  delete(cedula: string): Observable<Empleado> {
-    return this.http.delete<Empleado>(`${this.urlEndPoint}${cedula}`, { headers: this.httpHeaders }).pipe(
+  delete(cedula: string): Observable<Usuario> {
+    return this.http.delete<Usuario>(`${this.urlEndPoint}${cedula}`, { headers: this.httpHeaders }).pipe(
       catchError(e => {
         console.log(e.error.mensaje);
         Swal.fire('Error ', e.error.mensaje, 'error');
@@ -66,8 +66,8 @@ export class UsuarioService {
     );
   }
 
-  getEmpleado(cedula: string): Observable<Empleado> {
-    return this.http.get<Empleado>(`${this.urlEndPoint}${cedula}`).pipe(
+  getEmpleado(cedula: string): Observable<Usuario> {
+    return this.http.get<Usuario>(`${this.urlEndPoint}${cedula}`).pipe(
       //Entra cuando hay un NOT_FOUND o INTERNAL_SERVER_ERROR
       catchError(e => {
         this.router.navigate(['/empleados']);
@@ -78,9 +78,9 @@ export class UsuarioService {
     );
   }
 
-  update(empleado: Empleado): Observable<Empleado> {
-    return this.http.put<Empleado>(`${this.urlEndPoint}${empleado.cedula}`, empleado, { headers: this.httpHeaders }).pipe(
-      map((response: any) => response.empleado as Empleado),
+  update(empleado: Usuario): Observable<Usuario> {
+    return this.http.put<Usuario>(`${this.urlEndPoint}${empleado.cedula}`, empleado, { headers: this.httpHeaders }).pipe(
+      map((response: any) => response.empleado as Usuario),
       catchError(e => {
         console.log(e.error.mensaje);
         Swal.fire('Error ', e.error.mensaje, 'error');

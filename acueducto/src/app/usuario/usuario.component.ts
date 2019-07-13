@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Event } from "@angular/router";
-import { Empleado } from './Usuario';
+import { Usuario } from './Usuario';
 import { UsuarioService } from './usuario.service';
 import Swal from 'sweetalert2';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { ModalService } from './detalle-usuario/modal.service';
 
 @Component({
@@ -13,8 +12,8 @@ import { ModalService } from './detalle-usuario/modal.service';
 })
 export class UsuarioComponent implements OnInit {
 
-  private empleados: Empleado[];
-  private empleadoSeleccionado: Empleado;
+  private empleados: Usuario[];
+  private empleadoSeleccionado: Usuario;
   public pageActual: number = 1;
 
   constructor(private usuarioService: UsuarioService, private modalService:ModalService, private router: Router, private activatedRoute: ActivatedRoute) { }
@@ -25,7 +24,7 @@ export class UsuarioComponent implements OnInit {
     );
   }
 
-  eliminar(empleado: Empleado): void {
+  eliminar(empleado: Usuario): void {
     Swal.fire({
       title: 'Está seguro?',
       text: `¿Seguro que desea eliminar al empleado ${empleado.nombre} ${empleado.apellido}?`,
@@ -55,7 +54,7 @@ export class UsuarioComponent implements OnInit {
     })
   }
 
-  abrirModal(empleado:Empleado){
+  abrirModal(empleado:Usuario){
     this.empleadoSeleccionado = empleado;
     this.modalService.abrirModal();
   }

@@ -76,28 +76,29 @@ import { DetalleUsuarioComponent } from './usuario/detalle-usuario/detalle-usuar
 import { FilterFacturasComponent } from './factura/filter-facturas.component';
 import { DetallePredioComponent } from './predios/detalle-predio/detalle-predio.component';
 import {FilterSuscriptoresComponent } from './suscriptores/filter-suscriptores.component'
+import { AuthGuard } from './usuario/guards/auth.guard';
 registerLocaleData(localeES,'es');
 
 const routes: Routes = [
   {path: '', redirectTo:'suscriptores', pathMatch: "full"},
-  {path: 'suscriptores', component: SuscriptoresComponent},
-  {path: 'suscriptoresform', component: SuscriptoresFormComponent},
-  {path: 'suscriptoresform/form/:cedula', component: SuscriptoresFormComponent},
-  {path: 'predios', component: PrediosComponent},
-  {path: 'prediosform',component: PrediosFormComponent},
-  {path: 'prediosForm/form/:numeroMatricula', component: PrediosFormComponent},
-  {path: 'tarifas', component: TarifaComponent},
-  {path: 'tarifasForm', component: TarifaFormComponent},
-  {path: 'tarifasForm/form/:id', component: TarifaFormComponent},
-  {path: 'usuarios', component: UsuarioComponent },
-  {path: 'usuarios/form/:cedula', component: UsuarioFormComponent },
-  {path: 'usuarioForm', component: UsuarioFormComponent},
-  {path: 'lugares', component: LugarComponent},
-  {path: 'lugarForm', component: LugarFormComponent},
-  {path: 'lugar/form/:id', component: LugarFormComponent},
-  {path: 'facturas', component: FacturaComponent},
-  {path: 'facturaForm', component: FacturaFormComponent},
-  {path: 'facturaForm/form/:id', component: FacturaFormComponent},
+  {path: 'suscriptores', component: SuscriptoresComponent, canActivate:[AuthGuard]},
+  {path: 'suscriptoresform', component: SuscriptoresFormComponent, canActivate:[AuthGuard]},
+  {path: 'suscriptoresform/form/:cedula', component: SuscriptoresFormComponent, canActivate:[AuthGuard]},
+  {path: 'predios', component: PrediosComponent, canActivate:[AuthGuard]},
+  {path: 'prediosform',component: PrediosFormComponent, canActivate:[AuthGuard]},
+  {path: 'prediosForm/form/:numeroMatricula', component: PrediosFormComponent, canActivate:[AuthGuard]},
+  {path: 'tarifas', component: TarifaComponent, canActivate:[AuthGuard]},
+  {path: 'tarifasForm', component: TarifaFormComponent, canActivate:[AuthGuard]},
+  {path: 'tarifasForm/form/:id', component: TarifaFormComponent, canActivate:[AuthGuard]},
+  {path: 'usuarios', component: UsuarioComponent, canActivate:[AuthGuard] },
+  {path: 'usuarios/form/:cedula', component: UsuarioFormComponent, canActivate:[AuthGuard] },
+  {path: 'usuarioForm', component: UsuarioFormComponent, canActivate:[AuthGuard]},
+  {path: 'lugares', component: LugarComponent, canActivate:[AuthGuard]},
+  {path: 'lugarForm', component: LugarFormComponent, canActivate:[AuthGuard]},
+  {path: 'lugar/form/:id', component: LugarFormComponent, canActivate:[AuthGuard]},
+  {path: 'facturas', component: FacturaComponent, canActivate:[AuthGuard]},
+  {path: 'facturaForm', component: FacturaFormComponent, canActivate:[AuthGuard]},
+  {path: 'facturaForm/form/:id', component: FacturaFormComponent, canActivate:[AuthGuard]},
   {path: 'login', component: LoginComponent}
 ];
 

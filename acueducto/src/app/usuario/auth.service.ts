@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Empleado } from './Usuario';
+import { Usuario } from './Usuario';
 
 const clientID = 'acueducto';
 const password = '12345';
@@ -15,7 +15,7 @@ export class AuthService {
 
 
   private urlEndPoint: string = 'http://localhost:8080/oauth/token';
-  private _empleado: Empleado;
+  private _empleado: Usuario;
   private _token: string;
 
   //Basic DEBE llevar un espacio
@@ -26,14 +26,14 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
-  public get empleado(): Empleado {
+  public get empleado(): Usuario {
     if (this._empleado != null) {
       return this._empleado;
     } else if (this._empleado == null && sessionStorage.getItem('usuario') != null) {
-      this._empleado = JSON.parse(sessionStorage.getItem('usuario')) as Empleado;
+      this._empleado = JSON.parse(sessionStorage.getItem('usuario')) as Usuario;
       return this._empleado;
     }
-    return new Empleado();
+    return new Usuario();
   }
 
   public get token(): string {
@@ -46,7 +46,7 @@ export class AuthService {
     return null;
   }
 
-  login(empleado: Empleado): Observable<any> {
+  login(empleado: Usuario): Observable<any> {
 
     let params = new URLSearchParams();
 
@@ -65,7 +65,7 @@ export class AuthService {
   }
   guardarUsuario(accessToken: string): void {
     let payload = this.obtenerDatosToken(accessToken);
-    this._empleado = new Empleado();
+    this._empleado = new Usuario();
     this._empleado.nombre = payload.nombre;
     this._empleado.apellido = payload.apellido;
     //Atributos del payload se llaman así por oauth

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Empleado } from '../usuario/Usuario';
+import { Usuario } from '../usuario/Usuario';
 import Swal from 'sweetalert2';
 import {AuthService} from '../usuario/auth.service';
 import {Router} from '@angular/router';
@@ -13,10 +13,10 @@ export class LoginComponent implements OnInit {
 
   public titulo:string ='Por favor, ingrese sus credenciales';
 
-  empleado: Empleado;
+  empleado: Usuario;
 
   constructor(private authService: AuthService, private router: Router) { 
-    this.empleado = new Empleado();
+    this.empleado = new Usuario();
   }
 
   ngOnInit() {
