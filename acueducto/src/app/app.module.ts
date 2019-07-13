@@ -87,25 +87,76 @@ const routes: Routes = [
   // {path: '', redirectTo:'suscriptores', pathMatch: "full"},
   {
     path: 'suscriptores', component: SuscriptoresComponent,
+    canActivate: [AuthGuard, RoleGuard], data: { role: 'ROLE_ADMIN,ROLE_FONTANERO,ROLE_TESORERO' }
+  },
+  {
+    path: 'suscriptoresform', component: SuscriptoresFormComponent,
     canActivate: [AuthGuard, RoleGuard], data: { role: 'ROLE_ADMIN' }
   },
-  { path: 'suscriptoresform', component: SuscriptoresFormComponent, canActivate: [AuthGuard, RoleGuard], data: { role: 'ROLE_ADMIN' } },
-  { path: 'suscriptoresform/form/:cedula', component: SuscriptoresFormComponent, canActivate: [AuthGuard, RoleGuard], data: { role: 'ROLE_ADMIN' } },
-  { path: 'predios', component: PrediosComponent, canActivate: [AuthGuard, RoleGuard], data: { role: 'ROLE_ADMIN' } },
-  { path: 'prediosform', component: PrediosFormComponent, canActivate: [AuthGuard, RoleGuard], data: { role: 'ROLE_ADMIN' } },
-  { path: 'prediosForm/form/:numeroMatricula', component: PrediosFormComponent, canActivate: [AuthGuard, RoleGuard], data: { role: 'ROLE_ADMIN' } },
-  { path: 'tarifas', component: TarifaComponent, canActivate: [AuthGuard, RoleGuard], data: { role: 'ROLE_FONTANERO' } },
-  { path: 'tarifasForm', component: TarifaFormComponent, canActivate: [AuthGuard, RoleGuard], data: { role: 'ROLE_ADMIN' } },
-  { path: 'tarifasForm/form/:id', component: TarifaFormComponent, canActivate: [AuthGuard, RoleGuard], data: { role: 'ROLE_ADMIN' } },
-  { path: 'usuarios', component: UsuarioComponent, canActivate: [AuthGuard, RoleGuard], data: { role: 'ROLE_ADMIN' } },
-  { path: 'usuarios/form/:cedula', component: UsuarioFormComponent, canActivate: [AuthGuard, RoleGuard], data: { role: 'ROLE_ADMIN' } },
-  { path: 'usuarioForm', component: UsuarioFormComponent, canActivate: [AuthGuard, RoleGuard], data: { role: 'ROLE_ADMIN' } },
-  { path: 'lugares', component: LugarComponent, canActivate: [AuthGuard, RoleGuard], data: { role: 'ROLE_ADMIN' } },
-  { path: 'lugarForm', component: LugarFormComponent, canActivate: [AuthGuard, RoleGuard], data: { role: 'ROLE_ADMIN' } },
-  { path: 'lugar/form/:id', component: LugarFormComponent, canActivate: [AuthGuard, RoleGuard], data: { role: 'ROLE_ADMIN' } },
-  { path: 'facturas', component: FacturaComponent, canActivate: [AuthGuard, RoleGuard], data: { role: 'ROLE_ADMIN' } },
-  { path: 'facturaForm', component: FacturaFormComponent, canActivate: [AuthGuard, RoleGuard], data: { role: 'ROLE_ADMIN' } },
-  { path: 'facturaForm/form/:id', component: FacturaFormComponent, canActivate: [AuthGuard, RoleGuard], data: { role: 'ROLE_ADMIN' } },
+  {
+    path: 'suscriptoresform/form/:cedula', component: SuscriptoresFormComponent,
+    canActivate: [AuthGuard, RoleGuard], data: { role: 'ROLE_ADMIN' }
+  },
+  {
+    path: 'predios', component: PrediosComponent,
+    canActivate: [AuthGuard, RoleGuard], data: { role: 'ROLE_ADMIN' }
+  },
+  {
+    path: 'prediosform', component: PrediosFormComponent,
+    canActivate: [AuthGuard, RoleGuard], data: { role: 'ROLE_ADMIN' }
+  },
+  {
+    path: 'prediosForm/form/:numeroMatricula', component: PrediosFormComponent,
+    canActivate: [AuthGuard, RoleGuard], data: { role: 'ROLE_ADMIN' }
+  },
+  {
+    path: 'tarifas', component: TarifaComponent,
+    canActivate: [AuthGuard, RoleGuard], data: { role: 'ROLE_FONTANERO' }
+  },
+  {
+    path: 'tarifasForm', component: TarifaFormComponent,
+    canActivate: [AuthGuard, RoleGuard], data: { role: 'ROLE_ADMIN' }
+  },
+  {
+    path: 'tarifasForm/form/:id', component: TarifaFormComponent,
+    canActivate: [AuthGuard, RoleGuard], data: { role: 'ROLE_ADMIN' }
+  },
+  {
+    path: 'usuarios', component: UsuarioComponent,
+    canActivate: [AuthGuard, RoleGuard], data: { role: 'ROLE_ADMIN' }
+  },
+  {
+    path: 'usuarios/form/:cedula', component: UsuarioFormComponent,
+    canActivate: [AuthGuard, RoleGuard], data: { role: 'ROLE_ADMIN' }
+  },
+  {
+    path: 'usuarioForm', component: UsuarioFormComponent,
+    canActivate: [AuthGuard, RoleGuard], data: { role: 'ROLE_ADMIN' }
+  },
+  {
+    path: 'lugares', component: LugarComponent,
+    canActivate: [AuthGuard, RoleGuard], data: { role: 'ROLE_ADMIN' }
+  },
+  {
+    path: 'lugarForm', component: LugarFormComponent,
+    canActivate: [AuthGuard, RoleGuard], data: { role: 'ROLE_ADMIN' }
+  },
+  {
+    path: 'lugar/form/:id', component: LugarFormComponent,
+    canActivate: [AuthGuard, RoleGuard], data: { role: 'ROLE_ADMIN' }
+  },
+  {
+    path: 'facturas', component: FacturaComponent,
+    canActivate: [AuthGuard, RoleGuard], data: { role: 'ROLE_ADMIN' }
+  },
+  {
+    path: 'facturaForm', component: FacturaFormComponent,
+    canActivate: [AuthGuard, RoleGuard], data: { role: 'ROLE_ADMIN' }
+  },
+  {
+    path: 'facturaForm/form/:id', component: FacturaFormComponent,
+    canActivate: [AuthGuard, RoleGuard], data: { role: 'ROLE_ADMIN' }
+  },
   { path: 'login', component: LoginComponent }
 ];
 

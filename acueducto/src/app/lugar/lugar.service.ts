@@ -42,6 +42,16 @@ export class LugarService {
     );
   }
 
+  getLugar(id: number): Observable<Lugar> {
+    return this.http.get<Lugar>(`${this.urlEndPoint}${id}`).pipe(
+      catchError(e => {
+        console.log(e.error.mensaje);
+        Swal.fire('Error ', e.error.mensaje, 'error');
+        return throwError(e);
+      })
+    );
+  }
+
   update(lugar: Lugar): Observable<Lugar> {
     return this.http.put(`${this.urlEndPoint}${lugar.id}`, lugar).pipe(
       map((response: any) => response.lugar as Lugar),
