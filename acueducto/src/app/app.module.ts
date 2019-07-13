@@ -98,6 +98,7 @@ const routes: Routes = [
   {path: 'facturas', component: FacturaComponent},
   {path: 'facturaForm', component: FacturaFormComponent},
   {path: 'facturaForm/form/:id', component: FacturaFormComponent},
+  {path: 'login', component: LoginComponent}
 ];
 
 @NgModule({

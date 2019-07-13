@@ -5,7 +5,7 @@
   <div class="card-header">Suscriptores</div>
   <div class="card-body">
     <div class="my-1 text-left">
-      <button class="btn btn-rounded btn-primary" routerLink="/suscriptoresform"> Crear Suscriptor</button>
+      <button *ngIf="authService.hasRole('ROLE_ADMIN')" class="btn btn-rounded btn-primary" routerLink="/suscriptoresform"> Crear Suscriptor</button>
     </div>
 
     <hr>
@@ -48,11 +48,11 @@
                         'fa-exclamation-circle text-danger': suscriptor.estadoCuenta === 'M'}"></i>
               {{suscriptor.estadoCuenta === 'D'? 'Al día': 'En mora'}}</span></td>
           <td>
-            <button type="button" class="btn btn-info mx-2"
+            <button *ngIf="authService.hasRole('ROLE_ADMIN')" type="button" class="btn btn-info mx-2"
               [routerLink]="['/suscriptoresform/form', suscriptor.cedula]">
               Editar
             </button>
-            <button type="button" class="btn btn-danger mx-2" (click)="eliminar(suscriptor)">
+            <button *ngIf="authService.hasRole('ROLE_ADMIN')" type="button" class="btn btn-danger mx-2" (click)="eliminar(suscriptor)">
               Eliminar
             </button>
             <button type="button" class="btn btn-info mx-2" (click)="abrirModal(suscriptor)">

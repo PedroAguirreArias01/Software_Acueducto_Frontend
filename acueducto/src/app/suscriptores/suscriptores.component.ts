@@ -4,6 +4,7 @@ import { Suscriptor } from './Suscriptor';
 import Swal from 'sweetalert2';
 import { SuscriptorService } from './suscriptor.service';
 import { ModalService } from './detalle-suscriptor/modal.service';
+import { AuthService } from '../usuario/auth.service';
 
 @Component({
   selector: 'app-suscriptores',
@@ -18,15 +19,18 @@ export class SuscriptoresComponent implements OnInit {
   public pageActual: number = 1;
   public suscriptoresFiltrados: Array<Suscriptor> = [];
 
-  constructor(private suscriptorService: SuscriptorService, private router: Router,
-    private activatedRoute: ActivatedRoute, private modalService: ModalService) {
+  constructor(private suscriptorService: SuscriptorService,
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
+    private authService: AuthService,
+    private modalService: ModalService) {
 
   }
 
   ngOnInit() {
     this.suscriptorService.getSuscriptores().subscribe(
       suscriptores => {
-      this.suscriptores = suscriptores
+        this.suscriptores = suscriptores
         this.suscriptoresFiltrados = this.suscriptores;
       });
   }
@@ -49,7 +53,8 @@ export class SuscriptoresComponent implements OnInit {
       if (result.value) {
         this.suscriptorService.delete(suscriptor.cedula).subscribe(
           response => {
-            this.suscriptores = this.suscriptores.filter(susc => susc !== suscriptor)
+            
+            this.suscriptoresFiltrados = this.suscriptoresFiltrados.filter(susc => susc !== suscriptor)
             Swal.fire(
               'Suscriptor Eliminado!',
               `Suscriptor ${suscriptor.nombre} eliminado con éxito.`,

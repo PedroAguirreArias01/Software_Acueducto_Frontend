@@ -1,76 +1,76 @@
 <!--<div  class="container-fluid">-->
 
-<body>
-  <div class="row">
-    <div class="col-md-2">
-      <div class="nav-side-menu">
+<header class="navbar fixed-top navbar-dark bg-dark">
+  <nav class="container">
+    <div>
+      <ul class="navbar-nav navbar-right">
+        <li><a class="btn btn-outline-primary">SignIn</a></li>
+      </ul>
+    </div>
+  </nav>
+</header>
 
-        <div class="brand">Acueducto Moniquirá</div>
-        <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
-        <div class="menu-list">
-          <ul id="menu-content" class="menu-content collapse out">
+<div class="row">
+  <div class="col-md-2">
+    <div class="nav-side-menu">
 
-            <li>
-              <a href="#">
-                <i class="fa fa-dashboard fa-lg"></i> Inicio
-              </a>
-            </li>
-            <li routerLinkActive="active">
-              <a routerLink="/suscriptores">
-                <i class="fa fa-users fa-lg"></i> Suscriptores
-              </a>
-            </li>
+      <div class="brand">Acueducto Moniquirá</div>
+      <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
+      <div class="menu-list">
+        <ul id="menu-content" class="menu-content collapse out">
 
-            <li routerLinkActive="active">
-              <a routerLink="/tarifas">
-                <i class="fa fa-users fa-lg"></i> Tarifas
-              </a>
-            </li>
+          <li>
+            <a href="#">
+              <i class="fa fa-dashboard fa-lg"></i> Inicio
+            </a>
+          </li>
+          <li routerLinkActive="active">
+            <a routerLink="/suscriptores">
+              <i class="fa fa-users fa-lg"></i> Suscriptores
+            </a>
+          </li>
 
-            <li routerLinkActive="active">
-              <a routerLink="/usuarios">
-                <i class="fa fa-user fa-lg"></i> Usuarios
-              </a>
-            </li>
+          <li routerLinkActive="active">
+            <a routerLink="/tarifas">
+              <i class="fa fa-users fa-lg"></i> Tarifas
+            </a>
+          </li>
 
-            <li data-toggle="collapse" data-target="#new" class="collapsed">
-              <a> <i class="fa fa-map-marker fa-lg"></i>Lugares<span class="arrow"></span></a>
-            </li>
-            <ul class="sub-menu collapse" id="new">
-              <li routerLink="/lugares">Lugares</li>
-              <li> <a routerLink="/predios"> Predios </a></li>
-            </ul>
+          <li routerLinkActive="active">
+            <a routerLink="/usuarios">
+              <i class="fa fa-user fa-lg"></i> Usuarios
+            </a>
+          </li>
 
-            <li data-toggle="collapse" data-target="#facturacion" class="collapsed">
-              <a><i class="fa fa-car fa-lg"></i> Facturación<span class="arrow"></span></a>
-            </li>
-            <ul class="sub-menu collapse" id="facturacion">
-              <li routerLink="/facturaForm">Generar Facturación</li>
-              <li> <a routerLink="/facturas"> Facturas </a></li>
-            </ul>
-
+          <li data-toggle="collapse" data-target="#new" class="collapsed">
+            <a> <i class="fa fa-map-marker fa-lg"></i>Lugares<span class="arrow"></span></a>
+          </li>
+          <ul class="sub-menu collapse" id="new">
+            <li routerLink="/lugares">Lugares</li>
+            <li> <a routerLink="/predios"> Predios </a></li>
           </ul>
-        </div>
+
+          <li data-toggle="collapse" data-target="#facturacion" class="collapsed">
+            <a><i class="fa fa-car fa-lg"></i> Facturación<span class="arrow"></span></a>
+          </li>
+
+          <ul class="sub-menu collapse" id="facturacion">
+            <li routerLink="/facturaForm">Generar Facturación</li>
+            <li> <a routerLink="/facturas"> Facturas </a></li>
+          </ul>
+          <app-header></app-header>
+
+        </ul>
       </div>
     </div>
-
-
-    <div class="col-md-10" id="content">
-      <!--
-    <header class="navbar fixed-top navbar-dark bg-dark">
-      <nav class="container">
-        <div>
-          <ul class="navbar-nav navbar-right">
-            <li><a class="btn btn-outline-primary">SignIn</a></li>
-          </ul>
-        </div>
-      </nav>
-    </header>
-    -->
-      <router-outlet></router-outlet>
-    </div>
   </div>
-</body>
+
+
+  <div class="col-md-10" id="content">
+
+    <router-outlet></router-outlet>
+  </div>
+</div>
 <!-- <app-footer></app-footer> -->
 
 <!--</div>-->

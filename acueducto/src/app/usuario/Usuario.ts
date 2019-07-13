@@ -11,4 +11,5 @@ export class Empleado {
       public genero: string;
       public direccionResidencia: string;
       public lugarResidencia: Lugar;
+      public roles: string[] = [];
   }

@@ -6,6 +6,7 @@ import { Empleado } from './Usuario';
 import Swal from 'sweetalert2';
 import { Suscriptor } from '../suscriptores/Suscriptor';
 import { Router } from '@angular/router';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,27 @@ export class UsuarioService {
 
   private httpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' })
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router, private authService: AuthService) { }
+
+   //Agrega la cabecera del Authorization a los recursos protegidos
+   private addAuthorizationHeader() {
+    let token = this.authService.token;
+    if (token != null) {
+      return this.httpHeaders.append('Authorization', ' Bearer' + token);
+    }
+    return this.httpHeaders;
+  }
+
+
+  private isNotAuthorized(e): boolean {
+    //Si no está autenticado el usuario o no está autorizado para acceder al recurso
+    if (e.status == 401 || e.status == 403) {
+      this.router.navigate(['/login']);
+      return true;
+    }
+    return false;
+  }
+
 
   getEmpleados(): Observable<Empleado[]> {
     return this.http.get(this.urlEndPoint).pipe(
@@ -73,13 +94,25 @@ export class UsuarioService {
     let formData = new FormData();  
     formData.append("foto", foto);
     formData.append("cedula", cedula);
-    console.log("Aqui sube");
+
+    let httpHeaders = new HttpHeaders();
+    let token = this.authService.token;
+    if(token!=null){
+     httpHeaders = httpHeaders.append('Authorization','Bearer '+token);
+    }
+
     //Habilitita seguimiento de progreso de subida
     const req = new HttpRequest('POST', `${this.urlEndPoint}/cargarFoto`,formData, {
-      reportProgress: true
+      reportProgress: true,
+      headers: httpHeaders
     });
 
-    return this.http.request(req);
+    return this.http.request(req).pipe(
+      catchError(e =>{
+        this.isNotAuthorized(e);
+        return throwError(e);
+      })
+    );
   }
 
 }

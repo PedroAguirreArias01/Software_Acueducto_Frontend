@@ -1,3 +1,7 @@
-<p>
-  header works!
-</p>
+<li *ngIf="!authService.isAuthenticated()">
+    <a [routerLink]="['/login']"> <i class="fa fa-map-marker fa-lg"></i>Log In<span class="arrow"></span></a>
+</li>
+
+<li *ngIf="authService.isAuthenticated()">
+    <a (click)="logout()">Log Out</a>
+</li>
