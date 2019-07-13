@@ -2,19 +2,19 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, Component } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SuscriptoresComponent } from './suscriptores/suscriptores.component';
 import { SuscriptoresFormComponent } from './suscriptores/suscriptores-form.component';
-import {DetalleSuscriptorComponent} from './suscriptores/detalle-suscriptor/detalle-suscriptor.component';
-import {RouterModule, Routes} from '@angular/router';
+import { DetalleSuscriptorComponent } from './suscriptores/detalle-suscriptor/detalle-suscriptor.component';
+import { RouterModule, Routes } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PrediosComponent } from './predios/predios.component';
 import { PrediosFormComponent } from './predios/predios-form.component';
-import {NgxPaginationModule} from 'ngx-pagination';
-import { NgxCurrencyModule} from 'ngx-currency';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { NgxCurrencyModule } from 'ngx-currency';
 import { CommonModule } from '@angular/common';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 /*material */
 import {
@@ -56,7 +56,7 @@ import { UsuarioComponent } from './usuario/usuario.component';
 import { LoginComponent } from './login/login.component';
 import { TarifaComponent } from './tarifa/tarifa.component';
 import { TarifaFormComponent } from './tarifa/tarifa-form.component';
-import { NgbModalConfig, NgbModal  } from "@ng-bootstrap/ng-bootstrap";
+import { NgbModalConfig, NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { UsuarioFormComponent } from './usuario/usuario-form.component';
 import { HistorialTarifaModalComponent } from './tarifa/historial-tarifa-modal/historial-tarifa-modal.component';
 import { LugarComponent } from './lugar/lugar.component';
@@ -68,38 +68,45 @@ import { FooterComponent } from './footer/footer.component';
 import { FilterPrediosComponent } from './predios/filter-predios.component';
 
 //Registra el locale para procesar las fechas
-import {registerLocaleData} from '@angular/common';
+import { registerLocaleData } from '@angular/common';
 import localeES from '@angular/common/locales/es';
 import { FacturaDetallesComponent } from './factura/factura-detalles/factura-detalles.component';
 import { DigitsOnlyDirective } from './digits-only.directive';
 import { DetalleUsuarioComponent } from './usuario/detalle-usuario/detalle-usuario.component';
 import { FilterFacturasComponent } from './factura/filter-facturas.component';
 import { DetallePredioComponent } from './predios/detalle-predio/detalle-predio.component';
-import {FilterSuscriptoresComponent } from './suscriptores/filter-suscriptores.component'
+import { FilterSuscriptoresComponent } from './suscriptores/filter-suscriptores.component'
 import { AuthGuard } from './usuario/guards/auth.guard';
-registerLocaleData(localeES,'es');
+import { RoleGuard } from './usuario/guards/role.guard';
+import { TokenInterceptor } from './usuario/interceptors/token.interceptor';
+import { AuthInterceptor } from './usuario/interceptors/auth.interceptor';
+
+registerLocaleData(localeES, 'es');
 
 const routes: Routes = [
-  {path: '', redirectTo:'suscriptores', pathMatch: "full"},
-  {path: 'suscriptores', component: SuscriptoresComponent, canActivate:[AuthGuard]},
-  {path: 'suscriptoresform', component: SuscriptoresFormComponent, canActivate:[AuthGuard]},
-  {path: 'suscriptoresform/form/:cedula', component: SuscriptoresFormComponent, canActivate:[AuthGuard]},
-  {path: 'predios', component: PrediosComponent, canActivate:[AuthGuard]},
-  {path: 'prediosform',component: PrediosFormComponent, canActivate:[AuthGuard]},
-  {path: 'prediosForm/form/:numeroMatricula', component: PrediosFormComponent, canActivate:[AuthGuard]},
-  {path: 'tarifas', component: TarifaComponent, canActivate:[AuthGuard]},
-  {path: 'tarifasForm', component: TarifaFormComponent, canActivate:[AuthGuard]},
-  {path: 'tarifasForm/form/:id', component: TarifaFormComponent, canActivate:[AuthGuard]},
-  {path: 'usuarios', component: UsuarioComponent, canActivate:[AuthGuard] },
-  {path: 'usuarios/form/:cedula', component: UsuarioFormComponent, canActivate:[AuthGuard] },
-  {path: 'usuarioForm', component: UsuarioFormComponent, canActivate:[AuthGuard]},
-  {path: 'lugares', component: LugarComponent, canActivate:[AuthGuard]},
-  {path: 'lugarForm', component: LugarFormComponent, canActivate:[AuthGuard]},
-  {path: 'lugar/form/:id', component: LugarFormComponent, canActivate:[AuthGuard]},
-  {path: 'facturas', component: FacturaComponent, canActivate:[AuthGuard]},
-  {path: 'facturaForm', component: FacturaFormComponent, canActivate:[AuthGuard]},
-  {path: 'facturaForm/form/:id', component: FacturaFormComponent, canActivate:[AuthGuard]},
-  {path: 'login', component: LoginComponent}
+  // {path: '', redirectTo:'suscriptores', pathMatch: "full"},
+  {
+    path: 'suscriptores', component: SuscriptoresComponent,
+    canActivate: [AuthGuard, RoleGuard], data: { role: 'ROLE_ADMIN' }
+  },
+  { path: 'suscriptoresform', component: SuscriptoresFormComponent, canActivate: [AuthGuard, RoleGuard], data: { role: 'ROLE_ADMIN' } },
+  { path: 'suscriptoresform/form/:cedula', component: SuscriptoresFormComponent, canActivate: [AuthGuard, RoleGuard], data: { role: 'ROLE_ADMIN' } },
+  { path: 'predios', component: PrediosComponent, canActivate: [AuthGuard, RoleGuard], data: { role: 'ROLE_ADMIN' } },
+  { path: 'prediosform', component: PrediosFormComponent, canActivate: [AuthGuard, RoleGuard], data: { role: 'ROLE_ADMIN' } },
+  { path: 'prediosForm/form/:numeroMatricula', component: PrediosFormComponent, canActivate: [AuthGuard, RoleGuard], data: { role: 'ROLE_ADMIN' } },
+  { path: 'tarifas', component: TarifaComponent, canActivate: [AuthGuard, RoleGuard], data: { role: 'ROLE_FONTANERO' } },
+  { path: 'tarifasForm', component: TarifaFormComponent, canActivate: [AuthGuard, RoleGuard], data: { role: 'ROLE_ADMIN' } },
+  { path: 'tarifasForm/form/:id', component: TarifaFormComponent, canActivate: [AuthGuard, RoleGuard], data: { role: 'ROLE_ADMIN' } },
+  { path: 'usuarios', component: UsuarioComponent, canActivate: [AuthGuard, RoleGuard], data: { role: 'ROLE_ADMIN' } },
+  { path: 'usuarios/form/:cedula', component: UsuarioFormComponent, canActivate: [AuthGuard, RoleGuard], data: { role: 'ROLE_ADMIN' } },
+  { path: 'usuarioForm', component: UsuarioFormComponent, canActivate: [AuthGuard, RoleGuard], data: { role: 'ROLE_ADMIN' } },
+  { path: 'lugares', component: LugarComponent, canActivate: [AuthGuard, RoleGuard], data: { role: 'ROLE_ADMIN' } },
+  { path: 'lugarForm', component: LugarFormComponent, canActivate: [AuthGuard, RoleGuard], data: { role: 'ROLE_ADMIN' } },
+  { path: 'lugar/form/:id', component: LugarFormComponent, canActivate: [AuthGuard, RoleGuard], data: { role: 'ROLE_ADMIN' } },
+  { path: 'facturas', component: FacturaComponent, canActivate: [AuthGuard, RoleGuard], data: { role: 'ROLE_ADMIN' } },
+  { path: 'facturaForm', component: FacturaFormComponent, canActivate: [AuthGuard, RoleGuard], data: { role: 'ROLE_ADMIN' } },
+  { path: 'facturaForm/form/:id', component: FacturaFormComponent, canActivate: [AuthGuard, RoleGuard], data: { role: 'ROLE_ADMIN' } },
+  { path: 'login', component: LoginComponent }
 ];
 
 @NgModule({
@@ -129,7 +136,7 @@ const routes: Routes = [
     DetallePredioComponent,
     FilterPrediosComponent,
     FilterSuscriptoresComponent,
-    ],
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -177,9 +184,12 @@ const routes: Routes = [
     MatTooltipModule,
     ReactiveFormsModule,
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent],
-  entryComponents:[
+  entryComponents: [
     HistorialTarifaModalComponent,
     FacturaDetallesComponent]
 })

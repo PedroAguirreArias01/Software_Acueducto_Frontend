@@ -16,8 +16,6 @@ export class FacturaService {
 
   private urlEndPoint: string = 'http://localhost:8080/facturas/';
 
-  private httpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' })
-
   constructor(private http: HttpClient, private router: Router) { }
 
   getfacturas(): Observable<Factura[]> {
@@ -27,7 +25,7 @@ export class FacturaService {
   }
 
   create(factura: Factura): Observable<Factura> {
-    return this.http.post<Factura>(this.urlEndPoint, factura, { headers: this.httpHeaders }).pipe(
+    return this.http.post<Factura>(this.urlEndPoint, factura).pipe(
       catchError(e => {
         console.log(e.error.mensaje);
         Swal.fire('Error ', e.error.mensaje, 'error');
@@ -37,7 +35,7 @@ export class FacturaService {
   }
 
   delete(id: number): Observable<Factura> {
-    return this.http.delete<Factura>(`${this.urlEndPoint}${id}`, { headers: this.httpHeaders }).pipe(
+    return this.http.delete<Factura>(`${this.urlEndPoint}${id}`).pipe(
       catchError(e => {
         console.log(e.error.mensaje);
         Swal.fire('Error ', e.error.mensaje, 'error');
@@ -47,12 +45,12 @@ export class FacturaService {
   }
 
   update(factura: Factura): Observable<Factura> {
-    return this.http.put<Factura>(`${this.urlEndPoint}${factura.id}`, factura, { headers: this.httpHeaders })
+    return this.http.put<Factura>(`${this.urlEndPoint}${factura.id}`, factura)
   }
 
 
   getFactura(id: number): Observable<Factura> {
-    return this.http.get<Factura>(`${this.urlEndPoint}${id}`, { headers: this.httpHeaders }).pipe(
+    return this.http.get<Factura>(`${this.urlEndPoint}${id}`).pipe(
       //Entra cuando hay un NOT_FOUND o INTERNAL_SERVER_ERROR
       catchError(e => {
         this.router.navigate(['/facturas']);
@@ -79,5 +77,4 @@ export class FacturaService {
       })
     );
   }
-
 }

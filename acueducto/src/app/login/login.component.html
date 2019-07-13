@@ -2,14 +2,30 @@
   <div class="card-header">{{titulo}}</div>
   <div class="card-body">
     <form method="post">
-      <div class="form-group col-sm-12">
-        <input [(ngModel)]="empleado.usuario" type="text" class="form-control" name="username" id="username" placeholder="Nombre de usuario" autofocus required>
+      <div>
+        <div class="form-group col-sm-12">
+          <input [(ngModel)]="empleado.usuario" type="text" class="form-control" name="username" id="username"
+            placeholder="Nombre de usuario" autofocus required #usuario="ngModel">
+        </div>
+        <!-- Div exterior para saber si hay errores, divs interiores para mostrar cada uno de los errores -->
+        <div class="alert alert-danger py-0" *ngIf="usuario.invalid && (usuario.dirty || usuario.touched)">
+          <div *ngIf="usuario.errors.required">
+            <small>El nombre de usuario es requerido</small>
+          </div>
+        </div>
       </div>
       <div class="form-group col-sm-12">
-        <input  [(ngModel)]="empleado.contrasena" type="password" class="form-control" name="password" id="password" placeholder="Contraseña" required>
+        <input [(ngModel)]="empleado.contrasena" type="password" class="form-control" name="password" id="password"
+          placeholder="Contraseña" required #password="ngModel">
+      </div>
+      <!-- Div exterior para saber si hay errores, divs interiores para mostrar cada uno de los errores -->
+      <div class="alert alert-danger py-0" *ngIf="password.invalid && (password.dirty || password.touched)">
+        <div *ngIf="password.errors.required">
+          <small>La Contraseña es requerida</small>
+        </div>
       </div>
       <div class="form-group col-sm-12">
-        <input  (click)="login()" type="submit" class="btn btn-lg btn-primary btn-block" value="Login">
+        <input (click)="login()" type="submit" class="btn btn-lg btn-primary btn-block" value="Login">
       </div>
     </form>
   </div>
