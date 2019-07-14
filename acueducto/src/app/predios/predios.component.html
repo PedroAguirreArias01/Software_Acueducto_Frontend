@@ -1,5 +1,5 @@
 <detalle-predio *ngIf="predioSeleccionado" [predio] = predioSeleccionado></detalle-predio>
-<div class="col-md-12 card border-primary">
+<div class="col-md-12 card">
   <div class="card-header">Predios</div>
   <div class="card-body">
     <div class="my-2 text-left">
@@ -7,14 +7,16 @@
     </div>
     <div class="card-header">
       <div class="row">
-        <div class="col-sm-6 mt-3">
+        <div class="col-sm-5 mt-3">
           <h5 class="card-title">Listado de Predios</h5>
         </div>
         <div class="col-sm-6">
           <div class="d-flex flex-row-reverse">
               <app-filter-predios (changed)="filter($event)"></app-filter-predios>
           </div>
-         
+        </div>
+        <div class="col-md-1 mt-3">
+            <i class="fa fa-search fa-lg"></i>
         </div>
       </div>
     </div>

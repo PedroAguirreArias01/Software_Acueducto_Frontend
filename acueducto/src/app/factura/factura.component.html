@@ -6,7 +6,14 @@
         <form action="">
             <div class="form-group row">
                 <div class="col-sm-4 mt-3">
-                    <app-filter-facturas (changed)="filter($event)"></app-filter-facturas>
+                    <div class="row">
+                        <div class="col-ms-3">
+                            <app-filter-facturas (changed)="filter($event)"></app-filter-facturas>
+                        </div>
+                        <div class="col-ms-1 mt-3">
+                            <i class="fa fa-search fa-lg"></i>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-sm-4 mt-3">
                     <mat-form-field class="ms-3">
@@ -75,8 +82,9 @@
                             <td>{{factura.granTotal | currency}}</td>
                             <td>
                                 <button class="btn btn-success mx-2" type="button" (click)="open(factura)"> Ver</button>
-                                <button class="btn btn-primary" *ngIf="factura.estadoFactura !=='PA' && authService.hasRole('ROLE_ADMIN')"
-                                    (click) = "registrarPago(factura)">Registrar Pago</button>
+                                <button class="btn btn-primary"
+                                    *ngIf="factura.estadoFactura !=='PA' && authService.hasRole('ROLE_ADMIN')"
+                                    (click)="registrarPago(factura)">Registrar Pago</button>
                             </td>
                         </tr>
                         <tr *ngIf="!facturasFiltradas || !facturasFiltradas.length">
