@@ -76,7 +76,7 @@
                             <td>
                                 <button class="btn btn-success mx-2" type="button" (click)="open(factura)"> Ver</button>
                                 <button class="btn btn-primary" *ngIf="factura.estadoFactura !=='PA' && authService.hasRole('ROLE_ADMIN')"
-                                    [routerLink]="['/facturaForm/form',factura.id]">Editar</button>
+                                    (click) = "registrarPago(factura)">Registrar Pago</button>
                             </td>
                         </tr>
                         <tr *ngIf="!facturasFiltradas || !facturasFiltradas.length">

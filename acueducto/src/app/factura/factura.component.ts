@@ -12,6 +12,7 @@ import { MatDatepicker, MatDatepickerInputEvent } from '@angular/material/datepi
 import * as _moment from 'moment';
 import { default as _rollupMoment, Moment } from 'moment';
 import { FormControl } from '@angular/forms';
+import { AuthService } from '../usuario/auth.service';
 
 const moment = _rollupMoment || _moment;
 export const MY_FORMATS = {
@@ -42,9 +43,10 @@ export class FacturaComponent implements OnInit {
   public facturasFiltradas: Array<Factura> = [];
   public filtroFecha: Date = new Date();
   public estadoFactura: string;
+  public factura: Factura = new Factura();
 
   constructor(public facturaService: FacturaService
-    , public dialog: MatDialog) { }
+    , public dialog: MatDialog, public authService: AuthService, private router: Router) { }
 
 
   date = new FormControl(moment());
@@ -172,5 +174,20 @@ export class FacturaComponent implements OnInit {
     } else {
       this.facturasFiltradas = this.facturas;
     }
+  }
+
+
+  registrarPago(factura){
+    this.factura = factura;
+    this.factura.estadoFactura = 'PA';
+    this.facturaService.update(this.factura).subscribe(factura => {
+      this.router.navigate(['/facturas'])
+      Swal.fire({
+        title: 'Actualizar pago factura!',
+        text: `Pago de la factura ${this.factura.id} realizado con exito`,
+        type: 'success',
+        confirmButtonText: 'Aceptar'
+      })
+    })
   }
 }

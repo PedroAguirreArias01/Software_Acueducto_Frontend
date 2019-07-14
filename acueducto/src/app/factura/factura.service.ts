@@ -8,6 +8,7 @@ import { Factura } from './Factura';
 import { Predio } from '../predios/Predio';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
+import { AuthService } from '../usuario/auth.service';
 
 @Injectable({
   providedIn: 'root'
