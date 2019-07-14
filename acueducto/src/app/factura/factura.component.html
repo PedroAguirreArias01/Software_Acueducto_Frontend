@@ -73,9 +73,10 @@
                             <td>{{factura.periodoFacturado | date:"MM/yyyy"}}</td>
                             <td>{{factura.estadoFactura}}</td>
                             <td>{{factura.granTotal | currency}}</td>
-                            <td><button class="btn btn-danger mx-2" type="button" (click)="eliminar(factura)">X</button>
+                            <td>
                                 <button class="btn btn-success mx-2" type="button" (click)="open(factura)"> Ver</button>
-                                <button class="btn btn-primary" *ngIf="(factura.estadoFactura !=='PA')" [routerLink]="['/facturaForm/form',factura.id]">Editar</button>
+                                <button *ngIf="" class="btn btn-primary" *ngIf="(factura.estadoFactura !=='PA') && authService.hasRole('ROLE_ADMIN')"
+                                    [routerLink]="['/facturaForm/form',factura.id]">Editar</button>
                             </td>
                         </tr>
                         <tr *ngIf="!facturasFiltradas || !facturasFiltradas.length">

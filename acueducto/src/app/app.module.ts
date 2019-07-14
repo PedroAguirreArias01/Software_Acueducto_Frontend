@@ -100,7 +100,7 @@ const routes: Routes = [
   },
   {
     path: 'predios', component: PrediosComponent,
-    canActivate: [AuthGuard, RoleGuard], data: { role: 'ROLE_ADMIN' }
+    canActivate: [AuthGuard, RoleGuard], data: { role: 'ROLE_ADMIN,ROLE_FONTANERO,ROLE_TESORERO' }
   },
   {
     path: 'prediosform', component: PrediosFormComponent,
@@ -112,7 +112,7 @@ const routes: Routes = [
   },
   {
     path: 'tarifas', component: TarifaComponent,
-    canActivate: [AuthGuard, RoleGuard], data: { role: 'ROLE_FONTANERO' }
+    canActivate: [AuthGuard, RoleGuard], data: { role: 'ROLE_ADMIN,ROLE_FONTANERO,ROLE_TESORERO' }
   },
   {
     path: 'tarifasForm', component: TarifaFormComponent,
@@ -136,7 +136,7 @@ const routes: Routes = [
   },
   {
     path: 'lugares', component: LugarComponent,
-    canActivate: [AuthGuard, RoleGuard], data: { role: 'ROLE_ADMIN' }
+    canActivate: [AuthGuard, RoleGuard], data: { role: 'ROLE_ADMIN,ROLE_FONTANERO,ROLE_TESORERO' }
   },
   {
     path: 'lugarForm', component: LugarFormComponent,
@@ -148,7 +148,7 @@ const routes: Routes = [
   },
   {
     path: 'facturas', component: FacturaComponent,
-    canActivate: [AuthGuard, RoleGuard], data: { role: 'ROLE_ADMIN' }
+    canActivate: [AuthGuard, RoleGuard], data: { role: 'ROLE_ADMIN,ROLE_FONTANERO,ROLE_TESORERO' }
   },
   {
     path: 'facturaForm', component: FacturaFormComponent,

@@ -13,7 +13,7 @@ import { AuthService } from './auth.service';
 })
 export class UsuarioService {
 
-  private urlEndPoint: string = 'http://localhost:8080/empleados/';
+  private urlEndPoint: string = 'http://localhost:8080/usuarios/';
 
   private httpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' })
 

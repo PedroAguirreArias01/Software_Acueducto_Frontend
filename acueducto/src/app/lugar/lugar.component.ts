@@ -3,6 +3,7 @@ import { Lugar } from './lugar';
 import { LugarService } from './lugar.service';
 import Swal from 'sweetalert2';
 import { Router, ActivatedRoute } from "@angular/router";
+import { AuthService } from '../usuario/auth.service';
 
 @Component({
   selector: 'app-lugar',
@@ -13,9 +14,12 @@ export class LugarComponent implements OnInit {
 
   private lugares: Lugar[];
   private lugar: Lugar;
-  public pageActual: number=1;
-  
-  constructor(private lugarService: LugarService, private router:Router, private activatedRoute: ActivatedRoute) { }
+  public pageActual: number = 1;
+
+  constructor(private lugarService: LugarService,
+    private authService: AuthService,
+    private router: Router,
+    private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
     this.lugarService.get().subscribe(
