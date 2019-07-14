@@ -13,7 +13,6 @@ export class Predio implements Deserialize {
     public suscriptor: Suscriptor;
     public facturas: Factura[];
     public estado: string;
-    public estadoPredio: string;
 
     deserialize(input: any) {
         Object.assign(this, input);
