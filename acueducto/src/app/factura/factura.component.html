@@ -75,7 +75,7 @@
                             <td>{{factura.granTotal | currency}}</td>
                             <td>
                                 <button class="btn btn-success mx-2" type="button" (click)="open(factura)"> Ver</button>
-                                <button *ngIf="" class="btn btn-primary" *ngIf="(factura.estadoFactura !=='PA') && authService.hasRole('ROLE_ADMIN')"
+                                <button class="btn btn-primary" *ngIf="factura.estadoFactura !=='PA' && authService.hasRole('ROLE_ADMIN')"
                                     [routerLink]="['/facturaForm/form',factura.id]">Editar</button>
                             </td>
                         </tr>
