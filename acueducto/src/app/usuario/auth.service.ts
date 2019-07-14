@@ -55,7 +55,6 @@ export class AuthService {
     params.set('username', empleado.usuario);
     params.set('password', empleado.contrasena);
 
-    console.log(params.toString());
     return this.http.post(this.urlEndPoint, params.toString(), { headers: this.httpHeaders });
   }
 
@@ -70,6 +69,7 @@ export class AuthService {
     this._empleado.apellido = payload.apellido;
     //Atributos del payload se llaman así por oauth
     this._empleado.usuario = payload.user_name;
+    this._empleado.foto = payload.foto;
     this._empleado.roles = payload.authorities;
     //Session storage solo deja guardar strings, por eso se utiliza el método de la clase JSON
     sessionStorage.setItem('usuario', JSON.stringify(this._empleado));
