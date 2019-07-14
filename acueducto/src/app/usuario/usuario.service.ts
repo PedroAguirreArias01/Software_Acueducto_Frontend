@@ -15,18 +15,16 @@ export class UsuarioService {
 
   private urlEndPoint: string = 'http://localhost:8080/usuarios/';
 
-  private httpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' })
-
-  constructor(private http: HttpClient, private router: Router, private authService: AuthService) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
    //Agrega la cabecera del Authorization a los recursos protegidos
-   private addAuthorizationHeader() {
-    let token = this.authService.token;
-    if (token != null) {
-      return this.httpHeaders.append('Authorization', ' Bearer' + token);
-    }
-    return this.httpHeaders;
-  }
+  //  private addAuthorizationHeader() {
+  //   let token = this.authService.token;
+  //   if (token != null) {
+  //     return this.httpHeaders.append('Authorization', ' Bearer' + token);
+  //   }
+  //   return this.httpHeaders;
+  // }
 
 
   private isNotAuthorized(e): boolean {
@@ -46,7 +44,7 @@ export class UsuarioService {
   }
 
   create(empleado: Usuario): Observable<Usuario> {
-    return this.http.post<Usuario>(this.urlEndPoint, empleado, { headers: this.httpHeaders }).pipe(
+    return this.http.post<Usuario>(this.urlEndPoint, empleado).pipe(
       map((response: any) => response.empleado as Usuario),
       catchError(e => {
         console.log(e.error.mensaje);
@@ -57,7 +55,7 @@ export class UsuarioService {
   }
 
   delete(cedula: string): Observable<Usuario> {
-    return this.http.delete<Usuario>(`${this.urlEndPoint}${cedula}`, { headers: this.httpHeaders }).pipe(
+    return this.http.delete<Usuario>(`${this.urlEndPoint}${cedula}`).pipe(
       catchError(e => {
         console.log(e.error.mensaje);
         Swal.fire('Error ', e.error.mensaje, 'error');
@@ -79,7 +77,7 @@ export class UsuarioService {
   }
 
   update(empleado: Usuario): Observable<Usuario> {
-    return this.http.put<Usuario>(`${this.urlEndPoint}${empleado.cedula}`, empleado, { headers: this.httpHeaders }).pipe(
+    return this.http.put<Usuario>(`${this.urlEndPoint}${empleado.cedula}`, empleado).pipe(
       map((response: any) => response.empleado as Usuario),
       catchError(e => {
         console.log(e.error.mensaje);
@@ -95,16 +93,9 @@ export class UsuarioService {
     formData.append("foto", foto);
     formData.append("cedula", cedula);
 
-    let httpHeaders = new HttpHeaders();
-    let token = this.authService.token;
-    if(token!=null){
-     httpHeaders = httpHeaders.append('Authorization','Bearer '+token);
-    }
-
     //Habilitita seguimiento de progreso de subida
-    const req = new HttpRequest('POST', `${this.urlEndPoint}/cargarFoto`,formData, {
+    const req = new HttpRequest('POST', `${this.urlEndPoint}cargarFoto`,formData, {
       reportProgress: true,
-      headers: httpHeaders
     });
 
     return this.http.request(req).pipe(

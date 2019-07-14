@@ -24,7 +24,7 @@
       <tbody>
         <tr *ngFor="let empleado of empleados | paginate: { itemsPerPage: 7, currentPage: pageActual}">
           <td> <img (click)="abrirModal(empleado)" *ngIf="empleado?.foto"
-              src="http://localhost:8080/empleados/uploads/img/{{empleado.foto}}" alt="" class="img-thumbnail rounded-circle"
+              src="http://localhost:8080/usuarios/uploads/img/{{empleado.foto}}" alt="" class="img-thumbnail rounded-circle"
               style="width:64px;height:64px;cursor:pointer;">
               <img (click)="abrirModal(empleado)" *ngIf="!empleado?.foto"
               src="http://localhost:8080/images/user.png" alt="Sin foto" class="img-thumbnail rounded-circle"
