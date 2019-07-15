@@ -5,6 +5,7 @@ import Swal from 'sweetalert2';
 import { PredioService } from './predio.service';
 import { Suscriptor } from '../suscriptores/Suscriptor';
 import { ModalService } from '../suscriptores/detalle-suscriptor/modal.service';
+import { AuthService } from '../usuario/auth.service';
 
 @Component({
   selector: 'app-predios',
@@ -18,7 +19,9 @@ export class PrediosComponent implements OnInit {
   public prediosFiltrados: Array<Predio> = [];
   private predioSeleccionado: Predio;
 
-  constructor(private predioService: PredioService, private router: Router, private activatedRoute: ActivatedRoute, private modalService: ModalService) { }
+  constructor(private predioService: PredioService, private router: Router, 
+    private activatedRoute: ActivatedRoute, private modalService: ModalService,
+    public authService: AuthService) { }
 
   ngOnInit() {
     this.predioService.get().subscribe(
@@ -48,7 +51,7 @@ export class PrediosComponent implements OnInit {
       if (result.value) {
         this.predioService.delete(predio.numeroMatricula).subscribe(
           response => {
-            this.predios = this.predios.filter(pre => pre !== predio)
+            this.prediosFiltrados = this.predios.filter(pre => pre !== predio)
             Swal.fire(
               'Predio Eliminado!',
               `Predio ${predio.numeroMatricula} eliminado con éxito.`,
@@ -61,7 +64,6 @@ export class PrediosComponent implements OnInit {
   }
 
   filter(data: string) {
-    console.log('sisiissiisisisisisisis')
     if (data) {
       this.prediosFiltrados = this.predios.filter((predio: Predio) => {
         return predio.nombre.toLowerCase().indexOf(data.toLowerCase()) > -1 ||

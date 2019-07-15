@@ -154,8 +154,8 @@ export class FacturaComponent implements OnInit {
       this.facturasFiltradas = this.facturas.filter((factura: Factura) => {
         let dateFac = new Date(factura.periodoFacturado);
         var monthFac = dateFac.getUTCMonth() + 1; //months from 1-12
-      var yearFac = dateFac.getUTCFullYear();
-        if ((month === monthFac) && (year=== yearFac)) {
+        var yearFac = dateFac.getUTCFullYear();
+        if ((month === monthFac) && (year === yearFac)) {
           return factura;
         }
       });
@@ -166,7 +166,7 @@ export class FacturaComponent implements OnInit {
   }
 
 
-  filterFacturasEstado(data: string){
+  filterFacturasEstado(data: string) {
     if (data && (data != 'todo')) {
       this.facturasFiltradas = this.facturas.filter((factura: Factura) => {
         return factura.estadoFactura.toLowerCase().indexOf(data.toLowerCase()) > -1;
@@ -177,17 +177,35 @@ export class FacturaComponent implements OnInit {
   }
 
 
-  registrarPago(factura){
-    this.factura = factura;
-    this.factura.estadoFactura = 'PA';
-    this.facturaService.update(this.factura).subscribe(factura => {
-      this.router.navigate(['/facturas'])
-      Swal.fire({
-        title: 'Actualizar pago factura!',
-        text: `Pago de la factura ${this.factura.id} realizado con exito`,
-        type: 'success',
-        confirmButtonText: 'Aceptar'
-      })
+  registrarPago(factura) {
+    Swal.fire({
+      title: 'Está seguro?',
+      text: `¿Seguro que desea generar el pago a la factura ${factura.id}?`,
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, Generar pago!',
+      cancelButtonText: 'No, cancelar!',
+      confirmButtonClass: 'btn btn-success',
+      cancelButtonClass: 'btn btn-danger',
+      buttonsStyling: false,
+      reverseButtons: true
+    }).then((result) => {
+      if (result.value) {
+        this.factura = factura;
+        this.factura.estadoFactura = 'PA';
+        this.facturaService.update(this.factura).subscribe(factura => {
+          this.router.navigate(['/facturas'])
+          Swal.fire({
+            title: 'Actualizar pago factura!',
+            text: `Pago de la factura ${this.factura.id} realizado con exito`,
+            type: 'success',
+            confirmButtonText: 'Aceptar'
+          })
+        })
+
+      }
     })
   }
 }
