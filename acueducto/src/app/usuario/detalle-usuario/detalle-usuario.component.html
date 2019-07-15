@@ -4,7 +4,7 @@
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Detalle Empleado</h5>
+        <h5 class="modal-title">Detalle Usuario</h5>
         <button type="button" class="close" (click)="cerrarModal()" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -13,19 +13,45 @@
         <div class="container">
           <div class="row">
 
-            <div class="col-sm">
-              <ul *ngIf="empleado" class="list-group mb-3">
+            <div class="col-sm-6">
+              <label for="fotoPerfil">Foto de perfil</label>
+              <img *ngIf="empleado?.foto" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true"
+                aria-expanded="false" src="http://localhost:8080/usuarios/uploads/img/{{empleado.foto}}" alt=""
+                class="img-thumbnail rounded-circle" style="width:300px;height:300px;">
+              <img *ngIf="!empleado?.foto" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true"
+                aria-expanded="false" src="http://localhost:8080/images/user.png" alt="Sin foto"
+                class="img-thumbnail rounded-circle" style="width:300px;height:300px;">
+            </div>
+
+            <div class="col-sm-6">
+              <div class="form-group row  my-0">
+                <label for="Nombre">Nombres y Apellidos</label>
+                <input type="text" value="{{empleado.nombre}}  {{empleado.apellido}}" class="form-control" readonly>
+              </div>
+              <div class="form-group row  my-0">
+                <label for="cedula">Cedula</label>
+                <input type="text" value="{{empleado.cedula}}" class="form-control " readonly>
+              </div>
+              <div class="form-group row  my-0">
+                <label for="direccionResidencia">Dirección Residencia</label>
+                <input type="text" value="{{empleado.direccionResidencia}}" class="form-control" readonly>
+              </div>
+              <div class="form-group row ">
+                <label for="fechaNacimiento">Fecha Nacimiento</label>
+                <input type="text" value="{{empleado.fechaNacimiento | date: 'dd, MMMM  yyyy'}}" class="form-control" readonly>
+              </div>
+              <!-- <ul *ngIf="empleado" class="list-group mb-3">
                 <li class="list-group-item">{{empleado.nombre}} {{empleado.apellido}}</li>
                 <li class="list-group-item">{{empleado.cedula}}</li>
                 <li class="list-group-item">{{empleado.usuario}}</li>
                 <li class="list-group-item">{{empleado.direccionResidencia}}</li>
                 <li class="list-group-item">{{empleado.fechaNacimiento | date: "dd, MMMM  yyyy"}}</li>
-
-              </ul>
+              </ul> -->
               <div class="input-group mb-3">
                 <div class="custom-file">
                   <input (change)="seleccionarFoto($event)" type="file" class="custom-file-input" id="seleccionarFoto">
-                  <label  for="seleccionarFoto" class="custom-file-label" for="seleccionarFoto">{{fotoSeleccionada? fotoSeleccionada.name: 'Seleccionar Foto' }}</label>
+                  <label for="seleccionarFoto" class="custom-file-label"
+                    for="seleccionarFoto">{{fotoSeleccionada? fotoSeleccionada.name: 'Seleccionar Foto' }}</label>
                 </div>
                 <div class="input-group-append">
                   <button (click)="subirFoto()" [disabled]="!fotoSeleccionada" class="btn btn-outline-secondary"
@@ -42,10 +68,7 @@
 
             </div>
 
-            <div class="col-sm">
-              <img *ngIf="empleado?.foto" src="http://localhost:8080/usuarios/uploads/img/{{empleado.foto}}" alt=""
-                class="img-thumbnail rounded">
-            </div>
+
           </div>
         </div>
       </div>

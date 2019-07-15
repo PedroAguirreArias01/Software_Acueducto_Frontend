@@ -18,7 +18,7 @@
           <th>Apellido</th>
           <th>direccionResidencia</th>
           <th>Tipo Usuario</th>
-          <th></th>
+          <th>Acciones</th>
         </tr>
       </thead>
       <tbody>
@@ -34,7 +34,9 @@
           <td>{{empleado.nombre}}</td>
           <td>{{empleado.apellido}}</td>
           <td>{{empleado.direccionResidencia}}</td>
-          <td>{{empleado.tipoEmpleado}}</td>
+          <td  *ngIf="empleado.tipoEmpleado === 'ROLE_ADMIN'">Administrador</td>
+          <td  *ngIf="empleado.tipoEmpleado === 'ROLE_TESORERO'">Tesorero</td>
+          <td  *ngIf="empleado.tipoEmpleado === 'ROLE_FONTANERO'">Fontanero</td>
           <td class="empleado">
             <button type="button" class="btn btn-info mx-2" [routerLink]="['/usuarios/form',empleado.cedula]">
               <span class="glyphicon glyphicon-pencil"></span>Editar

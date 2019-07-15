@@ -193,8 +193,6 @@ export class FacturaComponent implements OnInit {
       reverseButtons: true
     }).then((result) => {
       if (result.value) {
-        this.factura = factura;
-        this.factura.estadoFactura = 'PA';
         this.facturaService.update(this.factura).subscribe(factura => {
           this.router.navigate(['/facturas'])
           Swal.fire({

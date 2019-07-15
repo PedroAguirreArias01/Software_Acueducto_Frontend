@@ -30,7 +30,7 @@
           <th>Nombre</th>
           <th>Estrato</th>
           <th>Vereda</th>
-          <th>Estado</th>
+          <!--<th>Estado</th>-->
           <th>Acciones</th>
         </tr>
       </thead>
@@ -40,7 +40,7 @@
           <td>{{predio.nombre}}</td>
           <td>{{predio.estrato}}</td>
           <td>{{predio.vereda.nombre}}</td>
-          <td>{{predio.estado}}</td>
+          <!--<td>{{predio.estado}}</td>-->
           <td class="predio">
             <button *ngIf="authService.hasRole('ROLE_ADMIN')" type="button" class="btn btn-info mx-2" [routerLink]="['/prediosForm/form',predio.numeroMatricula]">
               <span class="glyphicon glyphicon-pencil"></span>Editar

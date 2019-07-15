@@ -78,7 +78,9 @@
                             <td>{{factura.predio.nombre}}</td>
                             <td>{{factura.fechaEmision}}</td>
                             <td>{{factura.periodoFacturado | date:"MM/yyyy"}}</td>
-                            <td>{{factura.estadoFactura}}</td>
+                            <td *ngIf="factura.estadoFactura === 'PP'">Pendiente de pago</td>
+                            <td *ngIf="factura.estadoFactura === 'PA'">Pagada</td>
+                            <td *ngIf="factura.estadoFactura === 'VE'">Vencida</td>
                             <td>{{factura.granTotal | currency}}</td>
                             <td>
                                 <button class="btn btn-success mx-2" type="button" (click)="open(factura)"> Ver</button>
