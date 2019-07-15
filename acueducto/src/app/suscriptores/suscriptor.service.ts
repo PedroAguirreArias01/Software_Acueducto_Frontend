@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Suscriptor } from './Suscriptor';
 import { Observable, throwError } from 'rxjs';
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { map, catchError } from 'rxjs/operators';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
@@ -13,6 +13,9 @@ import { Predio } from '../predios/Predio';
 export class SuscriptorService {
 
   private urlEndPoint: string = 'http://localhost:8080/suscriptores/';
+
+  private httpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' })
+
 
   constructor(private http: HttpClient, private router: Router) { }
 
@@ -84,7 +87,7 @@ export class SuscriptorService {
         if (e.status != 401 && e.error.mensaje) {
           this.router.navigate(['/suscriptores']);
         }
-        
+
         Swal.fire('Error ', e.error.mensaje, 'error');
         return throwError(e);
       })
@@ -107,5 +110,13 @@ export class SuscriptorService {
     return this.http.get<Predio[]>(`${this.urlEndPoint}${cedula}` + '/predios').pipe(
       map(response => response as Predio[])
     );
+  }
+
+
+  generarReporte(): Observable<Blob> {
+    let headers = new HttpHeaders();
+    headers = headers.set('Accept', 'application/pdf');
+    console.log('hai2u');
+    return this.http.get<Blob>(`${this.urlEndPoint}` + 'reporte', { responseType: 'blob' as 'json' });
   }
 }
