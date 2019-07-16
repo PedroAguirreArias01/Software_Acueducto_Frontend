@@ -160,7 +160,8 @@ const routes: Routes = [
     canActivate: [AuthGuard, RoleGuard], data: { role: 'ROLE_ADMIN' }
   },
   { path: 'login', component: LoginComponent },
-  { path: 'dashboard', component: DashboardComponent }
+  { path: 'dashboard', component: DashboardComponent },
+  { path: 'reportes', component: ReportesComponent},
 
 ];
 
