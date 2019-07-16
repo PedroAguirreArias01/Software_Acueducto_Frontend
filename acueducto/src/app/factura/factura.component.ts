@@ -44,6 +44,7 @@ export class FacturaComponent implements OnInit {
   public filtroFecha: Date = new Date();
   public estadoFactura: string;
   public factura: Factura = new Factura();
+  public urlReport: any;
 
   constructor(public facturaService: FacturaService
     , public dialog: MatDialog, public authService: AuthService, private router: Router) { }
@@ -156,13 +157,6 @@ export class FacturaComponent implements OnInit {
         var monthFac = dateFac.getUTCMonth() + 1; //months from 1-12
         var yearFac = dateFac.getUTCFullYear();
         if ((month === monthFac) && (year === yearFac)) {
-        
-          this.facturaService.report(this.filtroFecha).subscribe(
-            facturas => {
-               console.log(facturas)
-              
-            }
-          );
           return factura;
         }
       });
@@ -172,6 +166,13 @@ export class FacturaComponent implements OnInit {
 
   }
 
+  downloadReporte(){
+    if(this.filtroFecha){
+      this.filtroFecha = new Date(this.filtroFecha.getFullYear(), this.filtroFecha.getMonth(), 1);
+      this.urlReport = 'http://localhost:8080/facturas/reportes/periodoFacturado/'+this.filtroFecha.toISOString();
+      this.router.navigate([this.urlReport]);
+    }
+  }
 
   filterFacturasEstado(data: string) {
     if (data && (data != 'todo')) {

@@ -51,7 +51,7 @@ export class FacturaService {
 
   report(periodoFacturado: Date): Observable<Factura>{
     periodoFacturado = new Date(periodoFacturado.getFullYear(), periodoFacturado.getMonth(), 1);
-    return this.http.get<Factura>(this.urlEndPoint+'prueba', {
+    return this.http.get<Factura>(this.urlEndPoint+'reportes', {
       params: new HttpParams().set('periodoFacturado',periodoFacturado.toISOString())
     });
   }
