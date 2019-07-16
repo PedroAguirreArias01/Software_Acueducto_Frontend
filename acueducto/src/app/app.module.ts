@@ -161,7 +161,7 @@ const routes: Routes = [
   },
   { path: 'login', component: LoginComponent },
   { path: 'dashboard', component: DashboardComponent },
-  { path: 'reportes', component: ReportesComponent},
+  { path: 'reportes', component: ReportesComponent, data: { role: 'ROLE_ADMIN' }},
 
 ];
 
