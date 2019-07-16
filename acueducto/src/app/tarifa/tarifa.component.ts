@@ -6,6 +6,7 @@ import { TarifaService } from './tarifa.service';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { MatDialog } from '@angular/material';
 import { HistorialTarifaModalComponent } from './historial-tarifa-modal/historial-tarifa-modal.component';
+import { AuthService } from '../usuario/auth.service';
 
 @Component({
   selector: 'app-tarifa',
@@ -19,7 +20,9 @@ export class TarifaComponent implements OnInit {
   private tarifa: Tarifa;
   public pageActual: number=1;
   constructor(private tarifaService: TarifaService, private router:Router, 
-    private activatedRoute: ActivatedRoute, config: NgbModalConfig, private modalService: NgbModal, public dialog: MatDialog) {
+    private activatedRoute: ActivatedRoute, config: NgbModalConfig, 
+    private modalService: NgbModal, public dialog: MatDialog,
+    public authService: AuthService) {
       config.backdrop = 'static';
       config.keyboard = false;
      }
