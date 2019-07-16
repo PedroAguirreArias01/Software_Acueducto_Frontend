@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     if(this.authService.isAuthenticated()){
-      this.router.navigate(['/suscriptores'])
+      this.router.navigate([''])
     }
   }
 
@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit {
 
         let empleado = this.authService.empleado;
 
-        this.router.navigate(['/suscriptores']);
+        this.router.navigate(['']);
         Swal.fire('Bienvenido',`${empleado.usuario},  has iniciado sesión con éxito`,'success');
       },err =>{
         //Este error se da cuando las credenciales no corresponden a algún usuario registrado
@@ -51,7 +51,5 @@ export class LoginComponent implements OnInit {
       }
      );
   }
-
-
 
 }
