@@ -193,7 +193,7 @@ const routes: Routes = [
     FilterPrediosComponent,
     FilterSuscriptoresComponent,
     DashboardComponent,
-    ReportesComponent,
+    ReportesComponent
   ],
   imports: [
     BrowserModule,
