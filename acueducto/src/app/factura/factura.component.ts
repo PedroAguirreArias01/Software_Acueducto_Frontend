@@ -156,6 +156,12 @@ export class FacturaComponent implements OnInit {
         var monthFac = dateFac.getUTCMonth() + 1; //months from 1-12
         var yearFac = dateFac.getUTCFullYear();
         if ((month === monthFac) && (year === yearFac)) {
+          this.facturaService.report(this.filtroFecha).subscribe(
+            facturas => {
+               console.log(facturas)
+              
+            }
+          );
           return factura;
         }
       });

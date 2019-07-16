@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { of } from 'rxjs';
-import { HttpClient, HttpEvent, HttpRequest } from "@angular/common/http";
+import { HttpClient, HttpEvent, HttpRequest, HttpParams } from "@angular/common/http";
 import { HttpHeaders } from '@angular/common/http';
 import { map, debounceTime, catchError } from 'rxjs/operators';
 import { Factura } from './Factura';
@@ -49,6 +49,12 @@ export class FacturaService {
     return this.http.put<Factura>(`${this.urlEndPoint}${factura.id}`, factura)
   }
 
+  report(periodoFacturado: Date): Observable<Factura>{
+    return this.http.get<Factura>(this.urlEndPoint+'prueba', {
+      params: new HttpParams().set('periodoFacturado',periodoFacturado.toISOString())
+    });
+    console.log('eeee'+ periodoFacturado.toISOString());
+  }
 
   getFactura(id: number): Observable<Factura> {
     return this.http.get<Factura>(`${this.urlEndPoint}${id}`).pipe(

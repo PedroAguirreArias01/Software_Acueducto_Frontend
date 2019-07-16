@@ -41,6 +41,23 @@
               </div>
             </div>
             <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                  <div class="card-header card-header-info card-header-icon">
+                    <div class="card-icon">
+                        <i class="material-icons">monetization_on</i>
+                    </div>
+                    <p class="card-category">Total Ingresos</p>
+                    <h4 class="card-title text-danger">$ 1'245.000</h4>
+                  </div>
+                  <div class="card-footer">
+                    <div class="stats">
+                        <i class="material-icons">money_off</i>
+                        <a href='/facturas'>Ver Facturas</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
               <div class="card card-stats">
                 <div class="card-header card-header-danger card-header-icon">
                   <div class="card-icon">
@@ -59,22 +76,7 @@
                 </div>
               </div>
             </div>
-            <div class="col-lg-3 col-md-6 col-sm-6">
-              <div class="card card-stats">
-                <div class="card-header card-header-info card-header-icon">
-                  <div class="card-icon">
-                    <i class="fa fa-twitter"></i>
-                  </div>
-                  <p class="card-category">Followers</p>
-                  <h3 class="card-title">+245</h3>
-                </div>
-                <div class="card-footer">
-                  <div class="stats">
-                    <i class="material-icons">update</i> Just Updated
-                  </div>
-                </div>
-              </div>
-            </div>
+            
           </div>
         </div>
       </div>
@@ -96,36 +98,28 @@
                 <th>Vereda</th>
               </thead>
               <tbody>
-                <tr>
-                  <td>1</td>
-                  <td>Dakota Rice</td>
-                  <td>$36,738</td>
-                  <td>083-3566484746</td>
-                  <td>Monsalve</td>
+                <tr  *ngFor="let factura of facturasPendPago | paginate: { itemsPerPage: 5, currentPage: pageActual}">
+                  <td>{{factura.id}}</td>
+                  <td>{{factura.predio.suscriptor.nombre}}  {{factura.predio.suscriptor.apellido}}</td>
+                  <td>{{factura.granTotal | currency}}</td>
+                  <td>{{factura.predio.numeroMatricula}}</td>
+                  <td>{{factura.predio.vereda.nombre}}</td>
                 </tr>
-                <tr>
-                  <td>2</td>
-                  <td>Minerva Hooper</td>
-                  <td>$23,789</td>
-                  <td>083-3566484746</td>
-                  <td>Potrero Grande</td>
-                </tr>
-                <tr>
-                  <td>3</td>
-                  <td>Sage Rodriguez</td>
-                  <td>$56,142</td>
-                  <td>083-3566484746</td>
-                  <td>Pila Grande</td>
-                </tr>
-                <tr>
-                  <td>4</td>
-                  <td>Philip Chaney</td>
-                  <td>$38,735</td>
-                  <td>083-3566484746</td>
-                  <td>Monsalve</td>
+                <tr *ngIf="!facturasPendPago || !facturasPendPago.length">
+                    <td colspan="6">No se encontraron facturas pendientes de pago!</td>
                 </tr>
               </tbody>
             </table>
+          </div>
+          <div class="row">
+              <div class="col-sm-9">
+                  <pagination-controls (pageChange)="pageActual = $event" *ngIf="suscriptores?.length != 0">
+                  </pagination-controls>
+              </div>
+
+              <div class="col-sm-3">
+                  Número de facturas: {{ facturasPendPago.length }}
+              </div>
           </div>
         </div>
       </div>
