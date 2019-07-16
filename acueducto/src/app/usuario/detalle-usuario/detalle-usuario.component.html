@@ -40,13 +40,6 @@
                 <label for="fechaNacimiento">Fecha Nacimiento</label>
                 <input type="text" value="{{empleado.fechaNacimiento | date: 'dd, MMMM  yyyy'}}" class="form-control" readonly>
               </div>
-              <!-- <ul *ngIf="empleado" class="list-group mb-3">
-                <li class="list-group-item">{{empleado.nombre}} {{empleado.apellido}}</li>
-                <li class="list-group-item">{{empleado.cedula}}</li>
-                <li class="list-group-item">{{empleado.usuario}}</li>
-                <li class="list-group-item">{{empleado.direccionResidencia}}</li>
-                <li class="list-group-item">{{empleado.fechaNacimiento | date: "dd, MMMM  yyyy"}}</li>
-              </ul> -->
               <div class="input-group mb-3">
                 <div class="custom-file">
                   <input (change)="seleccionarFoto($event)" type="file" class="custom-file-input" id="seleccionarFoto">
@@ -65,10 +58,7 @@
                   {{progreso}}%
                 </div>
               </div>
-
             </div>
-
-
           </div>
         </div>
       </div>
