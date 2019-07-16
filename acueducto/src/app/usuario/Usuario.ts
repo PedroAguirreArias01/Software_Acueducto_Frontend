@@ -1,4 +1,5 @@
 import { Lugar } from '../lugar/lugar';
+import { Rol } from './roles';
 
 export class Usuario {
     public cedula: string;
@@ -11,6 +12,6 @@ export class Usuario {
     public genero: string;
     public direccionResidencia: string;
     public lugarResidencia: Lugar;
-    public roles: string[] = [];
+    public rol: Rol;
     public foto: string;
 }

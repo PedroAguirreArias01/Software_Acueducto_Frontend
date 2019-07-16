@@ -7,6 +7,7 @@ import Swal from 'sweetalert2';
 import { Suscriptor } from '../suscriptores/Suscriptor';
 import { Router } from '@angular/router';
 import { AuthService } from './auth.service';
+import { Rol } from './roles';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ import { AuthService } from './auth.service';
 export class UsuarioService {
 
   private urlEndPoint: string = 'http://localhost:8080/usuarios/';
-
+  private urlEndPointRol: string = 'http://localhost:8080/usuarios/roles';
   constructor(private http: HttpClient, private router: Router) { }
 
    //Agrega la cabecera del Authorization a los recursos protegidos
@@ -103,6 +104,13 @@ export class UsuarioService {
         this.isNotAuthorized(e);
         return throwError(e);
       })
+    );
+  }
+
+
+  getRoles(): Observable<Rol[]> {
+    return this.http.get(this.urlEndPointRol).pipe(
+      map(response => response as Rol[])
     );
   }
 

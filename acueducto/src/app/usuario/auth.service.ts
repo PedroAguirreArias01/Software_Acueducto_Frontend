@@ -70,7 +70,7 @@ export class AuthService {
     //Atributos del payload se llaman así por oauth
     this._empleado.usuario = payload.user_name;
     this._empleado.foto = payload.foto;
-    this._empleado.roles = payload.authorities;
+    this._empleado.rol = payload.rol;
     //Session storage solo deja guardar strings, por eso se utiliza el método de la clase JSON
     sessionStorage.setItem('usuario', JSON.stringify(this._empleado));
 
@@ -101,8 +101,10 @@ export class AuthService {
   }
 
   hasRole(role: string):boolean{
+    console.log('rol: '+role);
+    console.log('rol empleado: '+this.empleado.rol.nombre);
     //Verifica en la instancia del usuario loggeado (si la hay) si tiene el rol especificado
-    return this.empleado.roles.includes(role);
+    return this.empleado.rol.nombre === role;
   }
 
 }

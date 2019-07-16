@@ -5,6 +5,7 @@ import { UsuarioService } from './usuario.service';
 import Swal from 'sweetalert2';
 import { Lugar } from '../lugar/lugar';
 import { LugarService } from '../lugar/lugar.service';
+import { Rol } from './roles';
 
 @Component({
   selector: 'app-usuario-form',
@@ -14,6 +15,7 @@ import { LugarService } from '../lugar/lugar.service';
 export class UsuarioFormComponent implements OnInit {
 
   public empleado: Usuario = new Usuario();
+  public roles: Rol[];
   public editar: boolean;
   public municipios: Lugar[];
   public passwordUser: string;
@@ -32,6 +34,8 @@ export class UsuarioFormComponent implements OnInit {
     if (!this.editar) {
       this.cargarEmpleado();
     }
+    this.getListaRoles();
+
   }
 
   onSubmit() {
@@ -93,10 +97,17 @@ export class UsuarioFormComponent implements OnInit {
 
   getListaMunicipios() {
     this.lugarService.getListaMunicipios().subscribe(
-      municipios => this.municipios = municipios
-    );
+      municipios =>{this.municipios = municipios
+      console.log(this.municipios);
+    } );
   }
 
+
+  getListaRoles() {
+    this.usuarioService.getRoles().subscribe(
+      roles => this.roles = roles
+    );
+  }
   //o1 -> del *ngFor
   //o2 -> asignado al empleado
   compararMunicipio(o1: Lugar, o2: Lugar) {
