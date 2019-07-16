@@ -81,6 +81,7 @@ import { RoleGuard } from './usuario/guards/role.guard';
 import { TokenInterceptor } from './usuario/interceptors/token.interceptor';
 import { AuthInterceptor } from './usuario/interceptors/auth.interceptor';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { ReportesComponent } from './reportes/reportes.component';
 
 registerLocaleData(localeES, 'es');
 
@@ -191,6 +192,7 @@ const routes: Routes = [
     FilterPrediosComponent,
     FilterSuscriptoresComponent,
     DashboardComponent,
+    ReportesComponent,
   ],
   imports: [
     BrowserModule,
