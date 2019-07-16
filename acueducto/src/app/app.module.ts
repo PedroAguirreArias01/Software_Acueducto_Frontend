@@ -153,7 +153,7 @@ const routes: Routes = [
   },
   {
     path: 'facturaForm', component: FacturaFormComponent,
-    canActivate: [AuthGuard, RoleGuard], data: { role: 'ROLE_ADMIN' }
+    canActivate: [AuthGuard, RoleGuard], data: { role: 'ROLE_ADMIN,ROLE_FONTANERO,ROLE_TESORERO' }
   },
   {
     path: 'facturaForm/form/:id', component: FacturaFormComponent,
