@@ -6,7 +6,7 @@
 
         <div class="form-group col-sm-12 my-5">
           <input [(ngModel)]="empleado.usuario" type="text" class="form-control" name="username" id="username"
-            placeholder="Nombre de usuario: " autofocus required #usuario="ngModel">
+            placeholder="Nombre de usuario " autofocus required #usuario="ngModel">
           <!-- Div exterior para saber si hay errores, divs interiores para mostrar cada uno de los errores -->
           <div class="alert alert-danger py-0" *ngIf="usuario.invalid && (usuario.dirty || usuario.touched)">
             <div *ngIf="usuario.errors.required">
@@ -17,7 +17,7 @@
   
       <div class="form-group col-sm-12 my-5">
         <input [(ngModel)]="empleado.contrasena" type="password" class="form-control" name="password" id="password"
-          placeholder="Contraseña: " required #password="ngModel">
+          placeholder="Contraseña " required #password="ngModel">
         <!-- Div exterior para saber si hay errores, divs interiores para mostrar cada uno de los errores -->
         <div class="alert alert-danger py-0" *ngIf="password.invalid && (password.dirty || password.touched)">
           <div *ngIf="password.errors.required">
