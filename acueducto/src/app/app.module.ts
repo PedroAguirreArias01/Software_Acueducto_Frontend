@@ -15,7 +15,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { NgxCurrencyModule } from 'ngx-currency';
 import { CommonModule } from '@angular/common';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
+//modulo de mapas
+import { AgmCoreModule } from '@agm/core';
 /*material */
 import {
   MatAutocompleteModule,
@@ -241,6 +242,10 @@ const routes: Routes = [
     MatToolbarModule,
     MatTooltipModule,
     ReactiveFormsModule,
+    //se agraga la key de google maps
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyCV764G10eDAD4olXBsZ6mzo5BlVsfDUuc'
+    })
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },

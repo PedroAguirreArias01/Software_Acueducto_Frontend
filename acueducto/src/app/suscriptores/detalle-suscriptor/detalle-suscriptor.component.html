@@ -126,7 +126,9 @@
                                 <td>Sin pagar</td>
                               </ng-template>
                               <td>{{factura.granTotal | currency}}</td>
-                              <td>{{factura.estadoFactura}}</td>
+                              <td *ngIf="factura.estadoFactura === 'PP'">Pendiente de pago</td>
+                            <td *ngIf="factura.estadoFactura === 'PA'">Pagada</td>
+                            <td *ngIf="factura.estadoFactura === 'VE'">Vencida</td>
                             </tr>
                           </tbody>
                         </table>

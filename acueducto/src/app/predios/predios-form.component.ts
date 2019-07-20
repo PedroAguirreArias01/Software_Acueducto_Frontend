@@ -19,6 +19,10 @@ export class PrediosFormComponent implements OnInit {
   public editar: boolean;
   public veredas: Lugar[];
   public suscriptores: Suscriptor[];
+  //datos para el mapa
+  public zoom: number = 17;
+  public lat: number = 4.0000000;
+  public lng: number = -72.0000000;
 
   constructor(private predioService: PredioService, private lugarService: LugarService, private suscriptorService: SuscriptorService, private router: Router, private activatedRoute: ActivatedRoute) { }
 
@@ -96,4 +100,11 @@ export class PrediosFormComponent implements OnInit {
   compararSuscriptor(o1: Suscriptor, o2: Suscriptor) {
     return (o1 == null || o2 == null) ? false : (o1.cedula === o2.cedula);
   }
+
+  placeMarker($event) {
+    console.log($event.coords.lat+'   '+ $event.coords.lng);
+    this.predio.latitud = $event.coords.lat;
+    this.predio.longitud = $event.coords.lng;
+  }
+
 }
