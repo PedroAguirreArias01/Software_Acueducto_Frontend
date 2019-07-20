@@ -98,7 +98,7 @@
             <tbody>
               <tr *ngFor="let detalle of data.factura.detallesFactura">
                 <td>{{detalle.tarifa.descripcion}}</td>
-                <td>{{detalle.tarifa.valorTarifa | currency}}</td>
+                <td>{{detalle.valor | currency}}</td>
                 <td>{{detalle.cantidad}}</td>
                 <td>{{detalle.valor | currency}}</td>
               </tr>

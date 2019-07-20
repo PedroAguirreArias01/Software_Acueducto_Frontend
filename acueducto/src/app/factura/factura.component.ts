@@ -201,11 +201,12 @@ export class FacturaComponent implements OnInit {
       reverseButtons: true
     }).then((result) => {
       if (result.value) {
-        this.facturaService.update(this.factura).subscribe(factura => {
+        factura.estadoFactura = "PA";
+        this.facturaService.update(factura).subscribe(factura => {
           this.router.navigate(['/facturas'])
           Swal.fire({
             title: 'Actualizar pago factura!',
-            text: `Pago de la factura ${this.factura.id} realizado con exito`,
+            text: `Pago de la factura ${factura.id} realizado con exito`,
             type: 'success',
             confirmButtonText: 'Aceptar'
           })

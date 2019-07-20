@@ -125,6 +125,7 @@ export class FacturaFormComponent implements OnInit {
     } else {
       let nuevoDetalle = new DetalleFactura();
       nuevoDetalle.tarifa = tarifa;
+      nuevoDetalle.valorUnitario = nuevoDetalle.tarifa.valorTarifa;
       this.factura.detallesFactura.push(nuevoDetalle);
     }
     this.myItem.setValue('');

@@ -46,7 +46,7 @@ export class FacturaService {
   }
 
   update(factura: Factura): Observable<Factura> {
-    return this.http.put<Factura>(`${this.urlEndPoint}${factura.id}`, factura)
+    return this.http.put<Factura>(`${this.urlEndPoint}${factura.id}`, factura);
   }
 
   report(periodoFacturado: Date): Observable<Factura>{
