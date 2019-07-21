@@ -16,7 +16,9 @@ export class DashboardComponent implements OnInit {
   public dashboardInfo: DashboardInfo;
 
 
-  constructor(private facturaService: FacturaService, private dashboardInfoService: DashboardInfoService) { }
+  constructor(private facturaService: FacturaService, private dashboardInfoService: DashboardInfoService) {
+    this.dashboardInfo = new DashboardInfo();
+   }
 
   ngOnInit() {
 

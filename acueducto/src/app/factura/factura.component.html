@@ -95,7 +95,7 @@
                     </tbody>
                 </table>
             </div>
-            <div class="row">
+            <div *ngIf="facturas.length>0" class="row">
                 <div class="col-sm-9">
                     <pagination-controls (pageChange)="pageActual = $event" *ngIf="suscriptores?.length != 0">
                     </pagination-controls>
@@ -105,7 +105,7 @@
                     Número de facturas: {{ facturasFiltradas.length }}
                 </div>
             </div>
-            <div class="modal-footer">
+            <div *ngIf="facturas.length>0"  class="modal-footer">
                 <a type="button" class="btn btn-secondary" href="http://localhost:8080/facturas/reportes/{{filtroFecha.toISOString()}}">Reporte Recaudos</a>
             </div>
         </div>

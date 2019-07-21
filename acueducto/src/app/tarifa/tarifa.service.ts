@@ -76,6 +76,8 @@ export class TarifaService {
   delete(id: number): Observable<Tarifa> {
     return this.http.delete<Tarifa>(`${this.urlEndPoint}${id}`).pipe(
       catchError(e => {
+        console.log(e.error.mensaje);
+        Swal.fire('Error ', e.error.mensaje, 'error');
         return throwError(e);
       })
     );

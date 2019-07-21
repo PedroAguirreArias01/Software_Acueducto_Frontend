@@ -68,7 +68,7 @@
         </tr>
       </tbody>
     </table>
-    <div class="row">
+    <div *ngIf="suscriptores.length>0" class="row">
         <div class="col-sm-9">
           <pagination-controls (pageChange)="pageActual = $event" *ngIf="suscriptoresFiltrados?.length != 0">
           </pagination-controls>
