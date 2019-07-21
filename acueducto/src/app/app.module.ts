@@ -246,7 +246,8 @@ const routes: Routes = [
     ReactiveFormsModule,
     //se agraga la key de google maps
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyCV764G10eDAD4olXBsZ6mzo5BlVsfDUuc'
+      apiKey: 'AIzaSyCV764G10eDAD4olXBsZ6mzo5BlVsfDUuc',
+      libraries: ['geometry']
     }),
     AgmDirectionModule 
   ],

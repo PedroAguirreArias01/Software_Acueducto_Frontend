@@ -7,7 +7,8 @@ import { LugarService } from '../lugar/lugar.service'
 import { Lugar } from '../lugar/lugar';
 import { SuscriptorService } from '../suscriptores/suscriptor.service';
 import { Suscriptor } from '../suscriptores/Suscriptor';
-import { GoogleMapsAPIWrapper } from '@agm/core';
+import { GoogleMapsAPIWrapper, InfoWindowManager } from '@agm/core';
+import {} from '@agm/core/services/google-maps-types'
 
 //mapss
 import { } from 'googlemaps';
@@ -29,6 +30,9 @@ export class PrediosFormComponent implements OnInit {
   public lng: number = -73.577350;
   public origin: any;
   public destination: any;
+  public markerOptions = { 
+    destination: {infoWindow: `<h3>Hello word</h3>`}};
+    public renderOptions = {suppressMarkers: true};
   //otro mapa
   // markers: Array<Object>
   // latitude: 4.0000000;
@@ -121,7 +125,17 @@ export class PrediosFormComponent implements OnInit {
     this.predio.latitud = $event.coords.lat;
     this.predio.longitud = $event.coords.lng;
     this.destination = { lat: this.predio.latitud, lng: this.predio.longitud };
+    this.calculateDistance();
   }
+
+  calculateDistance() {
+    const origin = new google.maps.LatLng(this.origin.lat, this.origin.lng);
+    const destination = new google.maps.LatLng(this.predio.latitud,this.predio.longitud );
+    const distance = google.maps.geometry.spherical.computeDistanceBetween(origin, destination);
+    console.log('distance: '+distance);
+  }
+
+
 
   //---------------------------mapas------------------------------------
   // initMap() {

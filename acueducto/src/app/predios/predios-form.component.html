@@ -81,44 +81,48 @@
       </div>
 
       <div class="form-group row">
-        <h3>Agregar Ubicacón predio</h3>
-        <div class="col-sm-12">
-          <!-- <div id="map" style="width:100%;height:600px">
+        <div class="container">
+
+          <div class="col-sm-12">
+            <h3 class="mb-2">Ubicación predio</h3>
+            <!-- <div id="map" style="width:100%;height:600px">
               </div> -->
-          <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" [mapTypeId]="'hybrid'"
-            (mapClick)="placeMarker($event)" style="width:100%;height:600px">
-            <agm-marker [latitude]="predio.latitud" [longitude]="predio.longitud">
-            </agm-marker>
-            <agm-direction [origin]="origin" [destination]="destination" [travelMode]="'WALKING'"> 
+            <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" [mapTypeId]="'hybrid'"
+              (mapClick)="placeMarker($event)" style="width:100%;height:600px">
+              <agm-direction [origin]="origin" [destination]="destination" [travelMode]="'WALKING'">
+
               </agm-direction>
-          </agm-map>
+            </agm-map>
+          </div>
         </div>
       </div>
 
       <div class="form-group row">
-        <div class="col-sm-6">
-          <label for="nombre" class="col-form-label col-sm-4">Latitud</label>
-          <input id="latitud" name="latitud" type="text" required [(ngModel)]="predio.latitud" #latitud="ngModel"
-            class="form-control">
-          <div class="alert alert-danger py-0" *ngIf="latitud.invalid && (latitud.dirty || latitud.touched)">
-            <div *ngIf="latitud.errors.required">
-              <small>El componente de latitud es requerido</small>
+        <div class="container">
+          <div class="col-sm-6">
+            <label for="nombre" class="col-form-label">Latitud</label>
+            <input id="latitud" name="latitud" type="text" disabled required [(ngModel)]="predio.latitud"
+              #latitud="ngModel" class="form-control">
+            <div class="alert alert-danger py-0" *ngIf="latitud.invalid && (latitud.dirty || latitud.touched)">
+              <div *ngIf="latitud.errors.required">
+                <small>El componente de latitud es requerido</small>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="col-sm-6">
-          <label for="nombre" class="col-form-label col-sm-4">Longitud</label>
-          <input id="longitud" name="longitud" type="text" required [(ngModel)]="predio.longitud" #longitud="ngModel"
-            class="form-control">
-          <div class="alert alert-danger py-0" *ngIf="longitud.invalid && (longitud.dirty || longitud.touched)">
-            <div *ngIf="longitud.errors.required">
-              <small>El componente de longitud es requerido</small>
+          <div class="col-sm-6">
+            <label for="nombre" class="col-form-label">Longitud</label>
+            <input id="longitud" name="longitud" type="text" disabled required [(ngModel)]="predio.longitud"
+              #longitud="ngModel" class="form-control">
+            <div class="alert alert-danger py-0" *ngIf="longitud.invalid && (longitud.dirty || longitud.touched)">
+              <div *ngIf="longitud.errors.required">
+                <small>El componente de longitud es requerido</small>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
-      <div class="form-group">
+      <div class="form-group row">
         <div class="col-md-12 text-center">
           <button type="submit" class="btn btn-primary btn-lg" (click)='onSubmit()' *ngIf="!editar else elseBlock"
             [disabled]="!predioForm.form.valid">Guardar</button>
