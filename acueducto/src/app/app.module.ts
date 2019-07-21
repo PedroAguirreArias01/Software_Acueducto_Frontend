@@ -17,6 +17,8 @@ import { CommonModule } from '@angular/common';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 //modulo de mapas
 import { AgmCoreModule } from '@agm/core';
+import { AgmDirectionModule } from 'agm-direction'; 
+
 /*material */
 import {
   MatAutocompleteModule,
@@ -245,7 +247,8 @@ const routes: Routes = [
     //se agraga la key de google maps
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyCV764G10eDAD4olXBsZ6mzo5BlVsfDUuc'
-    })
+    }),
+    AgmDirectionModule 
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },

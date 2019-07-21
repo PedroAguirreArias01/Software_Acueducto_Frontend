@@ -54,7 +54,7 @@
         </div>
       </div>
 
-      
+
 
       <div class="form-group row">
         <label for="vereda" class="col-form-label col-sm-4" style="text-align: right">Vereda</label>
@@ -83,41 +83,40 @@
       <div class="form-group row">
         <h3>Agregar Ubicacón predio</h3>
         <div class="col-sm-12">
-            <!-- <div id="map" style="width:100%;height:600px">
+          <!-- <div id="map" style="width:100%;height:600px">
               </div> -->
           <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" [mapTypeId]="'hybrid'"
-            (mapClick)="placeMarker($event)" style="height: 300px">
+            (mapClick)="placeMarker($event)" style="width:100%;height:600px">
             <agm-marker [latitude]="predio.latitud" [longitude]="predio.longitud">
             </agm-marker>
+            <agm-direction [origin]="origin" [destination]="destination" [travelMode]="'WALKING'"> 
+              </agm-direction>
           </agm-map>
         </div>
       </div>
 
       <div class="form-group row">
-          <label for="nombre" class="col-form-label col-sm-4" style="text-align: right">Latitud</label>
-          <div class="col-sm-6">
-            <input id="latitud" name="latitud" type="text" required [(ngModel)]="predio.latitud" #latitud="ngModel"
-              class="form-control">
-            <div class="alert alert-danger py-0" *ngIf="latitud.invalid && (latitud.dirty || latitud.touched)">
-              <div *ngIf="latitud.errors.required">
-                <small>El componente de latitud es requerido</small>
-              </div>
+        <div class="col-sm-6">
+          <label for="nombre" class="col-form-label col-sm-4">Latitud</label>
+          <input id="latitud" name="latitud" type="text" required [(ngModel)]="predio.latitud" #latitud="ngModel"
+            class="form-control">
+          <div class="alert alert-danger py-0" *ngIf="latitud.invalid && (latitud.dirty || latitud.touched)">
+            <div *ngIf="latitud.errors.required">
+              <small>El componente de latitud es requerido</small>
             </div>
           </div>
         </div>
-  
-        <div class="form-group row">
-          <label for="nombre" class="col-form-label col-sm-4" style="text-align: right">Longitud</label>
-          <div class="col-sm-6">
-            <input id="longitud" name="longitud" type="text" required [(ngModel)]="predio.longitud" #longitud="ngModel"
-              class="form-control">
-            <div class="alert alert-danger py-0" *ngIf="longitud.invalid && (longitud.dirty || longitud.touched)">
-              <div *ngIf="longitud.errors.required">
-                <small>El componente de longitud es requerido</small>
-              </div>
+        <div class="col-sm-6">
+          <label for="nombre" class="col-form-label col-sm-4">Longitud</label>
+          <input id="longitud" name="longitud" type="text" required [(ngModel)]="predio.longitud" #longitud="ngModel"
+            class="form-control">
+          <div class="alert alert-danger py-0" *ngIf="longitud.invalid && (longitud.dirty || longitud.touched)">
+            <div *ngIf="longitud.errors.required">
+              <small>El componente de longitud es requerido</small>
             </div>
           </div>
         </div>
+      </div>
 
       <div class="form-group">
         <div class="col-md-12 text-center">
