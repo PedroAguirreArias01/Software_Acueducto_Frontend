@@ -9,7 +9,7 @@ export class Predio implements Deserialize {
     public nombre: string;
     public estrato: string;
     public latitud: number;
-    public longitud: string;
+    public longitud: number;
     public suscriptor: Suscriptor;
     public facturas: Factura[];
     public estado: string;
