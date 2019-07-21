@@ -23,9 +23,9 @@ export class PrediosFormComponent implements OnInit {
   public veredas: Lugar[];
   public suscriptores: Suscriptor[];
   //datos para el mapa
-  // public zoom: number = 17;
-  // public lat: number = 4.0000000;
-  // public lng: number = -72.0000000;
+  public zoom: number = 17;
+  public lat: number = 4.0000000;
+  public lng: number = -72.0000000;
   //otro mapa
   markers: Array<Object>
   latitude: 4.0000000;
@@ -39,7 +39,7 @@ export class PrediosFormComponent implements OnInit {
     this.getListaVeredas();
     this.getSuscriptores();
     this.cargarLugar();
-    this.initMap();
+    //this.initMap();
   }
 
   onSubmit() {
@@ -112,11 +112,11 @@ export class PrediosFormComponent implements OnInit {
     return (o1 == null || o2 == null) ? false : (o1.cedula === o2.cedula);
   }
 
-  // placeMarker($event) {
-  //   console.log($event.coords.lat+'   '+ $event.coords.lng);
-  //   this.predio.latitud = $event.coords.lat;
-  //   this.predio.longitud = $event.coords.lng;
-  // }
+  placeMarker($event) {
+    console.log($event.coords.lat+'   '+ $event.coords.lng);
+    this.predio.latitud = $event.coords.lat;
+    this.predio.longitud = $event.coords.lng;
+  }
 
   //---------------------------mapas------------------------------------
   initMap() {
@@ -133,16 +133,16 @@ export class PrediosFormComponent implements OnInit {
     });
   }
 
-  placeMarker(event) {
-    if (event) {
-      this.predio.latitud = event.latLng.lat();
-      this.predio.longitud = event.latLng.lng();
-      this.marker.setOptions({
-        position: { lat: this.predio.latitud, lng: this.predio.longitud },
-        map: this.googleMap
-      })
-    }
-  }
+  // placeMarker(event) {
+  //   if (event) {
+  //     this.predio.latitud = event.latLng.lat();
+  //     this.predio.longitud = event.latLng.lng();
+  //     this.marker.setOptions({
+  //       position: { lat: this.predio.latitud, lng: this.predio.longitud },
+  //       map: this.googleMap
+  //     })
+  //   }
+  // }
 
   addBicycleLayer() {
     var bikeLayer = new google.maps.BicyclingLayer();
