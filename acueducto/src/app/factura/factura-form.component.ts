@@ -40,6 +40,12 @@ export class FacturaFormComponent implements OnInit {
 
   tarifasFiltradas: Observable<Tarifa[]>;
   myItem = new FormControl();
+  //-----------------------------------------------------------
+  public zoom: number = 18;
+  public lat: number = 5.851154;
+  public lng: number = -73.577350;
+  public origin: any;
+  public destination: any;
 
   constructor(private facturaService: FacturaService, private tarifaService: TarifaService,
     private predioService: PredioService, private router: Router, private activatedRoute: ActivatedRoute,
@@ -99,7 +105,15 @@ export class FacturaFormComponent implements OnInit {
     let predio = event.option.value as Predio;
     this.predio = predio;
     this.factura.predio = predio;
+
     this.suscriptor = predio.suscriptor;
+
+    if (this.predio) {
+      console.log('latitud: ' + this.predio.latitud)
+      console.log('longitud: ' + this.predio.longitud)
+      this.origin = { lat: this.predio.latitud, lng: this.predio.longitud}
+      //this.origin = { lat: 5.851154, lng: -73.577350 };
+    }
   }
 
   mostrarPredio(predio?: Predio): string | undefined {
@@ -220,7 +234,7 @@ export class FacturaFormComponent implements OnInit {
             this.progreso = Math.round(event.loaded / event.total * 100);
           } else if (event.type === HttpEventType.Response) {
             let response: any = event.body;
-            
+
             this.router.navigate(['/facturas']);
             Swal.fire(
               'Subida de Archivo',
@@ -231,6 +245,21 @@ export class FacturaFormComponent implements OnInit {
         }
       );
     }
+  }
+
+  //-----google maps
+  placeMarker($event) {
+    let latitud = $event.coords.lat;
+    let longitud = $event.coords.lng;
+    this.destination = { lat: latitud, lng: longitud };
+    this.calculateDistance();
+  }
+
+  calculateDistance() {
+    const origin = new google.maps.LatLng(this.factura.predio.latitud, this.factura.predio.longitud);
+    const destination = new google.maps.LatLng(this.predio.latitud, this.predio.longitud);
+    const distance = google.maps.geometry.spherical.computeDistanceBetween(origin, destination);
+    console.log('distance: ' + distance);
   }
 
 

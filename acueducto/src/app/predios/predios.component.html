@@ -1,4 +1,4 @@
-<detalle-predio *ngIf="predioSeleccionado" [predio] = predioSeleccionado></detalle-predio>
+<detalle-predio *ngIf="predioSeleccionado" [predio]=predioSeleccionado></detalle-predio>
 <div class="col-md-12 card">
   <div class="card-header">Predios</div>
   <div class="card-body">
@@ -12,11 +12,11 @@
         </div>
         <div class="col-sm-6">
           <div class="d-flex flex-row-reverse">
-              <app-filter-predios (changed)="filter($event)"></app-filter-predios>
+            <app-filter-predios (changed)="filter($event)"></app-filter-predios>
           </div>
         </div>
         <div class="col-md-1 mt-3">
-            <i class="fa fa-search fa-lg"></i>
+          <i class="fa fa-search fa-lg"></i>
         </div>
       </div>
     </div>
@@ -42,10 +42,12 @@
           <td>{{predio.vereda.nombre}}</td>
           <!--<td>{{predio.estado}}</td>-->
           <td class="predio">
-            <button *ngIf="authService.hasRole('ROLE_ADMIN')" type="button" class="btn btn-info mx-2" [routerLink]="['/prediosForm/form',predio.numeroMatricula]">
+            <button *ngIf="authService.hasRole('ROLE_ADMIN')" type="button" class="btn btn-info mx-2"
+              [routerLink]="['/prediosForm/form',predio.numeroMatricula]">
               <span class="glyphicon glyphicon-pencil"></span>Editar
             </button>
-            <button *ngIf="authService.hasRole('ROLE_ADMIN')" type="button" class="btn btn-danger mx-2" (click)="eliminar(predio)">
+            <button *ngIf="authService.hasRole('ROLE_ADMIN')" type="button" class="btn btn-danger mx-2"
+              (click)="eliminar(predio)">
               <span class="glyphicon glyphicon-remove"></span>Eliminar
             </button>
             <button type="button" class="btn btn-success mx-2" (click)="abrirModal(predio)">
@@ -54,7 +56,7 @@
           </td>
         </tr>
         <tr *ngIf="!prediosFiltrados || !prediosFiltrados.length">
-            <td colspan="6">No hay predios</td>
+          <td colspan="6">No hay predios</td>
         </tr>
       </tbody>
     </table>
@@ -67,5 +69,10 @@
         Número de Predios: {{ prediosFiltrados.length }}
       </div>
     </div>
+    <div class="footter">
+      <hr style="color: green">
+      <a routerLink = "/mapaPredios">Ver ubicación de todos los predios</a>
+    </div>
   </div>
+
 </div>

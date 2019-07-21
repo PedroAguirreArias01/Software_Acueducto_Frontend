@@ -10,7 +10,11 @@ import { ModalService } from 'src/app/suscriptores/detalle-suscriptor/modal.serv
 export class DetallePredioComponent implements OnInit {
 
   @Input() predio:Predio;
-
+  //datos para el mapa
+  public zoom: number = 18;
+  public lat: number = 5.851154;
+  public lng: number = -73.577350;
+  
   constructor(private modalService: ModalService) { }
 
   ngOnInit() {
