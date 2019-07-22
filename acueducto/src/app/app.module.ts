@@ -85,7 +85,6 @@ import { TokenInterceptor } from './usuario/interceptors/token.interceptor';
 import { AuthInterceptor } from './usuario/interceptors/auth.interceptor';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ReportesComponent } from './reportes/reportes.component';
-import { MapPredioComponent } from './map-predio/map-predio.component';
 
 registerLocaleData(localeES, 'es');
 
@@ -166,7 +165,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'reportes', component: ReportesComponent, data: { role: 'ROLE_ADMIN' }},
-  { path: 'mapaPredios', component: MapPredioComponent }
+
 ];
 
 @NgModule({
@@ -198,7 +197,6 @@ const routes: Routes = [
     FilterSuscriptoresComponent,
     DashboardComponent,
     ReportesComponent,
-    MapPredioComponent
   ],
   imports: [
     BrowserModule,

@@ -18,7 +18,11 @@ export class PrediosComponent implements OnInit {
   public pageActual: number = 1;
   public prediosFiltrados: Array<Predio> = [];
   private predioSeleccionado: Predio;
-
+   //datos para el mapa
+   public zoom: number = 18;
+   public lat: number = 5.851154;
+   public lng: number = -73.577350;
+   
   constructor(private predioService: PredioService, private router: Router, 
     private activatedRoute: ActivatedRoute, private modalService: ModalService,
     public authService: AuthService) { }

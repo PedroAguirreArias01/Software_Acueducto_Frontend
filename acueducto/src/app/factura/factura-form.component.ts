@@ -46,6 +46,7 @@ export class FacturaFormComponent implements OnInit {
   public lng: number = -73.577350;
   public origin: any;
   public destination: any;
+  public distance: number;
 
   constructor(private facturaService: FacturaService, private tarifaService: TarifaService,
     private predioService: PredioService, private router: Router, private activatedRoute: ActivatedRoute,
@@ -256,10 +257,16 @@ export class FacturaFormComponent implements OnInit {
   }
 
   calculateDistance() {
-    const origin = new google.maps.LatLng(this.factura.predio.latitud, this.factura.predio.longitud);
-    const destination = new google.maps.LatLng(this.predio.latitud, this.predio.longitud);
-    const distance = google.maps.geometry.spherical.computeDistanceBetween(origin, destination);
-    console.log('distance: ' + distance);
+    const origin = new google.maps.LatLng(this.predio.latitud, this.predio.longitud);
+    const destination = new google.maps.LatLng(this.destination.lat, this.destination.lng);
+     this.distance = google.maps.geometry.spherical.computeDistanceBetween(origin, destination) as number;
+    this.distance = Math.round(this.distance);
+    console.log('distance: ' + this.distance);
+    Swal.fire(
+      'Distancia a recorer',
+      this.distance+'Metros',
+      'success'
+    )
   }
 
 
