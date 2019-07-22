@@ -40,13 +40,24 @@ export class FacturaFormComponent implements OnInit {
 
   tarifasFiltradas: Observable<Tarifa[]>;
   myItem = new FormControl();
-  //-----------------------------------------------------------
+  //-----------------------------------------------------------maps---------------------------------
   public zoom: number = 18;
   public lat: number = 5.851154;
   public lng: number = -73.577350;
   public origin: any;
   public destination: any;
+  public destinaLat: number = 5.851154;
+  public destinaLng: number = -73.577350;
+
   public distance: number;
+  labelOptions = {
+    color: '#0000FF',
+    fontFamily: '',
+    fontSize: '14px',
+    fontWeight: 'bold',
+    text: 'A',
+    }
+  
 
   constructor(private facturaService: FacturaService, private tarifaService: TarifaService,
     private predioService: PredioService, private router: Router, private activatedRoute: ActivatedRoute,
@@ -113,6 +124,7 @@ export class FacturaFormComponent implements OnInit {
       console.log('latitud: ' + this.predio.latitud)
       console.log('longitud: ' + this.predio.longitud)
       this.origin = { lat: this.predio.latitud, lng: this.predio.longitud}
+      this.destination = { lat: this.destinaLat, lng: this.destinaLng };
       //this.origin = { lat: 5.851154, lng: -73.577350 };
     }
   }
