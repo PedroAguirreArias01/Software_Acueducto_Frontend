@@ -186,9 +186,10 @@ export class FacturaComponent implements OnInit {
 
 
   registrarPago(factura) {
+    this.factura = factura;
     Swal.fire({
       title: 'Está seguro?',
-      text: `¿Seguro que desea generar el pago a la factura ${factura.id}?`,
+      text: `¿Seguro que desea generar el pago a la factura ${factura.id}  perteneciente al suscriptor ${this.factura.predio.suscriptor.nombre} ${this.factura.predio.suscriptor.apellido}  ?`,
       type: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
@@ -206,7 +207,7 @@ export class FacturaComponent implements OnInit {
           this.router.navigate(['/facturas'])
           Swal.fire({
             title: 'Actualizar pago factura!',
-            text: `Pago de la factura ${factura.id} realizado con exito`,
+            text: `Pago de la factura ${this.factura.id} perteneciente al suscriptor ${this.factura.predio.suscriptor.nombre}  ${this.factura.predio.suscriptor.apellido}  realizado con exito`,
             type: 'success',
             confirmButtonText: 'Aceptar'
           })

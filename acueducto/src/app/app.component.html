@@ -1,108 +1,108 @@
+<div class="d-flex" id="wrapper">
+
+  <!-- Sidebar -->
+  <div class="bg-light border-right" id="sidebar-wrapper">
+    <div class="sidebar-heading">Acueducto Moniquirá</div>
+    <div class="list-group list-group-flush">
+      <a routerLink="/dashboard" class="list-group-item list-group-item-action bg-light">
+        <i class="fa fa-home fa-lg"></i>Inicio
+      </a>
+      <a routerLink="/suscriptores" class="list-group-item list-group-item-action bg-light">
+        <i class="fa fa-users fa-lg"></i>Suscriptores
+      </a>
+      <a routerLink="/tarifas" class="list-group-item list-group-item-action bg-light">
+        <i class="fa fa-list-ul"></i>Tarifas
+      </a>
+      <a routerLink="/usuarios" class="list-group-item list-group-item-action bg-light">
+        <i class="fa fa-user fa-lg"></i>Usuarios
+      </a>
+      <a class="list-group-item list-group-item-action bg-light">
+        <li data-toggle="collapse" data-target="#new" class="collapsed">
+          <i class="fa fa-map-marker fa-lg"></i>Lugares<span class="arrow"></span>
+        </li>
+      </a>
+      <ul class="sub-menu collapse" id="new">
+        <li> <a routerLink="/lugares" class="list-group-item list-group-item-action bg-light">Lugares </a></li>
+        <li> <a routerLink="/predios" class="list-group-item list-group-item-action bg-light"> Predios </a></li>
+      </ul>
+
+      <a class="list-group-item list-group-item-action bg-light">
+        <li data-toggle="collapse" data-target="#facturacion" class="collapsed">
+          <i class="fa fa-shopping-bag fa-lg"></i>Facturación<span class="arrow"></span>
+        </li>
+      </a>
+      <ul class="sub-menu collapse" id="facturacion">
+        <li> <a routerLink="/facturaForm" class="list-group-item list-group-item-action bg-light">Generar
+            Facturación</a> </li>
+        <li> <a routerLink="/facturas" class="list-group-item list-group-item-action bg-light"> Facturas </a></li>
+      </ul>
 
 
-  <div class="d-flex" id="wrapper">
+      <a routerLink="/reportes" class="list-group-item list-group-item-action bg-light">
+        <i class="fa fa-line-chart fa-lg" aria-hidden="true"></i>Reportes
+      </a>
+      <a routerLink="/documentacion" class="list-group-item list-group-item-action bg-light">
+        <i class="fa fa-files-o fa-lg" aria-hidden="true"></i>Documentación
+      </a>
+      <a class="list-group-item list-group-item-action bg-light">
 
-    <!-- Sidebar -->
-    <div class="bg-light border-right" id="sidebar-wrapper">
-      <div class="sidebar-heading">Acueducto Moniquirá</div>
-      <div class="list-group list-group-flush">
-        <a routerLink="/dashboard" class="list-group-item list-group-item-action bg-light">
-          <i class="fa fa-home fa-lg"></i>Inicio
-        </a>
-        <a routerLink="/suscriptores" class="list-group-item list-group-item-action bg-light">
-          <i class="fa fa-users fa-lg"></i>Suscriptores
-        </a>
-        <a routerLink="/tarifas" class="list-group-item list-group-item-action bg-light">
-          <i class="fa fa-list-ul"></i>Tarifas
-        </a>
-        <a routerLink="/usuarios" class="list-group-item list-group-item-action bg-light">
-          <i  class="fa fa-user fa-lg"></i>Usuarios
-        </a>
-        <a class="list-group-item list-group-item-action bg-light">
-          <li data-toggle="collapse" data-target="#new" class="collapsed">
-            <i class="fa fa-map-marker fa-lg"></i>Lugares<span class="arrow"></span>
-          </li>
-        </a>
-        <ul class="sub-menu collapse" id="new">
-          <li> <a routerLink="/lugares" class="list-group-item list-group-item-action bg-light">Lugares </a></li>
-          <li> <a routerLink="/predios" class="list-group-item list-group-item-action bg-light"> Predios </a></li>
-        </ul>
-
-        <a class="list-group-item list-group-item-action bg-light">
-          <li data-toggle="collapse" data-target="#facturacion" class="collapsed">
-              <i class="fa fa-shopping-bag fa-lg"></i>Facturación<span class="arrow"></span>
-          </li>
-        </a>
-        <ul class="sub-menu collapse" id="facturacion">
-          <li> <a routerLink="/facturaForm" class="list-group-item list-group-item-action bg-light">Generar Facturación</a> </li>
-          <li> <a routerLink="/facturas" class="list-group-item list-group-item-action bg-light"> Facturas </a></li>
-        </ul>
-
-        
-        <a routerLink="/reportes" class="list-group-item list-group-item-action bg-light">
-            <i class="fa fa-line-chart fa-lg" aria-hidden="true"></i>Reportes
-          </a>
-          <a  class="list-group-item list-group-item-action bg-light">
-           
-            </a>
-      </div>
+      </a>
     </div>
-    <!-- /#sidebar-wrapper -->
+  </div>
+  <!-- /#sidebar-wrapper -->
 
-    <!-- Page Content -->
-    <div id="page-content-wrapper">
+  <!-- Page Content -->
+  <div id="page-content-wrapper">
 
-      <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom ">
-        <button id="menu-toggle">
-          <span class="navbar-toggler-icon"></span>
-        </button>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom ">
+      <button id="menu-toggle">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-            <li class="nav-item dropdown">
-              
-                <img  *ngIf="authService.empleado?.foto" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-              src="http://localhost:8080/usuarios/uploads/img/{{authService.empleado.foto}}" alt="" class="img-thumbnail rounded-circle"
-              style="width:50px;height:50px;cursor:pointer;"> 
-              
-              <a *ngIf="authService.empleado?.foto">
-                  <span>{{authService.empleado.nombre}}</span>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+          <li class="nav-item dropdown">
+
+            <img *ngIf="authService.empleado?.foto" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true"
+              aria-expanded="false" src="http://localhost:8080/usuarios/uploads/img/{{authService.empleado.foto}}"
+              alt="" class="img-thumbnail rounded-circle" style="width:50px;height:50px;cursor:pointer;">
+
+            <a *ngIf="authService.empleado?.foto">
+              <span>{{authService.empleado.nombre}}</span>
             </a>
-              <img  *ngIf="!authService.empleado?.foto" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-              src="http://localhost:8080/images/user.png" alt="Sin foto" class="img-thumbnail rounded-circle"
-              style="width:50px;height:50px;cursor:pointer;"> <span>{{authService.empleado.nombre}}</span>
-              <!--
+            <img *ngIf="!authService.empleado?.foto" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true"
+              aria-expanded="false" src="http://localhost:8080/images/user.png" alt="Sin foto"
+              class="img-thumbnail rounded-circle" style="width:50px;height:50px;cursor:pointer;">
+            <span>{{authService.empleado.nombre}}</span>
+            <!--
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false">
                 Iniciar Sesión
               </a>
               -->
-              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item">
-                    <app-header></app-header>
-                </a>
-              </div>
-            </li>
-          </ul>
-        </div>
-      </nav>
-
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-md-12">
-            <router-outlet></router-outlet>
-          </div>
-        </div>
-
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item">
+                <app-header></app-header>
+              </a>
+            </div>
+          </li>
+        </ul>
       </div>
-    </div>
+    </nav>
 
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <router-outlet></router-outlet>
+        </div>
+      </div>
+
+    </div>
   </div>
 
-
-
+</div>

@@ -35,7 +35,7 @@ export class LugarFormComponent implements OnInit {
           title: 'Nuevo Lugar!',
           text: `Lugar ${lugar.nombre} creado con exito`,
           type: 'success',
-          confirmButtonText: 'Cool'
+          confirmButtonText: 'Aceptar'
         })
       }
       )

@@ -205,7 +205,7 @@ export class FacturaFormComponent implements OnInit {
         this.router.navigate(['/facturas'])
         Swal.fire({
           title: 'Nueva Factura!',
-          text: `Factura ${factura.id} creada con exito`,
+          text: `Factura perteneciente al suscriptor ${this.factura.predio.suscriptor.nombre}  ${this.factura.predio.suscriptor.apellido} creada con exito`,
           type: 'success',
           confirmButtonText: 'Aceptar'
         })
