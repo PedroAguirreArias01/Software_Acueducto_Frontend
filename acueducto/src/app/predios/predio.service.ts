@@ -7,6 +7,7 @@ import { map, debounceTime, catchError } from 'rxjs/operators';
 import { Predio } from './Predio';
 import { Lugar } from '../lugar/lugar';
 import Swal from 'sweetalert2';
+import { Suscriptor } from '../suscriptores/Suscriptor';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,6 @@ import Swal from 'sweetalert2';
 export class PredioService {
 
   private urlEndPoint: string = 'http://localhost:8080/predios/';
-
   constructor(private http: HttpClient) { }
 
   get(): Observable<Predio[]> {
@@ -73,4 +73,9 @@ export class PredioService {
   searchPredios(term) {
     return this.http.get<Predio[]>(`${this.urlEndPoint}search/${term}`);
   }
+
+  searchSuscriptor(term) {
+    return this.http.get<Suscriptor[]>('http://localhost:8080/suscriptores/search/'+term)
+  }
+  
 }

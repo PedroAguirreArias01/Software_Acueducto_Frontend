@@ -86,6 +86,10 @@ import { AuthInterceptor } from './usuario/interceptors/auth.interceptor';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ReportesComponent } from './reportes/reportes.component';
 import { DocumentacionComponent } from './documentacion/documentacion.component';
+//-------------------char js-----------------------------
+import { ChartsModule } from 'ng2-charts';
+//-------------------------print pdf
+import {NgxPrintModule} from 'ngx-print';
 
 registerLocaleData(localeES, 'es');
 
@@ -247,12 +251,15 @@ const routes: Routes = [
     MatToolbarModule,
     MatTooltipModule,
     ReactiveFormsModule,
+    ChartsModule,
     //se agraga la key de google maps
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyCV764G10eDAD4olXBsZ6mzo5BlVsfDUuc',
       libraries: ['geometry']
     }),
-    AgmDirectionModule 
+    AgmDirectionModule,
+    //---------------pdf module------
+    NgxPrintModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },

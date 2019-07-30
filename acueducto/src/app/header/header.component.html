@@ -3,5 +3,6 @@
 </li>
 
 <li *ngIf="authService.isAuthenticated()">
+    <h5>{{authService.empleado.nombre}}</h5>
     <a (click)="logout()">Log Out</a>
 </li>

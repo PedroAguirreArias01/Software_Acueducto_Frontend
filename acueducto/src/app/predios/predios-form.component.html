@@ -71,14 +71,22 @@
       <div class="form-group row">
         <label for="suscriptor" class="col-form-label col-sm-4" style="text-align: right">Suscriptor</label>
         <div class="col-sm-6">
-          <select [compareWith]="compararSuscriptor" class="form-control" required [(ngModel)]="predio.suscriptor"
-            name="suscriptor">
-            <!-- <option [ngValue]="undefined">Seleccione Suscriptor</option> -->
-            <option *ngFor="let suscriptor of suscriptores" [ngValue]="suscriptor">{{suscriptor.nombre}}
-              {{suscriptor.apellido}}</option>
-          </select>
+          
+          <mat-form-field class="example-full-width">
+            <input type="text" placeholder="Apellido Suscriptor" aria-label="Number" matInput [formControl]="myItem"
+              [matAutocomplete]="autoT">
+            <mat-autocomplete #autoT="matAutocomplete" [displayWith]="mostrarSuscriptor"
+              (optionSelected)="seleccionarSuscriptor($event)">
+              <mat-option *ngFor="let suscriptor of suscriptoresFiltrados | async" [value]="suscriptor">
+                {{suscriptor.nombre}}  {{suscriptor.apellido}}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+          <i class="fa fa-search fa-lg"></i>
         </div>
       </div>
+
+
 
       <div class="form-group row">
         <div class="container">
@@ -89,7 +97,7 @@
               </div> -->
             <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" [mapTypeId]="'hybrid'"
               (mapClick)="placeMarker($event)" style="width:100%;height:600px">
-              <agm-marker [latitude]="predio.latitud" [longitude]="predio.longitud" ></agm-marker>
+              <agm-marker [latitude]="predio.latitud" [longitude]="predio.longitud"></agm-marker>
             </agm-map>
           </div>
         </div>

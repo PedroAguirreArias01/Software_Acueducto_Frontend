@@ -52,3 +52,7 @@ ul, li, a {
   cursor: pointer;
   list-style: none;
 }
+
+.navbar{
+  background-color: #DCDCDE;
+}

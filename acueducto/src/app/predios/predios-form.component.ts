@@ -8,10 +8,16 @@ import { Lugar } from '../lugar/lugar';
 import { SuscriptorService } from '../suscriptores/suscriptor.service';
 import { Suscriptor } from '../suscriptores/Suscriptor';
 import { GoogleMapsAPIWrapper, InfoWindowManager } from '@agm/core';
-import {} from '@agm/core/services/google-maps-types'
+import { } from '@agm/core/services/google-maps-types';
+import { FormControl } from '@angular/forms';
+import { MatOption, MatAutocompleteSelectedEvent } from '@angular/material';
+
 
 //mapss
 import { } from 'googlemaps';
+import { Observable } from 'rxjs';
+import { map, flatMap } from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-predios-form',
@@ -30,15 +36,14 @@ export class PrediosFormComponent implements OnInit {
   public lng: number = -73.577350;
   public origin: any;
   public destination: any;
-  public markerOptions = { 
-    destination: {infoWindow: `<h3>Hello word</h3>`}};
-    public renderOptions = {suppressMarkers: true};
-  //otro mapa
-  // markers: Array<Object>
-  // latitude: 4.0000000;
-  // longitute: -72.0000000;
-  // googleMap: google.maps.Map;
-  // marker = new google.maps.Marker();
+  public markerOptions = {
+    destination: { infoWindow: `<h3>Hello word</h3>` }
+  };
+  public renderOptions = { suppressMarkers: true };
+
+  public suscriptoresFiltrados: Observable<Suscriptor>;
+  public suscriptor: Suscriptor = new Suscriptor();
+  myItem = new FormControl();
 
   constructor(private predioService: PredioService, private lugarService: LugarService, private suscriptorService: SuscriptorService, private router: Router, private activatedRoute: ActivatedRoute) { }
 
@@ -46,9 +51,11 @@ export class PrediosFormComponent implements OnInit {
     this.getListaVeredas();
     this.getSuscriptores();
     this.cargarLugar();
-    this.origin = { lat: 5.851154, lng: -73.577350 };
-
-    //this.initMap();
+    this.suscriptoresFiltrados = this.myItem.valueChanges
+      .pipe(
+        map(value => typeof value === 'string' ? value : value.nombre),
+        flatMap(value => value ? this._filterSuscriptor(value) : [])
+      );
   }
 
   onSubmit() {
@@ -124,17 +131,25 @@ export class PrediosFormComponent implements OnInit {
   placeMarker($event) {
     this.predio.latitud = $event.coords.lat;
     this.predio.longitud = $event.coords.lng;
-    this.destination = { lat: this.predio.latitud, lng: this.predio.longitud };
-    this.calculateDistance();
   }
 
-  calculateDistance() {
-    const origin = new google.maps.LatLng(this.origin.lat, this.origin.lng);
-    const destination = new google.maps.LatLng(this.predio.latitud,this.predio.longitud );
-    const distance = google.maps.geometry.spherical.computeDistanceBetween(origin, destination);
-    console.log('distance: '+distance);
+  //--------------------metodos de filtrado para suscriptor----------------------
+  seleccionarSuscriptor(event: MatAutocompleteSelectedEvent): void {
+    let suscriptor = event.option.value as Suscriptor;
+    this.predio.suscriptor = suscriptor;
+    //this.myItem.setValue('');
+    // event.option.focus();
+    // event.option.deselect();
   }
 
+
+  mostrarSuscriptor(suscriptor?: Suscriptor): string | undefined {
+    return suscriptor ? suscriptor.nombre+'  '+suscriptor.apellido: undefined;
+  }
+
+  private _filterSuscriptor(value: string): Observable<Suscriptor[]> {
+    return this.predioService.searchSuscriptor(value);
+  }
 
 
   //---------------------------mapas------------------------------------

@@ -54,7 +54,7 @@
   <!-- Page Content -->
   <div id="page-content-wrapper">
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom ">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light  border-bottom ">
       <button id="menu-toggle">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -72,13 +72,13 @@
               aria-expanded="false" src="http://localhost:8080/usuarios/uploads/img/{{authService.empleado.foto}}"
               alt="" class="img-thumbnail rounded-circle" style="width:50px;height:50px;cursor:pointer;">
 
-            <a *ngIf="authService.empleado?.foto">
-              <span>{{authService.empleado.nombre}}</span>
+            <a>
+              <h5>{{authService.empleado.nombre}}</h5>
             </a>
             <img *ngIf="!authService.empleado?.foto" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true"
               aria-expanded="false" src="http://localhost:8080/images/user.png" alt="Sin foto"
               class="img-thumbnail rounded-circle" style="width:50px;height:50px;cursor:pointer;">
-            <span>{{authService.empleado.nombre}}</span>
+            <h5>{{authService.empleado.nombre}}</h5>
             <!--
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false">
