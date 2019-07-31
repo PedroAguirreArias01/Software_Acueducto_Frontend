@@ -61,24 +61,30 @@
 
 
         </div>
-
-        <div class="row">
+        <br>
+        <br>
+        <div class="row" *ngIf="barChartData">
             <div class="col-sm-6">
-                <div>
-                    <div>
-                      <div style="display: block">
-                        <canvas baseChart
-                          [datasets]="barChartData"
-                          [labels]="barChartLabels"
-                          [options]="barChartOptions"
-                          [plugins]="barChartPlugins"
-                          [legend]="barChartLegend"
-                          [chartType]="barChartType">
-                        </canvas>
-                      </div>
-                      <button mat-button mat-raised-button color="primary" (click)="randomize()">Update</button>
-                    </div>
-                  </div>
+                <h5>Consumo de agua por vereda</h5>
+                <div style="display: block">
+                    <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions"
+                        [plugins]="barChartPlugins" [legend]="barChartLegend" [chartType]="barChartType">
+                    </canvas>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <h5>Recaudos por vereda</h5>
+                <div style="display: block">
+                    <canvas baseChart 
+                        [datasets]="barChartDataV" 
+                        [labels]="barChartLabelsV" 
+                        [options]="barChartOptionsV"
+                        [plugins]="barChartPluginsV" 
+                        [legend]="barChartLegendV" 
+                        [chartType]="barChartTypeV"
+                        [colors]="chartColors">
+                    </canvas>
+                </div>
             </div>
         </div>
     </div>

@@ -101,8 +101,6 @@ export class AuthService {
   }
 
   hasRole(role: string):boolean{
-    console.log('rol: '+role);
-    console.log('rol empleado: '+this.empleado.rol.nombre);
     //Verifica en la instancia del usuario loggeado (si la hay) si tiene el rol especificado
     return this.empleado.rol.nombre === role;
   }

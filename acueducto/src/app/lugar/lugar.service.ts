@@ -6,6 +6,7 @@ import { HttpHeaders } from '@angular/common/http';
 import { map, catchError } from 'rxjs/operators';
 import { Lugar } from './Lugar'
 import Swal from 'sweetalert2';
+import { ReporteVereda } from './reporteVereda';
 
 @Injectable({
   providedIn: 'root'
@@ -73,5 +74,9 @@ export class LugarService {
     return this.http.get<Lugar[]>(this.urlEndPoint + 'tipo/V').pipe(
       map(response => response as Lugar[])
     );
+  }
+
+  getReporteVereda(): Observable<ReporteVereda[]> {
+    return this.http.get<ReporteVereda[]>('http://localhost:8080/lugares/recaudos');
   }
 }
