@@ -95,7 +95,7 @@ export class ReportesComponent implements OnInit {
       }
       this.barChartLabelsV = label;
       this.barChartDataV =  [
-        { data: dataV, label: 'Series A', backgroundColor: "yellow" },
+        { data: dataV, label: 'Series A', backgroundColor: 'rgb(3,155,229,0.5)',hoverBorderColor: "#80b6f4", pointBackgroundColor: "#80b6f4", fill: false, },
       ];
     }
 
